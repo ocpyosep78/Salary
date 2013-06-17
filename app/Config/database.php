@@ -7,7 +7,7 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'adachi',
 		'password' => '',
-		'database' => 'adachi',
+		'database' => 'AdachiPAffairSalary',
 		'prefix' => '',
 		'encoding' => 'utf8'
 	);
