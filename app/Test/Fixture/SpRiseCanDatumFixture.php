@@ -1,0 +1,187 @@
+<?php
+/**
+ * SpRiseCanDatumFixture
+ *
+ */
+class SpRiseCanDatumFixture extends CakeTestFixture {
+
+/**
+ * Table name
+ *
+ * @var string
+ */
+	public $table = 'SpRiseCanData';
+
+/**
+ * Fields
+ *
+ * @var array
+ */
+	public $fields = array(
+		'ID' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary', 'comment' => 'ID : ID'),
+		'FiscalYear' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 4, 'collate' => 'utf8_general_ci', 'comment' => '年度 : 年度', 'charset' => 'utf8'),
+		'CreatedMonth' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '作成マスタ月 : 作成マスタ月', 'charset' => 'utf8'),
+		'FamilyName' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 20, 'collate' => 'utf8_general_ci', 'comment' => '氏名_氏 : 氏名_氏(旧姓使用中フラグがON⇒通称名_氏)', 'charset' => 'utf8'),
+		'FirstName' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 20, 'collate' => 'utf8_general_ci', 'comment' => '氏名_名 : 氏名_名(旧姓使用中フラグがON⇒通称名_名)', 'charset' => 'utf8'),
+		'EmpNo' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 8, 'collate' => 'utf8_general_ci', 'comment' => '職員番号 : 職員番号', 'charset' => 'utf8'),
+		'DepCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 8, 'collate' => 'utf8_general_ci', 'comment' => '所属CD : 所属CD', 'charset' => 'utf8'),
+		'DeptShortName' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 4, 'collate' => 'utf8_general_ci', 'comment' => '所属名短縮 : 所属名短縮', 'charset' => 'utf8'),
+		'BirthDate' => array('type' => 'date', 'null' => true, 'default' => null, 'comment' => '生年月日 : 生年月日'),
+		'SexCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 1, 'collate' => 'utf8_general_ci', 'comment' => '性別CD : 性別CD', 'charset' => 'utf8'),
+		'Age' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '年齢 : 年齢', 'charset' => 'utf8'),
+		'RecruitedDate' => array('type' => 'date', 'null' => true, 'default' => null, 'comment' => '採用年月日 : 採用年月日'),
+		'JobGradeCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '職層CD : 職層CD', 'charset' => 'utf8'),
+		'JobGradeShortName' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 10, 'collate' => 'utf8_general_ci', 'comment' => '職層省略名称 : 職層省略名称', 'charset' => 'utf8'),
+		'JobDutyCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 3, 'collate' => 'utf8_general_ci', 'comment' => '職務CD : 職務CD', 'charset' => 'utf8'),
+		'JobDutyShortName' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 20, 'collate' => 'utf8_general_ci', 'comment' => '職務略称 : 職務名称', 'charset' => 'utf8'),
+		'GabageEmpFlg' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 1, 'collate' => 'utf8_general_ci', 'comment' => '清掃職員フラグ : 清掃職員フラグ', 'charset' => 'utf8'),
+		'EmpDivCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '職員区分CD : 職員区分CD', 'charset' => 'utf8'),
+		'OrderedDate_JobGrade' => array('type' => 'date', 'null' => true, 'default' => null, 'comment' => '職層発令年月日 : 職層発令年月日'),
+		'RetiredReasonCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 4, 'collate' => 'utf8_general_ci', 'comment' => '退職事由CD : 退職事由CD', 'charset' => 'utf8'),
+		'RetiredDate' => array('type' => 'date', 'null' => true, 'default' => null, 'comment' => '退職年月日 : 退職年月日'),
+		'DivCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 6, 'collate' => 'utf8_general_ci', 'comment' => '部CD : 部CD', 'charset' => 'utf8'),
+		'DivName' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 30, 'collate' => 'utf8_general_ci', 'comment' => '部名 : 部名', 'charset' => 'utf8'),
+		'ClasifiedDiv' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 1, 'collate' => 'utf8_general_ci', 'comment' => '判定区分 : 判定区分', 'charset' => 'utf8'),
+		'SalaryTableCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '給料表CD : 給料表CD', 'charset' => 'utf8'),
+		'SalaryClassCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '級CD : 級CD', 'charset' => 'utf8'),
+		'SalaryGradeCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 3, 'collate' => 'utf8_general_ci', 'comment' => '号級CD : 号級CD', 'charset' => 'utf8'),
+		'SalaryGuaranteeFlg' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 1, 'collate' => 'utf8_general_ci', 'comment' => '現給保障有無フラグ : 現給保障有無フラグ', 'charset' => 'utf8'),
+		'TableOnGuarantTable' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '保障額表の表 : 保障額表の表', 'charset' => 'utf8'),
+		'ClassOnGuarantTable' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 3, 'collate' => 'utf8_general_ci', 'comment' => '保障額表の号 : 保障額表の号', 'charset' => 'utf8'),
+		'GradeOnGuarantTable' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '保障額表の級 : 補償額表の級', 'charset' => 'utf8'),
+		'DistDivCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 6, 'collate' => 'utf8_general_ci', 'comment' => '配布分類区分CD : 配布分類区分CD', 'charset' => 'utf8'),
+		'PromoTypeCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '昇任種別CD : 昇任種別CD', 'charset' => 'utf8'),
+		'ExamTypeCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '試験選考種別CD : 試験選考種別CD', 'charset' => 'utf8'),
+		'ExamPassedDate' => array('type' => 'date', 'null' => true, 'default' => null, 'comment' => '選考合格日 : 選考合格日'),
+		'RecomCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 1, 'collate' => 'utf8_general_ci', 'comment' => '推薦CD : 推薦CD', 'charset' => 'utf8'),
+		'RecomDiv' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 1, 'collate' => 'utf8_general_ci', 'comment' => '推薦区分 : 推薦区分', 'charset' => 'utf8'),
+		'PayRiseDivCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 1, 'collate' => 'utf8_general_ci', 'comment' => '昇給区分CD : 昇給区分CD', 'charset' => 'utf8'),
+		'PayRiseGrade' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 2, 'comment' => '昇給号数 : 昇給号数'),
+		'PunishGrade' => array('type' => 'integer', 'null' => true, 'default' => null, 'comment' => '処分抑制号数 : 処分抑制号数'),
+		'AgeRestGrade' => array('type' => 'integer', 'null' => true, 'default' => null, 'comment' => '年齢抑制号数 : 年齢抑制号数'),
+		'AbsPunishGrade' => array('type' => 'integer', 'null' => true, 'default' => null, 'comment' => '欠勤抑制号数 : 欠勤抑制号数'),
+		'RecalcFlg' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 1, 'collate' => 'utf8_general_ci', 'comment' => '再換算フラグ : 再換算フラグ', 'charset' => 'utf8'),
+		'AdjustType1CD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '調整種別1CD : 調整種別1CD', 'charset' => 'utf8'),
+		'AdjustUsage1' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 2, 'comment' => '調整1使用号数 : 調整1使用号数'),
+		'AdjustRemain1' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 2, 'comment' => '調整1残号数 : 調整1残号数'),
+		'AdjustType2CD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '調整種別2CD : 調整種別2CD', 'charset' => 'utf8'),
+		'AdjustUsage2' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 2, 'comment' => '調整2使用号数 : 調整2使用号数'),
+		'AdjustRemain2' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 2, 'comment' => '調整2残号数 : 調整2残号数'),
+		'AdjustType3CD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '調整種別3CD : 調整種別3CD', 'charset' => 'utf8'),
+		'AdjustUsage3' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 2, 'comment' => '調整3使用号数 : 調整3使用号数'),
+		'AdjustRemain3' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 2, 'comment' => '調整3残号数 : 調整3残号数'),
+		'AdjustType4CD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '調整種別4CD : 調整種別4CD', 'charset' => 'utf8'),
+		'AdjustUsage4' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 2, 'comment' => '調整4使用号数 : 調整4使用号数'),
+		'AdjustRemain4' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 2, 'comment' => '調整4残号数 : 調整4残号数'),
+		'RiseFinalDiv' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 1, 'collate' => 'utf8_general_ci', 'comment' => '最終昇給区分 : 最終昇給区分', 'charset' => 'utf8'),
+		'RiseFinalGrade' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 2, 'comment' => '最終昇給号数 : 最終昇給号数'),
+		'NewSalaryTableCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '新給料表CD : 新給料表CD', 'charset' => 'utf8'),
+		'NewSalaryClassCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '新級CD : 新級CD', 'charset' => 'utf8'),
+		'NewSalaryGradeCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 3, 'collate' => 'utf8_general_ci', 'comment' => '新号CD : 新号CD', 'charset' => 'utf8'),
+		'NewGuaranteeFlg' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 1, 'collate' => 'utf8_general_ci', 'comment' => '新現給保障有無FLG :  新現給保障有無FLG', 'charset' => 'utf8'),
+		'NewGuarantTableCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '新保障額給料表CD : 新保障額給料表CD', 'charset' => 'utf8'),
+		'NewGuarantClassCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '新保障額級CD : 新保障額級CD', 'charset' => 'utf8'),
+		'NewGuarantGradeCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 3, 'collate' => 'utf8_general_ci', 'comment' => '新保障額号給 : 新保障額号給', 'charset' => 'utf8'),
+		'RiseReasonCD' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 2, 'collate' => 'utf8_general_ci', 'comment' => '昇給昇格事由CD : 昇給昇格事由CD', 'charset' => 'utf8'),
+		'ReturningProcess' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 1, 'collate' => 'utf8_general_ci', 'comment' => '復職時調整回し(*) : 復職時調整回し(*)', 'charset' => 'utf8'),
+		'Remarks_PR' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 40, 'collate' => 'utf8_general_ci', 'comment' => '昇給備考 : 昇給備考', 'charset' => 'utf8'),
+		'registered_date' => array('type' => 'datetime', 'null' => false, 'default' => null, 'comment' => '登録日時 : 登録日時'),
+		'registered_by' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 10, 'collate' => 'utf8_general_ci', 'comment' => '登録者 : 登録者', 'charset' => 'utf8'),
+		'updated_date' => array('type' => 'datetime', 'null' => false, 'default' => null, 'comment' => '更新日時 : 更新日時'),
+		'update_by' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 10, 'collate' => 'utf8_general_ci', 'comment' => '更新者 : 更新者', 'charset' => 'utf8'),
+		'latest_data_flg' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 1, 'comment' => '最新・仮登録フラグ : 最新・仮登録フラグ'),
+		'last_key' => array('type' => 'integer', 'null' => true, 'default' => null, 'comment' => '最後キー : 最後キー'),
+		'effective_date' => array('type' => 'date', 'null' => true, 'default' => null, 'comment' => '開始年月日 : 開始年月日'),
+		'expired_date' => array('type' => 'date', 'null' => true, 'default' => null, 'comment' => '終了年月日 : 終了年月日'),
+		'indexes' => array(
+			'PRIMARY' => array('column' => 'ID', 'unique' => 1)
+		),
+		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
+	);
+
+/**
+ * Records
+ *
+ * @var array
+ */
+	public $records = array(
+		array(
+			'ID' => 1,
+			'FiscalYear' => 'Lo',
+			'CreatedMonth' => '',
+			'FamilyName' => 'Lorem ipsum dolor ',
+			'FirstName' => 'Lorem ipsum dolor ',
+			'EmpNo' => 'Lorem ',
+			'DepCD' => 'Lorem ',
+			'DeptShortName' => 'Lo',
+			'BirthDate' => '2013-06-17',
+			'SexCD' => 'Lorem ipsum dolor sit ame',
+			'Age' => '',
+			'RecruitedDate' => '2013-06-17',
+			'JobGradeCD' => '',
+			'JobGradeShortName' => 'Lorem ip',
+			'JobDutyCD' => 'L',
+			'JobDutyShortName' => 'Lorem ipsum dolor ',
+			'GabageEmpFlg' => 'Lorem ipsum dolor sit ame',
+			'EmpDivCD' => '',
+			'OrderedDate_JobGrade' => '2013-06-17',
+			'RetiredReasonCD' => 'Lo',
+			'RetiredDate' => '2013-06-17',
+			'DivCD' => 'Lore',
+			'DivName' => 'Lorem ipsum dolor sit amet',
+			'ClasifiedDiv' => 'Lorem ipsum dolor sit ame',
+			'SalaryTableCD' => '',
+			'SalaryClassCD' => '',
+			'SalaryGradeCD' => 'L',
+			'SalaryGuaranteeFlg' => 'Lorem ipsum dolor sit ame',
+			'TableOnGuarantTable' => '',
+			'ClassOnGuarantTable' => 'L',
+			'GradeOnGuarantTable' => '',
+			'DistDivCD' => 'Lore',
+			'PromoTypeCD' => '',
+			'ExamTypeCD' => '',
+			'ExamPassedDate' => '2013-06-17',
+			'RecomCD' => 'Lorem ipsum dolor sit ame',
+			'RecomDiv' => 'Lorem ipsum dolor sit ame',
+			'PayRiseDivCD' => 'Lorem ipsum dolor sit ame',
+			'PayRiseGrade' => 1,
+			'PunishGrade' => 1,
+			'AgeRestGrade' => 1,
+			'AbsPunishGrade' => 1,
+			'RecalcFlg' => 'Lorem ipsum dolor sit ame',
+			'AdjustType1CD' => '',
+			'AdjustUsage1' => 1,
+			'AdjustRemain1' => 1,
+			'AdjustType2CD' => '',
+			'AdjustUsage2' => 1,
+			'AdjustRemain2' => 1,
+			'AdjustType3CD' => '',
+			'AdjustUsage3' => 1,
+			'AdjustRemain3' => 1,
+			'AdjustType4CD' => '',
+			'AdjustUsage4' => 1,
+			'AdjustRemain4' => 1,
+			'RiseFinalDiv' => 'Lorem ipsum dolor sit ame',
+			'RiseFinalGrade' => 1,
+			'NewSalaryTableCD' => '',
+			'NewSalaryClassCD' => '',
+			'NewSalaryGradeCD' => 'L',
+			'NewGuaranteeFlg' => 'Lorem ipsum dolor sit ame',
+			'NewGuarantTableCD' => '',
+			'NewGuarantClassCD' => '',
+			'NewGuarantGradeCD' => 'L',
+			'RiseReasonCD' => '',
+			'ReturningProcess' => 'Lorem ipsum dolor sit ame',
+			'Remarks_PR' => 'Lorem ipsum dolor sit amet',
+			'registered_date' => '2013-06-17 23:10:01',
+			'registered_by' => 'Lorem ip',
+			'updated_date' => '2013-06-17 23:10:01',
+			'update_by' => 'Lorem ip',
+			'latest_data_flg' => 1,
+			'last_key' => 1,
+			'effective_date' => '2013-06-17',
+			'expired_date' => '2013-06-17'
+		),
+	);
+
+}
