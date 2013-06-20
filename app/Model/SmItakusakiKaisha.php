@@ -57,4 +57,26 @@ class SmItakusakiKaisha extends AppModel {
 			),
 		),
 	);
+
+	/**
+	 * 委託先研修会社テーブルから会社コードでデータを取得する
+	 * Paginate用メソッド
+	 */
+	public function getPaginateCondition($searchCondition) {
+
+		$conditions = array();
+		// 検索条件が未入力の場合、全件取得する
+		if (!empty($searchCondition['consignmentCompanyCd'])) $conditions['SmItakusakiKaisha.consignmentCompanyCd'] = $searchCondition['consignmentCompanyCd'];
+
+		return array(
+			'SmItakusakiKaisha' => array(
+				'conditions' => $conditions,
+				'limit' => 10, // 一度に表示する件数
+				'order' => array('SmItakusakiKaisha.consignmentCompanyCd' => 'asc'),
+				'page' => 1, // 最初に表示するページ
+			)
+		);
+
+	}
+
 }

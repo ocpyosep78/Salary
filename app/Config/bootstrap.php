@@ -53,6 +53,20 @@ Cache::config('default', array('engine' => 'Apc'));
  *
  */
 
+App::build(array(
+	'Controller' => array(
+			ROOT . DS . APP_DIR . DS . 'Controller' . DS,
+			ROOT . DS . APP_DIR . DS . 'Controller' . DS . 'Training' . DS,
+		),
+	'Model' => array(
+			ROOT . DS . APP_DIR . DS . 'Model' . DS,
+		),
+	'View' => array(
+			ROOT . DS . APP_DIR . DS . 'View' . DS,
+			ROOT . DS . APP_DIR . DS . 'View' . DS . 'Training' . DS,
+		),
+));
+
 /**
  * Custom Inflector rules, can be set to correctly pluralize or singularize table, model, controller names or whatever other
  * string is passed to the inflection functions
