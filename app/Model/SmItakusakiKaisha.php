@@ -66,7 +66,7 @@ class SmItakusakiKaisha extends AppModel {
 
 		$conditions = array();
 		// 検索条件が未入力の場合、全件取得する
-		if (!empty($searchCondition['consignmentCompanyCd'])) $conditions['SmItakusakiKaisha.consignmentCompanyCd'] = $searchCondition['consignmentCompanyCd'];
+		if (!empty($searchCondition['consignmentCompanyCd'])) $conditions['SmItakusakiKaisha.consignmentCompanyCd LIKE '] = '%'.$searchCondition['consignmentCompanyCd'].'%';
 
 		return array(
 			'SmItakusakiKaisha' => array(

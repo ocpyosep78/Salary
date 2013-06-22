@@ -22,7 +22,10 @@ class S003sController extends CommonController {
 	 * 委託先研修会社管理トップページ
 	 */
 	public function index() {
-		// 当画面では特に初期処理は必要ないので、実装なし
+
+		// 画面側でエラーが出ないように空の検索条件をセットしておく
+		$this->set('searchCondition', array());
+
 	}
 
 	/**
