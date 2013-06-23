@@ -25,11 +25,7 @@
 		<div id="container">
 			<?php echo $this->element('header'); // フロント画面用ヘッダー ?>
 
-			<div id="content">
-				<?php echo $this->fetch('content'); ?>
-			</div>
-
-			<?php echo $this->element('footer'); // フロント画面用フッター ?>
+			<?php echo $this->fetch('content'); ?>
 		</div>
 
 		<?php
@@ -37,8 +33,6 @@
 			echo $this->Html->script(array('user/jquery-1.9.0.min', 'user/lib'));
 			echo $this->fetch('script');
 		?>
-
-		<?php echo $this->element('sql_dump'); ?>
 
 	</body>
 </html>

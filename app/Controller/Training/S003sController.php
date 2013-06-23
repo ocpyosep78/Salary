@@ -59,4 +59,115 @@ class S003sController extends CommonController {
 
 	}
 
+	/**
+	 * 複数ボタンが用意されている画面からの共通呼び出しメソッド
+	 */
+	public function doFlexibleAction() {
+
+		// 遷移元から、どのアクションが呼ばれたのかを判定する
+		$commitType = $this->request->data['commitType'];
+
+		switch ($commitType) {
+			case 'close':
+			break;
+
+			case 'edit':
+				$this->updateDetailData($this->request->data);
+				$this->redirect('index');
+			break;
+
+			case 'add':
+				$this->insertDetailData($this->request->data);
+				$this->redirect('index');
+			break;
+
+			case 'delete':
+				$this->deleteDetailData($this->request->data);
+				$this->redirect('index');
+			break;
+
+			default:
+				;
+			break;
+		}
+
+	}
+
+	/**
+	 * 画面データから新規データを作成する
+	 */
+	private function insertDetailData($data) {
+
+		$param = array(
+			'SmItakusakiKaisha' => array(
+				'ConsignmentCompanyCD' => 'TOD',
+				'ConsignmentCompanyName' => $data['ConsignmentCompanyName'],
+				'Representative' => $data['Representative'],
+				'PostalCD' => $data['PostalCD1'].'-'.$data['PostalCD2'],
+				'CityCD' => $data['CityCD'],
+				'AddressKanji' => $data['AddressKanji'],
+				'SideKanji' => $data['SideKanji'],
+				'AddressKana' => $data['AddressKana'],
+				'SideKana' => $data['SideKana'],
+				'AccountExecutiveName' => $data['AccountExecutiveName'],
+				'TelNo1' => $data['TelNo1'],
+				'TelNo2' => $data['TelNo2'],
+				'TelNo3' => $data['TelNo3'],
+				'EmailAddresse1' => $data['EmailAddresse1'],
+				'EmailAddresse2' => $data['EmailAddresse2'],
+				'update_date' => date('Y-m-d H:i:s'),
+				'updated_by' => 'TODO 仮ユーザー',
+			)
+		);
+
+		$this->SmItakusakiKaisha->save($param);
+
+	}
+
+	/**
+	 * 画面データを更新する
+	 */
+	private function updateDetailData($data) {
+
+		$param = array(
+			'SmItakusakiKaisha' => array(
+				'ConsignmentCompanyCD' => $data['ConsignmentCompanyCD'],
+				'ConsignmentCompanyName' => $data['ConsignmentCompanyName'],
+				'Representative' => $data['Representative'],
+				'PostalCD' => $data['PostalCD1'].'-'.$data['PostalCD2'],
+				'CityCD' => $data['CityCD'],
+				'AddressKanji' => $data['AddressKanji'],
+				'SideKanji' => $data['SideKanji'],
+				'AddressKana' => $data['AddressKana'],
+				'SideKana' => $data['SideKana'],
+				'AccountExecutiveName' => $data['AccountExecutiveName'],
+				'TelNo1' => $data['TelNo1'],
+				'TelNo2' => $data['TelNo2'],
+				'TelNo3' => $data['TelNo3'],
+				'EmailAddresse1' => $data['EmailAddresse1'],
+				'EmailAddresse2' => $data['EmailAddresse2'],
+				'update_date' => date('Y-m-d H:i:s'),
+				'updated_by' => 'TODO 仮ユーザー',
+			)
+		);
+
+		$this->SmItakusakiKaisha->save($param);
+
+	}
+
+	/**
+	 * 選択されている情報を削除する
+	 */
+	private function deleteDetailData($data) {
+
+		$param = array(
+			'SmItakusakiKaisha' => array(
+				'ConsignmentCompanyCD' => $data['ConsignmentCompanyCD'],
+				'delete_flg' => '1',
+			)
+		);
+
+		$this->SmItakusakiKaisha->save($param);
+	}
+
 }
