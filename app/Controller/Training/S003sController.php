@@ -11,6 +11,12 @@ class S003sController extends CommonController {
 	// この画面で使うモデル（テーブル）を宣言する
 	public $uses = array('SmItakusakiKaisha');
 
+	// この画面で使うコンポーネントを宣言する
+	public $components = array('Session');
+
+	// この画面で使うセッション名を宣言する
+	const S003S_SESSION_KEY = "S003sControllerSession";
+
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -24,8 +30,11 @@ class S003sController extends CommonController {
 	public function index() {
 
 		// 画面側でエラーが出ないように空の検索条件をセットしておく
-		$this->set('searchCondition', array());
+		$searchCondition = array();
+		$this->set('searchCondition', $searchCondition);
 
+		// セッションを開始する
+		$this->Session->write(self::S003S_SESSION_KEY, $searchCondition);
 	}
 
 	/**
@@ -36,8 +45,22 @@ class S003sController extends CommonController {
 
 		// ********************  画面からのデータ受け取り  ********************
 
+		// ページ番号を直接指定された場合のリダイレクト処理
+		if ($_SERVER['REQUEST_METHOD']=='POST' && isset($this->params['data']['page'])) {
+			// リダイレクト
+			$this->redirect('search/page:'.$this->params['data']['page']);
+		}
+
 		// 前画面からの検索条件の受け取り（研修委託会社コード）
-		$searchCondition['consignmentCompanyCd'] = $this->request->data['consignmentCompanyCd'];
+		if (isset($this->request->data['consignmentCompanyCd'])) {
+			// POSTデータを受け取る
+			$searchCondition['consignmentCompanyCd'] = $this->request->data['consignmentCompanyCd'];
+			// セッションを上書きする
+			$this->Session->write(self::S003S_SESSION_KEY, $searchCondition);
+		} else {
+			// POSTデータが存在しない場合（ページングなど）、セッションから取得して使う
+			$searchCondition = $this->Session->read(self::S003S_SESSION_KEY);
+		}
 
 		// ********************  ビジネスロジック  ********************
 

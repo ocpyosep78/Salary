@@ -5,19 +5,9 @@
 	//$this->append('css');    echo $this->Html->css(array('user/detail'));    $this->end();
 ?>
 
-<?php echo $this->SalaryForm->create('S003', array('controller' => 'S003', 'action' => 'doFlexibleAction', 'name' => 'flexible')); ?>
-
 	<div id="content">
-		<table class="tbl_01">
-			<tr>
-				<td>
-					<input id="Button1" type="button" value="前ページ" />
-					<input id="Button1" type="button" value="次ページ" />
-					<input type="text" />/<input type="text" />
-					<input id="Button1" type="button" value="ジャンプ" />
-				</td>
-			</tr>
-		</table>
+
+		<?php echo $this->element('common_search_nav'); ?>
 
 		<div class="box_01">
 			<table class="tbl_02">
@@ -56,6 +46,8 @@
 		</div><!-- //.box_01 -->
 
 		<hr>
+
+<?php echo $this->SalaryForm->create('S003', array('controller' => 'S003', 'action' => 'doFlexibleAction', 'name' => 'flexible')); ?>
 
 		<div class="box_01">
 			<p id="code">コード：<span id="Code"></span></p>
