@@ -134,6 +134,9 @@
 
 <?php echo $this->SalaryForm->end(); ?>
 
+<?php // 検索子画面の読み込み ?>
+<?php echo $this->element('common_search'); ?>
+
 <script>
 	function beforeSubmit(type) {
 		var submitType = document.createElement("input");

@@ -472,3 +472,18 @@ padding-left: 3px;
 .f_td4 {
 text-align: right;
 }
+
+/* ========================================
+ * +modalWindow
+======================================== */
+.modalWindow {
+  display: none;
+  width: 90%;
+  min-width: 550px;
+  margin: 0 auto;
+  position: absolute;
+  z-index: 110;
+}
+.modalWindow.fixed {
+  width: 922px;
+}

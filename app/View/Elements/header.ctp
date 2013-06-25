@@ -4,7 +4,8 @@
 		<tr>
 			<td>
 				<p class="title">研修委託会社コード</p>
-				<input type="text" name="consignmentCompanyCd" value="<?php echo Hash::get($searchCondition, 'consignmentCompanyCd'); ?>" /><button type="button" name="" value="">？</button>
+				<input type="text" id="consignmentCompanyCd" name="consignmentCompanyCd" value="<?php echo Hash::get($searchCondition, 'consignmentCompanyCd'); ?>" />
+				<input type="button" value="？" onclick="viewCommonSearch('consignmentCompanyCd', 'aaaaaa', 'bbbbbb');" />
 				<p class="description">XXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
 			</td>
 			<td class="td1">
@@ -15,3 +16,22 @@
 	</table>
 
 </form>
+
+<script type="text/javascript">
+	/**
+	 * 検索子画面の表示
+	 *
+	 * @param target       検索結果を設定する項目のID
+	 * @param searchTable  検索対象のテーブル名
+	 * @param searchColumn 検索対象のテーブルのカラム
+	 */
+	function viewCommonSearch(target, searchTable, searchColumn) {
+		$(function(){
+			//
+			$("#common-search-target").val(target);
+			$("#common-search-table").val(searchTable);
+			$("#common-search-column").val(searchColumn);
+			$("#common_search").show();
+		});
+	}
+</script>
