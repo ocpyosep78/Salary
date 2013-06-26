@@ -41,15 +41,23 @@ class ProperPay001sController extends CommonController {
 // 	 * 正当支給の検索
 // 	 * 検索結果はList構造で返却
 // 	 */
-// 	public function search() {
+public function search() {
 
-// 		// ********************  画面からのデータ受け取り  ********************
+// ********************  画面からのデータ受け取り  ********************
 
 // 		// ページ番号を直接指定された場合のリダイレクト処理
 // 		if ($_SERVER['REQUEST_METHOD']=='POST' && isset($this->params['data']['page'])) {
 // 			// リダイレクト
 // 			$this->redirect('search/page:'.$this->params['data']['page']);
 // 		}
+	// 前画面からの検索条件の受け取り（職員番号、支給年月日、支給区分、支払者）
+	$searchCondition = array();
+	if (isset($this->request->data['EmpNo']) && isset($this->request->data['PaidYM']) && isset($this->request->data['PaidDiv']) && isset($this->request->data['PayerDiv'])) {
+		// POSTデータを受け取る
+		$postData = $this->request->data;
+		// 検索条件を設定する
+		foreach($postData as $key => $value) {
+			$searchCondition[$key] = $value;
 
 // 		// 前画面からの検索条件の受け取り（研修委託会社コード）
 // 		if (isset($this->request->data['consignmentCompanyCd'])) {
@@ -60,8 +68,7 @@ class ProperPay001sController extends CommonController {
 // 		} else {
 // 			// POSTデータが存在しない場合（ページングなど）、セッションから取得して使う
 // 			$searchCondition = $this->Session->read(self::S003S_SESSION_KEY);
-// 		}
-
+}
 // 		// ********************  ビジネスロジック  ********************
 
 // 		// 研修委託会社テーブルからリスト形式でデータを取得する
@@ -193,4 +200,6 @@ class ProperPay001sController extends CommonController {
 // 		$this->SmItakusakiKaisha->save($param);
 // 	}
 
+}
+}
 }

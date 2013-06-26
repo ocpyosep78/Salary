@@ -7,7 +7,7 @@
 
 		<?php
 			// フロント画面用の共通のCSSファイルを読み込み
-			echo $this->Html->css(array('salary/common'));
+			//echo $this->Html->css(array('properpay/common'));
 		?>
 
 		<?php
