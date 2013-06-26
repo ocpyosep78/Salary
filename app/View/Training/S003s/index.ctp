@@ -5,6 +5,8 @@
 	//$this->append('css');    echo $this->Html->css(array('user/detail'));    $this->end();
 ?>
 
+	<?php echo $this->element('header'); // フロント画面用ヘッダー ?>
+
 	<div id="content">
 
 		<?php

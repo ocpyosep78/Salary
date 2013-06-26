@@ -23,8 +23,6 @@
 
 	<body>
 		<div id="container">
-			<?php echo $this->element('header'); // フロント画面用ヘッダー ?>
-
 			<?php echo $this->fetch('content'); ?>
 		</div>
 

@@ -21,7 +21,7 @@ class S003sController extends CommonController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		// この画面で使うレイアウトファイルを指定する
-		$this->layout = 'layout_pattern_A';
+		$this->layout = 'layout';
 	}
 
 	/**
