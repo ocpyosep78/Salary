@@ -32,55 +32,67 @@ class Payroll001sController extends CommonController {
 		// 画面側でエラーが出ないように空の検索条件をセットしておく
 		$searchCondition = array();
 		$this->set('searchCondition', $searchCondition);
+		$meisaiInfo = array();
+		$this->set('meisaiInfo', $meisaiInfo);
+		$hiwariInfo = array();
+		$this->set('hiwariInfo', $hiwariInfo);
+		$uchiSonotaInfo = array();
+		$this->set('uchiSonotaInfo', $uchiSonotaInfo);
 
 		// セッションを開始する
 		$this->Session->write(self::PAYROLL_001S_SESSION_KEY, $searchCondition);
+
 	}
 
-// 	/**
-// 	 * 委託先研修会社の検索
-// 	 * 検索結果はList構造で返却
-// 	 */
-// 	public function search() {
+	/**
+	 * 支給明細照会の検索
+	 */
+	public function search() {
 
-// 		// ********************  画面からのデータ受け取り  ********************
+		// ********************  画面からのデータ受け取り  ********************
 
-// 		// ページ番号を直接指定された場合のリダイレクト処理
-// 		if ($_SERVER['REQUEST_METHOD']=='POST' && isset($this->params['data']['page'])) {
-// 			// リダイレクト
-// 			$this->redirect('search/page:'.$this->params['data']['page']);
-// 		}
+		// 前画面からの検索条件の受け取り（職員番号、支給年月日、支給区分、支払者）
+		$searchCondition = array();
+		if (isset($this->request->data['EmpNo']) && isset($this->request->data['PaidYM']) && isset($this->request->data['PaidDiv']) && isset($this->request->data['PayerDiv'])) {
+			// POSTデータを受け取る
+			$postData = $this->request->data;
+			// 検索条件を設定する
+			foreach($postData as $key => $value) {
+				$searchCondition[$key] = $value;
+			}
 
-// 		// 前画面からの検索条件の受け取り（研修委託会社コード）
-// 		if (isset($this->request->data['consignmentCompanyCd'])) {
-// 			// POSTデータを受け取る
-// 			$searchCondition['consignmentCompanyCd'] = $this->request->data['consignmentCompanyCd'];
-// 			// セッションを上書きする
-// 			$this->Session->write(self::S003S_SESSION_KEY, $searchCondition);
-// 		} else {
-// 			// POSTデータが存在しない場合（ページングなど）、セッションから取得して使う
-// 			$searchCondition = $this->Session->read(self::S003S_SESSION_KEY);
-// 		}
+			// セッションを上書きする
+			$this->Session->write(self::PAYROLL_001S_SESSION_KEY, $searchCondition);
+		} else {
+			// POSTデータが存在しない場合（ページングなど）、セッションから取得して使う
+			$searchCondition = $this->Session->read(self::PAYROLL_001S_SESSION_KEY);
+		}
 
-// 		// ********************  ビジネスロジック  ********************
+		// ********************  ビジネスロジック  ********************
 
-// 		// 研修委託会社テーブルからリスト形式でデータを取得する
-// 		$this->paginate = $this->SmItakusakiKaisha->getPaginateCondition($searchCondition);
+		// テーブル[支給明細データ]からデータを取得する
+		$meisaiInfo = $this->QtMeisai->find('first', $searchCondition);
+		// テーブル[支給明細データ：日割]からデータを取得する
+		$hiwariInfo = $this->QtMeisaiHiwari->find('first', $searchCondition);
+		// テーブル[支給明細データ：その他支給内訳]からデータを取得する
+		$uchiSonotaInfo = $this->QtMeisaiUchiSonotasikyu->find('first', $searchCondition);
 
-// 		// ********************  画面へのデータ反映  ********************
+		// ********************  画面へのデータ反映  ********************
 
-// 		// 前画面からの検索条件をそのまま画面にセットする
-// 		$this->set('searchCondition', $searchCondition);
+		// 前画面からの検索条件をそのまま画面にセットする
+ 		$this->set('searchCondition', $searchCondition);
 
-// 		// 取得したリストを画面にセットする
-// 		$this->set('rtnSmItakusakiKaishaList', $this->Paginate());
+		// 取得データを設定する
+		$this->set('meisaiInfo', $meisaiInfo);
+		$this->set('hiwariInfo', $hiwariInfo);
+		$this->set('uchiSonotaInfo', $uchiSonotaInfo);
 
-// 		// ********************  遷移先画面の設定  ********************
+		// ********************  遷移先画面の設定  ********************
 
-// 		// このメソッドには対応する画面はないので、元の画面にレンダリングする
-// 		$this->render('index');
+		// このメソッドには対応する画面はないので、元の画面にレンダリングする
+		$this->render('index');
 
-// 	}
+	}
 
 // 	/**
 // 	 * 複数ボタンが用意されている画面からの共通呼び出しメソッド
