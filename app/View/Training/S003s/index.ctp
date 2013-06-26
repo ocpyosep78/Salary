@@ -7,7 +7,13 @@
 
 	<div id="content">
 
-		<?php echo $this->element('common_search_nav'); ?>
+		<?php
+			if(isset($rtnSmItakusakiKaishaList) && sizeof($rtnSmItakusakiKaishaList) != '0') {
+				echo $this->element('common_search_nav');
+			} else {
+				echo '<br>';
+			}
+		?>
 
 		<div class="box_01">
 			<table class="tbl_02">
@@ -21,24 +27,7 @@
 				<tr class="selectableRecord">
 					<td><?php echo $items['SmItakusakiKaisha']['ConsignmentCompanyCD'] ?></td>
 					<td><?php echo $items['SmItakusakiKaisha']['ConsignmentCompanyName'] ?></td>
-					<td style="display:none" class="ConsignmentCompanyCD"><?php echo $items['SmItakusakiKaisha']['ConsignmentCompanyCD'] ?></td>
-					<td style="display:none" class="ConsignmentCompanyName"><?php echo $items['SmItakusakiKaisha']['ConsignmentCompanyName'] ?></td>
-					<td style="display:none" class="Representative"><?php echo $items['SmItakusakiKaisha']['Representative'] ?></td>
-					<td style="display:none" class="PostalCD1"><?php echo substr($items['SmItakusakiKaisha']['PostalCD'], 0, 3) ?></td>
-					<td style="display:none" class="PostalCD2"><?php echo substr($items['SmItakusakiKaisha']['PostalCD'], 4, 4) ?></td>
-					<td style="display:none" class="CityCD"><?php echo $items['SmItakusakiKaisha']['CityCD'] ?></td>
-					<td style="display:none" class="AddressKanji"><?php echo $items['SmItakusakiKaisha']['AddressKanji'] ?></td>
-					<td style="display:none" class="SideKanji"><?php echo $items['SmItakusakiKaisha']['SideKanji'] ?></td>
-					<td style="display:none" class="AddressKana"><?php echo $items['SmItakusakiKaisha']['AddressKana'] ?></td>
-					<td style="display:none" class="SideKana"><?php echo $items['SmItakusakiKaisha']['SideKana'] ?></td>
-					<td style="display:none" class="AccountExecutiveName"><?php echo $items['SmItakusakiKaisha']['AccountExecutiveName'] ?></td>
-					<td style="display:none" class="TelNo1"><?php echo $items['SmItakusakiKaisha']['TelNo1'] ?></td>
-					<td style="display:none" class="TelNo2"><?php echo $items['SmItakusakiKaisha']['TelNo2'] ?></td>
-					<td style="display:none" class="TelNo3"><?php echo $items['SmItakusakiKaisha']['TelNo3'] ?></td>
-					<td style="display:none" class="EmailAddresse1"><?php echo $items['SmItakusakiKaisha']['EmailAddresse1'] ?></td>
-					<td style="display:none" class="EmailAddresse2"><?php echo $items['SmItakusakiKaisha']['EmailAddresse2'] ?></td>
-					<td style="display:none" class="updated_date"><?php echo $this->SalaryForm->getJapaneseEra($items['SmItakusakiKaisha']['updated_date']); ?></td>
-					<td style="display:none" class="updated_by"><?php echo $items['SmItakusakiKaisha']['updated_by'] ?></td>
+					<?php $this->SalaryForm->getNonDisplayTags($items['SmItakusakiKaisha'], array()); ?>
 				</tr>
 				<?php endforeach ?>
 				<?php } ?>

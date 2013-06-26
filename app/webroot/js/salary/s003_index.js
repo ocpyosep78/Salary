@@ -9,8 +9,8 @@
 		$("#ConsignmentCompanyCD").val($(this).children("td.ConsignmentCompanyCD").html());
 		$("#ConsignmentCompanyName").val($(this).children("td.ConsignmentCompanyName").html());
 		$("#Representative").val($(this).children("td.Representative").html());
-		$("#PostalCD1").val($(this).children("td.PostalCD1").html());
-		$("#PostalCD2").val($(this).children("td.PostalCD2").html());
+		$("#PostalCD1").val($(this).children("td.PostalCD").html().substr(0,3));
+		$("#PostalCD2").val($(this).children("td.PostalCD").html().substr(4,7));
 		$("#CityCD").val($(this).children("td.CityCD").html());
 		$("#AddressKanji").val($(this).children("td.AddressKanji").html());
 		$("#SideKanji").val($(this).children("td.SideKanji").html());
