@@ -15,9 +15,9 @@
 				<input type="text" name="empNo" value="" /><button type="button" name="" value="">？</button>
 			</td>
 			<th class="tb_02">氏名</th>
-			<td><?php echo $jtKihonKihon['FamilyNameKana'].'　'.$jtKihonKihon['FirstNameKana']; ?></td>
+			<td><?php echo Hash::get($jtKihonKihon, 'FamilyNameKana').'　'.Hash::get($jtKihonKihon, 'FirstNameKana'); ?></td>
 			<th>職員区分</th>
-			<td><?php echo $jtKihonKihon['EmpDiv'] ?></td>
+			<td><?php echo Hash::get($jtKihonKihon, 'EmpDiv'); ?></td>
 			<td>NNNN</td>
 			<td>TODO</td>
 			<th class="tb_02">所属</th>
@@ -34,7 +34,7 @@
 			<th>&nbsp;</th>
 			<td>&nbsp;</td>
 			<th>&nbsp;</th>
-			<td><?php echo $jtKihonKihon['FamilyName'].'　'.$jtKihonKihon['FirstName']; ?></td>
+			<td><?php echo Hash::get($jtKihonKihon, 'FamilyName').'　'.Hash::get($jtKihonKihon, 'FirstName'); ?></td>
 			<th>職層</th>
 			<td>XX</td>
 			<td class="tb_02">NNNN</td>
@@ -58,9 +58,9 @@
 	<table class="tbl_01">
 		<tr>
 			<th>支給年月日</th>
-			<td><?php echo $this->SalaryForm->getJapaneseEra($qtMasterKotei['PaidYM']) ?></td>
+			<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($qtMasterKotei, 'PaidYM')) ?></td>
 			<th>&nbsp;</th>
-			<td><?php echo $jtKihonKihon['FamilyNameKana'].'　'.$jtKihonKihon['FirstNameKana']; ?></td>
+			<td><?php echo Hash::get($jtKihonKihon, 'FamilyNameKana').'　'.Hash::get($jtKihonKihon, 'FirstNameKana'); ?></td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
@@ -70,53 +70,53 @@
 		</tr>
 		<tr>
 			<th>職員番号</th>
-			<td><?php echo $qtMasterKotei['EmpNo'] ?></td>
+			<td><?php echo Hash::get($qtMasterKotei, 'EmpNo'); ?></td>
 			<th>氏名</th>
-			<td><?php echo $jtKihonKihon['FamilyName'].'　'.$jtKihonKihon['FirstName']; ?></td>
+			<td><?php echo Hash::get($jtKihonKihon, 'FamilyName').'　'.Hash::get($jtKihonKihon, 'FirstName'); ?></td>
 			<th>生年月日</th>
-			<td><?php echo $this->SalaryForm->getJapaneseEra($qtMasterKotei['BirthDate']) ?></td>
+			<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($qtMasterKotei, 'BirthDate')); ?></td>
 			<th>年齢</th>
-			<td>満<?php echo $this->SalaryForm->getAgeFromChristianEra($qtMasterKotei['BirthDate']) ?>歳</td>
+			<td><?php echo $this->SalaryForm->getAgeFromChristianEra(Hash::get($qtMasterKotei, 'BirthDate')); ?></td>
 			<th>前職員番号</th>
-			<td><?php echo $qtMasterKotei['OldEmpNo'] ?></td>
+			<td><?php echo Hash::get($qtMasterKotei, 'OldEmpNo'); ?></td>
 		</tr>
 	</table>
 
 	<table class="tbl_03">
 		<tr>
 			<th>採用年月日</th>
-			<td><?php echo $this->SalaryForm->getJapaneseEra($qtMasterKotei['RecruitedDate']) ?></td>
+			<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($qtMasterKotei, 'RecruitedDate')); ?></td>
 			<th>区勤務年月日</th>
-			<td><?php echo $this->SalaryForm->getJapaneseEra($qtMasterKotei['WkStartDateAtWard']) ?></td>
+			<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($qtMasterKotei, 'WkStartDateAtWard')); ?></td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
 			<th>当初任用開始年月日</th>
-			<td><?php echo $this->SalaryForm->getJapaneseEra($qtMasterKotei['FirstApoDate']) ?></td>
+			<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($qtMasterKotei, 'FirstApoDate')); ?></td>
 			<th>任用開始年月日</th>
-			<td><?php echo $this->SalaryForm->getJapaneseEra($qtMasterKotei['ApointStartDate']) ?></td>
+			<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($qtMasterKotei, 'ApointStartDate')); ?></td>
 			<th>任用終了年月日</th>
-			<td><?php echo $this->SalaryForm->getJapaneseEra($qtMasterKotei['ApointEndDate']) ?></td>
+			<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($qtMasterKotei, 'ApointEndDate')); ?></td>
 		</tr>
 	</table>
 
 	<table class="tbl_02 bdT_01">
 		<tr>
 			<th>所属</th>
-			<td><?php echo $qtMasterHiwari['DepCD'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'DepCD'); ?></td>
 			<td>N・NN・NNNNN</td>
 			<th>勤務地</th>
-			<td><?php echo substr($qtMasterHiwari['DepCD'], -2) ?></td>
+			<td><?php echo substr(Hash::get($qtMasterHiwari, 'DepCD'), -2); ?></td>
 			<td>NNNNNN</td>
 			<th>役職</th>
-			<td><?php echo $qtMasterHiwari['MgrCD'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'MgrCD'); ?></td>
 			<td>NNNNNN</td>
 			<th>職員区分</th>
-			<td><?php echo $qtMasterHiwari['EmpDiv'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'EmpDiv'); ?></td>
 			<td>NNNNNN</td>
 			<th>給与体系</th>
-			<td><?php echo $qtMasterHiwari['SalaryTypeCD'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'SalaryTypeCD'); ?></td>
 			<td>NNNNNN</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
@@ -126,21 +126,21 @@
 		</tr>
 		<tr>
 			<th>職層</th>
-			<td><?php echo $qtMasterHiwari['JobGradeCD'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'JobGradeCD'); ?></td>
 			<td>NNNNNNNNNN</td>
 			<th>職種職務</th>
-			<td><?php echo $qtMasterHiwari['JobDutyCD'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'JobDutyCD'); ?></td>
 			<td>NNNNNNNNNN</td>
 			<th>&nbsp;</th>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 			<th>支払者</th>
-			<td><?php echo $qtMasterHiwari['PayerDiv'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'PayerDiv'); ?></td>
 			<td>NNNNNN</td>
 			<th>給与計算対象</th>
 			<td>NNN</td>
 			<td>NNNNNN</td>
-			<td><?php echo $qtMasterHiwari['CoveredSalaryCalcFlg'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'CoveredSalaryCalcFlg'); ?></td>
 			<td>NNNNN</td>
 			<td>&nbsp;</td>
 		</tr>
@@ -149,18 +149,18 @@
 	<table class="tbl_02">
 		<tr>
 			<th>給料科目</th>
-			<td><?php echo $qtMasterHiwari['SalaryRewardsAccountCD'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'SalaryRewardsAccountCD'); ?></td>
 			<td>NNNNNNNNNNNNNNNNNNNN</td>
 			<th>児童手当科目</th>
-			<td><?php echo $qtMasterHiwari['ChildAllowAccountCD'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'ChildAllowAccountCD'); ?></td>
 			<td>NNNNNNNNNNNNNNNNNNNN</td>
 		</tr>
 		<tr>
 			<th>超勤科目</th>
-			<td><?php echo $qtMasterHiwari['OverTimeWorkAccountCD'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'OverTimeWorkAccountCD'); ?></td>
 			<td>NNNNNNNNNNNNNNNNNNNN</td>
 			<th>休日給科目</th>
-			<td><?php echo $qtMasterHiwari['HolidaySalaryAccountCD'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'HolidaySalaryAccountCD'); ?></td>
 			<td>NNNNNNNNNNNNNNNNNNNN</td>
 		</tr>
 	</table>
@@ -169,33 +169,33 @@
 		<tr>
 			<th>勤務態様</th>
 			<th>一日</th>
-			<td><?php echo $qtMasterHiwari['WorkingTimesOfDayHour'] ?>時間<?php echo $qtMasterHiwari['WorkingTimesOfDayMinute'] ?>分</td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'WorkingTimesOfDayHour'); ?>時間<?php echo Hash::get($qtMasterHiwari, 'WorkingTimesOfDayMinute'); ?>分</td>
 			<th>一週間</th>
-			<td><?php echo $qtMasterHiwari['WorkingDaysOfWeek'] ?>日勤務</td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'WorkingDaysOfWeek'); ?>日勤務</td>
 			<th>週の勤務時間</th>
-			<td><?php echo $qtMasterHiwari['WorkingTimesOfWeekHour'] ?>時間<?php echo $qtMasterHiwari['WorkingTimesOfWeekMinute'] ?>分</td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'WorkingTimesOfWeekHour'); ?>時間<?php echo Hash::get($qtMasterHiwari, 'WorkingTimesOfWeekMinute'); ?>分</td>
 			<th>月の勤務日数</th>
-			<td><?php echo $qtMasterHiwari['WorkingDaysOfMonth'] ?>日</td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'WorkingDaysOfMonth'); ?>日</td>
 			<th>年の勤務日数</th>
-			<td><?php echo $qtMasterHiwari['WorkingDaysOfYear'] ?>日</td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'WorkingDaysOfYear'); ?>日</td>
 			<th>その他</th>
-			<td><?php echo $qtMasterHiwari['OtherDay'] ?>日</td>
-			<td>／<?php echo $qtMasterHiwari['OtherMonth'] ?>月</td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'OtherDay'); ?>日</td>
+			<td>／<?php echo Hash::get($qtMasterHiwari, 'OtherMonth'); ?>月</td>
 		</tr>
 	</table>
 
 	<table class="tbl_02">
 		<tr>
 			<th>給料/報酬</th>
-			<td><?php echo $qtMasterHiwari['SalaryTable'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'SalaryTable'); ?></td>
 			<td>NNNNNN</td>
-			<td><?php echo $qtMasterHiwari['SalaryClass'] ?>-<?php echo $qtMasterHiwari['SalaryGrade'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'SalaryClass'); ?>-<?php echo Hash::get($qtMasterHiwari, 'SalaryGrade'); ?></td>
 			<td>NN</td>
 			<td>Z,ZZZ,ZZZ円</td>
-			<td><label><input type="checkbox" name="" value="1" <?php if($qtMasterHiwari['SweeperAdditionFlg'] == 1) { echo 'checked'; } ?>>清掃加算対象</label></td>
+			<td><label><input type="checkbox" name="" value="1" <?php if(Hash::get($qtMasterHiwari, 'SweeperAdditionFlg') == 1) { echo 'checked'; } ?>>清掃加算対象</label></td>
 			<th>単価算入特勤</th>
 			<th>特勤コード</th>
-			<td><?php echo $qtMasterHiwari['SpecificDutySalaryCD'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'SpecificDutySalaryCD'); ?></td>
 			<td>NNNNNN</td>
 		</tr>
 	</table>
@@ -203,21 +203,21 @@
 	<table class="tbl_02">
 		<tr>
 			<th>現給保障</th>
-			<td><?php echo $qtMasterHiwari['SalaryGuaranteeFlg'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'SalaryGuaranteeFlg'); ?></td>
 			<th>開始年月日</th>
-			<td><?php echo $this->SalaryForm->getJapaneseEra($qtMasterHiwari['SalaryGuaranteeStartDate']) ?></td>
+			<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($qtMasterHiwari, 'SalaryGuaranteeStartDate')); ?></td>
 			<td>～</td>
 			<th>終了年月日</th>
-			<td><?php echo $this->SalaryForm->getJapaneseEra($qtMasterHiwari['SalaryGuaranteeEndDate']) ?></td>
+			<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($qtMasterHiwari, 'SalaryGuaranteeEndDate')); ?></td>
 			<th>算入日数</th>
 			<td>ZZ日</td>
 		</tr>
 		<tr>
 			<th>&nbsp;</th>
 			<th>現在の保障額</th>
-			<td><?php echo $qtMasterHiwari['TableOnGuarantTable'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'TableOnGuarantTable'); ?></td>
 			<td>NNNNNN</td>
-			<td><?php echo $qtMasterHiwari['ClassOnGuarantTable'] ?>-<?php echo $qtMasterHiwari['GradeOnGuarantTable'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'ClassOnGuarantTable'); ?>-<?php echo Hash::get($qtMasterHiwari, 'GradeOnGuarantTable'); ?></td>
 			<th>Z,ZZZ,ZZZ円</th>
 			<td>&nbsp;</td>
 			<th>&nbsp;</th>
@@ -228,7 +228,7 @@
 	<table class="tbl_02 bdT_01">
 		<tr>
 			<th>月の要勤務日数</th>
-			<td><?php echo $qtMasterHiwari['RequestedWorkingDaysOfMonth'] ?>日</td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'RequestedWorkingDaysOfMonth'); ?>日</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
@@ -239,14 +239,14 @@
 		</tr>
 		<tr>
 			<th>勤怠事由</th>
-			<td><?php echo $qtMasterHiwari['AttendanceOrderedReasonCD'] ?></td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'AttendanceOrderedReasonCD'); ?></td>
 			<td>NNNNNN</td>
 			<th>支給割合</th>
-			<td><?php echo $qtMasterHiwari['PayRatio'] ?>％</td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'PayRatio'); ?>％</td>
 			<th>発令年月日</th>
-			<td><?php echo $this->SalaryForm->getJapaneseEra($qtMasterHiwari['StartDateOfLayoff']) ?></td>
+			<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($qtMasterHiwari, 'StartDateOfLayoff')); ?></td>
 			<th>対象日数</th>
-			<td><?php echo $qtMasterHiwari['ObjectDays'] ?>日</td>
+			<td><?php echo Hash::get($qtMasterHiwari, 'ObjectDays'); ?>日</td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
@@ -255,7 +255,7 @@
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 			<th>休職等終了年月日</th>
-			<td><?php echo $this->SalaryForm->getJapaneseEra($qtMasterHiwari['EndDateOfLayoff']) ?></td>
+			<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($qtMasterHiwari, 'EndDateOfLayoff')); ?></td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 		</tr>

@@ -80,6 +80,7 @@ class SalaryFormHelper extends FormHelper{
      * 西暦から満年齢を取得する
      */
     public function getAgeFromChristianEra($christianEra) {
+    	if (is_null($christianEra)) return null;
     	$y = date('Y', strtotime($christianEra));
     	$m = date('m', strtotime($christianEra));
     	$d = date('d', strtotime($christianEra));
@@ -90,7 +91,7 @@ class SalaryFormHelper extends FormHelper{
     	$tan=mktime(0,0,0,$m,$d,date("Y"));
     	//過ぎていれば、今年-生年、そうでなければ更に1を引く
     	$age=($today>$tan)?date("Y")-$y:date("Y")-$y-1;
-    	return $age;
+    	return '満'.$age.'歳';
     }
 
     /**
@@ -122,6 +123,8 @@ class SalaryFormHelper extends FormHelper{
      * 西暦表記から和暦表記へ変換する
      */
     public function getJapaneseEra($christianEra) {
+
+    	if (is_null($christianEra)) return null;
 
     	$date = date('Ymd', strtotime($christianEra));
     	$year = date('Y', strtotime($christianEra));

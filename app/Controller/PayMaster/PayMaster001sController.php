@@ -33,6 +33,10 @@ class PayMaster001sController extends CommonController {
 		$searchCondition = array();
 		$this->set('searchCondition', $searchCondition);
 
+		$this->set('jtKihonKihon',   array());
+		$this->set('qtMasterKotei',  array());
+		$this->set('qtMasterHiwari', array());
+
 		// セッションを開始する
 		$this->Session->write(self::PAY_MASTER_001S_SESSION_KEY, $searchCondition);
 	}
@@ -67,10 +71,15 @@ class PayMaster001sController extends CommonController {
 		$this->set('searchCondition', $searchCondition);
 
 		// 取得したリストを画面にセットする
-		$this->set('jtKihonKihon',   $jtKihonKihon['JtKihonKihon']);
-		$this->set('qtMasterKotei',  $qtMasterKotei['QtMasterKotei']);
-		$this->set('qtMasterHiwari', $qtMasterHiwari['QtMasterHiwari']);
-
+		if (sizeof($jtKihonKihon) != '0') {
+			$this->set('jtKihonKihon',   $jtKihonKihon['JtKihonKihon']);
+			$this->set('qtMasterKotei',  $qtMasterKotei['QtMasterKotei']);
+			$this->set('qtMasterHiwari', $qtMasterHiwari['QtMasterHiwari']);
+		} else {
+			$this->set('jtKihonKihon',   array());
+			$this->set('qtMasterKotei',  array());
+			$this->set('qtMasterHiwari', array());
+		}
 		// ********************  遷移先画面の設定  ********************
 
 		// このメソッドには対応する画面はないので、元の画面にレンダリングする
