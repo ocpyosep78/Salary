@@ -77,28 +77,69 @@ class SalaryFormHelper extends FormHelper{
     }
 
     /**
+     * 西暦から満年齢を取得する
+     */
+    public function getAgeFromChristianEra($christianEra) {
+    	$y = date('Y', strtotime($christianEra));
+    	$m = date('m', strtotime($christianEra));
+    	$d = date('d', strtotime($christianEra));
+
+    	$age=date("Y")-$y;
+    	//もう今年の誕生日が過ぎているかのチェック
+    	$today=mktime(0,0,0,date("n"),date("j"),date("Y"));
+    	$tan=mktime(0,0,0,$m,$d,date("Y"));
+    	//過ぎていれば、今年-生年、そうでなければ更に1を引く
+    	$age=($today>$tan)?date("Y")-$y:date("Y")-$y-1;
+    	return $age;
+    }
+
+    /**
+     * 西暦表記から和暦表記へ変換する
+     */
+    public function getJapaneseEraWithTime($christianEra) {
+
+	    $date = date('Ymd', strtotime($christianEra));
+	    $year = date('Y', strtotime($christianEra));
+	    $time = date('H：i：s', strtotime($christianEra));
+
+	    if ($date >= 19890108) { //平成元年（1989年1月8日以降）
+		    $name = '平成';
+		    $year -= 1988;
+	    } else if ($date >= 19261225) { //昭和元年（1926年12月25日以降）
+		    $name = '昭和';
+		    $year -= 1925;
+	    } else if ($date >= 19120730) { //大正元年（1912年7月30日以降）
+		    $name = '大正';
+		    $year -= 1911;
+	    } else if ($date >= 18680125) { //明治元年（1868年1月25日以降）
+	    $name = '明治';
+	    $year -= 1867;
+	    }
+	    return $name.$year.date('／m／d　'.$time, strtotime($date));
+    }
+
+    /**
      * 西暦表記から和暦表記へ変換する
      */
     public function getJapaneseEra($christianEra) {
 
-    $date = date('Ymd', strtotime($christianEra));
-    $year = date('Y', strtotime($christianEra));
-    $time = date('H：i：s', strtotime($christianEra));
+    	$date = date('Ymd', strtotime($christianEra));
+    	$year = date('Y', strtotime($christianEra));
 
-    if ($date >= 19890108) { //平成元年（1989年1月8日以降）
-    $name = '平成';
-    $year -= 1988;
-    } else if ($date >= 19261225) { //昭和元年（1926年12月25日以降）
-    $name = '昭和';
-    $year -= 1925;
-    } else if ($date >= 19120730) { //大正元年（1912年7月30日以降）
-    $name = '大正';
-    $year -= 1911;
-    } else if ($date >= 18680125) { //明治元年（1868年1月25日以降）
-    $name = '明治';
-    $year -= 1867;
-    }
-    return $name.$year.date('／m／d　'.$time, strtotime($date));
+    	if ($date >= 19890108) { //平成元年（1989年1月8日以降）
+    		$name = '平成';
+    		$year -= 1988;
+    	} else if ($date >= 19261225) { //昭和元年（1926年12月25日以降）
+    		$name = '昭和';
+    		$year -= 1925;
+    	} else if ($date >= 19120730) { //大正元年（1912年7月30日以降）
+    		$name = '大正';
+    		$year -= 1911;
+    	} else if ($date >= 18680125) { //明治元年（1868年1月25日以降）
+    		$name = '明治';
+    		$year -= 1867;
+    	}
+    	return $name.$year.date('.m.d　', strtotime($date));
     }
 
     /**
@@ -120,39 +161,39 @@ class SalaryFormHelper extends FormHelper{
      */
     public function getChristianEra($japaneseEra) {
 
-    // "/"の削除
-    $date = str_replace("/","",$date);
-    $date = str_replace("／","",$date);
-    // "年月日"の削除
-    $date = str_replace("年","",$date);
-    $date = str_replace("月","",$date);
-    $date = str_replace("日","",$date);
+	    // "/"の削除
+	    $date = str_replace("/","",$date);
+	    $date = str_replace("／","",$date);
+	    // "年月日"の削除
+	    $date = str_replace("年","",$date);
+	    $date = str_replace("月","",$date);
+	    $date = str_replace("日","",$date);
 
-    // 文字数が6文字の場合、先頭に"20"追加
-    if(mb_strlen($date)===6){
-        $date = "20" . $date;
-    }
+	    // 文字数が6文字の場合、先頭に"20"追加
+	    if(mb_strlen($date)===6){
+	        $date = "20" . $date;
+	    }
 
-    // 全角文字を全部半角に変換
-    $date= mb_convert_kana($date,"rnask","UTF-8");
+	    // 全角文字を全部半角に変換
+	    $date= mb_convert_kana($date,"rnask","UTF-8");
 
-    // 年・月・日に分割
-    mb_language('Japanese');
-    mb_internal_encoding('UTF-8');
-    $year  = mb_substr($date, 0, 4);
-    $month = mb_substr($date, 4, 2);
-    $day   = mb_substr($date, 6);
+	    // 年・月・日に分割
+	    mb_language('Japanese');
+	    mb_internal_encoding('UTF-8');
+	    $year  = mb_substr($date, 0, 4);
+	    $month = mb_substr($date, 4, 2);
+	    $day   = mb_substr($date, 6);
 
-    // 大正・昭和・平成の変換
-    $year = fnc_warekiset($year);
+	    // 大正・昭和・平成の変換
+	    $year = fnc_warekiset($year);
 
-    // 日付の整合性
-    if(!@checkdate($month,$day,$year)) {
-        // 変な日付
-        return "";
-    }
-    // 年月日の返品
-    return $year.$month.$day;
+	    // 日付の整合性
+	    if(!@checkdate($month,$day,$year)) {
+	        // 変な日付
+	        return "";
+	    }
+	    // 年月日の返品
+	    return $year.$month.$day;
 
     }
 
@@ -160,26 +201,26 @@ class SalaryFormHelper extends FormHelper{
      * 元号から西暦への変換
      */
     private function fnc_warekiset($year){
-    // 年度二分割
-    mb_language('Japanese');
-    mb_internal_encoding('UTF-8');
-    $gg = mb_substr($year,0,2);
-    $yy = mb_substr($year,2,2);
+	    // 年度二分割
+	    mb_language('Japanese');
+	    mb_internal_encoding('UTF-8');
+	    $gg = mb_substr($year,0,2);
+	    $yy = mb_substr($year,2,2);
 
-    // 和暦に応じて年度加算
-    switch($gg){
-    case "大正":
-    $year = 1911 + $yy;
-    break;
-    case "昭和":
-    $year = 1925 + $yy;
-    break;
-    case "平成":
-    $year = 1988 + $yy;
-    break;
-    }
-    // 年度の返品
-    return $year;
+	    // 和暦に応じて年度加算
+	    switch($gg){
+		    case "大正":
+		    $year = 1911 + $yy;
+		    break;
+		    case "昭和":
+		    $year = 1925 + $yy;
+		    break;
+		    case "平成":
+		    $year = 1988 + $yy;
+		    break;
+	    }
+	    // 年度の返品
+	    return $year;
     }
 
 

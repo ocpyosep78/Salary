@@ -9,7 +9,7 @@ App::uses('CommonController', 'Controller');
 class PayMaster001sController extends CommonController {
 
 	// この画面で使うモデル（テーブル）を宣言する
-	// TODO public $uses = array('SmItakusakiKaisha');
+	public $uses = array('JtKihonKihon', 'QtMasterKotei', 'QtMasterHiwari');
 
 	// この画面で使うコンポーネントを宣言する
 	public $components = array('Session');
@@ -37,50 +37,46 @@ class PayMaster001sController extends CommonController {
 		$this->Session->write(self::PAY_MASTER_001S_SESSION_KEY, $searchCondition);
 	}
 
-// 	/**
-// 	 * 委託先研修会社の検索
-// 	 * 検索結果はList構造で返却
-// 	 */
-// 	public function search() {
+	/**
+	 * 給与マスタの検索
+	 * 検索結果はList構造で返却
+	 * 複数のテーブルに検索にいき、その結果はタブ画面として保持する
+	 */
+	public function search() {
 
-// 		// ********************  画面からのデータ受け取り  ********************
+		// ********************  画面からのデータ受け取り  ********************
 
-// 		// ページ番号を直接指定された場合のリダイレクト処理
-// 		if ($_SERVER['REQUEST_METHOD']=='POST' && isset($this->params['data']['page'])) {
-// 			// リダイレクト
-// 			$this->redirect('search/page:'.$this->params['data']['page']);
-// 		}
+		// 前画面からの検索条件の受け取り（職員番号コード）
+		if (isset($this->request->data['empNo'])) {
+			// POSTデータを受け取る
+			$searchCondition['empNo'] = $this->request->data['empNo'];
+			// セッションを上書きする
+			$this->Session->write(self::PAY_MASTER_001S_SESSION_KEY, $searchCondition);
+		}
 
-// 		// 前画面からの検索条件の受け取り（研修委託会社コード）
-// 		if (isset($this->request->data['consignmentCompanyCd'])) {
-// 			// POSTデータを受け取る
-// 			$searchCondition['consignmentCompanyCd'] = $this->request->data['consignmentCompanyCd'];
-// 			// セッションを上書きする
-// 			$this->Session->write(self::S003S_SESSION_KEY, $searchCondition);
-// 		} else {
-// 			// POSTデータが存在しない場合（ページングなど）、セッションから取得して使う
-// 			$searchCondition = $this->Session->read(self::S003S_SESSION_KEY);
-// 		}
+		// ********************  ビジネスロジック  ********************
 
-// 		// ********************  ビジネスロジック  ********************
+		// 研修委託会社テーブルからリスト形式でデータを取得する
+		$jtKihonKihon   = $this->JtKihonKihon->find('first', array('conditions' => array('empNo' => $searchCondition['empNo'])));
+		$qtMasterKotei  = $this->QtMasterKotei->find('first', array('conditions' => array('empNo' => $searchCondition['empNo'])));
+		$qtMasterHiwari = $this->QtMasterHiwari->find('first', array('conditions' => array('empNo' => $searchCondition['empNo'])));
 
-// 		// 研修委託会社テーブルからリスト形式でデータを取得する
-// 		$this->paginate = $this->SmItakusakiKaisha->getPaginateCondition($searchCondition);
+		// ********************  画面へのデータ反映  ********************
 
-// 		// ********************  画面へのデータ反映  ********************
+		// 前画面からの検索条件をそのまま画面にセットする
+		$this->set('searchCondition', $searchCondition);
 
-// 		// 前画面からの検索条件をそのまま画面にセットする
-// 		$this->set('searchCondition', $searchCondition);
+		// 取得したリストを画面にセットする
+		$this->set('jtKihonKihon',   $jtKihonKihon['JtKihonKihon']);
+		$this->set('qtMasterKotei',  $qtMasterKotei['QtMasterKotei']);
+		$this->set('qtMasterHiwari', $qtMasterHiwari['QtMasterHiwari']);
 
-// 		// 取得したリストを画面にセットする
-// 		$this->set('rtnSmItakusakiKaishaList', $this->Paginate());
+		// ********************  遷移先画面の設定  ********************
 
-// 		// ********************  遷移先画面の設定  ********************
+		// このメソッドには対応する画面はないので、元の画面にレンダリングする
+		$this->render('index');
 
-// 		// このメソッドには対応する画面はないので、元の画面にレンダリングする
-// 		$this->render('index');
-
-// 	}
+	}
 
 // 	/**
 // 	 * 複数ボタンが用意されている画面からの共通呼び出しメソッド
