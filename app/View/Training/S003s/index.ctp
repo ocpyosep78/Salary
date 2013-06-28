@@ -2,20 +2,33 @@
 	// スクリプトで、この画面特有のものを差し込むときの書き方。（この画面では選択されたレコードを詳細エリアに転記するなどの処理）
 	$this->append('script'); echo $this->Html->script(array('lib/jquery-1.9.1.min', 'salary/s003_index')); $this->end();
 	// スタイルシートで、この画面特有のものを差し込むときの書き方。（この画面では必要無いのでコメントアウト）
-	//$this->append('css');    echo $this->Html->css(array('user/detail'));    $this->end();
+	$this->append('css');    echo $this->Html->css(array('salary/common'));    $this->end();
 ?>
 
-	<?php echo $this->element('header'); // フロント画面用ヘッダー ?>
 
-	<div id="content">
+<?php echo $this->SalaryForm->create('S003', array('controller' => 'S003', 'action' => 'search')); ?>
+	<table class="t_header">
+		<tr>
+			<td rowspan="2">
+				<p class="title">研修委託会社コード</p>
+				<input type="text" name="consignmentCompanyCd" value="<?php echo Hash::get($searchCondition, 'consignmentCompanyCd'); ?>" /><button type="button" id="Button2" name="" value="">？</button>
+				<p class="description">XXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+			</td>
+			<td class="td1 pd_01"><input class="Button1" type="submit" value="検索" /></td>
+		</tr>
+		<tr>
+			<td class="td1 pd_02"><input class="Button1" type="button" value="消去" /></td>
+		</tr>
+	</table>
+</form>
 
-		<?php
-			if(isset($rtnSmItakusakiKaishaList) && sizeof($rtnSmItakusakiKaishaList) != '0') {
-				echo $this->element('common_search_nav');
-			} else {
-				echo '<br>';
-			}
-		?>
+	<?php
+		if(isset($rtnSmItakusakiKaishaList) && sizeof($rtnSmItakusakiKaishaList) != '0') {
+			echo $this->element('common_search_nav');
+		} else {
+			echo '<br>';
+		}
+	?>
 
 		<div class="box_01">
 			<table class="tbl_02">
@@ -40,93 +53,97 @@
 
 <?php echo $this->SalaryForm->create('S003', array('controller' => 'S003', 'action' => 'doFlexibleAction', 'name' => 'flexible')); ?>
 
-		<div class="box_01">
+		<div class="box_02">
 			<p id="code">コード：<span id="Code"></span></p>
 			<input type="hidden" value= "" name="ConsignmentCompanyCD" id="ConsignmentCompanyCD" />
 			<table class="table_left">
 				<tr>
 					<th>委託先会社名</th>
-					<td><input type="text" value= "" name="ConsignmentCompanyName" id="ConsignmentCompanyName" /></td>
+					<td colspan="3"><input type="text" value= "" name="ConsignmentCompanyName" id="ConsignmentCompanyName" /></td>
 				</tr>
 				<tr>
-					<th>代表者名</th>
-					<td><input type="text" value= "" name="Representative" id="Representative" /></td>
+					<th>代表社名</th>
+					<td colspan="3"><input type="text" value= "" name="Representative" id="Representative" /></td>
 				</tr>
 				<tr>
-					<th colspan="2">所在地</th>
-				</tr>
-				<tr>
+					<th rowspan="6" class="th_01">所在地</th>
 					<th>郵便番号</th>
-					<td><input type="text" value= "" name="PostalCD1" id="PostalCD1" maxlength="3" class="short_01" /> - <input type="text" value= "" name="PostalCD2" id="PostalCD2" maxlength="3" class="short_01" /></td>
+					<td colspan="2"><input type="text" value= "" name="PostalCD1" id="PostalCD1" maxlength="3" class="short_01" /> - <input type="text" value= "" name="PostalCD2" id="PostalCD2" maxlength="3" class="short_01" /></td>
 				</tr>
 				<tr>
 					<th>市区町村CD</th>
 					<td><input type="text" value= "" name="CityCD" id="CityCD" class="short_02" /><button type="button" name="" value="">？</button></td>
+					<td>NNNNNNNNNNNNNNN</td>
 				</tr>
 				<tr>
-					<th>漢字住所</th>
-					<td><input type="text" value= "" name="AddressKanji" id="AddressKanji" /></td>
+					<th class="th_02">漢字住所</th>
+					<td colspan="2"><input type="text" value= "" name="AddressKanji" id="AddressKanji" /></td>
 				</tr>
 				<tr>
-					<th>方書き</th>
-					<td><input type="text" value= "" name="SideKanji" id="SideKanji" /></td>
+					<th class="th_02">方書き</th>
+					<td colspan="2"><input type="text" value= "" name="SideKanji" id="SideKanji" /></td>
 				</tr>
 				<tr>
-					<th>カナ住所</th>
-					<td><input type="text" value= "" name="AddressKana" id="AddressKana" /></td>
+					<th class="th_02">カナ住所</th>
+					<td colspan="2"><input type="text" value= "" name="AddressKana" id="AddressKana" /></td>
 				</tr>
 				<tr>
-					<th>方書き</th>
-					<td><input type="text" value= "" name="SideKana" id="SideKana" /></td>
+					<th class="th_02">方書き</th>
+					<td colspan="2"><input type="text" value= "" name="SideKana" id="SideKana" /></td>
 				</tr>
 			</table><!-- //.table_left -->
 			<table class="table_right">
 				<tr>
-					<th>営業担当者</th>
+					<th colspan="2">営業担当者</th>
 					<td><input type="text" value= "" name="AccountExecutiveName" id="AccountExecutiveName" /></td>
 				</tr>
 				<tr>
-					<th colspan="2">連絡先</th>
+					<th rowspan="3">連絡先</th>
+					<th class="th_02">電話1</th>
+					<td><input type="text" value= "" name="TelNo1" id="TelNo1" /></td>
 				</tr>
 				<tr>
-					<th>電話1</th>
-					<td><input type="tel" value= "" name="TelNo1" id="TelNo1" /></td>
+					<th class="th_02">電話2</th>
+					<td><input type="text" value= "" name="TelNo2" id="TelNo2" /></td>
 				</tr>
 				<tr>
-					<th>電話2</th>
-					<td><input type="tel" value= "" name="TelNo2" id="TelNo2" /></td>
+					<th class="th_02">電話3</th>
+					<td><input type="text" value= "" name="TelNo3" id="TelNo3" /></td>
 				</tr>
 				<tr>
-					<th>電話3</th>
-					<td><input type="tel" value= "" name="TelNo3" id="TelNo3" /></td>
+					<th colspan="2" class="th_02">メールアドレス1</th>
+					<td><input type="text" value=""  name="EmailAddresse1" id="EmailAddresse1" /></td>
 				</tr>
 				<tr>
-					<th>メールアドレス1</th>
-					<td><input type="email" value=""  name="EmailAddresse1" id="EmailAddresse1" /></td>
+					<th colspan="2" class="th_02">メールアドレス2</th>
+					<td><input type="text" value=""  name="EmailAddresse2" id="EmailAddresse2" /></td>
 				</tr>
 				<tr>
-					<th>メールアドレス2</th>
-					<td><input type="email" value=""  name="EmailAddresse2" id="EmailAddresse2" /></td>
-				</tr>
-				<tr>
-					<th>最終更新日時</th>
+					<th colspan="2">最終更新日時</th>
 					<td><span id="updated_date"></span></td>
 				</tr>
 				<tr>
-					<th>最終更新者</th>
+					<th colspan="2">最終更新者</th>
 					<td><span id="updated_by"></span></td>
 				</tr>
-			</table><!-- //.table_right -->
-		</div><!-- //.box_01 -->
+			</table>
+		</div><!-- //.box_02 -->
 
 		<hr>
-	</div>
-	<?php echo $this->element('footer'); // フロント画面用フッター ?>
+
+		<table id="footer">
+			<tr>
+				<td class="f_td1"><input class="Button1" type="button" value="閉じる" onclick="beforeSubmit('close');" /></td>
+				<td class="f_td2"><input class="Button1" type="button" value="修正" onclick="beforeSubmit('edit');" /></td>
+				<td class="f_td3"><input class="Button1" type="button" value="追加" onclick="beforeSubmit('add');" /></td>
+				<td class="f_td4"><input class="Button1" type="button" value="削除" onclick="beforeSubmit('delete');" /></td>
+			</tr>
+		</table><!-- //#footer -->
 
 <?php echo $this->SalaryForm->end(); ?>
 
 <?php // 検索子画面の読み込み ?>
-<?php echo $this->element('common_search'); ?>
+<?php // echo $this->element('common_search'); ?>
 
 <script>
 	function beforeSubmit(type) {
@@ -136,5 +153,25 @@
 		submitType.setAttribute("value", type);
 		document.flexible.appendChild(submitType);
 		document.flexible.submit();
+	}
+
+	/**
+	 * 検索子画面の表示
+	 *
+	 * @param searchTable  検索対象のテーブル名
+	 * @param searchColumn 検索対象のテーブルのカラム
+	 * @param target       検索結果を設定する項目名
+	 */
+	function viewCommonSearch(searchTable, searchColumn, target) {
+		$(function(){
+			// hidden項目の設定
+			$("#hidden-common-search-table").val(searchTable);
+			$("#hidden-common-search-column").val(searchColumn);
+			$("#hidden-common-search-target").val(target);
+
+			// 検索子画面の表示
+			// TODO モーダルで表示する
+			$("#common_search").show();
+		});
 	}
 </script>
