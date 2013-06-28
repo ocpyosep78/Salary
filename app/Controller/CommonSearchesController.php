@@ -42,6 +42,7 @@ class CommonSearchesController extends CommonController {
 
 		// 検索結果をViewに渡す
 		$this->set('searchResultList', $this->Paginate());
+		$this->set('tableName', $table);
 
 		// 検索結果一覧を表示する
 		$this->render('/Elements/common_search_result');

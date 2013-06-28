@@ -8,8 +8,8 @@
 					<input type="text" id="common-search-keyword" name="common-search-keyword" value="" />
 				</td>
 				<td class="td1">
-					<input id="Button1" type="button" onclick="commonSearch();" value="検索" />
-					<input id="Button1" type="button" value="消去" />
+					<input class="Button1" type="button" onclick="commonSearch();" value="検索" />
+					<input class="Button1" type="button" value="消去" />
 				</td>
 			</tr>
 		</table>

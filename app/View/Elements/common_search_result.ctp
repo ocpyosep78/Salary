@@ -6,28 +6,35 @@
 	}
 ?>
 
+<?php // 表示する項目を取得 ?>
+<?php $viewColumn = $this->SalaryForm->getViewColumnForCommonSearch($tableName); ?>
+
 <div class="box_01">
 	<table class="tbl_02">
 		<tr>
-			<th class="">コード</th>
-			<th class="">委託先会社名</th>
+			<th class="">Seq</th>
+			<?php foreach($viewColumn as $columnName) : ?>
+				<th><?php echo $columnName ?></th>
+			<?php endforeach ?>
 		</tr>
 
 		<?php if(isset($searchResultList)) { ?>
-			<?php foreach($searchResultList as $searchResult) : ?>
-					<tr class="selectableRecord">
-						<?php // TODO 動的に出したい。表示する項目名をテーブル毎にConstで持つようにする ?>
-						<td><?php echo $searchResult['SmItakusakiKaisha']['ConsignmentCompanyCD'] ?></td>
-						<td><?php echo $searchResult['SmItakusakiKaisha']['ConsignmentCompanyName'] ?></td>
+			<?php foreach($searchResultList as $key => $searchResult) : ?>
+
+					<tr class="selectableRecords">
+						<td><?php echo $key + 1 ?></td>
+						<?php foreach($viewColumn as $columnId => $columnName) : ?>
+							<td><?php echo $searchResult[$tableName][$columnId] ?></td>
+						<?php endforeach ?>
 					</tr>
+
 			<?php endforeach ?>
 		<?php } ?>
+
 	</table>
 </div><!-- //.box_01 -->
 
-<td class="td1">
-	<input id="Button1" type="button" onclick="commitSearchResult();" value="確定" />
-</td>
+<input class="Button1" type="button" onclick="commitSearchResult();" value="確定" />
 
 <script type="text/javascript">
 	/**

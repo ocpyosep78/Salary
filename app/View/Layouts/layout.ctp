@@ -30,7 +30,7 @@
 
 		<?php
 			// フロント画面用の共通のJSファイルを読み込み
-			echo $this->Html->script(array('user/jquery-1.9.0.min', 'user/lib'));
+			echo $this->Html->script(array('user/jquery-1.9.0.min', 'user/lib', 'salary/common_search'));
 			echo $this->fetch('script');
 		?>
 

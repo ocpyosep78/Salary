@@ -14,6 +14,13 @@ $const_labels = array(
 			'delete'  => array('symbol'=>'FLEXIBLE_ACTION_TYPE_DELETE','name'=>'削除'),
 		)
 	),
+	// 検索結果表示項目：委託先会社マスタ
+	'VIEW_COLUMN_SMITAKUSAKIKAISHA' => array(
+		'labels' => array(
+			'ConsignmentCompanyCD'   => array('symbol' => '', 'name' => '委託先会社コード'),
+			'ConsignmentCompanyName' => array('symbol' => '', 'name' => '委託先会社名'),
+		)
+	),
 );
 
 $config['const_labels'] = $const_labels;

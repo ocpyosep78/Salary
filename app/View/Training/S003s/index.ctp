@@ -11,7 +11,8 @@
 		<tr>
 			<td rowspan="2">
 				<p class="title">研修委託会社コード</p>
-				<input type="text" name="consignmentCompanyCd" value="<?php echo Hash::get($searchCondition, 'consignmentCompanyCd'); ?>" /><button type="button" id="Button2" name="" value="">？</button>
+				<input type="text" name="consignmentCompanyCd" value="<?php echo Hash::get($searchCondition, 'consignmentCompanyCd'); ?>" />
+				<input type="button"  id="Button2" value="？" onclick="viewCommonSearch('SmItakusakiKaisha', 'ConsignmentCompanyName', 'ConsignmentCompanyCD');" />
 				<p class="description">XXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
 			</td>
 			<td class="td1 pd_01"><input class="Button1" type="submit" value="検索" /></td>
@@ -143,7 +144,7 @@
 <?php echo $this->SalaryForm->end(); ?>
 
 <?php // 検索子画面の読み込み ?>
-<?php // echo $this->element('common_search'); ?>
+<?php echo $this->element('common_search'); ?>
 
 <script>
 	function beforeSubmit(type) {
