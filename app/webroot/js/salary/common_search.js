@@ -17,7 +17,7 @@
 
 		// 選択値を親画面の項目に設定する
 		$("#" + targetCode).val($(this).children("td." + columnCode).html());
-		$("#" + targetName).val($(this).children("td." + columnName).html());
+		$("#" + targetName).html($(this).children("td." + columnName).html());
 	});
 
 })(jQuery);

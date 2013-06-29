@@ -13,7 +13,7 @@
 				<p class="title">研修委託会社コード</p>
 				<input type="text" name="consignmentCompanyCd" id="consignmentCompanyCd" value="<?php echo Hash::get($searchCondition, 'consignmentCompanyCd'); ?>" />
 				<input type="button"  class="Button2" value="？" onclick="viewCommonSearch('SmItakusakiKaisha', 'ConsignmentCompanyName', 'ConsignmentCompanyCD', 'consignmentCompanyName', 'consignmentCompanyCd');" />
-				<p class="description">XXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+				<p class="description" id="consignmentCompanyName">XXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
 			</td>
 			<td class="td1 pd_01"><input class="Button1" type="submit" value="検索" /></td>
 		</tr>
@@ -171,7 +171,7 @@
 			$("#hidden-common-search-table").val(table);
 			$("#hidden-common-search-column-name").val(columnName);
 			$("#hidden-common-search-column-code").val(columnCode);
-			$("#hidden-common-search-taregt-name").val(targetName);
+			$("#hidden-common-search-target-name").val(targetName);
 			$("#hidden-common-search-target-code").val(targetCode);
 
 			// 検索子画面の表示
