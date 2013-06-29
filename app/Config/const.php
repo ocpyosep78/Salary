@@ -14,6 +14,12 @@ $const_labels = array(
 			'delete'  => array('symbol'=>'FLEXIBLE_ACTION_TYPE_DELETE','name'=>'削除'),
 		)
 	),
+	// 検索結果で一度に表示する件数
+	'PAGINATION_VIEW_LIMIT' => array(
+		'labels' => array(
+			'3'   => array('symbol' => 'PAGINATION_VIEW_LIMIT_COMMON_SEARCH', 'name' => '表示件数（検索子画面）'),
+		)
+	),
 	// 検索結果表示項目：委託先会社マスタ
 	'VIEW_COLUMN_SMITAKUSAKIKAISHA' => array(
 		'labels' => array(

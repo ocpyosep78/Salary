@@ -260,4 +260,15 @@ class SalaryFormHelper extends FormHelper{
 		return Configure::read($key);
 	}
 
+	/**
+	 * 検索結果レコードの通番を取得する
+	 *
+	 * @param $pageNumber      現在のページ番号
+	 * @param $limit           一覧表示件数
+	 * @param $searchResultKey 検索結果の配列のキー値
+	 */
+	public function getSequentialNumber($pageNumber, $limit, $searchResultKey) {
+
+		return ($pageNumber - 1) * $limit + ($searchResultKey + 1);
+	}
 }

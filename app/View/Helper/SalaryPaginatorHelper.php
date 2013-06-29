@@ -61,6 +61,26 @@ class SalaryPaginatorHelper extends PaginatorHelper {
 		return $out;
 	}
 
+	public function prev($title = '<< Prev', $options = array(), $disabledTitle = null, $disabledOptions = array()) {
+		$defaults = array(
+				'rel' => 'prev'
+		);
+
+		$options = array_merge(
+				array(
+						'tag' => 'span',
+						'after' => null,
+						'model' => $this->defaultModel(),
+						'separator' => ' | ',
+						'ellipsis' => '...',
+						'class' => 'Button1 prev',
+						'hsCustom' => false,
+				), (array) $options);
+
+		$options = array_merge($defaults, (array)$options);
+		return $this->_pagingLink('Prev', $title, $options, $disabledTitle, $disabledOptions);
+	}
+
 	public function next($title = 'Next >>', $options = array(), $disabledTitle = null, $disabledOptions = array()) {
 		$defaults = array(
 				'rel' => 'next'
@@ -73,14 +93,13 @@ class SalaryPaginatorHelper extends PaginatorHelper {
 						'model' => $this->defaultModel(),
 						'separator' => ' | ',
 						'ellipsis' => '...',
-						'class' => 'Button1',
+						'class' => 'Button1 next',
 						'hsCustom' => false,
 				), (array) $options);
 
 		$options = array_merge($defaults, (array)$options);
 		return $this->_pagingLink('Next', $title, $options, $disabledTitle, $disabledOptions);
 	}
-
 
 	public function last($last = 'last >>', $options = array()) {
 		$options = array_merge(

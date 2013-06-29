@@ -155,28 +155,4 @@
 		document.flexible.appendChild(submitType);
 		document.flexible.submit();
 	}
-
-	/**
-	 * 検索子画面の表示
-	 *
-	 * @param table      検索対象のテーブル名
-	 * @param columnName 検索対象のカラム（名称）
-	 * @param columnCode 検索対象のカラム（コード）
-	 * @param targetName 検索結果の設定先（名称）
-	 * @param targetCode 検索結果の設定先（コード）
-	 */
-	function viewCommonSearch(table, columnName, columnCode, targetName, targetCode) {
-		$(function(){
-			// hidden項目の設定
-			$("#hidden-common-search-table").val(table);
-			$("#hidden-common-search-column-name").val(columnName);
-			$("#hidden-common-search-column-code").val(columnCode);
-			$("#hidden-common-search-target-name").val(targetName);
-			$("#hidden-common-search-target-code").val(targetCode);
-
-			// 検索子画面の表示
-			// TODO モーダルで表示する
-			$("#common_search").show();
-		});
-	}
 </script>

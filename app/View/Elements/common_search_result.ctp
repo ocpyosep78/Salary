@@ -24,7 +24,7 @@
 			<?php foreach($searchResultList as $key => $searchResult) : ?>
 
 					<tr class="commonSearchSelectableRecord">
-						<td><?php echo $key + 1 ?></td>
+						<td><?php echo $this->SalaryForm->getSequentialNumber($this->SalaryPaginator->current(), PAGINATION_VIEW_LIMIT_COMMON_SEARCH, $key); ?></td>
 						<?php foreach($viewColumn as $columnId => $columnName) : ?>
 							<td class="<?php echo $columnId ?>"><?php echo $searchResult[$tableName][$columnId] ?></td>
 						<?php endforeach ?>
