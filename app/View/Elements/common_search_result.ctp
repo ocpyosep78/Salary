@@ -6,11 +6,13 @@
 	}
 ?>
 
-<?php // 表示する項目を取得 ?>
+<?php // 表示する項目を定数ファイルから取得 ?>
 <?php $viewColumn = $this->SalaryForm->getViewColumnForCommonSearch($tableName); ?>
 
+<?php // 検索結果一覧の表示 ?>
 <div class="box_01">
 	<table class="tbl_02">
+
 		<tr>
 			<th class="">Seq</th>
 			<?php foreach($viewColumn as $columnName) : ?>
@@ -21,10 +23,10 @@
 		<?php if(isset($searchResultList)) { ?>
 			<?php foreach($searchResultList as $key => $searchResult) : ?>
 
-					<tr class="selectableRecords">
+					<tr class="commonSearchSelectableRecord">
 						<td><?php echo $key + 1 ?></td>
 						<?php foreach($viewColumn as $columnId => $columnName) : ?>
-							<td><?php echo $searchResult[$tableName][$columnId] ?></td>
+							<td class="<?php echo $columnId ?>"><?php echo $searchResult[$tableName][$columnId] ?></td>
 						<?php endforeach ?>
 					</tr>
 
@@ -42,11 +44,7 @@
 	 */
 	function commitSearchResult() {
 		$(function(){
-			// 検索結果を設定する項目のIDを取得
-			var target = "#" + $("#hidden-common-search-target").val();
-
-			// TODO 親画面の項目に検索結果を設定する
-			$(target).val("ああああ");
+			// TODO モーダルを閉じる処理
 		});
 	}
 </script>

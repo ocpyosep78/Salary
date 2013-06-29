@@ -23,8 +23,10 @@
 
 <?php // テーブル検索に使用する項目をhiddenで定義 ?>
 <input type="hidden" value= "" name="hidden-common-search-table" id="hidden-common-search-table" />
-<input type="hidden" value= "" name="hidden-common-search-column" id="hidden-common-search-column" />
-<input type="hidden" value= "" name="hidden-common-search-target" id="hidden-common-search-target" />
+<input type="hidden" value= "" name="hidden-common-search-column-name" id="hidden-common-search-column-name" />
+<input type="hidden" value= "" name="hidden-common-search-column-code" id="hidden-common-search-column-code" />
+<input type="hidden" value= "" name="hidden-common-search-target-name" id="hidden-common-search-target-name" />
+<input type="hidden" value= "" name="hidden-common-search-target-code" id="hidden-common-search-target-code" />
 
 <script type="text/javascript">
 	/**
@@ -36,13 +38,13 @@
 		var keyword = $("#common-search-keyword").val();
 
 		// hidden項目の取得
-		var table  = $("#hidden-common-search-table").val();  // テーブル名
-		var column = $("#hidden-common-search-column").val(); // カラム名
-		var target = $("#hidden-common-search-target").val(); // 検索結果項目名
+		var table = $("#hidden-common-search-table").val();        // 検索対象のテーブル名
+		var name  = $("#hidden-common-search-column-name").val();  // 検索対象のカラム（名称）
+		var code  = $("#hidden-common-search-column-code").val();  // 検索対象のカラム（コード）
 
 		// テーブルデータの取得（Ajax通信）
 		$.ajax({
-			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'commonSearch')); ?>" + "?keyword=" + keyword + "&table=" + table + "&column=" + column + "&target=" + target,
+			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'commonSearch')); ?>" + "?keyword=" + keyword + "&table=" + table + "&name=" + name + "&code=" + code,
 			type: 'GET',
 			success: function(data) {
 				$("#commonSearchResult").html(data);

@@ -28,8 +28,6 @@
 	function viewCommonSearch(searchTable, searchColumn, target) {
 		$(function(){
 			// hidden項目の設定
-			alert();
-alert(searchTable);
 			$("#hidden-common-search-table").val(searchTable);
 			$("#hidden-common-search-column").val(searchColumn);
 			$("#hidden-common-search-target").val(target);

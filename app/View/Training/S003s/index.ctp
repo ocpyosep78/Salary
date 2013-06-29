@@ -11,8 +11,8 @@
 		<tr>
 			<td rowspan="2">
 				<p class="title">研修委託会社コード</p>
-				<input type="text" name="consignmentCompanyCd" value="<?php echo Hash::get($searchCondition, 'consignmentCompanyCd'); ?>" />
-				<input type="button"  id="Button2" value="？" onclick="viewCommonSearch('SmItakusakiKaisha', 'ConsignmentCompanyName', 'ConsignmentCompanyCD');" />
+				<input type="text" name="consignmentCompanyCd" id="consignmentCompanyCd" value="<?php echo Hash::get($searchCondition, 'consignmentCompanyCd'); ?>" />
+				<input type="button"  class="Button2" value="？" onclick="viewCommonSearch('SmItakusakiKaisha', 'ConsignmentCompanyName', 'ConsignmentCompanyCD', 'consignmentCompanyName', 'consignmentCompanyCd');" />
 				<p class="description">XXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
 			</td>
 			<td class="td1 pd_01"><input class="Button1" type="submit" value="検索" /></td>
@@ -159,16 +159,20 @@
 	/**
 	 * 検索子画面の表示
 	 *
-	 * @param searchTable  検索対象のテーブル名
-	 * @param searchColumn 検索対象のテーブルのカラム
-	 * @param target       検索結果を設定する項目名
+	 * @param table      検索対象のテーブル名
+	 * @param columnName 検索対象のカラム（名称）
+	 * @param columnCode 検索対象のカラム（コード）
+	 * @param targetName 検索結果の設定先（名称）
+	 * @param targetCode 検索結果の設定先（コード）
 	 */
-	function viewCommonSearch(searchTable, searchColumn, target) {
+	function viewCommonSearch(table, columnName, columnCode, targetName, targetCode) {
 		$(function(){
 			// hidden項目の設定
-			$("#hidden-common-search-table").val(searchTable);
-			$("#hidden-common-search-column").val(searchColumn);
-			$("#hidden-common-search-target").val(target);
+			$("#hidden-common-search-table").val(table);
+			$("#hidden-common-search-column-name").val(columnName);
+			$("#hidden-common-search-column-code").val(columnCode);
+			$("#hidden-common-search-taregt-name").val(targetName);
+			$("#hidden-common-search-target-code").val(targetCode);
 
 			// 検索子画面の表示
 			// TODO モーダルで表示する
