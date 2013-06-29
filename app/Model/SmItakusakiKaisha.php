@@ -73,7 +73,7 @@ class SmItakusakiKaisha extends AppModel {
 		return array(
 			'SmItakusakiKaisha' => array(
 				'conditions' => $conditions,
-				'limit' => 1, // 一度に表示する件数
+				'limit' => 10, // 一度に表示する件数
 				'order' => array('SmItakusakiKaisha.consignmentCompanyCd' => 'asc'),
 				'page' => 1, // 最初に表示するページ
 			)

@@ -12,7 +12,7 @@
 			<td rowspan="2">
 				<p class="title">研修委託会社コード</p>
 				<input type="text" name="consignmentCompanyCd" id="consignmentCompanyCd" value="<?php echo Hash::get($searchCondition, 'consignmentCompanyCd'); ?>" />
-				<input type="button"  class="Button2" value="？" onclick="viewCommonSearch('SmItakusakiKaisha', 'ConsignmentCompanyName', 'ConsignmentCompanyCD', 'consignmentCompanyName', 'consignmentCompanyCd');" />
+				<input type="button"  class="Button2" value="？" onclick="viewForCommonSearch('SmItakusakiKaisha', 'ConsignmentCompanyName', 'ConsignmentCompanyCD', 'consignmentCompanyName', 'consignmentCompanyCd');" />
 				<p class="description" id="consignmentCompanyName">XXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
 			</td>
 			<td class="td1 pd_01"><input class="Button1" type="submit" value="検索" /></td>

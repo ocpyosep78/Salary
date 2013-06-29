@@ -1,6 +1,23 @@
 ;(function($) {
 
 	/**
+	 * Paginationクリック処理
+	 */
+	function paginationClick(url) {
+
+		// 親画面の項目IDを取得
+		var targetCode = $("#hidden-common-search-target-code").val();
+		var targetName = $("#hidden-common-search-target-name").val();
+
+		// 親画面に設定した値をクリア
+		$("#" + targetCode).val("");
+		$("#" + targetName).html("");
+
+		// Ajax通信で指定ページを読み込む
+		$("#common-search-result").load(url);
+	}
+
+	/**
 	 * 検索子画面の一覧部分でレコード選択時の処理
 	 */
 	$(".commonSearchSelectableRecord").click(function(){
@@ -20,6 +37,9 @@
 		// 選択値を親画面の項目に設定する
 		$("#" + targetCode).val($(this).children("td." + columnCode).html());
 		$("#" + targetName).html($(this).children("td." + columnName).html());
+
+		// 確定ボタンを活性化する
+		$("#common-search-result .commit").removeAttr("disabled");
 	});
 
 	/**
@@ -27,11 +47,13 @@
 	 */
 	$("#common-search-result .pagination .prev, #common-search-result .pagination .next").click(function() {
 
-		// Ajax通信で次ページ（前ページ）を読み込む
-		$("#common-search-result").load($(this).children("a").attr("href"));
+		// Ajax通信用URLの取得
+		var url = $(this).children("a").attr("href");
 
-		// ブラウザのイベント処理でhref属性に設定されたリンク先に移動させず、
-		// jQueryの指定のみを有効にするため、"return false"とする。
+		// Paginationクリック時の処理を行う
+		paginationClick(url);
+
+		// ブラウザのイベント処理を無効にする
 		 return false;
 	});
 
@@ -40,12 +62,14 @@
 	 */
 	$("#common-search-result .pagination .jump").click(function() {
 
-		// ジャンプ先のページ番号を取得
+		// Ajax通信用URLの取得
 		var page = $(this).parent().find("input:first").val();
+		var url = "/CommonSearches/search/page:" + page;
 
-		// Ajax通信で指定ページを読み込む
-		var url = "/CommonSearches/commonSearch/page:" + page;
-		$("#common-search-result").load(url);
+		// Paginationクリック時の処理を行う
+		paginationClick(url);
+
+		// ブラウザのイベント処理を無効にする
 		return false;
 	});
 })(jQuery);

@@ -1,4 +1,4 @@
-<div class="modalWindow fixed" id="common_search">
+<div class="modalWindow fixed" id="common-search">
 	<div class="modalBody">
 
 		<table class="t_header">
@@ -8,8 +8,8 @@
 					<input type="text" id="common-search-keyword" name="common-search-keyword" value="" />
 				</td>
 				<td class="td1">
-					<input class="Button1" type="button" onclick="searchCommonSearch();" value="検索" />
-					<input class="Button1" type="button" onclick="clearCommonSearch()" value="消去" />
+					<input class="Button1" type="button" onclick="searchForCommonSearch();" value="検索" />
+					<input class="Button1" type="button" onclick="clearForCommonSearch()" value="消去" />
 				</td>
 			</tr>
 		</table>
@@ -38,37 +38,42 @@
 	 * @param targetName 検索結果の設定先（名称）
 	 * @param targetCode 検索結果の設定先（コード）
 	 */
-	function viewCommonSearch(table, columnName, columnCode, targetName, targetCode) {
-		$(function(){
-			// hidden項目の設定
-			$("#hidden-common-search-table").val(table);
-			$("#hidden-common-search-column-name").val(columnName);
-			$("#hidden-common-search-column-code").val(columnCode);
-			$("#hidden-common-search-target-name").val(targetName);
-			$("#hidden-common-search-target-code").val(targetCode);
+	function viewForCommonSearch(table, columnName, columnCode, targetName, targetCode) {
 
-			// 検索子画面の表示
-			// TODO モーダルで表示する
-			$("#common_search").show();
-		});
+		// hidden項目の設定
+		$("#hidden-common-search-table").val(table);
+		$("#hidden-common-search-column-name").val(columnName);
+		$("#hidden-common-search-column-code").val(columnCode);
+		$("#hidden-common-search-target-name").val(targetName);
+		$("#hidden-common-search-target-code").val(targetCode);
+
+		// 検索子画面の表示
+		// TODO モーダルで表示する
+		$("#common-search").show();
 	}
 
 	/**
 	 * テーブル検索
 	 */
-	function searchCommonSearch() {
+	function searchForCommonSearch() {
 
 		// 検索キーワードの取得
 		var keyword = $("#common-search-keyword").val();
 
 		// hidden項目の取得
-		var table = $("#hidden-common-search-table").val();        // 検索対象のテーブル名
-		var name  = $("#hidden-common-search-column-name").val();  // 検索対象のカラム（名称）
-		var code  = $("#hidden-common-search-column-code").val();  // 検索対象のカラム（コード）
+		var table      = $("#hidden-common-search-table").val();       // 検索対象のテーブル名
+		var columnName = $("#hidden-common-search-column-name").val(); // 検索対象のカラム（名称）
+		var columnCode = $("#hidden-common-search-column-code").val(); // 検索対象のカラム（コード）
+		var targetCode = $("#hidden-common-search-target-code").val(); // 検索結果の設定先（名称）
+		var targetName = $("#hidden-common-search-target-name").val(); // 検索結果の設定先（コード）
+
+		// 親画面に設定した値をクリア
+		$("#" + targetCode).val("");
+		$("#" + targetName).html("");
 
 		// テーブルデータの取得（Ajax通信）
 		$.ajax({
-			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'commonSearch')); ?>" + "?keyword=" + keyword + "&table=" + table + "&name=" + name + "&code=" + code,
+			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'search')); ?>" + "?keyword=" + keyword + "&table=" + table + "&columnName=" + columnName + "&columnCode=" + columnCode,
 			type: 'GET',
 			success: function(data) {
 				$("#common-search-result").html(data);
@@ -79,8 +84,21 @@
 	/**
 	 * 検索結果のクリア
 	 */
-	function clearCommonSearch() {
-		//
+	function clearForCommonSearch() {
+
+		// 親画面の項目IDを取得
+		var targetCode = $("#hidden-common-search-target-code").val();
+		var targetName = $("#hidden-common-search-target-name").val();
+
+		// 親画面に設定した値をクリア
+		$("#" + targetCode).val("");
+		$("#" + targetName).html("");
+
+		// 子画面の検索条件入力欄をクリア
+		$("#common-search-keyword").val("");
+
+		// 子画面の検索結果一覧をクリア
+		$("#common-search-result").html("");
 
 	}
 </script>

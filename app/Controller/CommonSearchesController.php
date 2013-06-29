@@ -3,8 +3,8 @@
 App::uses('CommonController', 'Controller');
 
 /**
- * S003sController Controller
- * 委託先研修会社管理コントローラー
+ * CommonSearchesController Controller
+ * 共通検索コントローラ
 */
 class CommonSearchesController extends CommonController {
 
@@ -27,21 +27,21 @@ class CommonSearchesController extends CommonController {
 	/**
 	 * 検索処理
 	 */
-	public function commonSearch() {
+	public function search() {
 
 		// クエリ変数を取得
-		$keyword       = Hash::get($this->request->query, 'keyword'); // 検索キーワード
-		$table         = Hash::get($this->request->query, 'table');   // 検索対象のテーブル名
-		$columnName    = Hash::get($this->request->query, 'name');    // 検索対象のカラム（名称）
-		$columnCode    = Hash::get($this->request->query, 'code');    // 検索対象のカラム（コード）
+		$keyword       = Hash::get($this->request->query, 'keyword');    // 検索キーワード
+		$table         = Hash::get($this->request->query, 'table');      // 検索対象のテーブル名
+		$columnName    = Hash::get($this->request->query, 'columnName'); // 検索対象のカラム（名称）
+		$columnCode    = Hash::get($this->request->query, 'columnCode'); // 検索対象のカラム（コード）
 
 		// 検索ボタンで遷移してきた場合
 		if (isset($keyword)) {
 			// 検索に必要な情報をセッションに書き込む
-			$sessionData['keyword'] = $keyword;
-			$sessionData['table']   = $table;
-			$sessionData['name']    = $columnName;
-			$sessionData['code']    = $columnCode;
+			$sessionData['keyword']    = $keyword;
+			$sessionData['table']      = $table;
+			$sessionData['columnName'] = $columnName;
+			$sessionData['columnCode'] = $columnCode;
 			$this->Session->write(self::COMMON_SEARCHES_SESSION_KEY, $sessionData);
 
 		// Paginationで遷移してきた場合
@@ -50,8 +50,8 @@ class CommonSearchesController extends CommonController {
 			$sessionData = $this->Session->read(self::COMMON_SEARCHES_SESSION_KEY);
 			$keyword       = Hash::get($sessionData, 'keyword');
 			$table         = Hash::get($sessionData, 'table');
-			$columnName    = Hash::get($sessionData, 'name');
-			$columnCode    = Hash::get($sessionData, 'code');
+			$columnName    = Hash::get($sessionData, 'columnName');
+			$columnCode    = Hash::get($sessionData, 'columnCode');
 		}
 
 		// ページ番号を取得

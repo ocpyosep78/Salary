@@ -36,15 +36,14 @@
 	</table>
 </div><!-- //.box_01 -->
 
-<input class="Button1" type="button" onclick="commitSearchResult();" value="確定" />
+<input class="Button1 commit" type="button" onclick="commitForCommonSearch();" disabled="disabled" value="確定" />
 
 <script type="text/javascript">
 	/**
 	 * 「確定」ボタン押下処理
 	 */
-	function commitSearchResult() {
-		$(function(){
-			// TODO モーダルを閉じる処理
-		});
+	function commitForCommonSearch() {
+
+		// TODO モーダルを閉じる処理
 	}
 </script>
