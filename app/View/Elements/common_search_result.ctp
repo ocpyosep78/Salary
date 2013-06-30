@@ -44,6 +44,13 @@
 	 */
 	function commitForCommonSearch() {
 
-		// TODO モーダルを閉じる処理
+		// モーダルを閉じる
+		$(".modalWindow,#blackLayer").hide();
+
+		// 子画面の検索条件入力欄をクリア
+		$("#common-search-keyword").val("");
+
+		// 子画面の検索結果一覧をクリア
+		$("#common-search-result").html("");
 	}
 </script>

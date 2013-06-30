@@ -1,14 +1,19 @@
 <div class="modalWindow fixed" id="common-search">
+	<div class="close"></div>
 	<div class="modalBody">
 
 		<table class="t_header">
 			<tr>
-				<td>
+				<td rowspan="2">
 					<p class="title">正式名称（部分検索可）</p>
 					<input type="text" id="common-search-keyword" name="common-search-keyword" value="" />
 				</td>
-				<td class="td1">
+				<td class="td1 pd_01">
 					<input class="Button1" type="button" onclick="searchForCommonSearch();" value="検索" />
+				</td>
+			</tr>
+			<tr>
+				<td class="td1 pd_02">
 					<input class="Button1" type="button" onclick="clearForCommonSearch()" value="消去" />
 				</td>
 			</tr>
@@ -49,7 +54,7 @@
 
 		// 検索子画面の表示
 		// TODO モーダルで表示する
-		$("#common-search").show();
+		$("#common-search").modal();
 	}
 
 	/**
