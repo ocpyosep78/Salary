@@ -32,6 +32,8 @@
 <input type="hidden" value= "" name="hidden-common-search-column-code" id="hidden-common-search-column-code" />
 <input type="hidden" value= "" name="hidden-common-search-target-name" id="hidden-common-search-target-name" />
 <input type="hidden" value= "" name="hidden-common-search-target-code" id="hidden-common-search-target-code" />
+<input type="hidden" value= "" name="hidden-common-search-select-name" id="hidden-common-search-select-name" />
+<input type="hidden" value= "" name="hidden-common-search-select-code" id="hidden-common-search-select-code" />
 
 <script type="text/javascript">
 	/**

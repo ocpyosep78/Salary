@@ -26,6 +26,10 @@
 				// 子画面の検索結果一覧をクリア
 				$("#common-search-result").html("");
 
+				// hidden項目をクリア
+				$("#hidden-common-search-select-name").val("");
+				$("#hidden-common-search-select-code").val("");
+
 				return false;
 			});
 		}
@@ -75,13 +79,9 @@
 		var columnCode = $("#hidden-common-search-column-code").val();
 		var columnName = $("#hidden-common-search-column-name").val();
 
-		// 選択値の設定先を取得する
-		var targetCode = $("#hidden-common-search-target-code").val();
-		var targetName = $("#hidden-common-search-target-name").val();
-
-		// 選択値を親画面の項目に設定する
-		$("#" + targetCode).val($(this).children("td." + columnCode).html());
-		$("#" + targetName).html($(this).children("td." + columnName).html());
+		// 選択値をhidden項目に設定する
+		$("#hidden-common-search-select-name").val($(this).children("td." + columnCode).html());
+		$("#hidden-common-search-select-code").val($(this).children("td." + columnName).html());
 
 		// 確定ボタンを活性化する
 		$("#common-search-result .commit").removeAttr("disabled");

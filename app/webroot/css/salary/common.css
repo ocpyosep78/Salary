@@ -352,6 +352,7 @@ text-align: right;
 .modalWindow {
   display: none;
   width: 90%;
+  heigth:300px;
   min-width: 550px;
   margin: 0 auto;
   padding: 5px 0;

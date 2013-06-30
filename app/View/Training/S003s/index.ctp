@@ -73,8 +73,11 @@
 				</tr>
 				<tr>
 					<th>市区町村CD</th>
-					<td><input type="text" value= "" name="CityCD" id="CityCD" class="short_02" /><button type="button" name="" value="">？</button></td>
-					<td>NNNNNNNNNNNNNNN</td>
+					<td>
+						<input type="text" value= "" name="CityCD" id="CityCD" class="short_02" />
+						<input type="button"  class="Button2" value="？" onclick="viewForCommonSearch('LGovMaster', 'LGovName', 'LGovCode', 'CityName', 'CityCD');" />
+					</td>
+					<td id="CityName">NNNNNNNNNNNNNNN</td>
 				</tr>
 				<tr>
 					<th class="th_02">漢字住所</th>

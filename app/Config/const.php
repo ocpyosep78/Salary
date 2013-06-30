@@ -27,6 +27,13 @@ $const_labels = array(
 			'ConsignmentCompanyName' => array('symbol' => '', 'name' => '委託先会社名'),
 		)
 	),
+	// 検索結果表示項目：市町村マスタ
+	'VIEW_COLUMN_LGOVMASTER' => array(
+		'labels' => array(
+			'LGovCode' => array('symbol' => '', 'name' => '市町村コード'),
+			'LGovName' => array('symbol' => '', 'name' => '市町村名'),
+		)
+	),
 );
 
 $config['const_labels'] = $const_labels;

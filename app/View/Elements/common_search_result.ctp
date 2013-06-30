@@ -44,6 +44,18 @@
 	 */
 	function commitForCommonSearch() {
 
+		// 選択値の設定先を取得する
+		var targetCode = $("#hidden-common-search-target-code").val();
+		var targetName = $("#hidden-common-search-target-name").val();
+
+		// 選択値を取得する
+		var selectName = $("#hidden-common-search-select-name").val();
+		var selectCode = $("#hidden-common-search-select-code").val();
+
+		// 選択値を親画面の項目に設定する
+		$("#" + targetCode).val(selectName);
+		$("#" + targetName).html(selectCode);
+
 		// モーダルを閉じる
 		$(".modalWindow,#blackLayer").hide();
 
@@ -52,5 +64,9 @@
 
 		// 子画面の検索結果一覧をクリア
 		$("#common-search-result").html("");
+
+		// hidden項目をクリア
+		$("#hidden-common-search-select-name").val("");
+		$("#hidden-common-search-select-code").val("");
 	}
 </script>
