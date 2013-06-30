@@ -5,6 +5,32 @@ App::uses('CommonController', 'Controller');
 /**
  * CommonSearchesController Controller
  * 共通検索コントローラ
+ *
+ * 検索子画面を使用する場合、以下の設定を行うこと。
+ *
+ * ■Congig
+ * 　検索子画面の検索結果一覧に表示する項目を指定するため、const.phpの$const_labelsにマスタ毎の表示項目を記載する。
+ * 　キー名は"VIEW_COLUMN_{マスタ名}"とする。
+ * 　
+ * 　例）市町村マスタ（LGovMaster）の表示項目を指定する場合
+ *
+ *　　　// 検索結果表示項目：市町村マスタ
+ *　　　'VIEW_COLUMN_LGOVMASTER' => array(
+ *　　　	'labels' => array(
+ *　　　		'LGovCode' => array('symbol' => '', 'name' => '市町村コード'),
+ *　　　		'LGovName' => array('symbol' => '', 'name' => '市町村名'),
+ *　　　	)
+ *　　　),
+ *
+ * ■View
+ * 　"？"ボタンを追加する場合、下記の通り記述する。
+ * 　<input type="button"  class="Button2" value="？" onclick="viewForCommonSearch('{マスタ名}', 'カラム名（名称）', 'カラム名（コード）', '検索結果設定先の項目ID（名称）', '検索結果設定先の項目IDの（コード）');" />
+ * 　
+ * 　例）市町村マスタの検索を行う場合の指定
+ * 　　　<input type="button"  class="Button2" value="？" onclick="viewForCommonSearch('LGovMaster', 'LGovName', 'LGovCode', 'CityName', 'CityCD');" />
+ *
+ * ■Controller
+ * 　$usesフィールドに使用するモデル（テーブル名）を追加する
  */
 class CommonSearchesController extends CommonController {
 
