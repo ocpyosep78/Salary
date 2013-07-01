@@ -24,9 +24,8 @@
 	?>
 
 	<body>
-		<div id="container">
-			<?php echo $this->fetch('content'); ?>
-		</div>
+
+		<?php echo $this->fetch('content'); ?>
 
 		<?php
 			// フロント画面用の共通のJSファイルを読み込み
