@@ -123,7 +123,7 @@ class S003sController extends CommonController {
 
 		$param = array(
 			'SmItakusakiKaisha' => array(
-				'ConsignmentCompanyCD' => 'TOD',
+				'ConsignmentCompanyCD' => 'TOE',
 				'ConsignmentCompanyName' => $data['ConsignmentCompanyName'],
 				'Representative' => $data['Representative'],
 				'PostalCD' => $data['PostalCD1'].'-'.$data['PostalCD2'],
