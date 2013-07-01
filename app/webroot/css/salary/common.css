@@ -307,7 +307,23 @@ text-align: right !important;
 padding-right: 3px !important;
 }
 
+/* ======================================
+[ 検索子画面 ]
+====================================== */
 
+.box_common_search {
+height: 300px;
+margin: 0 10px;
+overflow-y: auto;
+_width: 98%; /* IE6 */
+}
+
+.box_common_search_footer {
+height: 40px;
+margin: 0 10px;
+overflow-y: auto;
+_width: 98%; /* IE6 */
+}
 
 /* ======================================
 [ フッター ]

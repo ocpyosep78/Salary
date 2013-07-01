@@ -88,7 +88,7 @@ class CommonSearchesController extends CommonController {
 		// Paginateコントローラ変数の設定
 		$this->recursive = -1;
 		$searchCondition = array();
-		$searchCondition[$columnName . ' LIKE ?'] = '%' . $keyword . '%';
+		$searchCondition[$columnCode . ' LIKE ?'] = '%' . $keyword . '%';
 		$this->paginate = array(
 				'conditions' => $searchCondition,
 				'limit' => PAGINATION_VIEW_LIMIT_COMMON_SEARCH, // 一度に表示する件数
