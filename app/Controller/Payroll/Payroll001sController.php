@@ -9,13 +9,7 @@ App::uses('CommonController', 'Controller');
 class Payroll001sController extends CommonController {
 
 	// この画面で使うモデル（テーブル）を宣言する
-	public $uses = array('QtMeisai', 'QtMeisaiHiwari', 'QtMeisaiUchiSonotasikyu');
-
-	// この画面で使うコンポーネントを宣言する
-	public $components = array('Session');
-
-	// この画面で使うセッション名を宣言する
-	const PAYROLL_001S_SESSION_KEY = "Payroll001sControllerSession";
+	public $uses = array('QtMeisai', 'QtMeisaiHiwari', 'QtMeisaiUchiSonotasikyu', 'JtKihonKihon');
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
 	public function beforeFilter() {
@@ -32,15 +26,14 @@ class Payroll001sController extends CommonController {
 		// 画面側でエラーが出ないように空の検索条件をセットしておく
 		$searchCondition = array();
 		$this->set('searchCondition', $searchCondition);
+		$personalInfo = array();
+		$this->set('personalInfo', $personalInfo);
 		$meisaiInfo = array();
 		$this->set('meisaiInfo', $meisaiInfo);
 		$hiwariInfo = array();
 		$this->set('hiwariInfo', $hiwariInfo);
 		$uchiSonotaInfo = array();
 		$this->set('uchiSonotaInfo', $uchiSonotaInfo);
-
-		// セッションを開始する
-		$this->Session->write(self::PAYROLL_001S_SESSION_KEY, $searchCondition);
 
 	}
 
@@ -53,29 +46,33 @@ class Payroll001sController extends CommonController {
 
 		// 前画面からの検索条件の受け取り（職員番号、支給年月日、支給区分、支払者）
 		$searchCondition = array();
-		if (isset($this->request->data['EmpNo']) && isset($this->request->data['PaidYM']) && isset($this->request->data['PaidDiv']) && isset($this->request->data['PayerDiv'])) {
-			// POSTデータを受け取る
-			$postData = $this->request->data;
-			// 検索条件を設定する
-			foreach($postData as $key => $value) {
-				$searchCondition[$key] = $value;
-			}
-
-			// セッションを上書きする
-			$this->Session->write(self::PAYROLL_001S_SESSION_KEY, $searchCondition);
-		} else {
-			// POSTデータが存在しない場合（ページングなど）、セッションから取得して使う
-			$searchCondition = $this->Session->read(self::PAYROLL_001S_SESSION_KEY);
+		// POSTデータを受け取る
+		$postData = $this->request->data;
+		// 検索条件を設定する
+		foreach($postData as $key => $value) {
+			$searchCondition[$key] = $value;
 		}
 
 		// ********************  ビジネスロジック  ********************
 
+		// テーブル[人事基本情報]からデータを取得する
+		$personalInfo = array();
+		if(isset($searchCondition['EmpNo'])){
+			$personalInfo = $this->JtKihonKihon->find('first', array('conditions' => array('EmpNo' => $searchCondition['EmpNo'])));
+		}
+
+		// findのパラメータを設定する
+		$params = array(
+			'conditions' => $searchCondition
+		);
+
 		// テーブル[支給明細データ]からデータを取得する
-		$meisaiInfo = $this->QtMeisai->find('first', $searchCondition);
+		$meisaiInfo = $this->QtMeisai->find('first', $params);
+
 		// テーブル[支給明細データ：日割]からデータを取得する
-		$hiwariInfo = $this->QtMeisaiHiwari->find('first', $searchCondition);
+		$hiwariInfo = $this->QtMeisaiHiwari->find('first', $params);
 		// テーブル[支給明細データ：その他支給内訳]からデータを取得する
-		$uchiSonotaInfo = $this->QtMeisaiUchiSonotasikyu->find('first', $searchCondition);
+		$uchiSonotaInfo = $this->QtMeisaiUchiSonotasikyu->find('first', $params);
 
 		// ********************  画面へのデータ反映  ********************
 
@@ -83,6 +80,7 @@ class Payroll001sController extends CommonController {
  		$this->set('searchCondition', $searchCondition);
 
 		// 取得データを設定する
+		$this->set('personalInfo', $personalInfo);
 		$this->set('meisaiInfo', $meisaiInfo);
 		$this->set('hiwariInfo', $hiwariInfo);
 		$this->set('uchiSonotaInfo', $uchiSonotaInfo);
