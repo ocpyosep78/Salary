@@ -7,7 +7,7 @@
 	$this->end();
 ?>
 
-
+<?php echo $this->Form->create('ProperPay001s', array('controller' => 'ProperPay001s', 'action' => 'search', 'name' => 'ProperPay001sForm')); ?>
 <table class="t_header_04">
 	<tr>
 		<th>職員番号</th>

@@ -68,6 +68,18 @@ public function search() {
 // 		} else {
 // 			// POSTデータが存在しない場合（ページングなど）、セッションから取得して使う
 // 			$searchCondition = $this->Session->read(self::S003S_SESSION_KEY);
+			// 前画面からの検索条件をそのまま画面にセットする
+			$this->set('searchCondition', $searchCondition);
+
+			// 取得データを設定する
+			//$this->set('meisaiInfo', $meisaiInfo);
+			//$this->set('hiwariInfo', $hiwariInfo);
+			//$this->set('uchiSonotaInfo', $uchiSonotaInfo);
+
+			// ********************  遷移先画面の設定  ********************
+
+			// このメソッドには対応する画面はないので、元の画面にレンダリングする
+			$this->render('index');
 }
 // 		// ********************  ビジネスロジック  ********************
 
