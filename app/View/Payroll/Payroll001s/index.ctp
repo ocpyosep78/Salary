@@ -1,5 +1,5 @@
 <?php
-	$this->append('script'); echo $this->Html->script(array('lib/jquery-1.9.1.min', 'salary/s003_index')); $this->end();
+	$this->append('script'); echo $this->Html->script(array('lib/jquery-1.9.1.min')); $this->end();
 	$this->append('css');    echo $this->Html->css(array('salary/common'));    $this->end();
 ?>
 
@@ -28,9 +28,9 @@
 			</td>
 			<th>支給区分</th>
 			<td>
-				<input type="text" size="1" placeholder="X" name="PaidDiv" value="<?php echo Hash::get($searchCondition, 'PaidDiv'); ?>" />
-				<button type="button" name="" value="">？</button>
-				<p class="description">NNNNN</p>
+				<input type="text" size="1" placeholder="XX" name="PaidDiv" id="ShikyuCD" value="<?php echo Hash::get($searchCondition, 'PaidDiv'); ?>" />
+				<input type="button" name="" value="？" onclick="viewForCommonSearch('QmShikyuKubun', 'PaymentDivName', 'PaymentDivCD', 'ShikyuName', 'ShikyuCD');" />
+				<p class="description" id="ShikyuName" ></p>
 			</td>
 			<th>支払者</th>
 			<td>
@@ -347,3 +347,6 @@
 
 	<p class="btn_01"><input class="Button1" type="submit" value="（空白）" /></p>
 </div>
+
+<?php // 検索子画面の読み込み ?>
+<?php echo $this->element('common_search'); ?>

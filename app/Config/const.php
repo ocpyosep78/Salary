@@ -34,6 +34,13 @@ $const_labels = array(
 			'LGovName' => array('symbol' => '', 'name' => '市町村名'),
 		)
 	),
+	// 検索結果表示項目：支給区分マスタ
+	'VIEW_COLUMN_QMSHIKYUKUBUN' => array(
+		'labels' => array(
+			'PaymentDivCD' => array('symbol' => '', 'name' => '支給区分コード'),
+			'PaymentDivName' => array('symbol' => '', 'name' => '支給区分名'),
+		)
+	),
 );
 
 $config['const_labels'] = $const_labels;
