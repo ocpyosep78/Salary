@@ -59,8 +59,17 @@
 		$("#hidden-common-search-target-code").val(targetCode);
 
 		// 検索子画面の表示
-		// TODO モーダルで表示する
+		// モーダルで表示する
 		$("#common-search").modal();
+
+		// 子画面の検索結果一覧をクリア
+		$.ajax({
+			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'init')); ?>" + "?table=" + table,
+			type: 'GET',
+			success: function(data) {
+				$("#common-search-result").html(data);
+			}
+		});
 	}
 
 	/**
@@ -108,8 +117,16 @@
 		// 子画面の検索条件入力欄をクリア
 		$("#common-search-keyword").val("");
 
-		// 子画面の検索結果一覧をクリア
-		$("#common-search-result").html("");
+		var table = $("#hidden-common-search-table").val();       // 検索対象のテーブル名
 
+
+		// 子画面の検索結果一覧をクリア
+		$.ajax({
+			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'init')); ?>" + "?table=" + table,
+			type: 'GET',
+			success: function(data) {
+				$("#common-search-result").html(data);
+			}
+		});
 	}
 </script>
