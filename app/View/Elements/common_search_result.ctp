@@ -14,7 +14,7 @@
 	<table class="tbl_02">
 
 		<tr>
-			<th class="">Seq</th>
+			<th class="">連番</th>
 			<?php foreach($viewColumn as $columnName) : ?>
 				<th><?php echo $columnName ?></th>
 			<?php endforeach ?>

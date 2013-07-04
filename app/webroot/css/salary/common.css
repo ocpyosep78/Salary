@@ -98,13 +98,15 @@ color: #000;
 #container {
 width: 1237px;
 margin-top: 10px;
-background-color: #f8fdf0;
+margin-left: 10px;
+/*background-color: #f8fdf0;*/
 border: 2px solid #a9db80;
+border-top: 3px solid #a9db80;
 }
 
 hr {
 height: 4px;
-background-color: #a9db80;
+/*background-color: #a9db80;*/
 }
 
 .Button1,
@@ -127,11 +129,13 @@ position:relative;
 }
 
 .Button1 {
-padding: 5px 30px;
+padding: 2px 30px;
 }
 
 .Button2 {
-padding: 5px;
+padding: 1px;
+padding-right: 3px;
+padding-left: 3px;
 }
 
 input[type="text"] {
@@ -158,8 +162,8 @@ width: 100%;
 height: 72px;
 min-height: 72px;
 max-height: 72px;
-border-top: 3px solid #a9db80;
-border-bottom: 3px solid #a9db80;
+/*border-top: 3px solid #a9db80;*/
+border-bottom: 2px solid #a9db80;
 }
 
 .title {
@@ -244,7 +248,7 @@ border: 1px solid #999999;
 
 .tbl_02 th {
 padding: 3px 10px;
-background-color: #bfe2a2;
+background-color: #c0e3a3;
 }
 
 .tbl_02 td {
@@ -252,7 +256,7 @@ padding: 5px 10px;
 }
 
 .active {
-background-color: #fff7c8;
+background-color: #b1e0fd;
 }
 
 
@@ -308,30 +312,13 @@ padding-right: 3px !important;
 }
 
 /* ======================================
-[ 検索子画面 ]
-====================================== */
-
-.box_common_search {
-height: 300px;
-margin: 0 10px;
-overflow-y: auto;
-_width: 98%; /* IE6 */
-}
-
-.box_common_search_footer {
-height: 40px;
-margin: 0 10px;
-overflow-y: auto;
-_width: 98%; /* IE6 */
-}
-
-/* ======================================
 [ フッター ]
 ====================================== */
 
 #footer {
 height: 40px;
-margin: 0 10px;
+margin-top: 10px;
+margin-left: 10px;
 width: 60%;
 text-align: center;
 }
@@ -368,16 +355,18 @@ text-align: right;
 .modalWindow {
   display: none;
   width: 90%;
-  heigth:300px;
+  heigth:750px;
   min-width: 550px;
   margin: 0 auto;
   padding: 5px 0;
   position: absolute;
   z-index: 110;
   background-color: #fff;
+  border: 2px solid #a9db80;
+  border-top: 3px solid #a9db80;
 }
 .modalWindow.fixed {
-  width: 922px;
+  width: 1237px;
 }
 #blackLayer {
   position: fixed;
@@ -390,4 +379,22 @@ text-align: right;
   filter: alpha(opacity=80);
   z-index: 100;
   display: none;
+}
+
+/* ======================================
+[ 検索子画面 ]
+====================================== */
+
+.box_common_search {
+height: 575px;
+margin: 0 10px;
+overflow-y: auto;
+_width: 98%; /* IE6 */
+}
+
+.box_common_search_footer {
+height: 40px;
+margin: 0 10px;
+overflow-y: auto;
+_width: 98%; /* IE6 */
 }

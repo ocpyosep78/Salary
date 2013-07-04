@@ -27,4 +27,29 @@
 
 	});
 
+	$(document).ready(function(){
+	    $("table.tbl_02 tr:even").css({
+	    	backgroundColor:'#edf9da'
+	    });
+	});
+
+	$('table.tbl_02 tr').each(function(){
+		var bgColor = $(this).css('backgroundColor');
+		$(this).hover(function(){
+			$(this).css({
+				backgroundColor:'#b1e0fd'
+			});
+		},function(){
+		    $("table.tbl_02 tr:odd").css({
+		    	backgroundColor:'#ffffff'
+		    });
+		    $("table.tbl_02 tr:even").css({
+		    	backgroundColor:'#edf9da'
+		    });
+		    $("tr.active").css({
+		    	backgroundColor:'#b1e0fd'
+		    });
+		});
+	});
+
 })(jQuery);

@@ -17,7 +17,7 @@ $const_labels = array(
 	// 検索結果で一度に表示する件数
 	'PAGINATION_VIEW_LIMIT' => array(
 		'labels' => array(
-			'10'   => array('symbol' => 'PAGINATION_VIEW_LIMIT_COMMON_SEARCH', 'name' => '表示件数（検索子画面）'),
+			'20'   => array('symbol' => 'PAGINATION_VIEW_LIMIT_COMMON_SEARCH', 'name' => '表示件数（検索子画面）'),
 		)
 	),
 	// 検索結果表示項目：委託先会社マスタ

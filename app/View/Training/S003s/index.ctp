@@ -13,7 +13,7 @@
 					<p class="title">研修委託会社コード</p>
 					<input type="text" name="consignmentCompanyCd" id="consignmentCompanyCd" value="<?php echo Hash::get($searchCondition, 'consignmentCompanyCd'); ?>" />
 					<input type="button"  class="Button2" value="？" onclick="viewForCommonSearch('SmItakusakiKaisha', 'ConsignmentCompanyName', 'ConsignmentCompanyCD', 'consignmentCompanyName', 'consignmentCompanyCd');" />
-					<p class="description" id="consignmentCompanyName">XXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+					<p class="description" id="consignmentCompanyName"><?php echo Hash::get($searchCondition, 'consignmentCompanyName'); ?></p>
 				</td>
 				<td class="td1 pd_01"><input class="Button1" type="submit" value="検索" /></td>
 			</tr>
@@ -49,11 +49,11 @@
 					<?php } ?>
 				</table>
 			</div><!-- //.box_01 -->
-
-			<hr>
+</div>
 
 	<?php echo $this->SalaryForm->create('S003', array('controller' => 'S003', 'action' => 'doFlexibleAction', 'name' => 'flexible')); ?>
 
+		<div id="container">
 			<div class="box_02">
 				<p id="code">コード：<span id="Code"></span></p>
 				<input type="hidden" value= "" name="ConsignmentCompanyCD" id="ConsignmentCompanyCD" />
@@ -132,20 +132,18 @@
 					</tr>
 				</table>
 			</div><!-- //.box_02 -->
+		</div>
 
-			<hr>
-
-			<table id="footer">
-				<tr>
-					<td class="f_td1"><input class="Button1" type="button" value="閉じる" onclick="beforeSubmit('close');" /></td>
-					<td class="f_td2"><input class="Button1" type="button" value="修正" onclick="beforeSubmit('edit');" /></td>
-					<td class="f_td3"><input class="Button1" type="button" value="追加" onclick="beforeSubmit('add');" /></td>
-					<td class="f_td4"><input class="Button1" type="button" value="削除" onclick="beforeSubmit('delete');" /></td>
-				</tr>
-			</table><!-- //#footer -->
+		<table id="footer">
+			<tr>
+				<td class="f_td1"><input class="Button1" type="button" value="閉じる" onclick="beforeSubmit('close');" /></td>
+				<td class="f_td2"><input class="Button1" type="button" value="修正" onclick="beforeSubmit('edit');" /></td>
+				<td class="f_td3"><input class="Button1" type="button" value="追加" onclick="beforeSubmit('add');" /></td>
+				<td class="f_td4"><input class="Button1" type="button" value="削除" onclick="beforeSubmit('delete');" /></td>
+			</tr>
+		</table><!-- //#footer -->
 
 	<?php echo $this->SalaryForm->end(); ?>
-</div>
 
 <?php // 検索子画面の読み込み ?>
 <?php echo $this->element('common_search'); ?>

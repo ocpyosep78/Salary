@@ -4,7 +4,7 @@
 
 		<table class="t_header">
 			<tr>
-				<td rowspan="2">
+				<td>
 					<p class="title">正式名称（部分検索可）</p>
 					<input type="text" id="common-search-keyword" name="common-search-keyword" value="" />
 				</td>
@@ -13,6 +13,10 @@
 				</td>
 			</tr>
 			<tr>
+				<td>
+					<p class="title">正式名称（部分検索可）</p>
+					<input type="text" id="common-search-keyword" name="common-search-keyword" value="" />
+				</td>
 				<td class="td1 pd_02">
 					<input class="Button1" type="button" onclick="clearForCommonSearch()" value="消去" />
 				</td>
