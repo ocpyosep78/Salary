@@ -32,4 +32,66 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+
+	/**
+	 * find関数のコールバックメソッド
+	 *
+	 * @param array   $results findから返された結果
+	 * @param boolean $primary
+	 */
+	public function afterFind($results, $primary = false) {
+
+		// 検索結果が複数レコードの場合
+		if ($primary) {
+			foreach ($results as &$result) {
+				// コード名称の付加
+				$this->__addCodeName($result);
+			}
+
+		// 検索結果が1レコードの場合
+		} else {
+			// コード名称の付加
+			$this->__addCodeName($results);
+		}
+
+		return $results;
+	}
+
+	/**
+	 * 検索結果にキャッシュテーブルから取得した名称を付加する
+	 *
+	 * @param array $result
+	 */
+	private function __addCodeName(&$result) {
+
+		if (!Hash::check($result, $this->alias)) return;
+
+
+// TODO あとで消すこと
+foreach ($result[$this->alias] as $key => $value) {
+	$result[$this->alias]['Name_' . $key] = '名称が入ります';
+}
+return;
+
+		// TODO キャッシュデータの読み込み
+// 		$cacheData = Cache::read('キャッシュのキー値');
+		$cacheData = array();
+
+		// キャッシュデータのキーマップを取得
+		$cacheKeyMap = Configure::read("CACHE_KEY_MAP");
+
+		// 検索結果レコードから項目を取り出す
+		foreach ($result[$this->alias] as $key => $value) {
+			// キーマップからキャッシュデータのキーを取得する
+			$cacheKey = Hash::get($cacheKeyMap, $key);
+			if ($cacheKey === null) continue;
+
+			// 名称リストを取得する
+			$nameList = Hash::get($cacheData, $cacheKey);
+			if ($nameList === null) continue;
+
+			// 検索結果に名称を付加する
+			$result[$this->alias]['Name_' . $key] = Hash::get($nameList, $value);
+		}
+	}
 }
