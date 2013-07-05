@@ -51,12 +51,31 @@ class CommonSearchesController extends CommonController {
 	}
 
 	/**
-	 * 検索処理
+	 * 検索コードタイトルの初期処理
+	 */
+	public function titleInit() {
+
+		// クエリ変数を取得
+		$table = Hash::get($this->request->query, 'table');      // 検索対象のテーブル名
+		$column  = Hash::get($this->request->query, 'column');  // 検索対象のカラム（コード）
+
+		$SELECT_COLUMN_FOR_DISP = Configure::read("SELECT_COLUMN_" . strtoupper($table));
+		$this->set('title', Hash::get($SELECT_COLUMN_FOR_DISP, $column));
+
+		// 検索結果一覧を表示する
+		$this->render('/Elements/common_search_title_init');
+	}
+
+
+	/**
+	 * 初期化処理
 	 */
 	public function init() {
 
 		// クエリ変数を取得
-		$table         = Hash::get($this->request->query, 'table');      // 検索対象のテーブル名
+		$table = Hash::get($this->request->query, 'table');      // 検索対象のテーブル名
+		$columnCode  = Hash::get($this->request->query, 'columnCode');  // 検索対象のカラム（コード）
+		$columnName  = Hash::get($this->request->query, 'columnName');  // 検索対象のカラム（名称）
 
 		// 検索結果をViewに渡す
 		$this->set('searchResultList', array());
@@ -72,28 +91,31 @@ class CommonSearchesController extends CommonController {
 	public function search() {
 
 		// クエリ変数を取得
-		$keyword       = Hash::get($this->request->query, 'keyword');    // 検索キーワード
-		$table         = Hash::get($this->request->query, 'table');      // 検索対象のテーブル名
-		$columnName    = Hash::get($this->request->query, 'columnName'); // 検索対象のカラム（名称）
-		$columnCode    = Hash::get($this->request->query, 'columnCode'); // 検索対象のカラム（コード）
+		$keywordCd   = Hash::get($this->request->query, 'keywordCd');   // 検索キーワード（コード）
+		$keywordName = Hash::get($this->request->query, 'keywordName'); // 検索キーワード（名称）
+		$table       = Hash::get($this->request->query, 'table');       // 検索対象のテーブル名
+		$columnCode  = Hash::get($this->request->query, 'columnCode');  // 検索対象のカラム（コード）
+		$columnName  = Hash::get($this->request->query, 'columnName');  // 検索対象のカラム（名称）
 
 		// 検索ボタンで遷移してきた場合
-		if (isset($keyword)) {
+		if (isset($keywordCd) || isset($keywordName)) {
 			// 検索に必要な情報をセッションに書き込む
-			$sessionData['keyword']    = $keyword;
-			$sessionData['table']      = $table;
-			$sessionData['columnName'] = $columnName;
-			$sessionData['columnCode'] = $columnCode;
+			$sessionData['keywordCd']   = $keywordCd;
+			$sessionData['keywordName'] = $keywordName;
+			$sessionData['table']       = $table;
+			$sessionData['columnCode']  = $columnCode;
+			$sessionData['columnName']  = $columnName;
 			$this->Session->write(self::COMMON_SEARCHES_SESSION_KEY, $sessionData);
 
 		// Paginationで遷移してきた場合
 		} else {
 			// 検索に必要な情報をセッションから取得する
 			$sessionData = $this->Session->read(self::COMMON_SEARCHES_SESSION_KEY);
-			$keyword       = Hash::get($sessionData, 'keyword');
-			$table         = Hash::get($sessionData, 'table');
-			$columnName    = Hash::get($sessionData, 'columnName');
-			$columnCode    = Hash::get($sessionData, 'columnCode');
+			$keywordCd   = Hash::get($sessionData, 'keywordCd');
+			$keywordName = Hash::get($sessionData, 'keywordName');
+			$table       = Hash::get($sessionData, 'table');
+			$columnName  = Hash::get($sessionData, 'columnName');
+			$columnCode  = Hash::get($sessionData, 'columnCode');
 		}
 
 		// ページ番号を取得
@@ -104,7 +126,12 @@ class CommonSearchesController extends CommonController {
 		// Paginateコントローラ変数の設定
 		$this->recursive = -1;
 		$searchCondition = array();
-		$searchCondition[$columnCode . ' LIKE ?'] = '%' . $keyword . '%';
+		if (isset($keywordCd)) {
+			$searchCondition[$columnCode . ' LIKE ?'] = '%' . $keywordCd . '%';
+		}
+		if (isset($keywordName)) {
+			$searchCondition[$columnName . ' LIKE ?'] = '%' . $keywordName . '%';
+		}
 		$this->paginate = array(
 				'conditions' => $searchCondition,
 				'limit' => PAGINATION_VIEW_LIMIT_COMMON_SEARCH, // 一度に表示する件数

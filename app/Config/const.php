@@ -27,6 +27,13 @@ $const_labels = array(
 			'ConsignmentCompanyName' => array('symbol' => '', 'name' => '委託先会社名'),
 		)
 	),
+	// 検索項目：委託先会社マスタ
+	'SELECT_COLUMN_SMITAKUSAKIKAISHA' => array(
+		'labels' => array(
+			'ConsignmentCompanyCD'   => array('symbol' => '', 'name' => '委託先会社コード'),
+			'ConsignmentCompanyName' => array('symbol' => '', 'name' => '委託先会社名'),
+		)
+	),
 	// 検索結果表示項目：市町村マスタ
 	'VIEW_COLUMN_LGOVMASTER' => array(
 		'labels' => array(
@@ -34,8 +41,22 @@ $const_labels = array(
 			'LGovName' => array('symbol' => '', 'name' => '市町村名'),
 		)
 	),
+	// 検索項目：市町村マスタ
+	'SELECT_COLUMN_LGOVMASTER' => array(
+		'labels' => array(
+			'LGovCode' => array('symbol' => '', 'name' => '市町村コード'),
+			'LGovName' => array('symbol' => '', 'name' => '市町村名'),
+		)
+	),
 	// 検索結果表示項目：支給区分マスタ
 	'VIEW_COLUMN_QMSHIKYUKUBUN' => array(
+		'labels' => array(
+			'PaymentDivCD' => array('symbol' => '', 'name' => '支給区分コード'),
+			'PaymentDivName' => array('symbol' => '', 'name' => '支給区分名'),
+		)
+	),
+	// 検索項目：支給区分マスタ
+	'SELECT_COLUMN_QMSHIKYUKUBUN' => array(
 		'labels' => array(
 			'PaymentDivCD' => array('symbol' => '', 'name' => '支給区分コード'),
 			'PaymentDivName' => array('symbol' => '', 'name' => '支給区分名'),

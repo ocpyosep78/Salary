@@ -5,8 +5,8 @@
 		<table class="t_header">
 			<tr>
 				<td>
-					<p class="title">正式名称（部分検索可）</p>
-					<input type="text" id="common-search-keyword" name="common-search-keyword" value="" />
+					<p id="cdTitle" class="title"></p>
+					<input type="text" id="common-search-keyword-cd" name="common-search-keyword-cd" value="" />
 				</td>
 				<td class="td1 pd_01">
 					<input class="Button1" type="button" onclick="searchForCommonSearch();" value="検索" />
@@ -14,8 +14,8 @@
 			</tr>
 			<tr>
 				<td>
-					<p class="title">正式名称（部分検索可）</p>
-					<input type="text" id="common-search-keyword" name="common-search-keyword" value="" />
+					<p id="nameTitle" class="title"></p>
+					<input type="text" id="common-search-keyword-name" name="common-search-keyword-name" value="" />
 				</td>
 				<td class="td1 pd_02">
 					<input class="Button1" type="button" onclick="clearForCommonSearch()" value="消去" />
@@ -58,18 +58,36 @@
 		$("#hidden-common-search-target-name").val(targetName);
 		$("#hidden-common-search-target-code").val(targetCode);
 
-		// 検索子画面の表示
-		// モーダルで表示する
-		$("#common-search").modal();
+		// 子画面の検索キーワードタイトルを取得
+		$.ajax({
+			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'titleInit')); ?>" + "?table=" + table + "&column=" + columnCode,
+			type: 'GET',
+			success: function(data) {
+				$("#cdTitle").html(data);
+			}
+		});
+
+		// 子画面の検索ネームタイトルを取得
+		$.ajax({
+			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'titleInit')); ?>" + "?table=" + table + "&column=" + columnName,
+			type: 'GET',
+			success: function(data) {
+				$("#nameTitle").html(data);
+			}
+		});
 
 		// 子画面の検索結果一覧をクリア
 		$.ajax({
-			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'init')); ?>" + "?table=" + table,
+			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'init')); ?>" + "?table=" + table + "&columnName=" + columnName + "&columnCode=" + columnCode,
 			type: 'GET',
 			success: function(data) {
 				$("#common-search-result").html(data);
 			}
 		});
+
+		// 検索子画面の表示
+		// モーダルで表示する
+		$("#common-search").modal();
 	}
 
 	/**
@@ -78,7 +96,8 @@
 	function searchForCommonSearch() {
 
 		// 検索キーワードの取得
-		var keyword = $("#common-search-keyword").val();
+		var keywordCd   = $("#common-search-keyword-cd").val();
+		var keywordName = $("#common-search-keyword-name").val();
 
 		// hidden項目の取得
 		var table      = $("#hidden-common-search-table").val();       // 検索対象のテーブル名
@@ -93,7 +112,7 @@
 
 		// テーブルデータの取得（Ajax通信）
 		$.ajax({
-			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'search')); ?>" + "?keyword=" + keyword + "&table=" + table + "&columnName=" + columnName + "&columnCode=" + columnCode,
+			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'search')); ?>" + "?keywordCd=" + keywordCd + "&keywordName=" + keywordName + "&table=" + table + "&columnName=" + columnName + "&columnCode=" + columnCode,
 			type: 'GET',
 			success: function(data) {
 				$("#common-search-result").html(data);
@@ -115,7 +134,8 @@
 		$("#" + targetName).html("");
 
 		// 子画面の検索条件入力欄をクリア
-		$("#common-search-keyword").val("");
+		$("#common-search-keyword-cd").val("");
+		$("#common-search-keyword-name").val("");
 
 		var table = $("#hidden-common-search-table").val();       // 検索対象のテーブル名
 
