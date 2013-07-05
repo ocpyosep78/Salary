@@ -41,6 +41,13 @@ $const_labels = array(
 			'LGovName' => array('symbol' => '', 'name' => '市町村名'),
 		)
 	),
+	// 検索項目：市町村マスタ
+	'SELECT_COLUMN_LGOVMASTER' => array(
+		'labels' => array(
+				'LGovCode' => array('symbol' => '', 'name' => '市町村コード'),
+				'LGovName' => array('symbol' => '', 'name' => '市町村名'),
+		)
+	),
 	// 検索結果表示項目：支給区分マスタ
 	'VIEW_COLUMN_QMSHIKYUKUBUN' => array(
 		'labels' => array(
