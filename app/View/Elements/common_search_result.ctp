@@ -14,9 +14,9 @@
 	<table class="tbl_02">
 
 		<tr>
-			<th class="">連番</th>
+			<th style="width:10%">連番</th>
 			<?php foreach($viewColumn as $columnName) : ?>
-				<th><?php echo $columnName ?></th>
+				<th style="width:50%"><?php echo $columnName ?></th>
 			<?php endforeach ?>
 		</tr>
 
