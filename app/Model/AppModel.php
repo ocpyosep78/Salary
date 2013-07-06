@@ -66,22 +66,21 @@ class AppModel extends Model {
 
 		if (!Hash::check($result, $this->alias)) return;
 
-
 // TODO あとで消すこと
 foreach ($result[$this->alias] as $key => $value) {
 	$result[$this->alias]['Name_' . $key] = '名称が入ります';
 }
 return;
 
-		// TODO キャッシュデータの読み込み
-// 		$cacheData = Cache::read('キャッシュのキー値');
-		$cacheData = array();
+		// キャッシュデータの読み込み
+		$cacheData = Cache::read(CACHE_KEY_CODENAME);
 
 		// キャッシュデータのキーマップを取得
 		$cacheKeyMap = Configure::read("CACHE_KEY_MAP");
 
 		// 検索結果レコードから項目を取り出す
 		foreach ($result[$this->alias] as $key => $value) {
+
 			// キーマップからキャッシュデータのキーを取得する
 			$cacheKey = Hash::get($cacheKeyMap, $key);
 			if ($cacheKey === null) continue;
@@ -93,5 +92,6 @@ return;
 			// 検索結果に名称を付加する
 			$result[$this->alias]['Name_' . $key] = Hash::get($nameList, $value);
 		}
+		var_dump($result);
 	}
 }

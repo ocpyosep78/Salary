@@ -62,10 +62,16 @@ $const_labels = array(
 			'PaymentDivName' => array('symbol' => '', 'name' => '支給区分名'),
 		)
 	),
+	// キャッシュのキー
+	'CACHE_KEY' => array(
+		'labels' => array(
+			'CodeName' => array('symbol' => 'CACHE_KEY_CODENAME', 'name' => 'コード名称'),
+		)
+	),
 	// キャッシュデータのキーマップ
 	'CACHE_KEY_MAP' => array(
 		'labels' => array(
-			'LGovCode' => array('symbol' => '', 'name' => 'LGovName'),
+			'MgrCD' => array('symbol' => '', 'name' => 'MgrName'),	// 役職名
 		)
 	),
 );
