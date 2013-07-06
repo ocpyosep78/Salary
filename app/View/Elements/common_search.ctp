@@ -4,8 +4,10 @@
 
 		<table class="t_header">
 			<tr>
-				<td>
+				<td style="width:200px">
 					<p id="cdTitle" class="title"></p>
+				</td>
+				<td>
 					<input type="text" id="common-search-keyword-cd" name="common-search-keyword-cd" value="" />
 				</td>
 				<td class="td1 pd_01">
@@ -15,6 +17,8 @@
 			<tr>
 				<td>
 					<p id="nameTitle" class="title"></p>
+				</td>
+				<td>
 					<input type="text" id="common-search-keyword-name" name="common-search-keyword-name" value="" />
 				</td>
 				<td class="td1 pd_02">

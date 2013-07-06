@@ -19,16 +19,16 @@
 			$(".modalWindow .close").add("#blackLayer").click(function(){
 
 				// モーダルを閉じる
-				$(".modalWindow,#blackLayer").hide();
+				//$(".modalWindow,#blackLayer").hide();
 
 				// 子画面の検索条件入力欄をクリア
-				$("#common-search-keyword").val("");
+				//$("#common-search-keyword").val("");
 				// 子画面の検索結果一覧をクリア
-				$("#common-search-result").html("");
+				//$("#common-search-result").html("");
 
 				// hidden項目をクリア
-				$("#hidden-common-search-select-name").val("");
-				$("#hidden-common-search-select-code").val("");
+				//$("#hidden-common-search-select-name").val("");
+				//$("#hidden-common-search-select-code").val("");
 
 				return false;
 			});
