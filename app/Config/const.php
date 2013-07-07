@@ -68,12 +68,6 @@ $const_labels = array(
 			'CodeName' => array('symbol' => 'CACHE_KEY_CODENAME', 'name' => 'コード名称'),
 		)
 	),
-	// キャッシュデータのキーマップ
-	'CACHE_KEY_MAP' => array(
-		'labels' => array(
-			'MgrCD' => array('symbol' => '', 'name' => 'MgrName'),	// 役職名
-		)
-	),
 );
 
 $config['const_labels'] = $const_labels;
@@ -98,4 +92,11 @@ foreach($const_labels as $key=>$label) {
 	Configure::write($key,$confval);
 }
 
+/** キャッシュデータのキーマップ */
+Configure::write('CACHE_KEY_MAP',array(
+	// 役職
+	'MgrCD' => array('MgrName', 'MgrShortName'),
+	// 手当詳細
+	'AllowDetailCD' => array('AllowDetailName', 'AllowDetailSName'),
+));
 ?>

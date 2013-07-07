@@ -9,7 +9,7 @@ App::uses('CommonController', 'Controller');
 class Payroll001sController extends CommonController {
 
 	// この画面で使うモデル（テーブル）を宣言する
-	public $uses = array('QtMeisai', 'QtMeisaiHiwari', 'QtMeisaiUchiSonotasikyu', 'JtKihonKihon');
+	public $uses = array('QtMeisai', 'QtMeisaiHiwari', 'QtMeisaiUchiSonotasikyu', 'JtKihonKihon', 'QtMeisaiUchiChingin');
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
 	public function beforeFilter() {
@@ -19,7 +19,7 @@ class Payroll001sController extends CommonController {
 	}
 
 	/**
-	 * 支給明細照会トップページ
+	 * 支給明細照会　タブ01：基本情報
 	 */
 	public function index() {
 
@@ -90,6 +90,24 @@ class Payroll001sController extends CommonController {
 		// このメソッドには対応する画面はないので、元の画面にレンダリングする
 		$this->render('index');
 
+	}
+
+	/**
+	 * 支払明細照会　タブ10：賃金
+	 */
+	public function tab10($paidYm, $empNo, $paidDiv, $payerDiv) {
+
+		// TODO あとで消すこと
+		$paidYm   = '2013-07-01';
+		$empNo    = 'A0000001';
+		$paidDiv  = '01';
+		$payerDiv = '01';
+
+		// テーブル[支給明細データ：賃金内訳]からデータを取得する
+		$meisaiUchiChinginList = $this->QtMeisaiUchiChingin->findMeisaiUchiChingin($paidYm, $empNo, $paidDiv, $payerDiv);
+
+		// 取得データをViewに渡す
+		$this->set(compact('meisaiUchiChinginList'));
 	}
 
 // 	/**

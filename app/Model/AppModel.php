@@ -82,16 +82,19 @@ return;
 		foreach ($result[$this->alias] as $key => $value) {
 
 			// キーマップからキャッシュデータのキーを取得する
-			$cacheKey = Hash::get($cacheKeyMap, $key);
-			if ($cacheKey === null) continue;
+			$cacheKeyList = Hash::get($cacheKeyMap, $key);
+			if ($cacheKeyList === null) continue;
 
-			// 名称リストを取得する
-			$nameList = Hash::get($cacheData, $cacheKey);
-			if ($nameList === null) continue;
+			// キャッシュキーのリストからキーを取り出す
+			foreach ($cacheKeyList as $cacheKey) {
 
-			// 検索結果に名称を付加する
-			$result[$this->alias]['Name_' . $key] = Hash::get($nameList, $value);
+				// 名称リストを取得する
+				$nameList = Hash::get($cacheData, $cacheKey);
+				if ($nameList === null) continue;
+
+				// 検索結果に名称を付加する
+				$result[$this->alias]['CodeName_' . $cacheKey] = Hash::get($nameList, $value);
+			}
 		}
-		var_dump($result);
 	}
 }

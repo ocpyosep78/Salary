@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class TopsController extends AppController {
 
-	public $uses = array('MgrPositionMaster');
+	public $uses = array('MgrPositionMaster', 'ZAllowanceDetailNamemaster');
 
 	/**
 	 * 初期表示
@@ -17,6 +17,10 @@ class TopsController extends AppController {
 		// 役職マスタ
 		$results = $this->MgrPositionMaster->find('all', array('conditions' => array('delete_flg' => 0)));
 		$this->__saveCacheForCodeName($results, 'MgrPositionMaster', 'MgrCD', array('MgrName', 'MgrShortName'));
+
+		// 手当詳細CDマスタ
+		$results = $this->ZAllowanceDetailNamemaster->find('all', array('conditions' => array('delete_flg' => 0)));
+		$this->__saveCacheForCodeName($results, 'ZAllowanceDetailNamemaster', 'AllowDetailCD', array('AllowDetailName', 'AllowDetailSName'));
 	}
 
 	/**

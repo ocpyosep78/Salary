@@ -47,6 +47,15 @@
 
 	<ul class="menu">
 		<li><a href="">基本情報</a></li>
+		<li><a href="">日割情報</a></li>
+		<li><a href="">詳細情報</a></li>
+		<li><a href="">期末勤勉詳細</a></li>
+		<li><a href="">超勤・休日・夜勤</a></li>
+		<li><a href="">特勤・宿日直・管特</a></li>
+		<li><a href="">能率給</a></li>
+		<li><a href="">旅費・その他支給</a></li>
+		<li><a href="">福利控除</a></li>
+		<li><a href="">賃金</a></li>
 	</ul>
 	<div class="box_01">
 		<table class="tbl_01">
