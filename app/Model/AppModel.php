@@ -66,14 +66,10 @@ class AppModel extends Model {
 
 		if (!Hash::check($result, $this->alias)) return;
 
-// TODO あとで消すこと
-foreach ($result[$this->alias] as $key => $value) {
-	$result[$this->alias]['Name_' . $key] = '名称が入ります';
-}
-return;
-
 		// キャッシュデータの読み込み
 		$cacheData = Cache::read(CACHE_KEY_CODENAME);
+		// キャッシュデータが存在しない場合、後続処理を行わない
+		if (!$cacheData) return;
 
 		// キャッシュデータのキーマップを取得
 		$cacheKeyMap = Configure::read("CACHE_KEY_MAP");

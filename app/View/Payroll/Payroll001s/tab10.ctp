@@ -19,7 +19,7 @@
 				<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.AllowDetailCD'); ?></td>
 				<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.CodeName_AllowDetailName'); ?></td>
 				<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.AccountCD'); ?></td>
-				<td></td>
+				<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.CodeName_AccountCD'); ?></td>
 				<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.WorkTimes_LW'); ?></td>
 				<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.Payments'); ?></td>
 			</tr>

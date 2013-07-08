@@ -119,7 +119,7 @@ class QtMeisaiUchiChingin extends AppModel {
 	);
 
 	/**
-	 * 支払明細データ：賃金内訳のレコードを取得する
+	 * 支給明細データ：賃金内訳のレコードを取得する
 	 *
 	 * @param $paidYm   支給年月
 	 * @param $empNo    職員番号

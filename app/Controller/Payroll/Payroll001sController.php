@@ -9,7 +9,7 @@ App::uses('CommonController', 'Controller');
 class Payroll001sController extends CommonController {
 
 	// この画面で使うモデル（テーブル）を宣言する
-	public $uses = array('QtMeisai', 'QtMeisaiHiwari', 'QtMeisaiUchiSonotasikyu', 'JtKihonKihon', 'QtMeisaiUchiChingin');
+	public $uses = array('QtMeisai', 'QtMeisaiHiwari', 'QtMeisaiUchiSonotasikyu', 'JtKihonKihon', 'QtMeisaiUchiChingin', 'QtMeisaiUchiFukurikojo');
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
 	public function beforeFilter() {
@@ -90,6 +90,24 @@ class Payroll001sController extends CommonController {
 		// このメソッドには対応する画面はないので、元の画面にレンダリングする
 		$this->render('index');
 
+	}
+
+	/**
+	 * 支払明細照会　タブ09：福利控除
+	 */
+	public function tab09($paidYm, $empNo, $paidDiv, $payerDiv) {
+
+		// TODO あとで消すこと
+		$paidYm   = '2013-07-01';
+		$empNo    = 'A0000001';
+		$paidDiv  = '01';
+		$payerDiv = '01';
+
+		// テーブル[支給明細データ：福利控除内訳]からデータを取得する
+		$meisaiUchiFukurikojoList = $this->QtMeisaiUchiFukurikojo->findMeisaiUchiFukurikojo($paidYm, $empNo, $paidDiv, $payerDiv);
+
+		// 取得データをViewに渡す
+		$this->set(compact('meisaiUchiFukurikojoList'));
 	}
 
 	/**
