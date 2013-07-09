@@ -1,45 +1,46 @@
 <?php
 	$this->append('script'); echo $this->Html->script(array('lib/jquery-1.9.1.min')); $this->end();
-	$this->append('css');    echo $this->Html->css(array('salary/common'));    $this->end();
+	$this->append('css'); echo $this->Html->css(array('salary/common', 'payroll/common')); $this->end();
 ?>
 
 <div id="container">
 
-<?php echo $this->Form->create('Payroll001', array('controller' => 'Payroll001', 'action' => 'search', 'name' => 'Payroll001')); ?>
+<?php echo $this->SalaryForm->create(null, array('url' => array('controller' => 'payroll001s', 'action' => 'search'))); ?>
 	<table class="t_header">
 		<tr>
 			<th>職員番号</th>
 			<td>
-				<input type="text" name="EmpNo"  value="<?php echo Hash::get($searchCondition, 'EmpNo'); ?>" />
-				<button type="button" value="">？</button>
+				<?php echo $this->SalaryForm->text('EmpNo', array('value' => Hash::get($searchCondition, 'EmpNo')));?>
+				<?php echo $this->SalaryForm->button('？', array('type' => 'button'), null); ?>
 			</td>
 			<th>氏名</th>
 			<td><?php echo Hash::get($personalInfo, 'FamilyName'); ?>_<?php echo Hash::get($personalInfo, 'FamilyNameKana'); ?> <?php echo Hash::get($personalInfo, 'FirstName'); ?>_<?php echo Hash::get($personalInfo, 'FirstNameKana'); ?></td>
 			<th>年齢</th>
 			<td>満　ZZ歳</td>
 			<td class="td1">
-				<input type="submit" class="Button1" value="検索" />
+				<?php echo $this->SalaryForm->submit('検索', array('type' => 'submit', 'class' => 'Button1'), null); ?>
 			</td>
 		</tr>
 		<tr>
 			<th>支給年月日</th>
 			<td>
-				<input type="text" placeholder="GGYY.MM" name="PaidYM" value="<?php echo Hash::get($searchCondition, 'PaidYM'); ?>" /><button type="button" name="" value="">？</button>
+				<?php echo $this->SalaryForm->text('PaidYM', array('value' => Hash::get($searchCondition, 'PaidYM'), 'placeholder' => 'GGYY.MM'));?>
+				<?php echo $this->SalaryForm->button('？', array('type' => 'button'), null); ?>
 			</td>
 			<th>支給区分</th>
 			<td>
-				<input type="text" size="1" placeholder="XX" name="PaidDiv" id="ShikyuCD" value="<?php echo Hash::get($searchCondition, 'PaidDiv'); ?>" />
-				<input type="button" name="" value="？" onclick="viewForCommonSearch('QmShikyuKubun', 'PaymentDivName', 'PaymentDivCD', 'ShikyuName', 'ShikyuCD');" />
+				<?php echo $this->SalaryForm->text('PaidDiv', array('size' => '1', 'id' => 'ShikyuCD', 'value' => Hash::get($searchCondition, 'PaidDiv'), 'placeholder' => 'XX'));?>
+				<?php echo $this->SalaryForm->button('？', array('type' => 'button', 'onclick' => "viewForCommonSearch('QmShikyuKubun', 'PaymentDivName', 'PaymentDivCD', 'ShikyuName', 'ShikyuCD')" ), null); ?>
 				<p class="description" id="ShikyuName" ></p>
 			</td>
 			<th>支払者</th>
 			<td>
-				<input type="text" size="1" placeholder="X" name="PayerDiv" value="<?php echo Hash::get($searchCondition, 'PayerDiv'); ?>" />
-				<button type="button" name="" value="">？</button>
+				<?php echo $this->SalaryForm->text('PayerDiv', array('size' => '1', 'value' => Hash::get($searchCondition, 'PayerDiv'), 'placeholder' => 'XX'));?>
+				<?php echo $this->SalaryForm->button('？', array('type' => 'button'), null); ?>
 				<p class="description">NNNNN</p>
 			</td>
 			<td class="td1">
-				<input type="button" class="Button1" value="消去" />
+				<?php echo $this->SalaryForm->button('消去', array('type' => 'button', 'class' => 'Button1'), null); ?>
 			</td>
 		</tr>
 	</table>
@@ -61,7 +62,7 @@
 		<table class="tbl_01">
 			<tr>
 				<th>支給年月日</th>
-				<td>GGYY MM DD</td>
+				<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($hiwariInfo, 'QtMeisaiHiwari.PaidYM')); ?></td>
 				<th>職員区分</th>
 				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.EmpDiv'); ?></td>
 				<td>NNNN</td>

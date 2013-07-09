@@ -47,7 +47,7 @@ class Payroll001sController extends CommonController {
 		// 前画面からの検索条件の受け取り（職員番号、支給年月日、支給区分、支払者）
 		$searchCondition = array();
 		// POSTデータを受け取る
-		$postData = $this->request->data;
+		$postData = $this->request->data['QtMeisai'];
 		// 検索条件を設定する
 		foreach($postData as $key => $value) {
 			$searchCondition[$key] = $value;
