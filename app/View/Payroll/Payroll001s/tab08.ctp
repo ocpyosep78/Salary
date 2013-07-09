@@ -27,4 +27,21 @@
 			</tr>
 		<?php endforeach; ?>
 	</table>
+	<p>■その他支給</p>
+	<table class="tbl_02">
+		<tr>
+			<th>コード</th>
+			<th>名称</th>
+			<th>枝番</th>
+			<th>金額</th>
+		</tr>
+		<?php foreach ($meisaiUchiSonotasikyuList as $meisaiUchiSonotasikyu): ?>
+			<tr>
+				<td><?php echo Hash::get($meisaiUchiSonotasikyu, 'QtMeisaiUchiSonotasikyu.EtcTypeCD'); ?></td>
+				<td><?php echo Hash::get($meisaiUchiSonotasikyu, 'QtMeisaiUchiSonotasikyu.CodeName_EtcTypeCD'); ?></td>
+				<td><?php echo Hash::get($meisaiUchiSonotasikyu, 'QtMeisaiUchiSonotasikyu.SeqNo'); ?></td>
+				<td><?php echo Hash::get($meisaiUchiSonotasikyu, 'QtMeisaiUchiSonotasikyu.Amounts'); ?></td>
+			</tr>
+		<?php endforeach; ?>
+	</table>
 </div><!-- //.box_01 -->

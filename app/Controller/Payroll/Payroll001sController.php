@@ -95,7 +95,7 @@ class Payroll001sController extends CommonController {
 	/**
 	 * 支給明細照会　タブ08：旅費・その他支給
 	 */
-	public function tab08($paidYm, $empNo, $paidDiv, $payerDiv) {
+	public function tab08() {
 
 		// TODO あとで消すこと
 		$paidYm   = '2013-07-01';
@@ -105,15 +105,18 @@ class Payroll001sController extends CommonController {
 
 		// テーブル[支給明細データ：旅費内訳]からデータを取得する
 		$meisaiUchiRyohiList = $this->QtMeisaiUchiRyohi->findMeisaiUchiRyohi($paidYm, $empNo, $paidDiv, $payerDiv);
+		// テーブル[支給明細データ：その他支給内訳]からデータを取得する
+		$meisaiUchiSonotasikyuList = $this->QtMeisaiUchiSonotasikyu->findMeisaiUchiSonotasikyu($paidYm, $empNo, $paidDiv, $payerDiv);
 
 		// 取得データをViewに渡す
 		$this->set(compact('meisaiUchiRyohiList'));
+		$this->set(compact('meisaiUchiSonotasikyuList'));
 	}
 
 	/**
 	 * 支給明細照会　タブ09：福利控除
 	 */
-	public function tab09($paidYm, $empNo, $paidDiv, $payerDiv) {
+	public function tab09() {
 
 		// TODO あとで消すこと
 		$paidYm   = '2013-07-01';
@@ -131,7 +134,7 @@ class Payroll001sController extends CommonController {
 	/**
 	 * 支給明細照会　タブ10：賃金
 	 */
-	public function tab10($paidYm, $empNo, $paidDiv, $payerDiv) {
+	public function tab10() {
 
 		// TODO あとで消すこと
 		$paidYm   = '2013-07-01';
