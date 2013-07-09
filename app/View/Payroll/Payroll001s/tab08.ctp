@@ -20,9 +20,9 @@
 				<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.TravelExpTypeCD'); ?></td>
 				<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.CodeName_TravelExpTypeCD'); ?></td>
 				<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.ExpendDepCD'); ?></td>
-				<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.CodeName_ExpendDepCD'); ?></td>
+				<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.CodeName_ExpendDepName'); ?></td>
 				<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.AccountCD'); ?></td>
-				<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.CodeName_AccountCD'); ?></td>
+				<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.CodeName_AccountName'); ?></td>
 				<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.ExpenseAmount'); ?></td>
 			</tr>
 		<?php endforeach; ?>
@@ -38,7 +38,7 @@
 		<?php foreach ($meisaiUchiSonotasikyuList as $meisaiUchiSonotasikyu): ?>
 			<tr>
 				<td><?php echo Hash::get($meisaiUchiSonotasikyu, 'QtMeisaiUchiSonotasikyu.EtcTypeCD'); ?></td>
-				<td><?php echo Hash::get($meisaiUchiSonotasikyu, 'QtMeisaiUchiSonotasikyu.CodeName_EtcTypeCD'); ?></td>
+				<td><?php echo Hash::get($meisaiUchiSonotasikyu, 'QtMeisaiUchiSonotasikyu.CodeName_EtcTypeName'); ?></td>
 				<td><?php echo Hash::get($meisaiUchiSonotasikyu, 'QtMeisaiUchiSonotasikyu.SeqNo'); ?></td>
 				<td><?php echo Hash::get($meisaiUchiSonotasikyu, 'QtMeisaiUchiSonotasikyu.Amounts'); ?></td>
 			</tr>

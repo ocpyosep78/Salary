@@ -15,7 +15,7 @@
 		<?php foreach ($meisaiUchiFukurikojoList as $meisaiUchiFukurikojo): ?>
 			<tr>
 				<td><?php echo Hash::get($meisaiUchiFukurikojo, 'QtMeisaiUchiFukurikojo.DeductionCD'); ?></td>
-				<td><?php echo Hash::get($meisaiUchiFukurikojo, 'QtMeisaiUchiFukurikojo.CodeName_DeductionCD'); ?></td>
+				<td><?php echo Hash::get($meisaiUchiFukurikojo, 'QtMeisaiUchiFukurikojo.CodeName_DeductionName'); ?></td>
 				<td><?php echo Hash::get($meisaiUchiFukurikojo, 'QtMeisaiUchiFukurikojo.ReminderCnt'); ?></td>
 				<td><?php echo Hash::get($meisaiUchiFukurikojo, 'QtMeisaiUchiFukurikojo.Amounts'); ?></td>
 			</tr>
