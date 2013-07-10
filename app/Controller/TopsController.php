@@ -56,6 +56,10 @@ class TopsController extends AppController {
 		// 検索結果が0件の場合は何もしない
 		if (empty($results)) return;
 
+		// キャッシュデータの読み込み
+		$cacheData = Cache::read(CACHE_KEY_CODENAME);
+		if ($cacheData) $saveData = $cacheData;
+
 		// キャッシュ保存用に配列を整形する
 		foreach ($results as $result) {
 			// コード値の取得
