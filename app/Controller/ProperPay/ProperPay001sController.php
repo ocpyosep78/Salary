@@ -41,7 +41,58 @@ class ProperPay001sController extends CommonController {
 // 	 * 正当支給の検索
 // 	 * 検索結果はList構造で返却
 // 	 */
-public function search() {
+	public function search() {
+	
+		// ********************  画面からのデータ受け取り  ********************
+	
+		// 前画面からの検索条件の受け取り（職員番号、支給年月日、支給区分、支払者）
+		$searchCondition = array();
+		// POSTデータを受け取る
+		$postData = $this->request->data['QtMeisai'];
+		// 検索条件を設定する
+		foreach($postData as $key => $value) {
+			$searchCondition[$key] = $value;
+		}
+	
+		// ********************  ビジネスロジック  ********************
+	
+		// テーブル[人事基本情報]からデータを取得する
+		$personalInfo = array();
+		if(isset($searchCondition['EmpNo'])){
+			$personalInfo = $this->JtKihonKihon->find('first', array('conditions' => array('EmpNo' => $searchCondition['EmpNo'])));
+		}
+	
+		// findのパラメータを設定する
+		$params = array(
+				'conditions' => $searchCondition
+		);
+	
+		// テーブル[支給明細データ]からデータを取得する
+		$meisaiInfo = $this->QtMeisai->find('first', $params);
+	
+		// テーブル[支給明細データ：日割]からデータを取得する
+		$hiwariInfo = $this->QtMeisaiHiwari->find('first', $params);
+		// テーブル[支給明細データ：その他支給内訳]からデータを取得する
+		$uchiSonotaInfo = $this->QtMeisaiUchiSonotasikyu->find('first', $params);
+	
+		// ********************  画面へのデータ反映  ********************
+	
+		// 前画面からの検索条件をそのまま画面にセットする
+		$this->set('searchCondition', $searchCondition);
+	
+		// 取得データを設定する
+		$this->set('personalInfo', $personalInfo);
+		$this->set('meisaiInfo', $meisaiInfo);
+		$this->set('hiwariInfo', $hiwariInfo);
+		$this->set('uchiSonotaInfo', $uchiSonotaInfo);
+	
+		// ********************  遷移先画面の設定  ********************
+	
+		// このメソッドには対応する画面はないので、元の画面にレンダリングする
+		$this->render('index');
+	
+	}
+//public function search() {
 
 // ********************  画面からのデータ受け取り  ********************
 
@@ -51,14 +102,15 @@ public function search() {
 // 			$this->redirect('search/page:'.$this->params['data']['page']);
 // 		}
 	// 前画面からの検索条件の受け取り（職員番号、支給年月日、支給区分、支払者）
-	$searchCondition = array();
-	if (isset($this->request->data['EmpNo']) && isset($this->request->data['PaidYM']) && isset($this->request->data['PaidDiv']) && isset($this->request->data['PayerDiv'])) {
+	//$searchCondition = array();
+	//if (isset($this->request->data['EmpNo']) && isset($this->request->data['PaidYM']) && isset($this->request->data['PaidDiv']) && isset($this->request->data['PayerDiv'])) {
 		// POSTデータを受け取る
-		$postData = $this->request->data;
+	//	$postData = $this->request->data['EmpNo'];
+//var_dump($postData);
 		// 検索条件を設定する
-		foreach($postData as $key => $value) {
-			$searchCondition[$key] = $value;
-
+	//	foreach($postData as $key => $value) {
+		//	$searchCondition[$key] = $value;
+		//}
 // 		// 前画面からの検索条件の受け取り（研修委託会社コード）
 // 		if (isset($this->request->data['consignmentCompanyCd'])) {
 // 			// POSTデータを受け取る
@@ -69,7 +121,7 @@ public function search() {
 // 			// POSTデータが存在しない場合（ページングなど）、セッションから取得して使う
 // 			$searchCondition = $this->Session->read(self::S003S_SESSION_KEY);
 			// 前画面からの検索条件をそのまま画面にセットする
-			$this->set('searchCondition', $searchCondition);
+		//	$this->set('searchCondition', $searchCondition);
 
 			// 取得データを設定する
 			//$this->set('meisaiInfo', $meisaiInfo);
@@ -79,8 +131,8 @@ public function search() {
 			// ********************  遷移先画面の設定  ********************
 
 			// このメソッドには対応する画面はないので、元の画面にレンダリングする
-			$this->render('index');
-}
+		//	$this->render('index');
+//}
 // 		// ********************  ビジネスロジック  ********************
 
 // 		// 研修委託会社テーブルからリスト形式でデータを取得する
@@ -211,7 +263,5 @@ public function search() {
 
 // 		$this->SmItakusakiKaisha->save($param);
 // 	}
+}
 
-}
-}
-}

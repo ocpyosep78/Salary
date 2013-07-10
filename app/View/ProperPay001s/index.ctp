@@ -26,7 +26,7 @@
 	<tr>
 		<th>支給年月日</th>
 		<td>
-			<input type="text" placeholder="GGYY.MM" name="EmpNo" value="<?php echo Hash::get($searchCondition, 'PaidYM'); ?>" />
+			<input type="text" placeholder="GGYY.MM" name="EmpNo" value="<?php echo Hash::get($searchCondition, 'EmpNo'); ?>" />
 			<button type="button" value="">支給年月検索</button>
 		</td>
 		<th>支給区分</th>
