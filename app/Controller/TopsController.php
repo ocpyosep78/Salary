@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class TopsController extends AppController {
 
-	public $uses = array('MgrPositionMaster', 'ZAllowanceDetailNamemaster');
+	public $uses = array('MgrPositionMaster', 'ZAllowanceDetailNamemaster', 'JmSyokuinKubun', 'QmKyuyoTaikei', 'JmSyokuso', 'JobCategoryMaster', 'ZSalaryTableNamemaster');
 
 	/**
 	 * 初期表示
@@ -21,6 +21,26 @@ class TopsController extends AppController {
 		// 手当詳細CDマスタ
 		$results = $this->ZAllowanceDetailNamemaster->find('all', array('conditions' => array('delete_flg' => 0)));
 		$this->__saveCacheForCodeName($results, 'ZAllowanceDetailNamemaster', 'AllowDetailCD', array('AllowDetailName', 'AllowDetailSName'));
+
+		// 職員区分マスタ
+//		$results = $this->JmSyokuinKubun->find('all', array('conditions' => array('delete_flg' => 0)));
+//		$this->__saveCacheForCodeName($results, 'JmSyokuinKubun', 'EmpDiv', array('EmpDivName', 'EmpDivShortName'));
+
+		// 給与体系マスタ
+//		$results = $this->QmKyuyoTaikei->find('all', array('conditions' => array('delete_flg' => 0)));
+//		$this->__saveCacheForCodeName($results, 'QmKyuyoTaikei', 'SalaryTypeCD', array('SalaryTypeName', 'SalaryTypeShortName'));
+
+		// 職層マスタ
+//		$results = $this->JmSyokuso->find('all', array('conditions' => array('delete_flg' => 0)));
+//		$this->__saveCacheForCodeName($results, 'JmSyokuso', 'JobGradeCD', array('JobGradeName', 'JobGradeShortName'));
+
+		// 職種職務マスタ
+//		$results = $this->JobCategoryMaster->find('all', array('conditions' => array('delete_flg' => 0)));
+//		$this->__saveCacheForCodeName($results, 'JobCategoryMaster', 'JobDutyCD', array('JobTypeName', 'JobTypeShortName'));
+
+		// 給料表名称マスタ
+//		$results = $this->ZSalaryTableNamemaster->find('all', array('conditions' => array('delete_flg' => 0)));
+//		$this->__saveCacheForCodeName($results, 'ZSalaryTableNamemaster', 'SalaryTableCD', array('SalaryTableName', 'SalaryTableSName'));
 	}
 
 	/**

@@ -98,5 +98,15 @@ Configure::write('CACHE_KEY_MAP',array(
 	'MgrCD' => array('MgrName', 'MgrShortName'),
 	// 手当詳細
 	'AllowDetailCD' => array('AllowDetailName', 'AllowDetailSName'),
+	// 職員区分
+	'EmpDiv' => array('EmpDivName', 'EmpDivShortName'),
+	// 給与体系
+	'SalaryTypeCD' => array('SalaryTypeName', 'SalaryTypeShortName'),
+	// 職層マスタ
+	'JobGradeCD' => array('JobGradeName', 'JobGradeShortName'),
+	// 職種職務マスタ
+	'JobDutyCD' => array('JobTypeName', 'JobTypeShortName'),
+	// 給料表名称マスタ
+	'SalaryTableCD' => array('SalaryTableName', 'SalaryTableSName'),
 ));
 ?>

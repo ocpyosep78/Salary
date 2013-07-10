@@ -65,19 +65,19 @@
 				<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($hiwariInfo, 'QtMeisaiHiwari.PaidYM')); ?></td>
 				<th>職員区分</th>
 				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.EmpDiv'); ?></td>
-				<td>NNNN</td>
+				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.CodeName_EmpDivName'); ?></td>
 				<th>給与体系</th>
 				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.SalaryTypeCD'); ?></td>
-				<td>NNNNNN</td>
+				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.CodeName_SalaryTypeName'); ?></td>
 				<th>所属</th>
 				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.DepCD'); ?></td>
 				<td>N・NN・NNNNN</td>
 				<th>職層</th>
 				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.JobGradeCD'); ?></td>
-				<td>NNNN</td>
+				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.CodeName_JobGradeName'); ?></td>
 				<th>職務</th>
 				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.JobDutyCD'); ?></td>
-				<td>NNNNNNNNNN</td>
+				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.CodeName_JobTypeName'); ?></td>
 				<td>NNNNN</td>
 			</tr>
 		</table>
@@ -86,16 +86,16 @@
 			<tr>
 				<th>支出科目</th>
 				<th>給料</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.SalaryRewardSubjectCD'); ?></td>
+				<td>XX</td>
 				<td>NNNNNNNNNN</td>
 				<th>児童</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.ChildAllowanceSubjectCD'); ?></td>
+				<td>XX</td>
 				<td>NNNNNNNNNN</td>
 				<th>超勤</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.OverTimeWorkSubjectCD'); ?></td>
+				<td>XX</td>
 				<td>NNNNNNNNNN</td>
 				<th>休日給</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.HolidaySalarySubjectCD'); ?></td>
+				<td>XX</td>
 				<td>NNNNNNNNNN</td>
 			</tr>
 		</table>
@@ -104,7 +104,7 @@
 			<tr>
 				<th>給料/報酬</th>
 				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.SalaryTable'); ?></td>
-				<td>NNNNNN</td>
+				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.CodeName_SalaryTableName'); ?></td>
 				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.SalaryClass'); ?>-<?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.SalaryGrade'); ?></td>
 				<td>NN</td>
 				<td>Z,ZZZ,ZZZ円</td>

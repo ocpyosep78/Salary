@@ -68,7 +68,6 @@ class Payroll001sController extends CommonController {
 
 		// テーブル[支給明細データ]からデータを取得する
 		$meisaiInfo = $this->QtMeisai->find('first', $params);
-
 		// テーブル[支給明細データ：日割]からデータを取得する
 		$hiwariInfo = $this->QtMeisaiHiwari->find('first', $params);
 		// テーブル[支給明細データ：その他支給内訳]からデータを取得する
