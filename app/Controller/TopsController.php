@@ -27,8 +27,8 @@ class TopsController extends AppController {
 //		$this->__saveCacheForCodeName($results, 'JmSyokuinKubun', 'EmpDiv', array('EmpDivName', 'EmpDivShortName'));
 
 		// 給与体系マスタ
-//		$results = $this->QmKyuyoTaikei->find('all', array('conditions' => array('delete_flg' => 0)));
-//		$this->__saveCacheForCodeName($results, 'QmKyuyoTaikei', 'SalaryTypeCD', array('SalaryTypeName', 'SalaryTypeShortName'));
+// 		$results = $this->QmKyuyoTaikei->find('all', array('conditions' => array('delete_flg' => 0)));
+// 		$this->__saveCacheForCodeName($results, 'QmKyuyoTaikei', 'SalaryTypeCD', array('SalaryTypeName', 'SalaryTypeShortName'));
 
 		// 職層マスタ
 //		$results = $this->JmSyokuso->find('all', array('conditions' => array('delete_flg' => 0)));

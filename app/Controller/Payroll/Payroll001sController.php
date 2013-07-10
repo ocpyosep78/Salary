@@ -10,7 +10,9 @@ class Payroll001sController extends CommonController {
 
 	// この画面で使うモデル（テーブル）を宣言する
 	public $uses = array('QtMeisai', 'QtMeisaiHiwari', 'QtMeisaiUchiSonotasikyu', 'JtKihonKihon', 'QtMeisaiUchiChingin',
-							'QtMeisaiUchiFukurikojo', 'QtMeisaiUchiRyohi', 'QtMeisaiUchiNoritu', 'QtMeisaiUchiTokkin');
+							'QtMeisaiUchiFukurikojo', 'QtMeisaiUchiRyohi', 'QtMeisaiUchiNoritu', 'QtMeisaiUchiTokkin',
+							'QtMeisaiUchiShuku', 'QtMeisaiUchiKantoku'
+	);
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
 	public function beforeFilter() {
@@ -103,11 +105,19 @@ class Payroll001sController extends CommonController {
 		$paidDiv  = '01';
 		$payerDiv = '01';
 
-		// テーブル[支給明細データ：旅費内訳]からデータを取得する
+		// テーブル[支給明細データ：特勤内訳]からデータを取得する
 		$meisaiUchiTokkinList = $this->QtMeisaiUchiTokkin->findMeisaiUchiTokkin($paidYm, $empNo, $paidDiv, $payerDiv);
+
+		// テーブル[支給明細データ：宿日直内訳]からデータを取得する
+		$meisaiUchiShukuList = $this->QtMeisaiUchiShuku->findMeisaiUchiShuku($paidYm, $empNo, $paidDiv, $payerDiv);
+
+		// テーブル[支給明細データ：管理職特勤内訳]からデータを取得する
+		$meisaiUchiKantokuList = $this->QtMeisaiUchiKantoku->findMeisaiUchiKantoku($paidYm, $empNo, $paidDiv, $payerDiv);
 
 		// 取得データをViewに渡す
 		$this->set(compact('meisaiUchiTokkinList'));
+		$this->set(compact('meisaiUchiShukuList'));
+		$this->set(compact('meisaiUchiKantokuList'));
 	}
 
 	/**
