@@ -11,7 +11,7 @@ class Payroll001sController extends CommonController {
 	// この画面で使うモデル（テーブル）を宣言する
 	public $uses = array('QtMeisai', 'QtMeisaiHiwari', 'QtMeisaiUchiSonotasikyu', 'JtKihonKihon', 'QtMeisaiUchiChingin',
 							'QtMeisaiUchiFukurikojo', 'QtMeisaiUchiRyohi', 'QtMeisaiUchiNoritu', 'QtMeisaiUchiTokkin',
-							'QtMeisaiUchiShuku', 'QtMeisaiUchiKantoku'
+							'QtMeisaiUchiShuku', 'QtMeisaiUchiKantoku', 'QtMeisaiUchiChokin', 'QtMeisaiUchiKyujitukyu'
 	);
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
@@ -92,6 +92,28 @@ class Payroll001sController extends CommonController {
 		// このメソッドには対応する画面はないので、元の画面にレンダリングする
 		$this->render('index');
 
+	}
+
+	/**
+	 * 支給明細照会　タブ05：超勤・休日・夜勤
+	 */
+	public function tab05() {
+
+		// TODO あとで消すこと
+		$paidYm   = '2013-07-01';
+		$empNo    = 'A0000001';
+		$paidDiv  = '01';
+		$payerDiv = '01';
+
+		// テーブル[支給明細データ：超勤内訳]からデータを取得する
+		$meisaiUchiChokinList = $this->QtMeisaiUchiChokin->findMeisaiUchiChokin($paidYm, $empNo, $paidDiv, $payerDiv);
+
+		// テーブル[支給明細データ：休日給内訳]からデータを取得する
+		$meisaiUchiKyujitukyuList = $this->QtMeisaiUchiKyujitukyu->findMeisaiUchiKyujitukyu($paidYm, $empNo, $paidDiv, $payerDiv);
+
+		// 取得データをViewに渡す
+		$this->set(compact('meisaiUchiChokinList'));
+		$this->set(compact('meisaiUchiKyujitukyuList'));
 	}
 
 	/**
