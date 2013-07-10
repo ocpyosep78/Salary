@@ -9,7 +9,8 @@ App::uses('CommonController', 'Controller');
 class Payroll001sController extends CommonController {
 
 	// この画面で使うモデル（テーブル）を宣言する
-	public $uses = array('QtMeisai', 'QtMeisaiHiwari', 'QtMeisaiUchiSonotasikyu', 'JtKihonKihon', 'QtMeisaiUchiChingin', 'QtMeisaiUchiFukurikojo', 'QtMeisaiUchiRyohi', 'QtMeisaiUchiNoritu');
+	public $uses = array('QtMeisai', 'QtMeisaiHiwari', 'QtMeisaiUchiSonotasikyu', 'JtKihonKihon', 'QtMeisaiUchiChingin',
+							'QtMeisaiUchiFukurikojo', 'QtMeisaiUchiRyohi', 'QtMeisaiUchiNoritu', 'QtMeisaiUchiTokkin');
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
 	public function beforeFilter() {
@@ -89,6 +90,24 @@ class Payroll001sController extends CommonController {
 		// このメソッドには対応する画面はないので、元の画面にレンダリングする
 		$this->render('index');
 
+	}
+
+	/**
+	 * 支給明細照会　タブ06：特勤・宿日直・管特
+	 */
+	public function tab06() {
+
+		// TODO あとで消すこと
+		$paidYm   = '2013-07-01';
+		$empNo    = 'A0000001';
+		$paidDiv  = '01';
+		$payerDiv = '01';
+
+		// テーブル[支給明細データ：旅費内訳]からデータを取得する
+		$meisaiUchiTokkinList = $this->QtMeisaiUchiTokkin->findMeisaiUchiTokkin($paidYm, $empNo, $paidDiv, $payerDiv);
+
+		// 取得データをViewに渡す
+		$this->set(compact('meisaiUchiTokkinList'));
 	}
 
 	/**
