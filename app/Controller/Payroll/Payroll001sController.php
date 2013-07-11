@@ -217,6 +217,13 @@ class Payroll001sController extends CommonController {
 		$this->set(compact('meisaiUchiChinginList'));
 	}
 
+	/**
+	 * タブ切り替え用のサンプルメソッド
+	 * TODO　後で消すこと
+	 */
+	public function sample() {
+
+	}
 // 	/**
 // 	 * 複数ボタンが用意されている画面からの共通呼び出しメソッド
 // 	 */

@@ -35,7 +35,7 @@ App::uses('CommonController', 'Controller');
 class CommonSearchesController extends CommonController {
 
 	// この画面で使うモデル（テーブル）を宣言する
-	public $uses = array('LGovMaster', 'SmItakusakiKaisha', 'QmShikyuKubun');
+	public $uses = array('LGovMaster', 'SmItakusakiKaisha', 'QmShikyuKubun', 'Paginator');
 
 	// この画面で使うコンポーネントを宣言する
 	public $components = array('Session');
