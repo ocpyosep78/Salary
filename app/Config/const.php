@@ -107,6 +107,6 @@ Configure::write('CACHE_KEY_MAP',array(
 	// 職種職務マスタ
 	'JobDutyCD' => array('JobTypeName', 'JobTypeShortName'),
 	// 給料表名称マスタ
-	'SalaryTableCD' => array('SalaryTableName', 'SalaryTableSName'),
+	'SalaryTable' => array('SalaryTableName', 'SalaryTableSName'),
 ));
 ?>

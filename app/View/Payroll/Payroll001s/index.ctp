@@ -22,7 +22,7 @@
 			</td>
 		</tr>
 		<tr>
-			<th>支給年月日</th>
+			<th>支給年月</th>
 			<td>
 				<?php echo $this->SalaryForm->text('PaidYM', array('value' => Hash::get($searchCondition, 'PaidYM'), 'placeholder' => 'GGYY.MM'));?>
 				<?php echo $this->SalaryForm->button('？', array('type' => 'button'), null); ?>
@@ -108,13 +108,13 @@
 				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.SalaryClass'); ?>-<?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.SalaryGrade'); ?></td>
 				<td>NN</td>
 				<td>Z,ZZZ,ZZZ円</td>
-				<td><label><input type="checkbox" name="" value="">清掃加算対象</label></td>
+				<td><label><input type="checkbox" name="" value="" disabled <?php if(Hash::get($hiwariInfo, 'QtMeisaiHiwari.SweeperAdditionFlg') === '1') echo 'checked'; ?> >清掃加算対象</label></td>
 				<th>現給保障</th>
 				<td>NNN</td>
 				<th>現在の保障額</th>
-				<td>XX</td>
+				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.TableOnGuarantTable'); ?></td>
 				<td>NNNNNN</td>
-				<td>XXXXXX</td>
+				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.GradeOnGuarantTable'); ?><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.ClassOnGuarantTable'); ?></td>
 				<td>Z,ZZZ,ZZZ円</td>
 			</tr>
 		</table>
