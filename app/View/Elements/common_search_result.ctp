@@ -37,7 +37,7 @@
 </div><!-- //.box_01 -->
 
 <div class="box_common_search_footer">
-	<input class="Button1 commit" type="button" onclick="commitForCommonSearch();" disabled="disabled" value="確定" />
+	<input class="Button1 commit" type="button" onclick="commitForCommonSearch();" disabled="disabled" value="　確定　" />
 </div>
 
 <script type="text/javascript">

@@ -262,4 +262,77 @@ class SalaryPaginatorHelper extends PaginatorHelper {
 		return $out;
 	}
 
+	protected function _pagingLink($which, $title = null, $options = array(), $disabledTitle = null, $disabledOptions = array()) {
+		$check = 'has' . $which;
+		$_defaults = array(
+				'url' => array(), 'step' => 1, 'escape' => true, 'model' => null,
+				'tag' => 'span', 'class' => strtolower($which), 'disabledTag' => null
+		);
+		$options = array_merge($_defaults, (array)$options);
+		$paging = $this->params($options['model']);
+		if (empty($disabledOptions)) {
+			$disabledOptions = $options;
+		}
+
+		if (!$this->{$check}($options['model']) && (!empty($disabledTitle) || !empty($disabledOptions))) {
+			if (!empty($disabledTitle) && $disabledTitle !== true) {
+				$title = $disabledTitle;
+			}
+			$options = array_merge($_defaults, (array)$disabledOptions);
+		} elseif (!$this->{$check}($options['model'])) {
+			return null;
+		}
+
+		foreach (array_keys($_defaults) as $key) {
+			${
+				$key} = $options[$key];
+				unset($options[$key]);
+		}
+
+		// 独自実装(次ページや前ページが存在しない場合でもボタンを表示したいため)
+		$url = array_merge(
+				array('page' => $paging['page'] + ($which === 'Prev' ? $step * -1 : $step)),
+				$url
+		);
+		if ($tag === false) {
+			return $this->link(
+					$title,
+					$url,
+					compact('escape', 'model', 'class') + $options
+			);
+		}
+		$link = $this->link($title, $url, compact('escape', 'model') + $options);
+		return $this->Html->tag($tag, $link, compact('class'));
+
+// 		if ($this->{$check}($model)) {
+// 			$url = array_merge(
+// 					array('page' => $paging['page'] + ($which === 'Prev' ? $step * -1 : $step)),
+// 					$url
+// 			);
+// 			if ($tag === false) {
+// 				return $this->link(
+// 						$title,
+// 						$url,
+// 						compact('escape', 'model', 'class') + $options
+// 				);
+// 			}
+// 			$link = $this->link($title, $url, compact('escape', 'model') + $options);
+// 			return $this->Html->tag($tag, $link, compact('class'));
+// 		} else {
+// 			unset($options['rel']);
+// 			if (!$tag) {
+// 				if ($disabledTag) {
+// 					$tag = $disabledTag;
+// 					$disabledTag = null;
+// 				} else {
+// 					$tag = $_defaults['tag'];
+// 				}
+// 			}
+// 			if ($disabledTag) {
+// 				$title = $this->Html->tag($disabledTag, $title, compact('escape') + $options);
+// 				return $this->Html->tag($tag, $title, compact('class'));
+// 			}
+// 			return $this->Html->tag($tag, $title, compact('escape', 'class') + $options);
+// 		}
+	}
 }

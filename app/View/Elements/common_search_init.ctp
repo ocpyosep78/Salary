@@ -1,10 +1,18 @@
 <?php
 	echo
-	'<table class="pagination tbl_01">
+	'<table class="pagination box_common_search_header">
 		<tbody>
 			<tr>
-				<td>
-					<input type="text" width="30" value="1">/ 1
+				<td class="box_common_search_header_td01">
+					<span class="Button1"><a href="#">前ページ</a></span>
+				</td>
+				<td class="box_common_search_header_td02">
+					<span class="Button1"><a href="#">次ページ</a></span>
+				</td>
+				<td class="box_common_search_header_td03">
+					<input type="text" width="30">/
+				</td>
+				<td class="box_common_search_header_td04">
 					<input class="Button1" type="button" value="ジャンプ">
 				</td>
 			</tr>
@@ -17,7 +25,7 @@
 
 <?php // 検索結果一覧の表示 ?>
 <div class="box_common_search">
-	<table class="tbl_02_init">
+	<table class="box_common_search_content">
 
 		<tr>
 			<th style="width:10%">連番</th>
@@ -39,7 +47,7 @@
 </div><!-- //.box_01 -->
 
 <div class="box_common_search_footer">
-	<input class="Button1 commit" type="button" onclick="commitForCommonSearch();" disabled="disabled" value="確定" />
+	<input class="Button1 commit" type="button" onclick="commitForCommonSearch();" disabled="disabled" value="　確定　" />
 </div>
 
 <script type="text/javascript">

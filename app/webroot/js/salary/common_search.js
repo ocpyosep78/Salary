@@ -108,7 +108,7 @@
 	$("#common-search-result .pagination .jump").click(function() {
 
 		// Ajax通信用URLの取得
-		var page = $(this).parent().find("input:first").val();
+		var page = $(this).parent().parent().find("input:first").val();
 		var url = "/CommonSearches/search/page:" + page;
 
 		// Paginationクリック時の処理を行う

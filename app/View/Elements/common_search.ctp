@@ -11,7 +11,7 @@
 					<input type="text" id="common-search-keyword-cd" name="common-search-keyword-cd" value="" />
 				</td>
 				<td class="td1 pd_01">
-					<input class="Button1" type="button" onclick="searchForCommonSearch();" value="検索" />
+					<input class="Button1" type="button" onclick="searchForCommonSearch();" value="　検索　" />
 				</td>
 			</tr>
 			<tr>
@@ -22,7 +22,7 @@
 					<input type="text" id="common-search-keyword-name" name="common-search-keyword-name" value="" />
 				</td>
 				<td class="td1 pd_02">
-					<input class="Button1" type="button" onclick="clearForCommonSearch()" value="消去" />
+					<input class="Button1" type="button" onclick="clearForCommonSearch()" value="　消去　" />
 				</td>
 			</tr>
 		</table>
