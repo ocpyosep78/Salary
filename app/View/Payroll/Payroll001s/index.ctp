@@ -35,12 +35,12 @@
 			</td>
 			<th>支払者</th>
 			<td>
-				<?php echo $this->SalaryForm->text('PayerDiv', array('size' => '1', 'value' => Hash::get($searchCondition, 'PayerDiv'), 'placeholder' => 'XX'));?>
-				<?php echo $this->SalaryForm->button('？', array('type' => 'button'), null); ?>
-				<p class="description">NNNNN</p>
+				<?php echo $this->SalaryForm->text('PayerDiv', array('size' => '1', 'id' => 'ShiharaishaCD', 'value' => Hash::get($searchCondition, 'PayerDiv'), 'placeholder' => 'XX'));?>
+				<?php echo $this->SalaryForm->button('？', array('type' => 'button', 'onclick' => "viewForCommonSearch('QmKyuyoShiharaisha', 'PayerName', 'PayerDiv', 'ShiharaishaName', 'ShiharaishaCD')" ), null); ?>
+				<p class="description" id="ShiharaishaName"></p>
 			</td>
 			<td class="td1">
-				<?php echo $this->SalaryForm->button('消去', array('type' => 'button', 'class' => 'Button1'), null); ?>
+				<?php echo $this->SalaryForm->reset('clear', array('type' => 'reset', 'class' => 'Button1', 'value' => '消去'), null); ?>
 			</td>
 		</tr>
 	</table>
@@ -62,22 +62,22 @@
 		<table class="tbl_01">
 			<tr>
 				<th>支給年月日</th>
-				<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($hiwariInfo, 'QtMeisaiHiwari.PaidYM')); ?></td>
+				<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($kihonInfo, 'QtMeisaiHiwari.PaidYM')); ?></td>
 				<th>職員区分</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.EmpDiv'); ?></td>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.CodeName_EmpDivName'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.EmpDiv'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.CodeName_EmpDivName'); ?></td>
 				<th>給与体系</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.SalaryTypeCD'); ?></td>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.CodeName_SalaryTypeName'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.SalaryTypeCD'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.CodeName_SalaryTypeName'); ?></td>
 				<th>所属</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.DepCD'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.DepCD'); ?></td>
 				<td>N・NN・NNNNN</td>
 				<th>職層</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.JobGradeCD'); ?></td>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.CodeName_JobGradeName'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.JobGradeCD'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.CodeName_JobGradeName'); ?></td>
 				<th>職務</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.JobDutyCD'); ?></td>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.CodeName_JobTypeName'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.JobDutyCD'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.CodeName_JobTypeName'); ?></td>
 				<td>NNNNN</td>
 			</tr>
 		</table>
@@ -103,18 +103,18 @@
 		<table class="tbl_01">
 			<tr>
 				<th>給料/報酬</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.SalaryTable'); ?></td>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.CodeName_SalaryTableName'); ?></td>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.SalaryClass'); ?>-<?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.SalaryGrade'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.SalaryTable'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.CodeName_SalaryTableName'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.SalaryClass'); ?>-<?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.SalaryGrade'); ?></td>
 				<td>NN</td>
 				<td>Z,ZZZ,ZZZ円</td>
-				<td><label><input type="checkbox" name="" value="" disabled <?php if(Hash::get($hiwariInfo, 'QtMeisaiHiwari.SweeperAdditionFlg') === '1') echo 'checked'; ?> >清掃加算対象</label></td>
+				<td><label><input type="checkbox" name="" value="" disabled <?php if(Hash::get($kihonInfo, 'QtMeisaiHiwari.SweeperAdditionFlg') === '1') echo 'checked'; ?> >清掃加算対象</label></td>
 				<th>現給保障</th>
 				<td>NNN</td>
 				<th>現在の保障額</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.TableOnGuarantTable'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.TableOnGuarantTable'); ?></td>
 				<td>NNNNNN</td>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.GradeOnGuarantTable'); ?><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.ClassOnGuarantTable'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.GradeOnGuarantTable'); ?><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.ClassOnGuarantTable'); ?></td>
 				<td>Z,ZZZ,ZZZ円</td>
 			</tr>
 		</table>
@@ -123,32 +123,32 @@
 			<tr>
 				<th>勤務態様</th>
 				<th>一日</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.WorkingTimesOfDayHour'); ?>時間<?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.WorkingTimesOfDayMinute'); ?>分</td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.WorkingTimesOfDayHour'); ?>時間<?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.WorkingTimesOfDayMinute'); ?>分</td>
 				<th>一週間</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.WorkingDaysOfWeek'); ?>日勤務</td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.WorkingDaysOfWeek'); ?>日勤務</td>
 				<th>週の勤務時間</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.WorkingTimesOfWeekHour'); ?>時間<?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.WorkingTimesOfWeekMinute'); ?>分</td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.WorkingTimesOfWeekHour'); ?>時間<?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.WorkingTimesOfWeekMinute'); ?>分</td>
 				<th>月の勤務日数</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.WorkingDaysOfMonth'); ?>日</td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.WorkingDaysOfMonth'); ?>日</td>
 				<th>年の勤務日数</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.WorkingDaysOfYear'); ?>日</td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.WorkingDaysOfYear'); ?>日</td>
 				<th>その他</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.OtherDay'); ?>日</td>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.OtherMonth'); ?>月</td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.OtherDay'); ?>日</td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.OtherMonth'); ?>月</td>
 			</tr>
 		</table>
 
 		<table class="tbl_01">
 			<tr>
 				<th>勤怠事由</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.AttendanceOrderedReasonCD'); ?></td>
-				<td>NNNNNN</td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.AttendanceOrderedReasonCD'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.CodeName_NAME'); ?></td>
 				<th>支給割合</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.PayRatio'); ?>％</td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.PayRatio'); ?>％</td>
 				<th>発令年月日</th>
 				<td>GGYY.MM.DD</td>
 				<th>日割日数</th>
-				<td><?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.ObjectDays'); ?>/<?php echo Hash::get($hiwariInfo, 'QtMeisaiHiwari.RequestedWorkingDaysOfMonth'); ?></td>
+				<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.ObjectDays'); ?>/<?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.RequestedWorkingDaysOfMonth'); ?></td>
 			</tr>
 		</table>
 

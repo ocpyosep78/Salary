@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class TopsController extends AppController {
 
-	public $uses = array('MgrPositionMaster', 'ZAllowanceDetailNamemaster', 'JmSyokuinKubun', 'QmKyuyoTaikei', 'JmSyokuso', 'JobCategoryMaster', 'ZSalaryTableNamemaster');
+	public $uses = array('MgrPositionMaster', 'ZAllowanceDetailNamemaster', 'JmSyokuinKubun', 'QmKyuyoTaikei', 'JmSyokuso', 'JobCategoryMaster', 'ZSalaryTableNamemaster', 'ZAttendanceReason', 'ZDetachmentAllowDivmaster');
 
 	/**
 	 * 初期表示
@@ -42,7 +42,9 @@ class TopsController extends AppController {
 		$results = $this->ZSalaryTableNamemaster->find('all', array('conditions' => array('delete_flg' => 0)));
 		$this->__saveCacheForCodeName($results, 'ZSalaryTableNamemaster', 'SalaryTableCD', array('SalaryTableName', 'SalaryTableSName'));
 
-
+		// 勤怠事由マスタ
+		$results = $this->ZAttendanceReason->find('all', array('conditions' => array('DeleteFlg' => 0)));
+		$this->__saveCacheForCodeName($results, 'ZAttendanceReason', 'ID', array('NAME'));
 	}
 
 	/**

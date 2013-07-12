@@ -26,13 +26,15 @@ class Payroll001sController extends CommonController {
 	 */
 	public function index() {
 
-		// 画面側でエラーが出ないように空の検索条件をセットしておく
+		// 画面側でエラーが出ないように空の配列をセットしておく
 		$searchCondition = array();
 		$this->set('searchCondition', $searchCondition);
 		$personalInfo = array();
 		$this->set('personalInfo', $personalInfo);
 		$meisaiInfo = array();
 		$this->set('meisaiInfo', $meisaiInfo);
+		$kihonInfo = array();
+		$this->set('kihonInfo', $kihonInfo);
 		$hiwariInfo = array();
 		$this->set('hiwariInfo', $hiwariInfo);
 		$uchiSonotaInfo = array();
@@ -72,7 +74,37 @@ class Payroll001sController extends CommonController {
 		// テーブル[支給明細データ]からデータを取得する
 		$meisaiInfo = $this->QtMeisai->find('first', $params);
 		// テーブル[支給明細データ：日割]からデータを取得する
-		$hiwariInfo = $this->QtMeisaiHiwari->find('first', $params);
+		$hiwariAllInfo = $this->QtMeisaiHiwari->find('all', $params);
+
+		// レコード数が1件or複数の判定フラグを作成する
+		$hiwariMultiRecordFlg = false;
+		// 日割データが複数あるとき
+		if(count($hiwariAllInfo) > 1){
+			// 判定用のフラグをONにする
+			$hiwariMultiRecordFlg = true;
+		}
+
+		$kihonInfo = array();
+		$hiwariInfo = array();
+		// 検索結果にレコードがあるとき
+		if(!empty($hiwariAllInfo)){
+			// 日割データの1レコード目は共通で使用するので、抽出する
+			$kihonInfo = $hiwariAllInfo[0];
+
+			// 日割データの２コード目以降は、タブ「日割情報」で表示する
+			// 日割データが複数あるとき
+			if($hiwariMultiRecordFlg){
+				$i = 0;
+				foreach($hiwariAllInfo as $hiwariRecord){
+					if($i > 0){
+						// 日割データの２コード目以降は、タブ「日割情報」で表示する
+						$hiwariInfo[] = $hiwariRecord;
+					}
+					$i++;
+				}
+			}
+		}
+
 		// テーブル[支給明細データ：その他支給内訳]からデータを取得する
 		$uchiSonotaInfo = $this->QtMeisaiUchiSonotasikyu->find('first', $params);
 
@@ -84,7 +116,9 @@ class Payroll001sController extends CommonController {
 		// 取得データを設定する
 		$this->set('personalInfo', $personalInfo);
 		$this->set('meisaiInfo', $meisaiInfo);
+		$this->set('kihonInfo', $kihonInfo);
 		$this->set('hiwariInfo', $hiwariInfo);
+		$this->set('hiwariMultiRecordFlg', $hiwariMultiRecordFlg);
 		$this->set('uchiSonotaInfo', $uchiSonotaInfo);
 
 		// ********************  遷移先画面の設定  ********************

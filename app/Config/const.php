@@ -62,6 +62,20 @@ $const_labels = array(
 			'PaymentDivName' => array('symbol' => '', 'name' => '支給区分名'),
 		)
 	),
+	// 検索結果表示項目：給与支払者マスタ
+	'VIEW_COLUMN_QMKYUYOSHIHARAISHA' => array(
+		'labels' => array(
+			'PayerDiv' => array('symbol' => '', 'name' => '支払者区分コード'),
+			'PayerName' => array('symbol' => '', 'name' => '支払者区分名'),
+		)
+	),
+	// 検索項目：給与支払者マスタ
+	'SELECT_COLUMN_QMKYUYOSHIHARAISHA' => array(
+		'labels' => array(
+			'PayerDiv' => array('symbol' => '', 'name' => '支払者区分コード'),
+			'PayerName' => array('symbol' => '', 'name' => '支払者区分名'),
+		)
+	),
 	// キャッシュのキー
 	'CACHE_KEY' => array(
 		'labels' => array(
@@ -108,5 +122,7 @@ Configure::write('CACHE_KEY_MAP',array(
 	'JobDutyCD' => array('JobTypeName', 'JobTypeShortName'),
 	// 給料表名称マスタ
 	'SalaryTable' => array('SalaryTableName', 'SalaryTableSName'),
+	// 勤怠事由マスタ
+	'AttendanceOrderedReasonCD' => array('NAME'),
 ));
 ?>
