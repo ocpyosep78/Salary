@@ -86,6 +86,24 @@ class CommonSearchesController extends CommonController {
 	}
 
 	/**
+	 * 初期化処理
+	 */
+	public function clear() {
+
+		// クエリ変数を取得
+		$table = Hash::get($this->request->query, 'table');      // 検索対象のテーブル名
+		$columnCode  = Hash::get($this->request->query, 'columnCode');  // 検索対象のカラム（コード）
+		$columnName  = Hash::get($this->request->query, 'columnName');  // 検索対象のカラム（名称）
+
+		// 検索結果をViewに渡す
+		$this->set('searchResultList', array());
+		$this->set('tableName', $table);
+
+		// 検索結果一覧を表示する
+		$this->render('/Elements/common_search_clear');
+	}
+
+	/**
 	 * 検索処理
 	 */
 	public function search() {

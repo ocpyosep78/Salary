@@ -17,7 +17,7 @@
 
 <?php // 検索結果一覧の表示 ?>
 <div class="box_common_search">
-	<table class="tbl_02_init">
+	<table class="tbl_02">
 
 		<tr>
 			<th style="width:10%">連番</th>

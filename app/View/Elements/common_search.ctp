@@ -143,10 +143,9 @@
 
 		var table = $("#hidden-common-search-table").val();       // 検索対象のテーブル名
 
-
 		// 子画面の検索結果一覧をクリア
 		$.ajax({
-			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'init')); ?>" + "?table=" + table,
+			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'clear')); ?>" + "?table=" + table,
 			type: 'GET',
 			success: function(data) {
 				$("#common-search-result").html(data);
