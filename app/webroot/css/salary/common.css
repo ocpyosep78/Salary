@@ -387,6 +387,13 @@ text-align: right;
 [ 検索子画面 ]
 ====================================== */
 
+.box_common_search_t_header {
+width: 100%;
+height: 72px;
+min-height: 72px;
+max-height: 72px;
+}
+
 .box_common_search {
 height: 575px;
 margin: 0 10px;

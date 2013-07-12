@@ -2,7 +2,7 @@
 	<div class="close"></div>
 	<div class="modalBody">
 
-		<table class="t_header">
+		<table class="box_common_search_t_header">
 			<tr>
 				<td style="width:200px">
 					<p id="cdTitle" class="title"></p>
