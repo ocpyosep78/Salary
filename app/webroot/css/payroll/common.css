@@ -390,6 +390,41 @@ width: 50%;
 vertical-align: top;
 }
 
+.dsp_tbl_cell_8 {
+display: table-cell;
+width: 8%;
+vertical-align: top;
+}
+
+.dsp_tbl_cell_9 {
+display: table-cell;
+width: 9%;
+vertical-align: top;
+}
+
+.dsp_tbl_cell_10 {
+display: table-cell;
+width: 10%;
+vertical-align: top;
+}
+
+.dsp_tbl_cell_30 {
+display: table-cell;
+width: 30%;
+vertical-align: top;
+}
+
+.dsp_tbl_cell_35 {
+display: table-cell;
+width: 35%;
+vertical-align: top;
+}
+
+.dsp_tbl_cell_40 {
+display: table-cell;
+width: 40%;
+vertical-align: top;
+}
 
 /*
 [ ボタン ]

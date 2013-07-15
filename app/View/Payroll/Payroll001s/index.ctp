@@ -176,7 +176,7 @@
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimeWorkAllow'); ?></td>
 					<th>期末手当</th>
 					<td class="bdR"><?php echo Hash::get($meisaiInfo, 'QtMeisai.EndTermAllow'); ?></td>
-	
+
 					<th>共済</th>
 					<th>長期</th>
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.MultiAidLongTermPrem'); ?></td>
@@ -194,7 +194,7 @@
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.HolidayWorkAllow'); ?></td>
 					<th>勤勉手当</th>
 					<td class="bdR"><?php echo Hash::get($meisaiInfo, 'QtMeisai.DiligenceAllow'); ?></td>
-	
+
 					<th>&nbsp;</th>
 					<th>短期</th>
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.MultiAidShortTermPrem'); ?></td>
@@ -209,7 +209,7 @@
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.DependentAllow'); ?></td>
 					<th>&nbsp;</th>
 					<td class="bdR">&nbsp;</td>
-	
+
 					<th>&nbsp;</th>
 					<th>福祉</th>
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.MultiAidWelfarePrem'); ?></td>
@@ -224,7 +224,7 @@
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.SpeWorkAllow'); ?></td>
 					<th>その他支給</th>
 					<td class="bdR"><?php echo Hash::get($meisaiInfo, 'QtMeisai.OtherPaidAmo_RepetitionTotal'); ?></td>
-	
+
 					<th>&nbsp;</th>
 					<th>介護</th>
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.MultiAidNursingPrem'); ?></td>
@@ -239,7 +239,7 @@
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.MgrSpAllow'); ?></td>
 					<th>（内、近接地内旅費）</th>
 					<td class="bdR">-Z,ZZZ,ZZZ</td>
-	
+
 					<th>社保</th>
 					<th>厚年</th>
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.SocialInsWelfarePensPrem'); ?></td>
@@ -254,7 +254,7 @@
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.NightWatchAllow'); ?></td>
 					<th>&nbsp;</th>
 					<td class="bdR">&nbsp;</td>
-	
+
 					<th>&nbsp;</th>
 					<th>健保</th>
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.SocialInsHealthInsPrem'); ?></td>
@@ -269,7 +269,7 @@
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.NightWatchAllowNonTax'); ?></td>
 					<th>&nbsp;</th>
 					<td class="bdR">&nbsp;</td>
-	
+
 					<th>&nbsp;</th>
 					<th>介護</th>
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.SocialInsNursingInsPrem'); ?></td>
@@ -284,7 +284,7 @@
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.EfficiencyWages'); ?></td>
 					<th>&nbsp;</th>
 					<td class="bdR">&nbsp;</td>
-	
+
 					<th>雇用保険</th>
 					<th>&nbsp;</th>
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.EmploymentInsPrem'); ?></td>
@@ -299,7 +299,7 @@
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.ChildAllow'); ?></td>
 					<th>&nbsp;</th>
 					<td class="bdR">&nbsp;</td>
-	
+
 					<th>所得税</th>
 					<th>&nbsp;</th>
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.IncomeTax'); ?></td>
@@ -314,7 +314,7 @@
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.AdjustedEmpProcessTotalAmo'); ?></td>
 					<th>■支給額計</th>
 					<td class="bdR"><?php echo Hash::get($meisaiInfo, 'QtMeisai.TotalSalaryPaidAmo'); ?></td>
-	
+
 					<th>課税対象</th>
 					<th>&nbsp;</th>
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.TaxableIncome'); ?></td>
@@ -329,7 +329,7 @@
 					<td>&nbsp;</td>
 					<th>（内、非課税額）</th>
 					<td class="bdR"><?php echo Hash::get($meisaiInfo, 'QtMeisai.TotalSalaryPaidAmo_NonTaxable'); ?></td>
-	
+
 					<th>税率</th>
 					<th>&nbsp;</th>
 					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.BonusTaxRate'); ?>％</td>
@@ -337,7 +337,7 @@
 					<td>&nbsp;</td>
 				</tr>
 			</table>
-	
+
 			<table class="tbl02 bdT bdB_blue">
 				<tr>
 					<th rowspan="2">■差引支給額</th>
@@ -612,7 +612,7 @@
 					<tr>
 						<th colspan="6" class="bdR">■扶養手当</th>
 						<th colspan="3" class="bdR">■減額</th>
-				
+
 						<th>■共済/社保</th>
 						<td>X</td>
 						<td>NNNN</td>
@@ -633,7 +633,7 @@
 
 						<td>ZZZ時間</td>
 						<td colspan="2" class="bdR">ZZ日</td>
-				
+
 						<th class="pdL20">介護該当</th>
 						<td>X</td>
 						<td>NNNN</td>
@@ -653,7 +653,7 @@
 						<td class="bdR">X</td>
 
 						<td colspan="3" class="bdR td04"><label><input type="checkbox" name="" value="">全欠勤</label></td>
-				
+
 						<td colspan="3" class="td04 pdL20"><label><input type="checkbox" name="" value="">部分休長期免除</label></td>
 						<th class="th01">普通障害</th>
 						<th class="th01">特別障害</th>
@@ -665,9 +665,9 @@
 					<tr>
 						<th colspan="3">■住居手当</th>
 						<th colspan="3" class="bdR">■単身赴任</th>
-				
+
 						<th colspan="3" class="bdR">■手当停止</th>
-				
+
 						<td colspan="3">ZZZ時間</td>
 						<td>X</td>
 						<td>X</td>
@@ -681,11 +681,11 @@
 						<td colspan="2" class="td04">NNNNNN</td>
 						<td>XX</td>
 						<td colspan="2" class="td04 bdR">NNNNNN</td>
-				
+
 						<th class="pdL20">通勤</th>
 						<td>X</td>
 						<td class="bdR">NN</td>
-				
+
 						<th colspan="3">■標準報酬</th>
 						<th>《扶養親族》</th>
 						<td>&nbsp;</td>
@@ -704,7 +704,7 @@
 						<th class="pdL20">管理職</th>
 						<td>X</td>
 						<td class="bdR">NN</td>
-				
+
 						<th class="th01">等級</th>
 						<td>XX</td>
 						<td>（XX）</td>
@@ -725,7 +725,7 @@
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th class="bdR">&nbsp;</th>
-				
+
 						<th class="th01">月額</th>
 						<td colspan="2">Z,ZZZ,ZZZ</td>
 						<td>X</td>
@@ -746,7 +746,7 @@
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th class="bdR">&nbsp;</th>
-				
+
 						<th class="th01">適用</th>
 						<td colspan="2">GGYY.MM</td>
 						<th>■互助会/互助組合</th>
@@ -767,7 +767,7 @@
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th class="bdR">&nbsp;</th>
-				
+
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<td>&nbsp;</td>
@@ -789,7 +789,7 @@
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th class="bdR">&nbsp;</th>
-				
+
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<td>&nbsp;</td>
@@ -811,7 +811,7 @@
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th class="bdR">&nbsp;</th>
-				
+
 						<th>■雇用保険</th>
 						<td>X</td>
 						<td>NNNN</td>
@@ -833,7 +833,7 @@
 						<th>&nbsp;</th>
 						<th>&nbsp;</th>
 						<th class="bdR">&nbsp;</th>
-				
+
 						<th class="pdL20">高齢免除</th>
 						<td>X</td>
 						<td>NNNN</td>
@@ -1026,58 +1026,109 @@
 			<div class="wrap bdT_blue bdB_blue ">
 				<div class="wrap dsp_tbl">
 <!-- 表（左） -->
-					<div class="dsp_tbl_cell">
+					<div class="dsp_tbl_cell_9">
 <!-- ↓■超過勤務手当 -->
 						<div class="y_data_area">
 <!-- ↓タイトル -->
 							<table class="y_data_title tbl02 w05">
-								<col style="width: 14.2%;">
-								<col style="width: 14.2%;">
-								<col style="width: 14.2%;">
-								<col style="width: 14.2%;">
-								<col style="width: 14.2%;">
-								<col style="width: 14.2%;">
-								<col style="width: 14.2%;">
+								<col style="width: 68%;">
+								<col style="width: 32%;">
 								<tr>
 									<th colspan="2">■超過勤務手当</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
 								</tr>
 								<tr>
 									<th colspan="2">《時間数合計》</th>
-									<th>《内訳》</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
+								</tr>
+							</table>
+<!-- //タイトル -->
+							<table class="y_data tbl02">
+								<col style="width: 68%;">
+								<col style="width: 32%;">
+								<tr>
+									<td><p title="125">125</p></td>
+									<td><p title="ZZZ">ZZZ</p></td>
 								</tr>
 								<tr>
-									<th>125</th>
-									<th>ZZZ</th>
+									<td><p title="150">150</p></td>
+									<td><p title="ZZZ">ZZZ</p></td>
+								</tr>
+								<tr>
+									<td><p title="135">135</p></td>
+									<td><p title="ZZZ">ZZZ</p></td>
+								</tr>
+								<tr>
+									<td><p title="160">160</p></td>
+									<td><p title="ZZZ">ZZZ</p></td>
+								</tr>
+								<tr>
+									<td><p title="100">100</p></td>
+									<td><p title="ZZZ">ZZZ</p></td>
+								</tr>
+								<tr>
+									<td><p title="25">25</p></td>
+									<td><p title="ZZZ">ZZZ</p></td>
+								</tr>
+								<tr>
+									<td><p title="前月25">前月25</p></td>
+									<td><p title="ZZZ">ZZZ</p></td>
+								</tr>
+								<tr>
+									<td><p title="割増150">割増150</p></td>
+									<td><p title="ZZZ">ZZZ</p></td>
+								</tr>
+								<tr>
+									<td><p title="割増175">割増175</p></td>
+									<td><p title="ZZZ">ZZZ</p></td>
+								</tr>
+								<tr>
+									<td><p title="割増50">割増50</p></td>
+									<td><p title="ZZZ">ZZZ</p></td>
+								</tr>
+								<tr>
+									<td><p title="割増前50">割増前50</p></td>
+									<td><p title="ZZZ">ZZZ</p></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+
+<!-- 表（左） -->
+					<div class="dsp_tbl_cell_35">
+<!-- ↓■超過勤務手当 -->
+						<div class="y_data_area">
+<!-- ↓タイトル -->
+							<table class="y_data_title tbl02 w05">
+								<col style="width: 8.0%;">
+								<col style="width: 21.0%;">
+								<col style="width: 18.0%;">
+								<col style="width: 8.0%;">
+								<col style="width: 13.0%;">
+								<tr>
+									<td colspan="5">&nbsp;</td>
+								</tr>
+								<tr>
+									<th colspan="5">《内訳》</th>
+								</tr>
+								<tr>
 									<th>コード</th>
 									<th>科目コード</th>
 									<th>科目名称</th>
 									<th>時間数</th>
 									<th>支給額</th>
 								</tr>
-							</table><!-- //タイトル -->
+							</table>
+<!-- //タイトル -->
 <!-- ↓内訳 -->
 							<div class="y_scroll_box h01">
 								<div class="y_hidden">
 									<table class="y_data tbl02">
-										<col style="width: 14.2%;">
-										<col style="width: 14.2%;">
-										<col style="width: 14.2%;">
-										<col style="width: 14.2%;">
-										<col style="width: 14.2%;">
-										<col style="width: 14.2%;">
-										<col style="width: 14.2%;">
+										<col style="width: 8.0%;">
+										<col style="width: 21.0%;">
+										<col style="width: 18.0%;">
+										<col style="width: 6.0%;">
+										<col style="width: 13.0%;">
 										<tr>
-											<td><p title="150">150</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1085,8 +1136,6 @@
 											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="135">135</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1094,8 +1143,6 @@
 											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="160">160</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1103,8 +1150,6 @@
 											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="100">100</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1112,8 +1157,6 @@
 											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="25">25</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1121,8 +1164,6 @@
 											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="前月25">前月25</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1130,8 +1171,6 @@
 											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="割増150">割増150</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1139,8 +1178,6 @@
 											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="割増175">割増175</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1148,17 +1185,6 @@
 											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="割増50">割増50</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="割増前50">割増前50</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1170,55 +1196,92 @@
 							</div><!-- //内訳 -->
 						</div><!-- //↑■超過勤務手当 -->
 					</div><!-- //↑表（左） -->
+
+
+
 <!-- 表（右） -->
-					<div class="dsp_tbl_cell">
+					<div class="dsp_tbl_cell_9">
 <!-- ↓■休日給 -->
 						<div class="y_data_area">
 <!-- ↓タイトル -->
 							<table class="y_data_title tbl04 w05">
-								<col style="width: 16.6%;">
-								<col style="width: 16.6%;">
-								<col style="width: 16.6%;">
-								<col style="width: 16.6%;">
-								<col style="width: 16.6%;">
-								<col style="width: 16.6%;">
+								<col style="width: 100.0%;">
 								<tr>
 									<th>■休日給</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
 								</tr>
 								<tr>
 									<th>《時間数合計》</th>
-									<th>《内訳》</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
 								</tr>
 								<tr>
-									<th>ZZZ</th>
+									<td><p title="ZZZ">ZZZ</p></td>
+								</tr>
+								<tr>
+									<td><p>&nbsp;</p></td>
+								</tr>
+								<tr>
+									<td><p>&nbsp;</p></td>
+								</tr>
+								<tr>
+									<td><p>&nbsp;</p></td>
+								</tr>
+								<tr>
+									<td><p>&nbsp;</p></td>
+								</tr>
+							</table><!-- //タイトル -->
+						</div>
+
+<!-- ↓タイトル -->
+						<table class="y_data_title tbl04 w05">
+							<col style="width: 100.0%;">
+							<tr>
+								<th>■夜勤手当</th>
+							</tr>
+							<tr>
+								<th>《時間数合計》</th>
+							</tr>
+							<tr>
+								<td><p title="ZZZ">ZZZ</p></td>
+							</tr>
+						</table><!-- //タイトル -->
+					</div>
+
+
+<!-- 表（右） -->
+					<div class="dsp_tbl_cell_35">
+<!-- ↓■休日給 -->
+						<div class="y_data_area">
+<!-- ↓タイトル -->
+							<table class="y_data_title tbl04 w05">
+								<col style="width: 8.0%;">
+								<col style="width: 21.0%;">
+								<col style="width: 18.0%;">
+								<col style="width: 8.0%;">
+								<col style="width: 13.0%;">
+								<tr>
+									<th colspan="5">&nbsp;</th>
+								</tr>
+								<tr>
+									<th colspan="5">《内訳》</th>
+								</tr>
+								<tr>
 									<th>コード</th>
 									<th>科目コード</th>
 									<th>科目名称</th>
 									<th>時間数</th>
 									<th>支給額</th>
 								</tr>
-							</table><!-- //タイトル -->
+							</table>
+<!-- //タイトル -->
 <!-- ↓内訳 -->
-							<div class="y_scroll_box h01 max_h01">
+							<div class="y_scroll_box h01 max_h02">
 								<div class="y_hidden">
 									<table class="y_data tbl04">
-										<col style="width: 16.6%;">
-										<col style="width: 16.6%;">
-										<col style="width: 16.6%;">
-										<col style="width: 16.6%;">
-										<col style="width: 16.6%;">
-										<col style="width: 16.6%;">
+										<col style="width: 8.0%;">
+										<col style="width: 21.0%;">
+										<col style="width: 18.0%;">
+										<col style="width: 8.0%;">
+										<col style="width: 13.0%;">
 										<tr>
-											<td><p title="&nbsp;">&nbsp;</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1226,7 +1289,6 @@
 											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="&nbsp;">&nbsp;</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1234,7 +1296,6 @@
 											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="&nbsp;">&nbsp;</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1242,7 +1303,6 @@
 											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="&nbsp;">&nbsp;</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1252,55 +1312,40 @@
 									</table>
 								</div>
 							</div><!-- //内訳 -->
-						</div><!-- //↑■休日給 -->
+						</div>
 
-<!-- ↓■夜勤手当 -->
 						<div class="y_data_area">
 <!-- ↓タイトル -->
 							<table class="y_data_title tbl04 w05">
-								<col style="width: 16.6%;">
-								<col style="width: 16.6%;">
-								<col style="width: 16.6%;">
-								<col style="width: 16.6%;">
-								<col style="width: 16.6%;">
-								<col style="width: 16.6%;">
+								<col style="width: 8.0%;">
+								<col style="width: 21.0%;">
+								<col style="width: 18.0%;">
+								<col style="width: 8.0%;">
+								<col style="width: 13.0%;">
 								<tr>
-									<th>■夜勤手当</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
+									<th colspan="5">&nbsp;</th>
 								</tr>
 								<tr>
-									<th>《時間数合計》</th>
-									<th>《内訳》</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
-									<th>&nbsp;</th>
+									<th colspan="5">《内訳》</th>
 								</tr>
 								<tr>
-									<th>ZZZ</th>
 									<th>コード</th>
 									<th>科目コード</th>
 									<th>科目名称</th>
 									<th>時間数</th>
 									<th>支給額</th>
 								</tr>
-							</table><!-- //タイトル -->
+							</table>
 <!-- ↓内訳 -->
-							<div class="y_scroll_box h01 max_h01">
+							<div class="y_scroll_box h01 max_h02">
 								<div class="y_hidden">
 									<table class="y_data tbl04">
-										<col style="width: 16.6%;">
-										<col style="width: 16.6%;">
-										<col style="width: 16.6%;">
-										<col style="width: 16.6%;">
-										<col style="width: 16.6%;">
-										<col style="width: 16.6%;">
+										<col style="width: 8.0%;">
+										<col style="width: 21.0%;">
+										<col style="width: 18.0%;">
+										<col style="width: 8.0%;">
+										<col style="width: 13.0%;">
 										<tr>
-											<td><p title="&nbsp;">&nbsp;</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1308,7 +1353,6 @@
 											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="&nbsp;">&nbsp;</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1316,7 +1360,6 @@
 											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="&nbsp;">&nbsp;</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1324,7 +1367,6 @@
 											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="&nbsp;">&nbsp;</p></td>
 											<td><p title="XXXX">XXXX</p></td>
 											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
 											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
@@ -1738,7 +1780,7 @@
 
 <!-- *********************************【フッター】********************************* -->
 	<p id="footer"><input type="submit" name="" value="（空白）" class="btn01" /></p>
-	
+
 </div><!-- //#container -->
 
 <?php // 検索子画面の読み込み ?>
