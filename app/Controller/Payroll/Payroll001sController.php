@@ -22,10 +22,112 @@ class Payroll001sController extends CommonController {
 	}
 
 	/**
-	 * 支給明細照会　タブ01：基本情報
+	 * 支給明細照会 初期画面
 	 */
 	public function index() {
 
+		// 初期値の設定を行う
+		$this->_initSet();
+	}
+
+	/**
+	 * 支給明細照会 検索
+	 */
+	public function search() {
+
+		// ********************  画面からのデータ受け取り  ********************
+
+		// 前画面からの検索条件の受け取り（職員番号、支給年月日、支給区分、支払者）
+		$searchCondition = array();
+		
+		// TODO バリデーションチェック
+		
+		// POSTデータを受け取る
+		$postData = $this->request->data['Payroll001s'];
+		
+		// 検索条件を設定する
+		$searchCondition['EmpNo']    = $postData['EmpNo'];    // 職員番号
+		// TODO 和暦から西暦に変換する
+		$searchCondition['PaidYM']   = $postData['PaidYM'];   // 支給年月
+		$searchCondition['PaidDiv']  = $postData['PaidDiv'];  // 支給区分
+		$searchCondition['PayerDiv'] = $postData['PayerDiv']; // 支払者区分
+
+		// ********************  ビジネスロジック  ********************
+
+		// テーブル[人事基本情報]からデータを取得する
+		$personalInfo = array();
+		if(isset($searchCondition['EmpNo'])){
+			$personalInfo = $this->JtKihonKihon->find('first', array('conditions' => array('EmpNo' => $searchCondition['EmpNo'])));
+		}
+
+		// findのパラメータを設定する
+		// 条件：削除されていない
+		$searchCondition['delete_flg'] = 0;
+		$params = array(
+			'conditions' => $searchCondition
+		);
+
+		// テーブル[支給明細データ]からデータを取得する
+		$meisaiInfo = $this->QtMeisai->find('first', $params);
+		// テーブル[支給明細データ：日割]からデータを取得する
+		$hiwariAllInfo = $this->QtMeisaiHiwari->find('all', $params);
+		
+		// 共通エリア情報
+		$kihonInfo = array();
+		// 検索結果にレコードがあるとき
+		if(!empty($hiwariAllInfo)){
+			// 日割データの1レコード目は共通で使用するので、抽出する
+			$kihonInfo = $hiwariAllInfo[0];
+		}
+
+		// TODO tab01処理として分ける.（タブ08でも使っているっぽいので、共通の方がいいかも）
+		// テーブル[支給明細データ：その他支給内訳]からデータを取得する
+		$uchiSonotaInfo = $this->QtMeisaiUchiSonotasikyu->find('first', $params);
+		
+		// タブ02：日割情報
+		$this->tab02($hiwariAllInfo);
+		
+		// タブ05：超勤・休日・夜勤
+		$this->tab05($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
+		
+		// タブ06：特勤・宿日直・管特
+		$this->tab06($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
+		
+		// タブ07：能率給内訳
+		$this->tab07($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
+		
+		// タブ08：旅費・その他支給
+		$this->tab08($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
+		
+		// タブ09：福利控除
+		$this->tab09($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
+		
+		// タブ10：賃金
+		$this->tab10($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
+
+		// ********************  画面へのデータ反映  ********************
+
+		// 前画面からの検索条件をそのまま画面にセットする
+ 		$this->set('searchCondition', $searchCondition);
+
+		// 取得データを設定する
+		$this->set('personalInfo', $personalInfo);
+		$this->set('meisaiInfo', $meisaiInfo);
+		$this->set('kihonInfo', $kihonInfo);
+		$this->set('uchiSonotaInfo', $uchiSonotaInfo);
+
+		// ********************  遷移先画面の設定  ********************
+
+		// このメソッドには対応する画面はないので、元の画面にレンダリングする
+		$this->render('index');
+
+	}
+	
+	/**
+	 * 初期値を設定する
+	 */
+	private function _initSet() {
+		
 		// 画面側でエラーが出ないように空の配列をセットしておく
 		$searchCondition = array();
 		$this->set('searchCondition', $searchCondition);
@@ -39,43 +141,33 @@ class Payroll001sController extends CommonController {
 		$this->set('hiwariInfo', $hiwariInfo);
 		$uchiSonotaInfo = array();
 		$this->set('uchiSonotaInfo', $uchiSonotaInfo);
-
+		$meisaiUchiChinginList = array();
+		$this->set('meisaiUchiChinginList', $meisaiUchiChinginList);
+		$meisaiUchiFukurikojoList = array();
+		$this->set('meisaiUchiFukurikojoList', $meisaiUchiFukurikojoList);
+		$meisaiUchiRyohiList = array();
+		$this->set('meisaiUchiRyohiList', $meisaiUchiRyohiList);
+		$meisaiUchiSonotasikyuList = array();
+		$this->set('meisaiUchiSonotasikyuList', $meisaiUchiSonotasikyuList);
+		$meisaiUchiNorituList = array();
+		$this->set('meisaiUchiNorituList', $meisaiUchiNorituList);
+		$meisaiUchiTokkinList = array();
+		$this->set('meisaiUchiTokkinList', $meisaiUchiTokkinList);
+		$meisaiUchiShukuList = array();
+		$this->set('meisaiUchiShukuList', $meisaiUchiShukuList);
+		$meisaiUchiKantokuList = array();
+		$this->set('meisaiUchiKantokuList', $meisaiUchiKantokuList);
+		$meisaiUchiChokinList = array();
+		$this->set('meisaiUchiChokinList', $meisaiUchiChokinList);
+		$meisaiUchiKyujitukyuList = array();
+		$this->set('meisaiUchiKyujitukyuList', $meisaiUchiKyujitukyuList);
 	}
-
+	
 	/**
-	 * 支給明細照会の検索
+	 * 支給明細照会　タブ02：日割情報
 	 */
-	public function search() {
-
-		// ********************  画面からのデータ受け取り  ********************
-
-		// 前画面からの検索条件の受け取り（職員番号、支給年月日、支給区分、支払者）
-		$searchCondition = array();
-		// POSTデータを受け取る
-		$postData = $this->request->data['QtMeisai'];
-		// 検索条件を設定する
-		foreach($postData as $key => $value) {
-			$searchCondition[$key] = $value;
-		}
-
-		// ********************  ビジネスロジック  ********************
-
-		// テーブル[人事基本情報]からデータを取得する
-		$personalInfo = array();
-		if(isset($searchCondition['EmpNo'])){
-			$personalInfo = $this->JtKihonKihon->find('first', array('conditions' => array('EmpNo' => $searchCondition['EmpNo'])));
-		}
-
-		// findのパラメータを設定する
-		$params = array(
-			'conditions' => $searchCondition
-		);
-
-		// テーブル[支給明細データ]からデータを取得する
-		$meisaiInfo = $this->QtMeisai->find('first', $params);
-		// テーブル[支給明細データ：日割]からデータを取得する
-		$hiwariAllInfo = $this->QtMeisaiHiwari->find('all', $params);
-
+	private function tab02($hiwariAllInfo) {
+		
 		// レコード数が1件or複数の判定フラグを作成する
 		$hiwariMultiRecordFlg = false;
 		// 日割データが複数あるとき
@@ -84,13 +176,10 @@ class Payroll001sController extends CommonController {
 			$hiwariMultiRecordFlg = true;
 		}
 
-		$kihonInfo = array();
 		$hiwariInfo = array();
-		// 検索結果にレコードがあるとき
+		// 日割情報の検索結果にレコードがあるとき
 		if(!empty($hiwariAllInfo)){
-			// 日割データの1レコード目は共通で使用するので、抽出する
-			$kihonInfo = $hiwariAllInfo[0];
-
+		
 			// 日割データの２コード目以降は、タブ「日割情報」で表示する
 			// 日割データが複数あるとき
 			if($hiwariMultiRecordFlg){
@@ -104,40 +193,15 @@ class Payroll001sController extends CommonController {
 				}
 			}
 		}
-
-		// テーブル[支給明細データ：その他支給内訳]からデータを取得する
-		$uchiSonotaInfo = $this->QtMeisaiUchiSonotasikyu->find('first', $params);
-
-		// ********************  画面へのデータ反映  ********************
-
-		// 前画面からの検索条件をそのまま画面にセットする
- 		$this->set('searchCondition', $searchCondition);
-
-		// 取得データを設定する
-		$this->set('personalInfo', $personalInfo);
-		$this->set('meisaiInfo', $meisaiInfo);
-		$this->set('kihonInfo', $kihonInfo);
-		$this->set('hiwariInfo', $hiwariInfo);
+		
 		$this->set('hiwariMultiRecordFlg', $hiwariMultiRecordFlg);
-		$this->set('uchiSonotaInfo', $uchiSonotaInfo);
-
-		// ********************  遷移先画面の設定  ********************
-
-		// このメソッドには対応する画面はないので、元の画面にレンダリングする
-		$this->render('index');
-
+		$this->set('hiwariInfo', $hiwariInfo);
 	}
 
 	/**
 	 * 支給明細照会　タブ05：超勤・休日・夜勤
 	 */
-	public function tab05() {
-
-		// TODO あとで消すこと
-		$paidYm   = '2013-07-01';
-		$empNo    = 'A0000001';
-		$paidDiv  = '01';
-		$payerDiv = '01';
+	private function tab05($empNo, $paidYm, $paidDiv, $payerDiv) {
 
 		// テーブル[支給明細データ：超勤内訳]からデータを取得する
 		$meisaiUchiChokinList = $this->QtMeisaiUchiChokin->findMeisaiUchiChokin($paidYm, $empNo, $paidDiv, $payerDiv);
@@ -153,13 +217,7 @@ class Payroll001sController extends CommonController {
 	/**
 	 * 支給明細照会　タブ06：特勤・宿日直・管特
 	 */
-	public function tab06() {
-
-		// TODO あとで消すこと
-		$paidYm   = '2013-07-01';
-		$empNo    = 'A0000001';
-		$paidDiv  = '01';
-		$payerDiv = '01';
+	private function tab06($empNo, $paidYm, $paidDiv, $payerDiv) {
 
 		// テーブル[支給明細データ：特勤内訳]からデータを取得する
 		$meisaiUchiTokkinList = $this->QtMeisaiUchiTokkin->findMeisaiUchiTokkin($paidYm, $empNo, $paidDiv, $payerDiv);
@@ -179,13 +237,7 @@ class Payroll001sController extends CommonController {
 	/**
 	 * 支給明細照会　タブ07：能率給内訳
 	 */
-	public function tab07() {
-
-		// TODO あとで消すこと
-		$paidYm   = '2013-07-01';
-		$empNo    = 'A0000001';
-		$paidDiv  = '01';
-		$payerDiv = '01';
+	private function tab07($empNo, $paidYm, $paidDiv, $payerDiv) {
 
 		// テーブル[支給明細データ：旅費内訳]からデータを取得する
 		$meisaiUchiNorituList = $this->QtMeisaiUchiNoritu->findMeisaiUchiNoritu($paidYm, $empNo, $paidDiv, $payerDiv);
@@ -197,13 +249,7 @@ class Payroll001sController extends CommonController {
 	/**
 	 * 支給明細照会　タブ08：旅費・その他支給
 	 */
-	public function tab08() {
-
-		// TODO あとで消すこと
-		$paidYm   = '2013-07-01';
-		$empNo    = 'A0000001';
-		$paidDiv  = '01';
-		$payerDiv = '01';
+	private function tab08($empNo, $paidYm, $paidDiv, $payerDiv) {
 
 		// テーブル[支給明細データ：旅費内訳]からデータを取得する
 		$meisaiUchiRyohiList = $this->QtMeisaiUchiRyohi->findMeisaiUchiRyohi($paidYm, $empNo, $paidDiv, $payerDiv);
@@ -218,13 +264,7 @@ class Payroll001sController extends CommonController {
 	/**
 	 * 支給明細照会　タブ09：福利控除
 	 */
-	public function tab09() {
-
-		// TODO あとで消すこと
-		$paidYm   = '2013-07-01';
-		$empNo    = 'A0000001';
-		$paidDiv  = '01';
-		$payerDiv = '01';
+	private function tab09($empNo, $paidYm, $paidDiv, $payerDiv) {
 
 		// テーブル[支給明細データ：福利控除内訳]からデータを取得する
 		$meisaiUchiFukurikojoList = $this->QtMeisaiUchiFukurikojo->findMeisaiUchiFukurikojo($paidYm, $empNo, $paidDiv, $payerDiv);
@@ -236,13 +276,7 @@ class Payroll001sController extends CommonController {
 	/**
 	 * 支給明細照会　タブ10：賃金
 	 */
-	public function tab10() {
-
-		// TODO あとで消すこと
-		$paidYm   = '2013-07-01';
-		$empNo    = 'A0000001';
-		$paidDiv  = '01';
-		$payerDiv = '01';
+	private function tab10($empNo, $paidYm, $paidDiv, $payerDiv) {
 
 		// テーブル[支給明細データ：賃金内訳]からデータを取得する
 		$meisaiUchiChinginList = $this->QtMeisaiUchiChingin->findMeisaiUchiChingin($paidYm, $empNo, $paidDiv, $payerDiv);
@@ -258,115 +292,5 @@ class Payroll001sController extends CommonController {
 	public function sample() {
 
 	}
-// 	/**
-// 	 * 複数ボタンが用意されている画面からの共通呼び出しメソッド
-// 	 */
-// 	public function doFlexibleAction() {
-
-// 		// 遷移元から、どのアクションが呼ばれたのかを判定する
-// 		$commitType = $this->request->data['commitType'];
-
-// 		switch ($commitType) {
-// 			case 'close':
-// 			break;
-
-// 			case 'edit':
-// 				$this->updateDetailData($this->request->data);
-// 				$this->redirect('index');
-// 			break;
-
-// 			case 'add':
-// 				$this->insertDetailData($this->request->data);
-// 				$this->redirect('index');
-// 			break;
-
-// 			case 'delete':
-// 				$this->deleteDetailData($this->request->data);
-// 				$this->redirect('index');
-// 			break;
-
-// 			default:
-// 				;
-// 			break;
-// 		}
-
-// 	}
-
-// 	/**
-// 	 * 画面データから新規データを作成する
-// 	 */
-// 	private function insertDetailData($data) {
-
-// 		$param = array(
-// 			'SmItakusakiKaisha' => array(
-// 				'ConsignmentCompanyCD' => 'TOD',
-// 				'ConsignmentCompanyName' => $data['ConsignmentCompanyName'],
-// 				'Representative' => $data['Representative'],
-// 				'PostalCD' => $data['PostalCD1'].'-'.$data['PostalCD2'],
-// 				'CityCD' => $data['CityCD'],
-// 				'AddressKanji' => $data['AddressKanji'],
-// 				'SideKanji' => $data['SideKanji'],
-// 				'AddressKana' => $data['AddressKana'],
-// 				'SideKana' => $data['SideKana'],
-// 				'AccountExecutiveName' => $data['AccountExecutiveName'],
-// 				'TelNo1' => $data['TelNo1'],
-// 				'TelNo2' => $data['TelNo2'],
-// 				'TelNo3' => $data['TelNo3'],
-// 				'EmailAddresse1' => $data['EmailAddresse1'],
-// 				'EmailAddresse2' => $data['EmailAddresse2'],
-// 				'update_date' => date('Y-m-d H:i:s'),
-// 				'updated_by' => 'TODO 仮ユーザー',
-// 			)
-// 		);
-
-// 		$this->SmItakusakiKaisha->save($param);
-
-// 	}
-
-// 	/**
-// 	 * 画面データを更新する
-// 	 */
-// 	private function updateDetailData($data) {
-
-// 		$param = array(
-// 			'SmItakusakiKaisha' => array(
-// 				'ConsignmentCompanyCD' => $data['ConsignmentCompanyCD'],
-// 				'ConsignmentCompanyName' => $data['ConsignmentCompanyName'],
-// 				'Representative' => $data['Representative'],
-// 				'PostalCD' => $data['PostalCD1'].'-'.$data['PostalCD2'],
-// 				'CityCD' => $data['CityCD'],
-// 				'AddressKanji' => $data['AddressKanji'],
-// 				'SideKanji' => $data['SideKanji'],
-// 				'AddressKana' => $data['AddressKana'],
-// 				'SideKana' => $data['SideKana'],
-// 				'AccountExecutiveName' => $data['AccountExecutiveName'],
-// 				'TelNo1' => $data['TelNo1'],
-// 				'TelNo2' => $data['TelNo2'],
-// 				'TelNo3' => $data['TelNo3'],
-// 				'EmailAddresse1' => $data['EmailAddresse1'],
-// 				'EmailAddresse2' => $data['EmailAddresse2'],
-// 				'update_date' => date('Y-m-d H:i:s'),
-// 				'updated_by' => 'TODO 仮ユーザー',
-// 			)
-// 		);
-
-// 		$this->SmItakusakiKaisha->save($param);
-
-// 	}
-
-// 	/**
-// 	 * 選択されている情報を削除する
-// 	 */
-// 	private function deleteDetailData($data) {
-
-// 		$param = array(
-// 			'SmItakusakiKaisha' => array(
-// 				'ConsignmentCompanyCD' => $data['ConsignmentCompanyCD'],
-// 				'delete_flg' => '1',
-// 			)
-// 		);
-
-// 		$this->SmItakusakiKaisha->save($param);
-// 	}
 
 }

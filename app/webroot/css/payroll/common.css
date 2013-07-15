@@ -1,5 +1,6 @@
 @charset "utf-8";
 
+
 /* ======================================
 [ RESET ]
 ====================================== */
@@ -19,7 +20,6 @@ h4,
 h5,
 h6,
 input,
-form,
 textarea,
 p,
 th,
@@ -75,10 +75,6 @@ font-size: 100%;
 vertical-align: middle;
 }
 
-a {
-vertical-align: middle;
-}
-
 
 
 /* ======================================
@@ -86,55 +82,124 @@ vertical-align: middle;
 ====================================== */
 
 body {
-font-size: 90%;
-color: #414141;
-background-color: #f8fdf0;
+color: #000;
 }
 
 #container {
-margin: 0 auto;
-/*width: 1237px;*/
-width: 1300px;
+width: 1237px;
+margin-top: 10px;
+background-color: #f8fdf0;
+border: 2px solid #a9db80;
 }
 
 hr {
-height: 5px;
+height: 4px;
 background-color: #a9db80;
 }
 
-button {
-padding: 3px;
-vertical-align: middle;
+input[type="text"] {
+display: inline-block;
+margin: 0 3px;
+border: 1px solid #000;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+border-radius: 3px;
+behavior: url(PIE.htc);
+position:relative;
+_display: inline; /* IE6 */
+_zoom: 1; /* IE6 */
 }
 
-#Button1 {
-font-weight: bold;
-font-size: 90%;
-color: #414141;
-background-color: #d2ea87;
-width: 118px;
-padding: 3px;
-line-height: 1;
-/*
-height: 37px;
-*/
+input[type="checkbox"] {
+margin-right: 5px;
+vertical-align: -2px;
 }
 
 
 
 /* ======================================
-[ 上段 ]
+[ ヘッダー ]
+====================================== */
+
+.t_header {
+width: 100%;
+height: 72px;
+min-height: 72px;
+max-height: 72px;
+border-top: 2px solid #a9db80;
+border-bottom: 4px solid #a9db80;
+background-color: #fff;
+}
+
+.title {
+display: inline-block;
+font-size: 120%;
+font-weight: bold;
+margin-left: 10px;
+_display: inline; /* IE6 */
+_zoom: 1; /* IE6 */
+}
+
+.description {
+display: inline-block;
+margin-left: 5px;
+_display: inline; /* IE6 */
+_zoom: 1; /* IE6 */
+}
+
+/* IE7 */
+*:first-child+html .title,
+*:first-child+html .t_header td input,
+*:first-child+html .description {
+display: inline;
+zoom: 1;
+}
+
+.pd01 {
+padding: 5px 10px 3px 0;
+}
+
+.pd02 {
+padding: 0 10px 5px 0;
+}
+
+.td01 {
+text-align: right;
+padding-right: 5px;
+}
+
+.active {
+background-color: #fff7c8;
+}
+
+
+
+/* ======================================
+[ コンテンツ ]
+====================================== */
+
+#tabs {
+margin: 10px;
+height: 550px;
+min-height: 550px;
+max-height: 550px;
+overflow-y: auto;
+}
+
+
+/*
+[ 共通タブメニュー ]
 ====================================== */
 
 .menu {
-margin: 10px 10px 0 10px;
-position: relative;
-top: 2px;
+margin-left: 8px;
 }
 
 .menu li {
 display: inline-block;
 height: 30px;
+font-size: 90%;
+background-color: #999999;
 _display: inline; /* IE6 */
 _zoom: 1; /* IE6 */
 }
@@ -145,133 +210,397 @@ display: inline;
 zoom: 1;
 }
 
+.current {
+position: relative;
+top: 2px;
+background-color: #fff !important;
+border-top: 2px solid #96d7f4;
+border-right: 2px solid #96d7f4;
+border-left: 2px solid #96d7f4;
+}
+
 .menu li a {
 display: block;
 text-decoration: none;
 font-weight: bold;
 font-size: 120%;
-color: #414141;
+color: #000;
 padding: 7px 15px;
-background-color: #fff;
-border-top: 2px solid #a9db80;
-border-right: 2px solid #a9db80;
-border-left: 2px solid #a9db80;
-}
-
-.t_header {
-width: 100%;
-height: 72px;
-background-color: #fff;
-border-bottom: 5px solid #a9db80;
-}
-
-.t_header th,
-.t_header td {
-text-align: left;
-padding: 3px 5px;
-}
-
-.t_header td input {
-display: inline-block;
-padding: 3px;
-_display: inline; /* IE6 */
-_zoom: 1; /* IE6 */
-}
-
-.description {
-display: inline-block;
-margin-left: 3px;
-_display: inline; /* IE6 */
-_zoom: 1; /* IE6 */
-}
-
-/* IE7 */
-*:first-child+html .t_header td input,
-*:first-child+html .description {
-display: inline;
-zoom: 1;
-}
-
-.td1 {
-width: 118px !important;
-}
-
-input[type="checkbox"] {
-margin-right: 5px;
-vertical-align: -2px;
-}
-
-.td_02 {
-white-space: nowrap;
 }
 
 
-
-/* ======================================
-[ 中段 ]
+/*
+[ 共通表示項目 ]
 ====================================== */
 
-.box_01 {
-margin: 0 10px 10px 10px;
-height: 516px;
-min_height: 516px;
-max_height: 516px;
+.wrap {
 background-color: #fff;
-border: 2px solid #a9db80;
-overflow-y: auto;
+overflow-x: hidden;
 }
 
-/* テーブル1 */
-
-.tbl_01 {
-width: 98%;
-margin: 7px auto;
-}
-
-.tbl_01 th,
-.tbl_01 td {
-text-align: left;
-padding: 10px;
-}
-
-/* テーブル3 */
-
-.tbl_03 {
+.tbl01 {
 width: 100%;
 }
 
-.tbl_03 th {
-padding: 10px 5px 10px 3px;
-text-align:right;
-}
-
-.tbl_03 td {
-padding: 10px 3px 10px 5px;
-text-arign: left;
-}
-
-
-/* テーブル2 */
-
-.tbl_02 {
-width: 100%;
-}
-
-.tbl_02 th {
+.tbl01 th,
+.tbl01 td {
 text-align: left;
-}
-
-.tbl_02 th,
-.tbl_02 td {
 padding: 10px 5px;
 }
 
-.bdR_01 {
+
+/*
+[ コンテンツ内容 ]
+====================================== */
+
+#tab01content,#tab02content,#tab03content,#tab04content,#tab05content,#tab06content,#tab07content,#tab08content,#tab09content,#tab10content {
+border-right: 2px solid #96d7f4;
+border-left: 2px solid #96d7f4;
+}
+
+
+/*
+[ テーブル1 ]
+-------------------------------------- */
+
+.tbl02 {
+width: 100%;
+background-color: #fff;
+}
+
+.tbl02 th,
+.tbl02 td {
+text-align: left;
+padding: 5px 10px;
+}
+
+
+/*
+[ テーブル2 ]
+-------------------------------------- */
+
+.tbl03 {
+width: 100%;
+}
+
+.tbl03 th {
+text-align: left;
+padding: 5px 3px;
+}
+
+.tbl03 td {
+text-align: center;
+padding: 5px 3px;
+}
+
+
+/*
+[ テーブル3 ]
+-------------------------------------- */
+
+.tbl04 {
+width: 100%;
+}
+
+.tbl04 th,
+.tbl04 td {
+text-align: left;
+padding: 5px 3px;
+}
+
+
+/*
+[ テーブル用パーツ ]
+-------------------------------------- */
+
+.th01 {
+text-align: center !important;
+}
+
+.th02 {
+width: 100px;
+}
+
+.td03 {
+padding: 5px !important;
+}
+
+.td04 {
+text-align: left !important;
+}
+
+
+/*
+[ 横幅 ]
+-------------------------------------- */
+
+.w10 {
+width: 10%;
+}
+
+.w20 {
+width: 20%;
+}
+
+.w40 {
+width: 40%;
+}
+
+/* セルが7個用 */
+.w01 th,
+.w01 td {
+width: 14.2%;
+}
+
+/* セルが9～10個用 */
+.w02 th,
+.w02 td {
+width: 10%;
+}
+
+/* スクロール入った時のth幅対応用1 */
+.w03 {
+width: 98.6%;
+}
+
+/* スクロール入った時のth幅対応用2 */
+.w05 {
+width: 97.2%;
+}
+
+/* セルが8個用 */
+.w04 th,
+.w04 td {
+width: 12.5%;
+}
+
+
+/*
+[ テーブルセル ]
+-------------------------------------- */
+
+.dsp_tbl {
+display: table;
+width: 100%;
+}
+
+.dsp_tbl_cell {
+display: table-cell;
+width: 50%;
+vertical-align: top;
+}
+
+
+/*
+[ ボタン ]
+-------------------------------------- */
+
+.btn01,
+.btn02 {
+display: inline-block;
+font-weight: bold;
+border: 1px solid #8bcf54;
+-moz-border-radius: 2px;
+-webkit-border-radius: 2px;
+border-radius: 2px;
+background: #c3f2ac;
+background: -moz-linear-gradient(top, rgba(227,242,172,1) 0%, rgba(195,242,172,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(227,242,172,1)), color-stop(100%,rgba(195,242,172,1)));
+background: -webkit-linear-gradient(top, rgba(227,242,172,1) 0%,rgba(195,242,172,1) 100%);
+background: -o-linear-gradient(top, rgba(227,242,172,1) 0%,rgba(195,242,172,1) 100%);
+background: -ms-linear-gradient(top, rgba(227,242,172,1) 0%,rgba(195,242,172,1) 100%);
+background: linear-gradient(to bottom, rgba(227,242,172,1) 0%,rgba(195,242,172,1) 100%);
+-pie-background: linear-gradient(#e3f2ac, #c3f2ac);
+behavior: url(PIE.htc);
+position:relative;
+}
+
+.btn01 {
+height: 30px;
+padding: 5px 30px;
+}
+
+.btn02 {
+padding: 5px;
+}
+
+.btn01:hover,
+.btn02:hover {
+border: 1px solid #ffc04a !important;
+background: rgb(255,240,188);
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZjBiYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZWQ2NWQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top, rgba(255,240,188,1) 0%, rgba(254,214,93,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,240,188,1)), color-stop(100%,rgba(254,214,93,1)));
+background: -webkit-linear-gradient(top, rgba(255,240,188,1) 0%,rgba(254,214,93,1) 100%);
+background: -o-linear-gradient(top, rgba(255,240,188,1) 0%,rgba(254,214,93,1) 100%);
+background: -ms-linear-gradient(top, rgba(255,240,188,1) 0%,rgba(254,214,93,1) 100%);
+background: linear-gradient(to bottom, rgba(255,240,188,1) 0%,rgba(254,214,93,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff0bc', endColorstr='#fed65d',GradientType=0 );
+-pie-background: linear-gradient(#fff0bc, #fed65d);
+behavior: url(PIE.htc);
+position:relative;
+}
+
+.btn01:hover {
+padding: 4px 29px\9; /* IE8 */
+}
+
+.btn02:hover {
+padding: 4px\9; /* IE8 */
+}
+
+/* IE8のみ */
+html>/**/body .btn01:hover {
+padding: 4px 29px !important¥9;
+}
+
+/* IE8のみ */
+html>/**/body .btn02:hover {
+padding: 4px !important¥9;
+}
+
+
+/*
+[ スクロール ]
+-------------------------------------- */
+
+.scroll {
+overflow-y: scroll;
+}
+
+
+/*
+[ 高さ ]
+-------------------------------------- */
+
+.h01 {
+height: 300px;
+}
+
+.h02 {
+height: 100px;
+}
+
+.max_h01 {
+max-height: 300px;
+}
+
+.max_h02 {
+max-height: 100px;
+}
+
+
+/*
+[ パディング ]
+-------------------------------------- */
+
+.pd10 {
+padding: 10px;
+}
+
+.pdT10 {
+padding-top: 10px;
+}
+
+.pdR10 {
+padding-right: 10px;
+}
+
+.pdB10 {
+padding-bottom: 10px;
+}
+
+.pdL10 {
+padding-left: 10px;
+}
+
+.pdL20 {
+padding-left: 20px !important;
+}
+
+.pdR20 {
+padding-right: 20px !important;
+}
+
+
+/*
+[ マージン ]
+-------------------------------------- */
+
+.mg10 {
+margin: 10px;
+}
+
+.mgT10 {
+margin-top: 10px;
+}
+
+.mgR10 {
+margin-right: 10px;
+}
+
+.mgB10 {
+margin-bottom: 10px;
+}
+
+.mgL10 {
+margin-left: 10px;
+}
+
+
+/*
+[ 背景色 ]
+-------------------------------------- */
+
+.bg01 {
+background-color: #a9db80;
+}
+
+
+/*
+[ ボーダー ]
+-------------------------------------- */
+
+.bd {
+border: 2px solid #a9db80;
+}
+
+.bdT {
+border-top: 2px solid #a9db80;
+}
+
+.bdR {
 border-right: 2px solid #a9db80;
 }
 
-.bdT_01 {
-border-top: 2px solid #a9db80;
+.bdB {
+border-bottom: 2px solid #a9db80;
+}
+
+.bdL {
+border-left: 2px solid #a9db80;
+}
+
+.bd_double {
+border-bottom: 3px double #000;
+}
+
+/* ボーダー（青） */
+
+.bdT_blue {
+border-top: 2px solid #96d7f4;
+}
+
+.bdR_blue {
+border-right: 2px solid #96d7f4;
+}
+
+.bdB_blue {
+border-bottom: 2px solid #96d7f4;
+}
+
+.bdL_blue {
+border-left: 2px solid #96d7f4;
 }
 
 
@@ -281,12 +610,105 @@ border-top: 2px solid #a9db80;
 ====================================== */
 
 #footer {
-width: 100%;
-height: 40px;
-text-align: center;
-border-top: 5px solid #a9db80;
+height: 30px;
+padding: 5px 10px;
+text-align: right;
+border-top: 2px solid #a9db80;
 }
 
-#footer td {
-width: 10%;
+
+
+/* ======================================
+[ span button用対応 ]
+====================================== */
+
+span.Button1 a {
+display: inline;
+padding: 6px 30px 7px !important;
+position: relative;
+top: 2px;
+top: 1px\9;
+text-decoration: none;
+color: #000;
+font-size: 100%;
+font-weight: bold;
+border: 1px solid #8bcf54;
+-moz-border-radius: 2px;
+-webkit-border-radius: 2px;
+border-radius: 2px;
+background: #c3f2ac;
+background: -moz-linear-gradient(top, rgba(227,242,172,1) 0%, rgba(195,242,172,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(227,242,172,1)), color-stop(100%,rgba(195,242,172,1)));
+background: -webkit-linear-gradient(top, rgba(227,242,172,1) 0%,rgba(195,242,172,1) 100%);
+background: -o-linear-gradient(top, rgba(227,242,172,1) 0%,rgba(195,242,172,1) 100%);
+background: -ms-linear-gradient(top, rgba(227,242,172,1) 0%,rgba(195,242,172,1) 100%);
+background: linear-gradient(to bottom, rgba(227,242,172,1) 0%,rgba(195,242,172,1) 100%);
+-pie-background: linear-gradient(#e3f2ac, #c3f2ac);
+behavior: url(PIE.htc);
+position:relative;
+}
+
+span.Button1 {
+display: inline-block;
+padding: 0;
+background: none;
+-pie-background: none;
+behavior: url(PIE.htc);
+border: none;
+}
+
+
+
+/* ======================================
+[ タブ05（セルが7個用）、タブ06（セルが14個用）対応 ]
+====================================== */
+
+/* タイトル部分 */
+table.y_data_title {
+table-layout: fixed;
+}
+
+table.y_data_title th {
+font-size: 85%;
+text-align: left;
+}
+
+table.y_data_title th,
+table.y_data_title td {
+padding: 5px;
+}
+
+/* データ部分 */
+div.y_scroll_box {
+height: auto !important; /* IE6 max-height対応 */
+height: 100px;　/* IE6 max-height対応 */
+overflow-x: hidden; /* 横スクロール非表示 */
+overflow-y: scroll; /* 縦スクロール */
+}
+
+div.y_hidden {
+overflow: hidden; /* IE系でデータ部分のテーブルをドラッグした際のズレを防止 */
+/*padding: 0 0 10px;*/ /* スクロール仕切った際の下ボーダーの重なりを防止 */
+}
+
+table.y_data {
+table-layout: fixed;　/* 内容を固定 */
+}
+
+table.y_data th,
+table.y_data td {
+padding: 5px;
+}
+
+table.y_data td {
+overflow: hidden; /* データが幅を超えたとき非表示に */
+white-space: nowrap; /* データの折り返しを防止 */
+}
+
+table.y_data td p {
+margin: 0; /* 余分なマージンを消去 */
+}
+
+.w06 {
+width: 1200px;
 }
