@@ -1,5 +1,5 @@
 <?php
-	$this->append('script'); echo $this->Html->script(array('lib/jquery-1.9.1.min')); $this->end();
+	$this->append('script'); echo $this->Html->script(array('lib/jquery-1.9.1.min', 'salary/payroll001s')); $this->end();
 	$this->append('css'); echo $this->Html->css(array('salary/common', 'payroll/common')); $this->end();
 ?>
 
@@ -49,21 +49,21 @@
 	<div id="tabs">
 <!-- ============================== 共通タブメニュー ============================== -->
 	<ul class="menu">
-		<li><a href="">基本情報</a></li>
-		<li><a href="">日割情報</a></li>
-		<li><a href="">詳細情報</a></li>
-		<li><a href="">期末勤勉詳細</a></li>
-		<li><a href="">超勤・休日・夜勤</a></li>
-		<li><a href="">特勤・宿日直・管特</a></li>
-		<li><a href="">能率給</a></li>
-		<li><a href="">旅費・その他支給</a></li>
-		<li><a href="">福利控除</a></li>
-		<li><a href="">賃金</a></li>
+		<li><a href="#">基本情報</a></li>
+		<li><a href="#">日割情報</a></li>
+		<li><a href="#">詳細情報</a></li>
+		<li><a href="#">期末勤勉詳細</a></li>
+		<li><a href="#">超勤・休日・夜勤</a></li>
+		<li><a href="#">特勤・宿日直・管特</a></li>
+		<li><a href="#">能率給</a></li>
+		<li><a href="#">旅費・その他支給</a></li>
+		<li><a href="#">福利控除</a></li>
+		<li><a href="#">賃金</a></li>
 	</ul>
 <!-- ============================== 共通表示項目 ============================== -->
 
 <!-- 1行目 -->
-		<div class="wrap bdT_blue bdR_blue bdL_blue pdR10 pdL10">
+		<div class="wrap bdT_blue bdR_blue bdL_blue pdR10 pdL10" id="tabCommonContents">
 			<table class="tbl_01">
 				<tr>
 					<th>支給年月日</th>
@@ -159,7 +159,7 @@
 		</div><!-- //.wrap -->
 
 <!-- ============================== タブ01【基本情報】============================== -->
-		<div id="tab01content">
+		<div id="tab01content" class="tabContent">
 			<table class="tbl02 bdT">
 				<tr>
 					<th colspan="7" class="th01 bdR bdB bg01">支給</th>
@@ -363,7 +363,7 @@
 			</table>
 		</div><!-- //#tab01content -->
 <!-- ============================== タブ02【日割情報】============================== -->
-		<div id="tab02content">
+		<div id="tab02content" class="tabContent">
 			<div class="wrap bdT_blue bdB_blue pd10">
 				<table class="tbl02 mgR10 mgB10 mgL10 w40">
 					<tr>
@@ -601,7 +601,7 @@
 		</div><!-- //#tab2content -->
 
 <!-- ============================== タブ03【詳細情報】============================== -->
-		<div id="tab03content">
+		<div id="tab03content" class="tabContent">
 			<div class="wrap bdT_blue bdB_blue">
 				<table class="tbl03">
 					<tr>
@@ -849,7 +849,7 @@
 		</div><!-- //#tab3content -->
 
 <!-- ============================== タブ04【期末勤勉詳細】============================== -->
-		<div id="tab04content">
+		<div id="tab04content" class="tabContent">
 			<div class="wrap bdT_blue bdB_blue">
 				<table class="tbl04">
 					<tr>
@@ -1022,7 +1022,7 @@
 		</div><!-- //#tab4content -->
 
 <!-- ============================== タブ05【超勤・休日・夜勤】============================== -->
-		<div id="tab05content">
+		<div id="tab05content" class="tabContent">
 			<div class="wrap bdT_blue bdB_blue ">
 				<div class="wrap dsp_tbl">
 <!-- 表（左） -->
@@ -1383,7 +1383,7 @@
 		</div><!-- //#tab05content -->
 
 <!-- ============================== タブ06【特勤・宿日直・管特】============================== -->
-		<div id="tab06content">
+		<div id="tab06content" class="tabContent">
 			<div class="wrap bdT_blue bdB_blue">
 <!-- ↓■特殊勤務手当 -->
 				<div class="y_data_area">
@@ -1626,7 +1626,7 @@
 		</div><!-- //#tab06content -->
 
 <!-- ============================== タブ07【能率給】============================== -->
-		<div id="tab07content">
+		<div id="tab07content" class="tabContent">
 			<div class="wrap bdT_blue bdB_blue">
 				<table class="tbl02 w04 w03">
 					<tr>
@@ -1660,7 +1660,7 @@
 		</div><!-- //#tab07content -->
 
 <!-- ============================== タブ08【旅費・その他支給】============================== -->
-		<div id="tab08content">
+		<div id="tab08content" class="tabContent">
 			<div class="wrap bdT_blue bdB_blue">
 				<table class="tbl02 w04 w03">
 					<tr>
@@ -1715,7 +1715,7 @@
 		</div><!-- //#tab08content -->
 
 <!-- ============================== タブ09【福利控除】============================== -->
-		<div id="tab09content">
+		<div id="tab09content" class="tabContent">
 			<div class="wrap bdT_blue bdB_blue">
 				<table class="tbl02 w02 w03">
 					<tr>
@@ -1746,7 +1746,7 @@
 		</div><!-- //#tab09content -->
 
 <!-- ============================== タブ10【賃金】============================== -->
-		<div id="tab10content">
+		<div id="tab10content" class="tabContent">
 			<div class="wrap bdT_blue bdB_blue">
 				<table class="tbl02 w01 w03">
 					<tr>
