@@ -1058,47 +1058,47 @@
 								<col style="width: 32%;">
 								<tr>
 									<td><p title="125">125</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal125'); ?></p></td>
 								</tr>
 								<tr>
 									<td><p title="150">150</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal150'); ?></p></td>
 								</tr>
 								<tr>
 									<td><p title="135">135</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal135'); ?></p></td>
 								</tr>
 								<tr>
 									<td><p title="160">160</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal160'); ?></p></td>
 								</tr>
 								<tr>
 									<td><p title="100">100</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal100'); ?></p></td>
 								</tr>
 								<tr>
 									<td><p title="25">25</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal25'); ?></p></td>
 								</tr>
 								<tr>
 									<td><p title="前月25">前月25</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal25_Pre'); ?></p></td>
 								</tr>
 								<tr>
 									<td><p title="割増150">割増150</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.Over60TimesTotal150'); ?></p></td>
 								</tr>
 								<tr>
 									<td><p title="割増175">割増175</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.Over60TimesTotal175'); ?></p></td>
 								</tr>
 								<tr>
 									<td><p title="割増50">割増50</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.Over60TimesTotal50'); ?></p></td>
 								</tr>
 								<tr>
 									<td><p title="割増前50">割増前50</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.Over60TimesTotal50_Pre'); ?></p></td>
 								</tr>
 							</table>
 						</div>
@@ -1140,69 +1140,15 @@
 										<col style="width: 18.0%;">
 										<col style="width: 6.0%;">
 										<col style="width: 13.0%;">
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
+										<?php foreach ($meisaiUchiChokinList as $meisaiUchiChokin): ?>
+											<tr>
+												<td><p title="XXXX"><?php echo Hash::get($meisaiUchiChokin, 'QtMeisaiUchiChokin.AllowDetailCD'); ?></p></td>
+												<td><p title="XXXXXXXXXXXX"><?php echo Hash::get($meisaiUchiChokin, 'QtMeisaiUchiChokin.AccountCD'); ?></p></td>
+												<td><p title="NNNNNNNNNN"><?php echo Hash::get($meisaiUchiChokin, 'QtMeisaiUchiChokin.CodeName_AccountName'); ?></p></td>
+												<td><p title="ZZZ"><?php echo Hash::get($meisaiUchiChokin, 'QtMeisaiUchiChokin.WorkHours_OT'); ?></p></td>
+												<td><p title="Z,ZZZ,ZZZ"><?php echo Hash::get($meisaiUchiChokin, 'QtMeisaiUchiChokin.Payments'); ?></p></td>
+											</tr>
+										<?php endforeach; ?>
 									</table>
 								</div>
 							</div><!-- //内訳 -->
@@ -1225,7 +1171,7 @@
 									<th>《時間数合計》</th>
 								</tr>
 								<tr>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.HolidayWorkTimesTotal'); ?></p></td>
 								</tr>
 								<tr>
 									<td><p>&nbsp;</p></td>
@@ -1252,7 +1198,7 @@
 								<th>《時間数合計》</th>
 							</tr>
 							<tr>
-								<td><p title="ZZZ">ZZZ</p></td>
+								<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.NightShiftTimesTotal'); ?></p></td>
 							</tr>
 						</table><!-- //タイトル -->
 					</div>
@@ -1293,34 +1239,15 @@
 										<col style="width: 18.0%;">
 										<col style="width: 8.0%;">
 										<col style="width: 13.0%;">
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
+										<?php foreach ($meisaiUchiKyujitukyuList as $meisaiUchiKyujitukyu): ?>
+											<tr>
+												<td><p title="XXXX"><?php echo Hash::get($meisaiUchiKyujitukyu, 'QtMeisaiUchiKyujitukyu.AllowDetailCD'); ?></p></td>
+												<td><p title="XXXXXXXXXXXX"><?php echo Hash::get($meisaiUchiKyujitukyu, 'QtMeisaiUchiKyujitukyu.AccountCD'); ?></p></td>
+												<td><p title="NNNNNNNNNN"><?php echo Hash::get($meisaiUchiKyujitukyu, 'QtMeisaiUchiKyujitukyu.CodeName_AccountName'); ?></p></td>
+												<td><p title="ZZZ"><?php echo Hash::get($meisaiUchiKyujitukyu, 'QtMeisaiUchiKyujitukyu.WorkHours_HO'); ?></p></td>
+												<td><p title="Z,ZZZ,ZZZ"><?php echo Hash::get($meisaiUchiKyujitukyu, 'QtMeisaiUchiKyujitukyu.Payments'); ?></p></td>
+											</tr>
+										<?php endforeach; ?>
 									</table>
 								</div>
 							</div><!-- //内訳 -->

@@ -11,7 +11,8 @@ class Payroll001sController extends CommonController {
 	// この画面で使うモデル（テーブル）を宣言する
 	public $uses = array('QtMeisai', 'QtMeisaiHiwari', 'QtMeisaiUchiSonotasikyu', 'JtKihonKihon', 'QtMeisaiUchiChingin',
 							'QtMeisaiUchiFukurikojo', 'QtMeisaiUchiRyohi', 'QtMeisaiUchiNoritu', 'QtMeisaiUchiTokkin',
-							'QtMeisaiUchiShuku', 'QtMeisaiUchiKantoku', 'QtMeisaiUchiChokin', 'QtMeisaiUchiKyujitukyu'
+							'QtMeisaiUchiShuku', 'QtMeisaiUchiKantoku', 'QtMeisaiUchiChokin', 'QtMeisaiUchiKyujitukyu',
+							'QtMeisaiUchiYakin'
 	);
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
@@ -39,12 +40,12 @@ class Payroll001sController extends CommonController {
 
 		// 前画面からの検索条件の受け取り（職員番号、支給年月日、支給区分、支払者）
 		$searchCondition = array();
-		
+
 		// TODO バリデーションチェック
-		
+
 		// POSTデータを受け取る
 		$postData = $this->request->data['Payroll001s'];
-		
+
 		// 検索条件を設定する
 		$searchCondition['EmpNo']    = $postData['EmpNo'];    // 職員番号
 		// TODO 和暦から西暦に変換する
@@ -71,7 +72,7 @@ class Payroll001sController extends CommonController {
 		$meisaiInfo = $this->QtMeisai->find('first', $params);
 		// テーブル[支給明細データ：日割]からデータを取得する
 		$hiwariAllInfo = $this->QtMeisaiHiwari->find('all', $params);
-		
+
 		// 共通エリア情報
 		$kihonInfo = array();
 		// 検索結果にレコードがあるとき
@@ -83,25 +84,25 @@ class Payroll001sController extends CommonController {
 		// TODO tab01処理として分ける.（タブ08でも使っているっぽいので、共通の方がいいかも）
 		// テーブル[支給明細データ：その他支給内訳]からデータを取得する
 		$uchiSonotaInfo = $this->QtMeisaiUchiSonotasikyu->find('first', $params);
-		
+
 		// タブ02：日割情報
 		$this->tab02($hiwariAllInfo);
-		
+
 		// タブ05：超勤・休日・夜勤
 		$this->tab05($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
-		
+
 		// タブ06：特勤・宿日直・管特
 		$this->tab06($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
-		
+
 		// タブ07：能率給内訳
 		$this->tab07($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
-		
+
 		// タブ08：旅費・その他支給
 		$this->tab08($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
-		
+
 		// タブ09：福利控除
 		$this->tab09($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
-		
+
 		// タブ10：賃金
 		$this->tab10($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
 
@@ -122,12 +123,12 @@ class Payroll001sController extends CommonController {
 		$this->render('index');
 
 	}
-	
+
 	/**
 	 * 初期値を設定する
 	 */
 	private function _initSet() {
-		
+
 		// 画面側でエラーが出ないように空の配列をセットしておく
 		$searchCondition = array();
 		$this->set('searchCondition', $searchCondition);
@@ -162,12 +163,12 @@ class Payroll001sController extends CommonController {
 		$meisaiUchiKyujitukyuList = array();
 		$this->set('meisaiUchiKyujitukyuList', $meisaiUchiKyujitukyuList);
 	}
-	
+
 	/**
 	 * 支給明細照会　タブ02：日割情報
 	 */
 	private function tab02($hiwariAllInfo) {
-		
+
 		// レコード数が1件or複数の判定フラグを作成する
 		$hiwariMultiRecordFlg = false;
 		// 日割データが複数あるとき
@@ -179,7 +180,7 @@ class Payroll001sController extends CommonController {
 		$hiwariInfo = array();
 		// 日割情報の検索結果にレコードがあるとき
 		if(!empty($hiwariAllInfo)){
-		
+
 			// 日割データの２コード目以降は、タブ「日割情報」で表示する
 			// 日割データが複数あるとき
 			if($hiwariMultiRecordFlg){
@@ -193,7 +194,7 @@ class Payroll001sController extends CommonController {
 				}
 			}
 		}
-		
+
 		$this->set('hiwariMultiRecordFlg', $hiwariMultiRecordFlg);
 		$this->set('hiwariInfo', $hiwariInfo);
 	}
@@ -209,8 +210,12 @@ class Payroll001sController extends CommonController {
 		// テーブル[支給明細データ：休日給内訳]からデータを取得する
 		$meisaiUchiKyujitukyuList = $this->QtMeisaiUchiKyujitukyu->findMeisaiUchiKyujitukyu($paidYm, $empNo, $paidDiv, $payerDiv);
 
+		// テーブル[支給明細データ：夜勤内訳]からデータを取得する
+		$meisaiUchiYakinList = $this->QtMeisaiUchiYakin->findMeisaiUchiYakin($paidYm, $empNo, $paidDiv, $payerDiv);
+
 		// 取得データをViewに渡す
 		$this->set(compact('meisaiUchiChokinList'));
+		$this->set(compact('meisaiUchiKyujitukyuList'));
 		$this->set(compact('meisaiUchiKyujitukyuList'));
 	}
 
@@ -284,13 +289,4 @@ class Payroll001sController extends CommonController {
 		// 取得データをViewに渡す
 		$this->set(compact('meisaiUchiChinginList'));
 	}
-
-	/**
-	 * タブ切り替え用のサンプルメソッド
-	 * TODO　後で消すこと
-	 */
-	public function sample() {
-
-	}
-
 }
