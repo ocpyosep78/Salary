@@ -63,7 +63,7 @@ class ProperPay001sController extends CommonController {
 		// テーブル[正当支給 : 固定給]からデータを取得する
 		$koteiInfo = $this->QtSeitoKotei->find('first', $params);
 		// テーブル[正当支給データ：日割]からデータを取得する
-		$hiwariAllInfo = $this->QtSeitoHiwari->find('first', $params);
+		$hiwariAllInfo = $this->QtSeitoHiwari->find('all', $params);
 
 		// 共通エリア情報
 		$commonInfo = array();
