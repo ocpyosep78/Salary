@@ -271,4 +271,18 @@ class SalaryFormHelper extends FormHelper{
 
 		return ($pageNumber - 1) * $limit + ($searchResultKey + 1);
 	}
+
+	/**
+	 * 引数が数値の場合は、number_formatして返す。それ以外はそのまま返す。
+	 *
+	 * @param $num number_formatを行う対象数値
+	 * @return mixed　引数が数値の場合は、number_formatして返す。それ以外はそのまま返す
+	 */
+	public function number_format($num){
+		if(is_numeric($num)) {
+			return number_format($num);
+		} else {
+			return $num;
+		}
+	}
 }

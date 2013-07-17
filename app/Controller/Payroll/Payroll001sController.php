@@ -62,7 +62,7 @@ class Payroll001sController extends CommonController {
 		}
 
 		// findのパラメータを設定する
-		// 条件：削除されていない
+		// 追加条件：論理削除されていないこと
 		$searchCondition['delete_flg'] = 0;
 		$params = array(
 			'conditions' => $searchCondition
@@ -81,9 +81,11 @@ class Payroll001sController extends CommonController {
 			$kihonInfo = $hiwariAllInfo[0];
 		}
 
-		// TODO tab01処理として分ける.（タブ08でも使っているっぽいので、共通の方がいいかも）
-		// テーブル[支給明細データ：その他支給内訳]からデータを取得する
-		$uchiSonotaInfo = $this->QtMeisaiUchiSonotasikyu->find('first', $params);
+		// テーブル[支給明細データ：その他支給内訳]からデータを取得する(タブ01、タブ08で使用する)
+		$meisaiUchiSonotasikyuList = $this->QtMeisaiUchiSonotasikyu->findMeisaiUchiSonotasikyu($searchCondition['PaidYM'], $searchCondition['EmpNo'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
+
+		// タブ01：基本情報
+		$this->tab01($meisaiUchiSonotasikyuList);
 
 		// タブ02：日割情報
 		$this->tab02($hiwariAllInfo);
@@ -115,7 +117,7 @@ class Payroll001sController extends CommonController {
 		$this->set('personalInfo', $personalInfo);
 		$this->set('meisaiInfo', $meisaiInfo);
 		$this->set('kihonInfo', $kihonInfo);
-		$this->set('uchiSonotaInfo', $uchiSonotaInfo);
+		$this->set(compact('meisaiUchiSonotasikyuList'));
 
 		// ********************  遷移先画面の設定  ********************
 
@@ -162,10 +164,44 @@ class Payroll001sController extends CommonController {
 		$this->set('meisaiUchiChokinList', $meisaiUchiChokinList);
 		$meisaiUchiKyujitukyuList = array();
 		$this->set('meisaiUchiKyujitukyuList', $meisaiUchiKyujitukyuList);
+		$uchiKinsetsuchiRyohi = array();
+		$this->set('uchiKinsetsuchiRyohi', $uchiKinsetsuchiRyohi);
+	}
+
+	/**
+	 * 支給明細照会 タブ01：基本情報
+	 *
+	 * @param array テーブル[支給明細データ：その他支給内訳]から取得したデータ
+	 */
+	private function tab01($meisaiUchiSonotasikyuList) {
+
+		// その他支給（内、近接地内旅費）を算出する
+		// 算出方法：その他支給内訳.その他支給種別 の　10,11 のカラム"金額"を合算して格納。
+
+		// 10のカラムの金額と11のカラムの金額を抽出する
+		$amount10 = 0;
+		$amount11 = 0;
+		foreach($meisaiUchiSonotasikyuList as $record){
+			// 10のカラムの金額を取得する
+			if($record['QtMeisaiUchiSonotasikyu']['EtcTypeCD'] === '10'){
+				$amount10 = $record['QtMeisaiUchiSonotasikyu']['Amounts'];
+			}
+			// 11のカラムの金額を取得する
+			if($record['QtMeisaiUchiSonotasikyu']['EtcTypeCD'] === '11'){
+				$amount11 = $record['QtMeisaiUchiSonotasikyu']['Amounts'];
+			}
+		}
+		// 10,11 のカラム"金額"を合算して格納する
+		$uchiKinsetsuchiRyohi = $amount10 + $amount11;
+
+		// 取得データをViewに渡す
+		$this->set(compact('uchiKinsetsuchiRyohi'));
 	}
 
 	/**
 	 * 支給明細照会　タブ02：日割情報
+	 *
+	 * @param array テーブル[支給明細データ：日割]から取得したデータ
 	 */
 	private function tab02($hiwariAllInfo) {
 
@@ -195,6 +231,14 @@ class Payroll001sController extends CommonController {
 			}
 		}
 
+		// 配列を組み替える（支給年月日が同一のレコード同士をグルーピングする）
+		$tmpArray = array();
+		foreach($hiwariInfo as $record){
+			$tmpArray[$record['QtMeisaiHiwari']['PaidYM']][] =  $record;
+		}
+		$hiwariInfo = $tmpArray;
+
+		// 取得データをViewに渡す
 		$this->set('hiwariMultiRecordFlg', $hiwariMultiRecordFlg);
 		$this->set('hiwariInfo', $hiwariInfo);
 	}
@@ -216,7 +260,7 @@ class Payroll001sController extends CommonController {
 		// 取得データをViewに渡す
 		$this->set(compact('meisaiUchiChokinList'));
 		$this->set(compact('meisaiUchiKyujitukyuList'));
-		$this->set(compact('meisaiUchiKyujitukyuList'));
+		$this->set(compact('meisaiUchiYakinList'));
 	}
 
 	/**
@@ -258,12 +302,9 @@ class Payroll001sController extends CommonController {
 
 		// テーブル[支給明細データ：旅費内訳]からデータを取得する
 		$meisaiUchiRyohiList = $this->QtMeisaiUchiRyohi->findMeisaiUchiRyohi($paidYm, $empNo, $paidDiv, $payerDiv);
-		// テーブル[支給明細データ：その他支給内訳]からデータを取得する
-		$meisaiUchiSonotasikyuList = $this->QtMeisaiUchiSonotasikyu->findMeisaiUchiSonotasikyu($paidYm, $empNo, $paidDiv, $payerDiv);
 
 		// 取得データをViewに渡す
 		$this->set(compact('meisaiUchiRyohiList'));
-		$this->set(compact('meisaiUchiSonotasikyuList'));
 	}
 
 	/**

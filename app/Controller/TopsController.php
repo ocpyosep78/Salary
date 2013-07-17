@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class TopsController extends AppController {
 
-	public $uses = array('MgrPositionMaster', 'ZAllowanceDetailNamemaster', 'JmSyokuinKubun', 'QmKyuyoTaikei', 'JmSyokuso', 'JobCategoryMaster', 'ZSalaryTableNamemaster', 'ZAttendanceReason', 'ZDetachmentAllowDivmaster');
+	public $uses = array('MgrPositionMaster', 'ZAllowanceDetailNamemaster', 'JmSyokuinKubun', 'QmKyuyoTaikei', 'JmSyokuso', 'JobCategoryMaster', 'ZSalaryTableNamemaster', 'ZAttendanceReason', 'ZDetachmentAllowDivmaster', 'BankMaster');
 
 	/**
 	 * 初期表示
@@ -45,6 +45,11 @@ class TopsController extends AppController {
 		// 勤怠事由マスタ
 		$results = $this->ZAttendanceReason->find('all', array('conditions' => array('DeleteFlg' => 0)));
 		$this->__saveCacheForCodeName($results, 'ZAttendanceReason', 'ID', array('NAME'));
+
+		// 銀行マスタ
+		$results = $this->BankMaster->find('all', array('conditions' => array('delete_flg' => 0)));
+		$this->__saveCacheForCodeName($results, 'BankMaster', 'BankCode', array('BankNameKana'));
+		$this->__saveCacheForCodeName($results, 'BankMaster', 'BankBranchCode', array('BankBrancheName'));
 	}
 
 	/**

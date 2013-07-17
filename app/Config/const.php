@@ -124,5 +124,10 @@ Configure::write('CACHE_KEY_MAP',array(
 	'SalaryTable' => array('SalaryTableName', 'SalaryTableSName'),
 	// 勤怠事由マスタ
 	'AttendanceOrderedReasonCD' => array('NAME'),
+	// 銀行マスタ
+	'A_Account_BankCD' => array('BankNameKana'),
+	//'B_Account_BankCD' => array('BankNameKana'),
+	'A_Account_BranchCD' => array('BankBrancheName'),
+	//'B_Account_BranchCD' => array('BankBrancheName'),
 ));
 ?>
