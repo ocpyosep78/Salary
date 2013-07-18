@@ -1,11 +1,11 @@
 <?php
 	$this->append('script'); echo $this->Html->script(array('lib/jquery-1.9.1.min', 'salary/payroll001s')); $this->end();
-	$this->append('css'); echo $this->Html->css(array('salary/common', 'payroll/common')); $this->end();
+	$this->append('css'); echo $this->Html->css(array('salary/common', 'M298/common')); $this->end();
 ?>
 
 <div id="container">
 <!-- *********************************【ヘッダー】********************************* -->
-<?php echo $this->SalaryForm->create('Payroll001s', array('url' => array('controller' => 'payroll001s', 'action' => 'search'))); ?>
+<?php echo $this->SalaryForm->create('M298s', array('url' => array('controller' => 'M298s', 'action' => 'search'))); ?>
 	<table class="t_header">
 		<tr>
 			<th>職員番号</th>

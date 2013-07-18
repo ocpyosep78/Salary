@@ -3,10 +3,10 @@
 App::uses('CommonController', 'Controller');
 
 /**
- * Payroll001sController Controller
+ * M298sController Controller
  * 支給明細照会コントローラー
  */
-class Payroll001sController extends CommonController {
+class M298sController extends CommonController {
 
 	// この画面で使うモデル（テーブル）を宣言する
 	public $uses = array('QtMeisai', 'QtMeisaiHiwari', 'QtMeisaiUchiSonotasikyu', 'JtKihonKihon', 'QtMeisaiUchiChingin',
@@ -44,7 +44,7 @@ class Payroll001sController extends CommonController {
 		// TODO バリデーションチェック
 
 		// POSTデータを受け取る
-		$postData = $this->request->data['Payroll001s'];
+		$postData = $this->request->data['M298s'];
 
 		// 検索条件を設定する
 		$searchCondition['EmpNo']    = $postData['EmpNo'];    // 職員番号

@@ -3,10 +3,10 @@
 App::uses('CommonController', 'Controller');
 
 /**
- * ProperPay001sController Controller
+ * M061sController Controller
  * 正当支給照会コントローラー
  */
-class ProperPay001sController extends CommonController {
+class M061sController extends CommonController {
 
 	// この画面で使うモデル（テーブル）を宣言する
 	public $uses = array('QtSeitoKotei', 'QtSeitoHendo', 'QtSeitoHiwari');
@@ -41,7 +41,7 @@ class ProperPay001sController extends CommonController {
 		// TODO バリデーションチェック
 
 		// POSTデータを受け取る
-		$postData = $this->request->data['ProperPay001s'];
+		$postData = $this->request->data['M061s'];
 
 		// 検索条件を設定する
 		$searchCondition['EmpNo']    = $postData['EmpNo'];    // 職員番号

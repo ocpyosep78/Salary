@@ -58,8 +58,8 @@ App::build(array(
 			ROOT . DS . APP_DIR . DS . 'Controller' . DS,
 			ROOT . DS . APP_DIR . DS . 'Controller' . DS . 'Training' . DS,
 			ROOT . DS . APP_DIR . DS . 'Controller' . DS . 'PayMaster' . DS,
-			ROOT . DS . APP_DIR . DS . 'Controller' . DS . 'Payroll' . DS,
-			ROOT . DS . APP_DIR . DS . 'Controller' . DS . 'ProperPay' . DS,
+			ROOT . DS . APP_DIR . DS . 'Controller' . DS . 'M298' . DS,
+			ROOT . DS . APP_DIR . DS . 'Controller' . DS . 'M061' . DS,
 		),
 	'Model' => array(
 			ROOT . DS . APP_DIR . DS . 'Model' . DS,
@@ -68,8 +68,8 @@ App::build(array(
 			ROOT . DS . APP_DIR . DS . 'View' . DS,
 			ROOT . DS . APP_DIR . DS . 'View' . DS . 'Training' . DS,
 			ROOT . DS . APP_DIR . DS . 'View' . DS . 'PayMaster' . DS,
-			ROOT . DS . APP_DIR . DS . 'View' . DS . 'Payroll' . DS,
-			ROOT . DS . APP_DIR . DS . 'View' . DS . 'ProperPay' . DS,
+			ROOT . DS . APP_DIR . DS . 'View' . DS . 'M298' . DS,
+			ROOT . DS . APP_DIR . DS . 'View' . DS . 'M061' . DS,
 		),
 ));
 

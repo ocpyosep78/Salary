@@ -1,11 +1,11 @@
 <?php
 	$this->append('script'); echo $this->Html->script(array('lib/jquery-1.9.1.min', 'salary/payroll001s')); $this->end();
-	$this->append('css'); echo $this->Html->css(array('salary/common', 'properpay/common')); $this->end();
+	$this->append('css'); echo $this->Html->css(array('salary/common', 'M061/common')); $this->end();
 ?>
 
 <div id="container">
 <!-- *********************************【ヘッダー】********************************* -->
-<?php echo $this->SalaryForm->create('ProperPay001s', array('url' => array('controller' => 'properpay001s', 'action' => 'search'))); ?>
+<?php echo $this->SalaryForm->create('M061s', array('url' => array('controller' => 'M061s', 'action' => 'search'))); ?>
 	<table class="t_header">
 		<tr>
 			<th>職員番号</th>
@@ -61,22 +61,22 @@
 			<table class="tbl01">
 				<tr>
 					<th class="bd_double">支給年月日</th>
-					<td class="bd_double">GGYY MM DD</td>
+					<td class="bd_double"><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($commonInfo, 'QtSeitoHiwari.PaidYM')); ?></td>
 					<th>職員区分</th>
-					<td>XX</td>
-					<td>NNNN</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.EmpDiv'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_EmpDivName'); ?></td>
 					<th>給与体系</th>
-					<td>XX</td>
-					<td>NNNNNN</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryTypeCD'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_SalaryTypeName'); ?></td>
 					<th>所属</th>
-					<td>XXXXXXXXX</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.DepCD'); ?></td>
 					<td>N・NN・NNNNN</td>
 					<th>職層</th>
-					<td>XX</td>
-					<td>NNNN</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.JobGradeCD'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_JobGradeName'); ?></td>
 					<th>職務</th>
-					<td>XXX</td>
-					<td>NNNNNNNNNN</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.JobDutyCD'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_JobTypeName'); ?></td>
 					<td>NNNNN</td>
 				</tr>
 			</table>
@@ -85,16 +85,16 @@
 				<tr>
 					<th>支出科目</th>
 					<th>給料</th>
-					<td>XXXXXXXXXXXX</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryRewardsAccountCD'); ?></td>
 					<td>NNNNNNNNNN</td>
 					<th>児童</th>
-					<td>XXXXXXXXXXXX</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.ChildAllowAccountCD'); ?></td>
 					<td>NNNNNNNNNN</td>
 					<th>超勤</th>
-					<td>XXXXXXXXXXXX</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.OverTimeWorkAccountCD'); ?></td>
 					<td>NNNNNNNNNN</td>
 					<th>休日給</th>
-					<td>XXXXXXXXXXXX</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.HolidaySalaryAccountCD'); ?></td>
 					<td>NNNNNNNNNN</td>
 				</tr>
 			</table>
@@ -102,7 +102,7 @@
 			<table class="tbl01">
 				<tr>
 					<th>給料/報酬</th>
-					<td>XX</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryTableCD'); ?></td>
 					<td>NNNNNN</td>
 					<td>XX-XXX</td>
 					<td>NN</td>
