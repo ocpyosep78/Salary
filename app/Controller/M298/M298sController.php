@@ -12,7 +12,7 @@ class M298sController extends CommonController {
 	public $uses = array('QtMeisai', 'QtMeisaiHiwari', 'QtMeisaiUchiSonotasikyu', 'JtKihonKihon', 'QtMeisaiUchiChingin',
 							'QtMeisaiUchiFukurikojo', 'QtMeisaiUchiRyohi', 'QtMeisaiUchiNoritu', 'QtMeisaiUchiTokkin',
 							'QtMeisaiUchiShuku', 'QtMeisaiUchiKantoku', 'QtMeisaiUchiChokin', 'QtMeisaiUchiKyujitukyu',
-							'QtMeisaiUchiYakin'
+							'QtMeisaiUchiYakin', 'QmKyuryoChild'
 	);
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
@@ -65,21 +65,44 @@ class M298sController extends CommonController {
 		// 追加条件：論理削除されていないこと
 		$searchCondition['delete_flg'] = 0;
 		$params = array(
-			'conditions' => $searchCondition
+			'conditions' => $searchCondition,
 		);
 
 		// テーブル[支給明細データ]からデータを取得する
 		$meisaiInfo = $this->QtMeisai->find('first', $params);
+
+		// TableNoで昇順
+		$params['order'] = array('QtMeisaiHiwari.TableNo');
 		// テーブル[支給明細データ：日割]からデータを取得する
 		$hiwariAllInfo = $this->QtMeisaiHiwari->find('all', $params);
 
 		// 共通エリア情報
-		$kihonInfo = array();
+		$commonInfo = array();
 		// 検索結果にレコードがあるとき
 		if(!empty($hiwariAllInfo)){
 			// 日割データの1レコード目は共通で使用するので、抽出する
-			$kihonInfo = $hiwariAllInfo[0];
+			$commonInfo = $hiwariAllInfo[0];
 		}
+
+		// 清掃／臨職の表示内容を判定する
+		$sweeperYosan = '';
+		if($commonInfo['QtMeisaiHiwari']['TempEmpPreDiv'] == '2') {
+			// 臨時職員予算区分が2のとき
+			$sweeperYosan = '事業課予算';
+		} elseif($commonInfo['QtMeisaiHiwari']['TempEmpPreDiv'] == '1') {
+			// 臨時職員予算区分が1のとき
+			$sweeperYosan = '人事課予算';
+		} else {
+			// 臨時職員予算区分が2および1ではないとき（想定値：0）
+			if($commonInfo['QtMeisaiHiwari']['TempEmpPreDiv'] == '1'){
+				// 清掃職員フラグが1のとき
+				$sweeperYosan = '清掃職員';
+			}
+		}
+		$commonInfo['sweeperYosan'] = $sweeperYosan;
+
+		// 給料/報酬の金額を取得する
+		$commonInfo['kyuryoHoushuGaku'] = $this->QmKyuryoChild->getSumAddAllow($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['SalaryTable'], $commonInfo['QtMeisaiHiwari']['SalaryClass'], $commonInfo['QtMeisaiHiwari']['SalaryGrade']);
 
 		// テーブル[支給明細データ：その他支給内訳]からデータを取得する(タブ01、タブ08で使用する)
 		$meisaiUchiSonotasikyuList = $this->QtMeisaiUchiSonotasikyu->findMeisaiUchiSonotasikyu($searchCondition['PaidYM'], $searchCondition['EmpNo'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
@@ -116,7 +139,7 @@ class M298sController extends CommonController {
 		// 取得データを設定する
 		$this->set('personalInfo', $personalInfo);
 		$this->set('meisaiInfo', $meisaiInfo);
-		$this->set('kihonInfo', $kihonInfo);
+		$this->set('commonInfo', $commonInfo);
 		$this->set(compact('meisaiUchiSonotasikyuList'));
 
 		// ********************  遷移先画面の設定  ********************
@@ -131,40 +154,43 @@ class M298sController extends CommonController {
 	 */
 	private function _initSet() {
 
-		// 画面側でエラーが出ないように空の配列をセットしておく
+		// 画面側でエラーが出ないように空配列や空文字をセットしておく
 		$searchCondition = array();
-		$this->set('searchCondition', $searchCondition);
 		$personalInfo = array();
-		$this->set('personalInfo', $personalInfo);
 		$meisaiInfo = array();
-		$this->set('meisaiInfo', $meisaiInfo);
-		$kihonInfo = array();
-		$this->set('kihonInfo', $kihonInfo);
+		$commonInfo = array();
 		$hiwariInfo = array();
-		$this->set('hiwariInfo', $hiwariInfo);
 		$uchiSonotaInfo = array();
-		$this->set('uchiSonotaInfo', $uchiSonotaInfo);
 		$meisaiUchiChinginList = array();
-		$this->set('meisaiUchiChinginList', $meisaiUchiChinginList);
 		$meisaiUchiFukurikojoList = array();
-		$this->set('meisaiUchiFukurikojoList', $meisaiUchiFukurikojoList);
 		$meisaiUchiRyohiList = array();
-		$this->set('meisaiUchiRyohiList', $meisaiUchiRyohiList);
 		$meisaiUchiSonotasikyuList = array();
-		$this->set('meisaiUchiSonotasikyuList', $meisaiUchiSonotasikyuList);
 		$meisaiUchiNorituList = array();
-		$this->set('meisaiUchiNorituList', $meisaiUchiNorituList);
 		$meisaiUchiTokkinList = array();
-		$this->set('meisaiUchiTokkinList', $meisaiUchiTokkinList);
 		$meisaiUchiShukuList = array();
-		$this->set('meisaiUchiShukuList', $meisaiUchiShukuList);
 		$meisaiUchiKantokuList = array();
-		$this->set('meisaiUchiKantokuList', $meisaiUchiKantokuList);
 		$meisaiUchiChokinList = array();
-		$this->set('meisaiUchiChokinList', $meisaiUchiChokinList);
 		$meisaiUchiKyujitukyuList = array();
-		$this->set('meisaiUchiKyujitukyuList', $meisaiUchiKyujitukyuList);
 		$uchiKinsetsuchiRyohi = array();
+
+
+		// 画面への設定
+		$this->set('searchCondition', $searchCondition);
+		$this->set('personalInfo', $personalInfo);
+		$this->set('meisaiInfo', $meisaiInfo);
+		$this->set('commonInfo', $commonInfo);
+		$this->set('hiwariInfo', $hiwariInfo);
+		$this->set('uchiSonotaInfo', $uchiSonotaInfo);
+		$this->set('meisaiUchiChinginList', $meisaiUchiChinginList);
+		$this->set('meisaiUchiFukurikojoList', $meisaiUchiFukurikojoList);
+		$this->set('meisaiUchiRyohiList', $meisaiUchiRyohiList);
+		$this->set('meisaiUchiSonotasikyuList', $meisaiUchiSonotasikyuList);
+		$this->set('meisaiUchiNorituList', $meisaiUchiNorituList);
+		$this->set('meisaiUchiTokkinList', $meisaiUchiTokkinList);
+		$this->set('meisaiUchiShukuList', $meisaiUchiShukuList);
+		$this->set('meisaiUchiKantokuList', $meisaiUchiKantokuList);
+		$this->set('meisaiUchiChokinList', $meisaiUchiChokinList);
+		$this->set('meisaiUchiKyujitukyuList', $meisaiUchiKyujitukyuList);
 		$this->set('uchiKinsetsuchiRyohi', $uchiKinsetsuchiRyohi);
 	}
 

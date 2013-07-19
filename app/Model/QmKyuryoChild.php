@@ -87,4 +87,46 @@ class QmKyuryoChild extends AppModel {
 			),
 		),
 	);
+
+	/**
+	 * 加算後額（Sum_AddAllow）を取得する
+	 *
+	 * @param string $paidYM        支給年月
+	 * @param string $salaryTableCD 給料表CD
+	 * @param string $salaryClass   級
+	 * @param string $salaryGrade   号級
+	 *
+	 * @return mixed 正常：int、異常（データが無い）:string(空文字)
+	 */
+	public function getSumAddAllow($paidYM, $salaryTableCD, $salaryClass, $salaryGrade) {
+
+		$this->recursive = -1;
+
+		// 検索条件の設定
+		$searchCondition = array(
+			'RevYM <='      => date($paidYM),  // 改定年月:支給年月の直近過去最新
+			'SalaryTableCD' => $salaryTableCD, // 給料表CD
+			'SalaryClass'   => $salaryClass,   // 級
+			'SalaryGrade'   => $salaryGrade,   // 号級
+			'delete_flg'    => '0',            // 削除フラグ
+		);
+
+		// 検索パラメータの設定
+		$params = array(
+			'conditions' => $searchCondition,
+			// 改定年月が、支給年月の直近過去最新のデータを取得する
+			'order'      => array('QmKyuryoChild.RevYM DESC'),
+		);
+
+		// 検索
+		$result = $this->find('first', $params);
+
+		// 加算後額を検索結果から抽出する
+		$sumAddAllow = '';
+		if(!empty($result)) {
+			$sumAddAllow = $result['QmKyuryoChild']['Sum_AddAllow'];
+		}
+
+		return $sumAddAllow;
+	}
 }

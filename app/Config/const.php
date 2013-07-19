@@ -129,5 +129,13 @@ Configure::write('CACHE_KEY_MAP',array(
 	//'B_Account_BankCD' => array('BankNameKana'),
 	'A_Account_BranchCD' => array('BankBrancheName'),
 	//'B_Account_BranchCD' => array('BankBrancheName'),
+	// 科目テーブル
+	'AccountCD' => array('AccountName', 'AccountShortName'),
+	// 支給種別CDマスタ
+	'EtcTypeCD' => array('EtcTypeName', 'EtcTypeSName'),
+	// 支給種別CDマスタ
+	'DepCD' => array('DeptName', 'DeptShortName'),
+	// 給料表級名称マスタ
+	'SalaryClass' => array('SalaryClassName', 'SalaryClassNameShort'),
 ));
 ?>

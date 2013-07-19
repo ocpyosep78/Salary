@@ -67,23 +67,23 @@
 			<table class="tbl_01">
 				<tr>
 					<th>支給年月日</th>
-					<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($kihonInfo, 'QtMeisaiHiwari.PaidYM')); ?></td>
+					<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($commonInfo, 'QtMeisaiHiwari.PaidYM')); ?></td>
 					<th>職員区分</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.EmpDiv'); ?></td>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.CodeName_EmpDivName'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.EmpDiv'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.CodeName_EmpDivName'); ?></td>
 					<th>給与体系</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.SalaryTypeCD'); ?></td>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.CodeName_SalaryTypeName'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.SalaryTypeCD'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.CodeName_SalaryTypeName'); ?></td>
 					<th>所属</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.DepCD'); ?></td>
-					<td>N・NN・NNNNN</td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.DepCD'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.CodeName_DeptShortName'); ?></td>
 					<th>職層</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.JobGradeCD'); ?></td>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.CodeName_JobGradeName'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.JobGradeCD'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.CodeName_JobGradeName'); ?></td>
 					<th>職務</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.JobDutyCD'); ?></td>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.CodeName_JobTypeName'); ?></td>
-					<td>NNNNN</td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.JobDutyCD'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.CodeName_JobTypeName'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'sweeperYosan'); ?></td>
 				</tr>
 			</table>
 <!-- 2行目 -->
@@ -91,16 +91,16 @@
 				<tr>
 					<th>支出科目</th>
 					<th>給料</th>
-					<td>XX</td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.SalaryRewardsAccountCD'); ?></td>
 					<td>NNNNNNNNNN</td>
 					<th>児童</th>
-					<td>XX</td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.ChildAllowAccountCD'); ?></td>
 					<td>NNNNNNNNNN</td>
 					<th>超勤</th>
-					<td>XX</td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.OverTimeWorkAccountCD'); ?></td>
 					<td>NNNNNNNNNN</td>
 					<th>休日給</th>
-					<td>XX</td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.HolidaySalaryAccountCD'); ?></td>
 					<td>NNNNNNNNNN</td>
 				</tr>
 			</table>
@@ -108,18 +108,18 @@
 			<table class="tbl_01">
 				<tr>
 					<th>給料/報酬</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.SalaryTable'); ?></td>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.CodeName_SalaryTableName'); ?></td>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.SalaryClass'); ?>-<?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.SalaryGrade'); ?></td>
-					<td>NN</td>
-					<td>Z,ZZZ,ZZZ円</td>
-					<td><label><input type="checkbox" name="" value="" disabled <?php if(Hash::get($kihonInfo, 'QtMeisaiHiwari.SweeperAdditionFlg') === '1') echo 'checked'; ?> >清掃加算対象</label></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.SalaryTable'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.CodeName_SalaryTableName'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.SalaryClass'); ?>-<?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.SalaryGrade'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.CodeName_SalaryClassName'); ?></td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($commonInfo, 'kyuryoHoushuGaku')); ?>円</td>
+					<td><label><input type="checkbox" name="" value="" disabled <?php if(Hash::get($commonInfo, 'QtMeisaiHiwari.SweeperAdditionFlg') === '1') echo 'checked'; ?> >清掃加算対象</label></td>
 					<th>現給保障</th>
 					<td>NNN</td>
 					<th>現在の保障額</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.TableOnGuarantTable'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.TableOnGuarantTable'); ?></td>
 					<td>NNNNNN</td>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.GradeOnGuarantTable'); ?><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.ClassOnGuarantTable'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.GradeOnGuarantTable'); ?><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.ClassOnGuarantTable'); ?></td>
 					<td>Z,ZZZ,ZZZ円</td>
 				</tr>
 			</table>
@@ -128,32 +128,32 @@
 				<tr>
 					<th>勤務態様</th>
 					<th>一日</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.WorkingTimesOfDayHour'); ?>時間<?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.WorkingTimesOfDayMinute'); ?>分</td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.WorkingTimesOfDayHour'); ?>時間<?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.WorkingTimesOfDayMinute'); ?>分</td>
 					<th>一週間</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.WorkingDaysOfWeek'); ?>日勤務</td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.WorkingDaysOfWeek'); ?>日勤務</td>
 					<th>週の勤務時間</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.WorkingTimesOfWeekHour'); ?>時間<?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.WorkingTimesOfWeekMinute'); ?>分</td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.WorkingTimesOfWeekHour'); ?>時間<?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.WorkingTimesOfWeekMinute'); ?>分</td>
 					<th>月の勤務日数</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.WorkingDaysOfMonth'); ?>日</td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.WorkingDaysOfMonth'); ?>日</td>
 					<th>年の勤務日数</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.WorkingDaysOfYear'); ?>日</td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.WorkingDaysOfYear'); ?>日</td>
 					<th>その他</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.OtherDay'); ?>日</td>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.OtherMonth'); ?>月</td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.OtherDay'); ?>日</td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.OtherMonth'); ?>月</td>
 				</tr>
 			</table>
 <!-- 5行目 -->
 			<table class="tbl_01">
 				<tr>
 					<th>勤怠事由</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.AttendanceOrderedReasonCD'); ?></td>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.CodeName_NAME'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.AttendanceOrderedReasonCD'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.CodeName_NAME'); ?></td>
 					<th>支給割合</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.PayRatio'); ?>％</td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.PayRatio'); ?>％</td>
 					<th>発令年月日</th>
-					<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($kihonInfo, 'QtMeisaiHiwari.DailyRateStartDate')); ?></td>
+					<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($commonInfo, 'QtMeisaiHiwari.DailyRateStartDate')); ?></td>
 					<th>日割日数</th>
-					<td><?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.ObjectDays'); ?>/<?php echo Hash::get($kihonInfo, 'QtMeisaiHiwari.RequestedWorkingDaysOfMonth'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.ObjectDays'); ?>/<?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.RequestedWorkingDaysOfMonth'); ?></td>
 				</tr>
 			</table>
 		</div><!-- //.wrap -->
@@ -366,11 +366,11 @@
 				</tr>
 				<tr>
 					<td>B口座</td>
-					<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiInfo, 'QtMeisai.B_Account_RemitAmount')); ?></td>
-					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.B_Account_BankCD'); ?></td>
-					<td>NNNNNNNN</td>
-					<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.B_Account_BranchCD'); ?></td>
-					<td>NNNNNNNN</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
 			</table>
 		</div><!-- //#tab01content -->
@@ -460,7 +460,6 @@
 							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.OtherDay'); ?>日</td>
 							<td>／</td>
 							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.OtherMonth'); ?>月</td>
-							<td><button type="button" name="" value="" class="btn01">単価</button></td>
 						</tr>
 					</table>
 					<table class="tbl02">
@@ -960,48 +959,48 @@
 								<col style="width: 68%;">
 								<col style="width: 32%;">
 								<tr>
-									<td><p title="125">125</p></td>
-									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal125'); ?></p></td>
+									<td><p>125</p></td>
+									<td><p><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal125'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="150">150</p></td>
-									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal150'); ?></p></td>
+									<td><p>150</p></td>
+									<td><p><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal150'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="135">135</p></td>
-									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal135'); ?></p></td>
+									<td><p>135</p></td>
+									<td><p><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal135'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="160">160</p></td>
-									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal160'); ?></p></td>
+									<td><p>160</p></td>
+									<td><p><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal160'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="100">100</p></td>
-									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal100'); ?></p></td>
+									<td><p>100</p></td>
+									<td><p><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal100'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="25">25</p></td>
-									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal25'); ?></p></td>
+									<td><p>25</p></td>
+									<td><p><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal25'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="前月25">前月25</p></td>
-									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal25_Pre'); ?></p></td>
+									<td><p>前月25</p></td>
+									<td><p><?php echo Hash::get($meisaiInfo, 'QtMeisai.OverTimesTotal25_Pre'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="割増150">割増150</p></td>
-									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.Over60TimesTotal150'); ?></p></td>
+									<td><p>割増150</p></td>
+									<td><p><?php echo Hash::get($meisaiInfo, 'QtMeisai.Over60TimesTotal150'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="割増175">割増175</p></td>
-									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.Over60TimesTotal175'); ?></p></td>
+									<td><p>割増175</p></td>
+									<td><p><?php echo Hash::get($meisaiInfo, 'QtMeisai.Over60TimesTotal175'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="割増50">割増50</p></td>
-									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.Over60TimesTotal50'); ?></p></td>
+									<td><p>割増50</p></td>
+									<td><p><?php echo Hash::get($meisaiInfo, 'QtMeisai.Over60TimesTotal50'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="割増前50">割増前50</p></td>
-									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.Over60TimesTotal50_Pre'); ?></p></td>
+									<td><p>割増前50</p></td>
+									<td><p><?php echo Hash::get($meisaiInfo, 'QtMeisai.Over60TimesTotal50_Pre'); ?></p></td>
 								</tr>
 							</table>
 						</div>
@@ -1045,11 +1044,11 @@
 										<col style="width: 13.0%;">
 										<?php foreach ($meisaiUchiChokinList as $meisaiUchiChokin): ?>
 											<tr>
-												<td><p title="XXXX"><?php echo Hash::get($meisaiUchiChokin, 'QtMeisaiUchiChokin.AllowDetailCD'); ?></p></td>
-												<td><p title="XXXXXXXXXXXX"><?php echo Hash::get($meisaiUchiChokin, 'QtMeisaiUchiChokin.AccountCD'); ?></p></td>
-												<td><p title="NNNNNNNNNN"><?php echo Hash::get($meisaiUchiChokin, 'QtMeisaiUchiChokin.CodeName_AccountName'); ?></p></td>
-												<td><p title="ZZZ"><?php echo Hash::get($meisaiUchiChokin, 'QtMeisaiUchiChokin.WorkHours_OT'); ?></p></td>
-												<td><p title="Z,ZZZ,ZZZ"><?php echo Hash::get($meisaiUchiChokin, 'QtMeisaiUchiChokin.Payments'); ?></p></td>
+												<td><p><?php echo Hash::get($meisaiUchiChokin, 'QtMeisaiUchiChokin.AllowDetailCD'); ?></p></td>
+												<td><p><?php echo Hash::get($meisaiUchiChokin, 'QtMeisaiUchiChokin.AccountCD'); ?></p></td>
+												<td><p><?php echo Hash::get($meisaiUchiChokin, 'QtMeisaiUchiChokin.CodeName_AccountShortName'); ?></p></td>
+												<td><p><?php echo Hash::get($meisaiUchiChokin, 'QtMeisaiUchiChokin.WorkHours_OT'); ?></p></td>
+												<td><p><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiChokin, 'QtMeisaiUchiChokin.Payments')); ?></p></td>
 											</tr>
 										<?php endforeach; ?>
 									</table>
@@ -1074,7 +1073,7 @@
 									<th>《時間数合計》</th>
 								</tr>
 								<tr>
-									<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.HolidayWorkTimesTotal'); ?></p></td>
+									<td><p><?php echo Hash::get($meisaiInfo, 'QtMeisai.HolidayWorkTimesTotal'); ?></p></td>
 								</tr>
 								<tr>
 									<td><p>&nbsp;</p></td>
@@ -1101,7 +1100,7 @@
 								<th>《時間数合計》</th>
 							</tr>
 							<tr>
-								<td><p title="ZZZ"><?php echo Hash::get($meisaiInfo, 'QtMeisai.NightShiftTimesTotal'); ?></p></td>
+								<td><p><?php echo Hash::get($meisaiInfo, 'QtMeisai.NightShiftTimesTotal'); ?></p></td>
 							</tr>
 						</table><!-- //タイトル -->
 					</div>
@@ -1144,11 +1143,11 @@
 										<col style="width: 13.0%;">
 										<?php foreach ($meisaiUchiKyujitukyuList as $meisaiUchiKyujitukyu): ?>
 											<tr>
-												<td><p title="XXXX"><?php echo Hash::get($meisaiUchiKyujitukyu, 'QtMeisaiUchiKyujitukyu.AllowDetailCD'); ?></p></td>
-												<td><p title="XXXXXXXXXXXX"><?php echo Hash::get($meisaiUchiKyujitukyu, 'QtMeisaiUchiKyujitukyu.AccountCD'); ?></p></td>
-												<td><p title="NNNNNNNNNN"><?php echo Hash::get($meisaiUchiKyujitukyu, 'QtMeisaiUchiKyujitukyu.CodeName_AccountName'); ?></p></td>
-												<td><p title="ZZZ"><?php echo Hash::get($meisaiUchiKyujitukyu, 'QtMeisaiUchiKyujitukyu.WorkHours_HO'); ?></p></td>
-												<td><p title="Z,ZZZ,ZZZ"><?php echo Hash::get($meisaiUchiKyujitukyu, 'QtMeisaiUchiKyujitukyu.Payments'); ?></p></td>
+												<td><p><?php echo Hash::get($meisaiUchiKyujitukyu, 'QtMeisaiUchiKyujitukyu.AllowDetailCD'); ?></p></td>
+												<td><p><?php echo Hash::get($meisaiUchiKyujitukyu, 'QtMeisaiUchiKyujitukyu.AccountCD'); ?></p></td>
+												<td><p><?php echo Hash::get($meisaiUchiKyujitukyu, 'QtMeisaiUchiKyujitukyu.CodeName_AccountShortName'); ?></p></td>
+												<td><p><?php echo Hash::get($meisaiUchiKyujitukyu, 'QtMeisaiUchiKyujitukyu.WorkHours_HO'); ?></p></td>
+												<td><p><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiKyujitukyu, 'QtMeisaiUchiKyujitukyu.Payments')); ?></p></td>
 											</tr>
 										<?php endforeach; ?>
 									</table>
@@ -1189,11 +1188,11 @@
 										<col style="width: 13.0%;">
 										<?php foreach ($meisaiUchiYakinList as $meisaiUchiYakin): ?>
 											<tr>
-												<td><p title="XXXX"><?php echo Hash::get($meisaiUchiYakin, 'QtMeisaiUchiYakin.AllowDetailCD'); ?></p></td>
-												<td><p title="XXXXXXXXXXXX"><?php echo Hash::get($meisaiUchiYakin, 'QtMeisaiUchiYakin.AccountCD'); ?></p></td>
-												<td><p title="NNNNNNNNNN"><?php echo Hash::get($meisaiUchiYakin, 'QtMeisaiUchiYakin.CodeName_AccountName'); ?></p></td>
-												<td><p title="ZZZ"><?php echo Hash::get($meisaiUchiYakin, 'QtMeisaiUchiYakin.WorkHours_ON'); ?></p></td>
-												<td><p title="Z,ZZZ,ZZZ"><?php echo Hash::get($meisaiUchiYakin, 'QtMeisaiUchiYakin.Payments'); ?></p></td>
+												<td><p><?php echo Hash::get($meisaiUchiYakin, 'QtMeisaiUchiYakin.AllowDetailCD'); ?></p></td>
+												<td><p><?php echo Hash::get($meisaiUchiYakin, 'QtMeisaiUchiYakin.AccountCD'); ?></p></td>
+												<td><p><?php echo Hash::get($meisaiUchiYakin, 'QtMeisaiUchiYakin.CodeName_AccountShortName'); ?></p></td>
+												<td><p><?php echo Hash::get($meisaiUchiYakin, 'QtMeisaiUchiYakin.WorkHours_ON'); ?></p></td>
+												<td><p><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiYakin, 'QtMeisaiUchiYakin.Payments')); ?></p></td>
 											</tr>
 										<?php endforeach; ?>
 									</table>
@@ -1271,9 +1270,9 @@
 									<td><?php echo Hash::get($meisaiUchiTokkin, 'QtMeisaiUchiTokkin.AllowDetailCD'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiTokkin, 'QtMeisaiUchiTokkin.CodeName_AllowDetailName'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiTokkin, 'QtMeisaiUchiTokkin.AccountCD'); ?></td>
-									<td><?php echo Hash::get($meisaiUchiTokkin, 'QtMeisaiUchiTokkin.CodeName_AccountName'); ?></td>
+									<td><?php echo Hash::get($meisaiUchiTokkin, 'QtMeisaiUchiTokkin.CodeName_AccountShortName'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiTokkin, 'QtMeisaiUchiTokkin.WorkTiimes_UQ'); ?></td>
-									<td><?php echo Hash::get($meisaiUchiTokkin, 'QtMeisaiUchiTokkin.Payments'); ?></td>
+									<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiTokkin, 'QtMeisaiUchiTokkin.Payments')); ?></td>
 								<?php // 偶数個目のデータのときはtr終了タグを入れる ?>
 								<?php if($num % 2 === 0){ ?>
 								</tr>
@@ -1352,9 +1351,9 @@
 									<td><?php echo Hash::get($meisaiUchiShuku, 'QtMeisaiUchiShuku.AllowDetailCD'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiShuku, 'QtMeisaiUchiShuku.CodeName_AllowDetailName'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiShuku, 'QtMeisaiUchiShuku.AccountCD'); ?></td>
-									<td><?php echo Hash::get($meisaiUchiShuku, 'QtMeisaiUchiShuku.CodeName_AccountName'); ?></td>
+									<td><?php echo Hash::get($meisaiUchiShuku, 'QtMeisaiUchiShuku.CodeName_AccountShortName'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiShuku, 'QtMeisaiUchiShuku.WorkTimes_ND'); ?></td>
-									<td><?php echo Hash::get($meisaiUchiShuku, 'QtMeisaiUchiShuku.Payments'); ?></td>
+									<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiShuku, 'QtMeisaiUchiShuku.Payments')); ?></td>
 								<?php // 偶数個目のデータのときはtr終了タグを入れる ?>
 								<?php if($num % 2 === 0){ ?>
 								</tr>
@@ -1433,9 +1432,9 @@
 									<td><?php echo Hash::get($meisaiUchiKantoku, 'QtMeisaiUchiKantoku.AllowDetailCD'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiKantoku, 'QtMeisaiUchiKantoku.CodeName_AllowDetailName'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiKantoku, 'QtMeisaiUchiKantoku.AccountCD'); ?></td>
-									<td><?php echo Hash::get($meisaiUchiKantoku, 'QtMeisaiUchiKantoku.CodeName_AccountName'); ?></td>
+									<td><?php echo Hash::get($meisaiUchiKantoku, 'QtMeisaiUchiKantoku.CodeName_AccountShortName'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiKantoku, 'QtMeisaiUchiKantoku.WorkTimes_AU'); ?></td>
-									<td><?php echo Hash::get($meisaiUchiKantoku, 'QtMeisaiUchiKantoku.Payments'); ?></td>
+									<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiKantoku, 'QtMeisaiUchiKantoku.Payments')); ?></td>
 								<?php // 偶数個目のデータのときはtr終了タグを入れる ?>
 								<?php if($num % 2 === 0){ ?>
 								</tr>
@@ -1476,10 +1475,10 @@
 							<td><?php echo Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.AllowDetailCD'); ?></td>
 							<td><?php echo Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.CodeName_AllowDetailName'); ?></td>
 							<td><?php echo Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.AccountCD'); ?></td>
-							<td><?php echo Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.CodeName_AccountName'); ?></td>
+							<td><?php echo Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.CodeName_AccountShortName'); ?></td>
 							<td><?php echo Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.EfficiencyWagesTimes'); ?></td>
-							<td><?php echo Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.EfficiencyWagesAmount'); ?></td>
-							<td><?php echo Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.Payments'); ?></td>
+							<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.EfficiencyWagesAmount')); ?></td>
+							<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.Payments')); ?></td>
 						</tr>
 					<?php endforeach; ?>
 					</table>
@@ -1508,12 +1507,12 @@
 							<tr>
 								<td>&nbsp;</td>
 								<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.TravelExpTypeCD'); ?></td>
-								<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.CodeName_TravelExpTypeCD'); ?></td>
+								<td>NNNNNNNN</td>
 								<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.ExpendDepCD'); ?></td>
-								<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.CodeName_ExpendDepName'); ?></td>
+								<td>NNNNNNNN</td>
 								<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.AccountCD'); ?></td>
-								<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.CodeName_AccountName'); ?></td>
-								<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.ExpenseAmount'); ?></td>
+								<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.CodeName_AccountShortName'); ?></td>
+								<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.ExpenseAmount')); ?></td>
 							</tr>
 						<?php endforeach; ?>
 					</table>
@@ -1541,7 +1540,7 @@
 							<td><?php echo Hash::get($meisaiUchiSonotasikyu, 'QtMeisaiUchiSonotasikyu.EtcTypeCD'); ?></td>
 							<td><?php echo Hash::get($meisaiUchiSonotasikyu, 'QtMeisaiUchiSonotasikyu.CodeName_EtcTypeName'); ?></td>
 							<td><?php echo Hash::get($meisaiUchiSonotasikyu, 'QtMeisaiUchiSonotasikyu.SeqNo'); ?></td>
-							<td><?php echo Hash::get($meisaiUchiSonotasikyu, 'QtMeisaiUchiSonotasikyu.Amounts'); ?></td>
+							<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiSonotasikyu, 'QtMeisaiUchiSonotasikyu.Amounts')); ?></td>
 						<?php // 偶数個目のデータのときはtr終了タグを入れる ?>
 						<?php if($num % 2 === 0){ ?>
 						</tr>
@@ -1583,9 +1582,9 @@
 						<?php } ?>
 							<td>&nbsp;</td>
 							<td><?php echo Hash::get($meisaiUchiFukurikojo, 'QtMeisaiUchiFukurikojo.DeductionCD'); ?></td>
-							<td><?php echo Hash::get($meisaiUchiFukurikojo, 'QtMeisaiUchiFukurikojo.CodeName_DeductionName'); ?></td>
+							<td>NNNNNNNNNN</td>
 							<td><?php echo Hash::get($meisaiUchiFukurikojo, 'QtMeisaiUchiFukurikojo.ReminderCnt'); ?></td>
-							<td><?php echo Hash::get($meisaiUchiFukurikojo, 'QtMeisaiUchiFukurikojo.Amounts'); ?></td>
+							<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiFukurikojo, 'QtMeisaiUchiFukurikojo.Amounts')); ?></td>
 						<?php // 偶数個目のデータのときはtr終了タグを入れる ?>
 						<?php if($num % 2 === 0){ ?>
 						</tr>
@@ -1628,9 +1627,9 @@
 							<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.AllowDetailCD'); ?></td>
 							<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.CodeName_AllowDetailName'); ?></td>
 							<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.AccountCD'); ?></td>
-							<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.CodeName_AccountCD'); ?></td>
+							<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.CodeName_AccountShortName'); ?></td>
 							<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.WorkTimes_LW'); ?></td>
-							<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.Payments'); ?></td>
+							<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.Payments')); ?></td>
 						</tr>
 					<?php endforeach; ?>
 					</table>

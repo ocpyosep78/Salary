@@ -7,7 +7,10 @@ App::uses('AppController', 'Controller');
  */
 class TopsController extends AppController {
 
-	public $uses = array('MgrPositionMaster', 'ZAllowanceDetailNamemaster', 'JmSyokuinKubun', 'QmKyuyoTaikei', 'JmSyokuso', 'JobCategoryMaster', 'ZSalaryTableNamemaster', 'ZAttendanceReason', 'ZDetachmentAllowDivmaster', 'BankMaster');
+	public $uses = array('MgrPositionMaster', 'ZAllowanceDetailNamemaster', 'JmSyokuinKubun', 'QmKyuyoTaikei',
+							'JmSyokuso', 'JobCategoryMaster', 'ZSalaryTableNamemaster', 'ZAttendanceReason', 'ZDetachmentAllowDivmaster',
+								'BankMaster', 'QmKamoku', 'CzSikyuSyubetu', 'JmShozoku', 'ZSalaryTableClsName'
+	);
 
 	/**
 	 * 初期表示
@@ -50,6 +53,22 @@ class TopsController extends AppController {
 		$results = $this->BankMaster->find('all', array('conditions' => array('delete_flg' => 0)));
 		$this->__saveCacheForCodeName($results, 'BankMaster', 'BankCode', array('BankNameKana'));
 		$this->__saveCacheForCodeName($results, 'BankMaster', 'BankBranchCode', array('BankBrancheName'));
+
+		// 科目テーブル
+		$results = $this->QmKamoku->find('all', array('conditions' => array('delete_flg' => 0)));
+		$this->__saveCacheForCodeName($results, 'QmKamoku', 'AccountCD', array('AccountName', 'AccountShortName'));
+
+		// 支給種別CDマスタ
+		$results = $this->CzSikyuSyubetu->find('all', array('conditions' => array('delete_flg' => 0)));
+		$this->__saveCacheForCodeName($results, 'CzSikyuSyubetu', 'EtcTypeCD', array('EtcTypeName', 'EtcTypeSName'));
+
+		// 所属マスタ
+		$results = $this->JmShozoku->find('all', array('conditions' => array('delete_flg' => 0)));
+		$this->__saveCacheForCodeName($results, 'JmShozoku', 'DepCD', array('DeptName', 'DeptShortName'));
+
+		// 給料表級名称マスタ
+		$results = $this->ZSalaryTableClsName->find('all', array('conditions' => array('delete_flg' => 0)));
+		$this->__saveCacheForCodeName($results, 'ZSalaryTableClsName', 'SalaryClass', array('SalaryClassName', 'SalaryClassNameShort'));
 	}
 
 	/**
