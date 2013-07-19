@@ -133,9 +133,16 @@ Configure::write('CACHE_KEY_MAP',array(
 	'AccountCD' => array('AccountName', 'AccountShortName'),
 	// 支給種別CDマスタ
 	'EtcTypeCD' => array('EtcTypeName', 'EtcTypeSName'),
-	// 支給種別CDマスタ
+	// 所属マスタ
 	'DepCD' => array('DeptName', 'DeptShortName'),
+	'ExpendDepCD' => array('DeptName', 'DeptShortName'),
 	// 給料表級名称マスタ
 	'SalaryClass' => array('SalaryClassName', 'SalaryClassNameShort'),
+	// 現給保障区分マスタ
+	'SalaryGuaranteeFlg' => array('SalaryGuaranteeDivName', 'SalaryGuaranteeDivShortName'),
+	// 手当コードマスタ
+	'TravelExpTypeCD' => array('AllowanceName', 'AllowanceShortName'),
+	// 福利控除金種別マスタ
+	'DeductionCD' => array('BenefitDeductMoneyTypeName'),
 ));
 ?>

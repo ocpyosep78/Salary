@@ -77,4 +77,42 @@ class BankMaster extends AppModel {
 			),
 		),
 	);
+	
+	/**
+	 * 銀行名称と支店名称を取得する
+	 * 
+	 * @param string $bankCode       銀行CD
+	 * @param string $bankBranchCode 店舗コード
+	 * 
+	 * @return array 銀行名と銀行支店名の配列。検索結果が無いときは、そろぞれに空文字を格納した配列を返す
+	 */
+	public function getBankName($bankCode, $bankBranchCode) {
+		$returnArray = array(
+			'BankNameKana'    => '',
+			'BankBrancheName' => '',
+		);
+		
+		$this->recursive = -1;
+		
+		// 検索条件の設定
+		$searchCondition = array();
+		$searchCondition['BankCode']       = $bankCode;       // 支給年月
+		$searchCondition['BankBranchCode'] = $bankBranchCode; // 職員番号
+		$searchCondition['delete_flg']     = '0';             // 削除フラグ
+		
+		// 検索パラメータの設定
+		$params = array(
+			'conditions' => $searchCondition
+		);
+		
+		// 検索
+		$result = $this->find('first', $params);
+		
+		if(!empty($result)) {
+			$returnArray['BankNameKana']    = $result['BankMaster']['BankNameKana'];
+			$returnArray['BankBrancheName'] = $result['BankMaster']['BankBrancheName'];
+		}
+		
+		return $returnArray;
+	}
 }

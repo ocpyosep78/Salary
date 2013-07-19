@@ -9,7 +9,8 @@ class TopsController extends AppController {
 
 	public $uses = array('MgrPositionMaster', 'ZAllowanceDetailNamemaster', 'JmSyokuinKubun', 'QmKyuyoTaikei',
 							'JmSyokuso', 'JobCategoryMaster', 'ZSalaryTableNamemaster', 'ZAttendanceReason', 'ZDetachmentAllowDivmaster',
-								'BankMaster', 'QmKamoku', 'CzSikyuSyubetu', 'JmShozoku', 'ZSalaryTableClsName'
+								'QmKamoku', 'CzSikyuSyubetu', 'JmShozoku', 'ZSalaryTableClsName', 'ZSalaryGuaranteeDivmaster', 'QmTeateCd',
+									'CzFukurikojoShubetsu'
 	);
 
 	/**
@@ -49,11 +50,6 @@ class TopsController extends AppController {
 		$results = $this->ZAttendanceReason->find('all', array('conditions' => array('DeleteFlg' => 0)));
 		$this->__saveCacheForCodeName($results, 'ZAttendanceReason', 'ID', array('NAME'));
 
-		// 銀行マスタ
-		$results = $this->BankMaster->find('all', array('conditions' => array('delete_flg' => 0)));
-		$this->__saveCacheForCodeName($results, 'BankMaster', 'BankCode', array('BankNameKana'));
-		$this->__saveCacheForCodeName($results, 'BankMaster', 'BankBranchCode', array('BankBrancheName'));
-
 		// 科目テーブル
 		$results = $this->QmKamoku->find('all', array('conditions' => array('delete_flg' => 0)));
 		$this->__saveCacheForCodeName($results, 'QmKamoku', 'AccountCD', array('AccountName', 'AccountShortName'));
@@ -69,6 +65,18 @@ class TopsController extends AppController {
 		// 給料表級名称マスタ
 		$results = $this->ZSalaryTableClsName->find('all', array('conditions' => array('delete_flg' => 0)));
 		$this->__saveCacheForCodeName($results, 'ZSalaryTableClsName', 'SalaryClass', array('SalaryClassName', 'SalaryClassNameShort'));
+		
+		// 現給保障区分マスタ
+		$results = $this->ZSalaryGuaranteeDivmaster->find('all', array('conditions' => array('delete_flg' => 0)));
+		$this->__saveCacheForCodeName($results, 'ZSalaryGuaranteeDivmaster', 'SalaryGuaranteeDivCD', array('SalaryGuaranteeDivName', 'SalaryGuaranteeDivShortName'));
+		
+		// 手当コードマスタ
+		$results = $this->QmTeateCd->find('all', array('conditions' => array('delete_flg' => 0)));
+		$this->__saveCacheForCodeName($results, 'QmTeateCd', 'AllowanceCD', array('AllowanceName', 'AllowanceShortName'));
+		
+		// 福利控除金種別マスタ
+		$results = $this->CzFukurikojoShubetsu->find('all', array('conditions' => array('delete_flg' => 0)));
+		$this->__saveCacheForCodeName($results, 'CzFukurikojoShubetsu', 'BenefitDeductMoneyTypeCD', array('BenefitDeductMoneyTypeName'));
 	}
 
 	/**

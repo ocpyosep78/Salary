@@ -57,4 +57,35 @@ class ZSalaryTableNamemaster extends AppModel {
 			),
 		),
 	);
+	
+	/**
+	 * 給料表名称を取得する
+	 * 
+	 * @param string $salaryTableCD 給料表CD
+	 * 
+	 * @return string 
+	 */
+	public function getSalaryTableName($salaryTableCD) {
+		$salaryTableName = '';
+		
+		$this->recursive = -1;
+		
+		// 検索条件の設定
+		$searchCondition = array();
+		$searchCondition['SalaryTableCD'] = $salaryTableCD; // 給料表CD
+		
+		// 検索パラメータの設定
+		$params = array(
+			'conditions' => $searchCondition,
+		);
+		
+		// 検索
+		$result = $this->find('first', $params);
+		
+		if(!empty($result)) {
+			$salaryTableName = $result['ZSalaryTableNamemaster']['SalaryTableName'];
+		}
+		
+		return $salaryTableName;
+	}
 }
