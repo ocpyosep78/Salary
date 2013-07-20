@@ -32,7 +32,7 @@ class M061sController extends CommonController {
  	 * 検索結果はList構造で返却
  	 */
 	public function search() {
-
+		
 		// ********************  画面からのデータ受け取り  ********************
 
 		// 前画面からの検索条件の受け取り（職員番号、支給年月、支払者）

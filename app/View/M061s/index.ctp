@@ -102,18 +102,18 @@
 			<table class="tbl01">
 				<tr>
 					<th>給料/報酬</th>
-					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryTableCD'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryTable'); ?></td>
 					<td>NNNNNN</td>
-					<td>XX-XXX</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryClass'); ?>-<?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryGrade'); ?></td>
 					<td>NN</td>
 					<td>Z,ZZZ,ZZZ円</td>
 					<td><label><input type="checkbox" name="" value="">清掃加算対象</label></td>
 					<th>現給保障</th>
 					<td>NNN</td>
 					<th>現在の保障額</th>
-					<td>XX</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.TableOnGuarantTable'); ?></td>
 					<td>NNNNNN</td>
-					<td>XX-XXX</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.GradeOnGuarantTable'); ?>-<?php echo Hash::get($commonInfo, 'QtSeitoHiwari.ClassOnGuarantTable'); ?></td>
 					<td>Z,ZZZ,ZZZ円</td>
 				</tr>
 			</table>
@@ -122,35 +122,35 @@
 				<tr>
 					<th>勤務態様</th>
 					<th>一日</th>
-					<td>ZZ時間ZZ分</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.WorkingTimesOfDayHour'); ?>時間<?php echo Hash::get($commonInfo, 'QtSeitoHiwari.WorkingTimesOfDayMinute'); ?>分</td>
 					<th>一週間</th>
-					<td>Z日勤務</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.WorkingDaysOfWeek'); ?>日勤務</td>
 					<th>週の勤務時間</th>
-					<td>ZZ時間ZZ分</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.WorkingTimesOfWeekHour'); ?>時間<?php echo Hash::get($commonInfo, 'QtSeitoHiwari.WorkingTimesOfWeekMinute'); ?>分</td>
 					<th>月の勤務日数</th>
-					<td>ZZ日</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.WorkingDaysOfMonth'); ?>日</td>
 					<th>年の勤務日数</th>
-					<td>ZZZ日</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.WorkingDaysOfYear'); ?>日</td>
 					<th>その他</th>
-					<td>ZZZ日</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.OtherDay'); ?>日</td>
 					<td>／</td>
-					<td>ZZ月</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.OtherMonth'); ?>月</td>
 				</tr>
 			</table>
 <!-- 5行目 -->
 			<table class="tbl01">
 				<tr>
 					<th>勤怠事由</th>
-					<td>XXXX</td>
-					<td>NNNNNN</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.AttendanceOrderedReasonCD'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_NAME'); ?></td>
 					<th>支給割合</th>
-					<td>ZZZ％</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.PayRatio'); ?>％</td>
 					<th>発令年月日</th>
-					<td>GGYY.MM.DD</td>
+					<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($commonInfo, 'QtSeitoHiwari.DailyRateStartDate')); ?></td>
 					<th>日割日数</th>
-					<td>ZZ</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.ObjectDays'); ?></td>
 					<td>／</td>
-					<td>ZZ</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.RequestedWorkingDaysOfMonth'); ?></td>
 				</tr>
 			</table>
 		</div><!-- //.wrap -->
@@ -165,32 +165,50 @@
 				<tr>
 					<th>給料/報酬</th>
 					<th>発令給</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td>
+						<?php
+							if(is_numeric(Hash::get($koteiInfo, 'QtSeitoKotei.SalaryPaidAmoTotal_PreReduce')) && is_numeric(Hash::get($koteiInfo, 'QtSeitoKotei.MonthlyRewardTotal_PreReduce'))){
+								$hatsureikyuu = Hash::get($koteiInfo, 'QtSeitoKotei.SalaryPaidAmoTotal_PreReduce') + Hash::get($koteiInfo, 'QtSeitoKotei.MonthlyRewardTotal_PreReduce');
+							} else {
+								$hatsureikyuu = null;
+							}
+						?>
+						<?php echo $this->SalaryForm->number_format($hatsureikyuu); ?>
+					</td>
 					<th>超過勤務手当</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.OverTimeWorkAllow')); ?></td>
 					<th>《1日現在単価》</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"></td>
 
 					<th>共済</th>
 					<th>長期</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.MultiAidLongTermPrem')); ?></td>
 					<th>期末</th>
 					<th>共済</th>
 					<th>長期</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTerm_MultiAidLTPrem')); ?></td>
 				</tr>
 				<tr>
 					<th>&nbsp;</th>
 					<th>支給額</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td>
+						<?php
+							if(is_numeric(Hash::get($koteiInfo, 'QtSeitoKotei.SalaryPaidAmoTotal')) && is_numeric(Hash::get($koteiInfo, 'QtSeitoKotei.MonthlyRewardTotal'))){
+								$sikyuugaku = Hash::get($koteiInfo, 'QtSeitoKotei.SalaryPaidAmoTotal') + Hash::get($koteiInfo, 'QtSeitoKotei.MonthlyRewardTotal');
+							} else {
+								$sikyuugaku = null;
+							}
+						?>
+						<?php echo $this->SalaryForm->number_format($sikyuugaku); ?>
+					</td>
 					<th>休日給</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.HolidayWorkAllow')); ?></td>
 					<th class="td01">100</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.UnitPrcPerHour100')); ?></td>
 
 					<th>&nbsp;</th>
 					<th>短期</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.SocialInsHealthInsPrem')); ?></td>
 					<th>&nbsp;</th>
 					<th></th>
 					<th>短期</th>
