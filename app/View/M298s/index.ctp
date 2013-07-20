@@ -410,14 +410,14 @@
 							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.CodeName_SalaryTypeName'); ?></td>
 							<th>所属</th>
 							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.DepCD'); ?></td>
-							<td>N・NN・NNNNN</td>
+							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.CodeName_DeptShortName'); ?></td>
 							<th>職層</th>
 							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.JobGradeCD'); ?></td>
 							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.CodeName_JobGradeName'); ?></td>
 							<th>職務</th>
 							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.JobDutyCD'); ?></td>
 							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.CodeName_JobTypeName'); ?></td>
-							<td>NNNNN</td>
+							<td><?php echo Hash::get($record, 'sweeperYosan'); ?></td>
 						</tr>
 					</table>
 					<table class="tbl02">
@@ -429,16 +429,16 @@
 							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.SalaryTable'); ?></td>
 							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.CodeName_SalaryTableName'); ?></td>
 							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.SalaryClass'); ?>-<?php echo Hash::get($record, 'QtMeisaiHiwari.SalaryGrade'); ?></td>
-							<td>NN</td>
-							<td>Z,ZZZ,ZZZ円</td>
+							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.CodeName_SalaryClassName'); ?></td>
+							<td><?php echo $this->SalaryForm->number_format(Hash::get($record, 'kyuryoHoushuGaku')); ?>円</td>
 							<td><label><input type="checkbox" name="" value="" disabled <?php if(Hash::get($record, 'QtMeisaiHiwari.SweeperAdditionFlg') === '1') echo 'checked'; ?> >清掃加算対象</label></td>
 							<th>現給保障</th>
-							<td>NNN</td>
+							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.CodeName_SalaryGuaranteeDivName'); ?></td>
 							<th>保障額表</th>
 							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.TableOnGuarantTable'); ?></td>
-							<td>NNNNNN</td>
+							<td><?php echo Hash::get($record, 'genkyuHoshoTableName'); ?></td>
 							<td><?php echo Hash::get($record, 'QtMeisaiHiwari.GradeOnGuarantTable'); ?>-<?php echo Hash::get($record, 'QtMeisaiHiwari.ClassOnGuarantTable'); ?></td>
-							<td>Z,ZZZ,ZZZ円</td>
+							<td><?php echo $this->SalaryForm->number_format(Hash::get($record, 'genkyuHoshoKingaku')); ?>円</td>
 						</tr>
 					</table>
 					<table class="tbl02">

@@ -94,7 +94,7 @@ class M298sController extends CommonController {
 			$sweeperYosan = '人事課予算';
 		} else {
 			// 臨時職員予算区分が2および1ではないとき（想定値：0）
-			if($commonInfo['QtMeisaiHiwari']['TempEmpPreDiv'] == '1'){
+			if($commonInfo['QtMeisaiHiwari']['SweeperFlg'] == '1'){
 				// 清掃職員フラグが1のとき
 				$sweeperYosan = '清掃職員';
 			}
@@ -117,7 +117,7 @@ class M298sController extends CommonController {
 		$this->tab01($meisaiInfo, $meisaiUchiSonotasikyuList);
 
 		// タブ02：日割情報
-		$this->tab02($hiwariAllInfo);
+		$this->tab02($searchCondition['PaidYM'], $hiwariAllInfo);
 
 		// タブ05：超勤・休日・夜勤
 		$this->tab05($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
@@ -245,9 +245,10 @@ class M298sController extends CommonController {
 	/**
 	 * 支給明細照会　タブ02：日割情報
 	 *
-	 * @param array テーブル[支給明細データ：日割]から取得したデータ
+	 * @param string $paidYm        支給年月の入力値
+	 * @param array  $hiwariAllInfo テーブル[支給明細データ：日割]から取得したデータ
 	 */
-	private function tab02($hiwariAllInfo) {
+	private function tab02($paidYm, $hiwariAllInfo) {
 
 		// レコード数が1件or複数の判定フラグを作成する
 		$hiwariMultiRecordFlg = false;
@@ -273,6 +274,35 @@ class M298sController extends CommonController {
 					$i++;
 				}
 			}
+		}
+
+		// 清掃／臨職の表示内容等、個別に設定する必要があるものの設定を行う
+		foreach($hiwariInfo as $key => $record){
+			// 清掃／臨職の表示内容を判定する
+			$sweeperYosan = '';
+			if($record['QtMeisaiHiwari']['TempEmpPreDiv'] == '2') {
+				// 臨時職員予算区分が2のとき
+				$sweeperYosan = '事業課予算';
+			} elseif($record['QtMeisaiHiwari']['TempEmpPreDiv'] == '1') {
+				// 臨時職員予算区分が1のとき
+				$sweeperYosan = '人事課予算';
+			} else {
+				// 臨時職員予算区分が2および1ではないとき（想定値：0）
+				if($record['QtMeisaiHiwari']['SweeperFlg'] == '1'){
+					// 清掃職員フラグが1のとき
+					$sweeperYosan = '清掃職員';
+				}
+			}
+			$hiwariInfo[$key]['sweeperYosan'] = $sweeperYosan;
+			
+			// 給料/報酬の金額を取得する
+			$hiwariInfo[$key]['kyuryoHoushuGaku'] = $this->QmKyuryoChild->getSumAddAllow($paidYm, $record['QtMeisaiHiwari']['SalaryTable'], $record['QtMeisaiHiwari']['SalaryClass'], $record['QtMeisaiHiwari']['SalaryGrade']);
+			
+			// 現給保障 表(名称)を取得する
+			$hiwariInfo[$key]['genkyuHoshoTableName'] = $this->ZSalaryTableNamemaster->getSalaryTableName($record['QtMeisaiHiwari']['SalaryTable']);
+			
+			// 現給保障の金額を取得する
+			$hiwariInfo[$key]['genkyuHoshoKingaku'] = $this->QmHoshogaku->getAmounts($paidYm, $record['QtMeisaiHiwari']['SalaryTable'], $record['QtMeisaiHiwari']['SalaryClass'], $record['QtMeisaiHiwari']['SalaryGrade']);
 		}
 
 		// 配列を組み替える（支給年月日が同一のレコード同士をグルーピングする）
