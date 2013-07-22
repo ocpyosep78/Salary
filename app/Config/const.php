@@ -76,6 +76,22 @@ $const_labels = array(
 			'PayerName' => array('symbol' => '', 'name' => '支払者区分名'),
 		)
 	),
+	// 検索結果表示項目：人事基本情報
+	'VIEW_COLUMN_JTKIHONKIHON' => array(
+		'labels' => array(
+			'EmpNo' => array('symbol' => '', 'name' => '職員番号'),
+			'FamilyName' => array('symbol' => '', 'name' => '氏名_氏'),
+			'FirstName' => array('symbol' => '', 'name' => '氏名_名'),
+		)
+	),
+	// 検索項目：人事基本情報
+	'SELECT_COLUMN_JTKIHONKIHON' => array(
+		'labels' => array(
+			'EmpNo' => array('symbol' => '', 'name' => '職員番号'),
+			'FamilyName' => array('symbol' => '', 'name' => '氏名_氏'),
+			'FirstName' => array('symbol' => '', 'name' => '氏名_名'),
+		)
+	),
 	// キャッシュのキー
 	'CACHE_KEY' => array(
 		'labels' => array(
