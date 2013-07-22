@@ -103,10 +103,10 @@ class M298sController extends CommonController {
 
 		// 給料/報酬の金額を取得する
 		$commonInfo['kyuryoHoushuGaku'] = $this->QmKyuryoChild->getSumAddAllow($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['SalaryTable'], $commonInfo['QtMeisaiHiwari']['SalaryClass'], $commonInfo['QtMeisaiHiwari']['SalaryGrade']);
-		
+
 		// 現給保障 表(名称)を取得する
 		$commonInfo['genkyuHoshoTableName'] = $this->ZSalaryTableNamemaster->getSalaryTableName($commonInfo['QtMeisaiHiwari']['SalaryTable']);
-		
+
 		// 現給保障の金額を取得する
 		$commonInfo['genkyuHoshoKingaku'] = $this->QmHoshogaku->getAmounts($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['SalaryTable'], $commonInfo['QtMeisaiHiwari']['SalaryClass'], $commonInfo['QtMeisaiHiwari']['SalaryGrade']);
 
@@ -160,12 +160,13 @@ class M298sController extends CommonController {
 	 */
 	private function _initSet() {
 
-		// 画面側でエラーが出ないように空配列や空文字をセットしておく
+		// 画面側でエラーが出ないように空配列等の初期値をセットしておく
 		$searchCondition = array();
 		$personalInfo = array();
 		$meisaiInfo = array();
 		$commonInfo = array();
 		$hiwariInfo = array();
+		$hiwariMultiRecordFlg = false;
 		$uchiSonotaInfo = array();
 		$meisaiUchiChinginList = array();
 		$meisaiUchiFukurikojoList = array();
@@ -186,6 +187,7 @@ class M298sController extends CommonController {
 		$this->set('meisaiInfo', $meisaiInfo);
 		$this->set('commonInfo', $commonInfo);
 		$this->set('hiwariInfo', $hiwariInfo);
+		$this->set('hiwariMultiRecordFlg', $hiwariMultiRecordFlg);
 		$this->set('uchiSonotaInfo', $uchiSonotaInfo);
 		$this->set('meisaiUchiChinginList', $meisaiUchiChinginList);
 		$this->set('meisaiUchiFukurikojoList', $meisaiUchiFukurikojoList);
@@ -213,13 +215,13 @@ class M298sController extends CommonController {
 		// 支給明細情報にA口座の銀行名称、銀行支店名称を設定する
 		$meisaiInfo['QtMeisai']['A_BankNameKana']    = $aBankAry['BankNameKana'];    // 銀行名（カナ）
 		$meisaiInfo['QtMeisai']['A_BankBrancheName'] = $aBankAry['BankBrancheName']; // 銀行支店名（漢字）
-		
+
 		// B口座の銀行名称、銀行支店名称を取得する
 		$bBankAry = $this->BankMaster->getBankName($meisaiInfo['QtMeisai']['B_Account_BankCD'], $meisaiInfo['QtMeisai']['B_Account_BranchCD']);
 		// 支給明細情報にA口座の銀行名称、銀行支店名称を設定する
 		$meisaiInfo['QtMeisai']['B_BankNameKana']    = $bBankAry['BankNameKana'];    // 銀行名（カナ）
 		$meisaiInfo['QtMeisai']['B_BankBrancheName'] = $bBankAry['BankBrancheName']; // 銀行支店名（漢字）
-		
+
 		// その他支給（内、近接地内旅費）を算出する
 		// 算出方法：その他支給内訳.その他支給種別 の　10,11 のカラム"金額"を合算して格納。
 		// 10のカラムの金額と11のカラムの金額を抽出する
@@ -294,13 +296,13 @@ class M298sController extends CommonController {
 				}
 			}
 			$hiwariInfo[$key]['sweeperYosan'] = $sweeperYosan;
-			
+
 			// 給料/報酬の金額を取得する
 			$hiwariInfo[$key]['kyuryoHoushuGaku'] = $this->QmKyuryoChild->getSumAddAllow($paidYm, $record['QtMeisaiHiwari']['SalaryTable'], $record['QtMeisaiHiwari']['SalaryClass'], $record['QtMeisaiHiwari']['SalaryGrade']);
-			
+
 			// 現給保障 表(名称)を取得する
 			$hiwariInfo[$key]['genkyuHoshoTableName'] = $this->ZSalaryTableNamemaster->getSalaryTableName($record['QtMeisaiHiwari']['SalaryTable']);
-			
+
 			// 現給保障の金額を取得する
 			$hiwariInfo[$key]['genkyuHoshoKingaku'] = $this->QmHoshogaku->getAmounts($paidYm, $record['QtMeisaiHiwari']['SalaryTable'], $record['QtMeisaiHiwari']['SalaryClass'], $record['QtMeisaiHiwari']['SalaryGrade']);
 		}

@@ -127,4 +127,34 @@ class QtSeitoUchiChokin extends AppModel {
 			),
 		),
 	);
+
+	/**
+	 * 正当支給データ：超勤内訳のレコードを取得する
+	 *
+	 * @param $paidYm   支給年月
+	 * @param $empNo    職員番号
+	 * @param $payerDiv 支払者区分
+	 * @return 検索結果レコード
+	 */
+	public function findSeitoUchiChokin($paidYm, $empNo, $payerDiv) {
+
+		$this->recursive = -1;
+
+		// 検索条件の設定
+		$searchCondition = array();
+		$searchCondition['PaidYM']     = $paidYm;   // 支給年月
+		$searchCondition['EmpNo']      = $empNo;    // 職員番号
+		$searchCondition['PayerDiv']   = $payerDiv; // 支払者区分
+		$searchCondition['delete_flg'] = '0';       // 削除フラグ
+
+		// 検索パラメータの設定
+		$params = array(
+			'conditions' => $searchCondition
+		);
+
+		// 検索
+		$result = $this->find('all', $params);
+
+		return $result;
+	}
 }

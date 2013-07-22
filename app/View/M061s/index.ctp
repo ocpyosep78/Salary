@@ -70,14 +70,14 @@
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_SalaryTypeName'); ?></td>
 					<th>所属</th>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.DepCD'); ?></td>
-					<td>N・NN・NNNNN</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_DeptShortName'); ?></td>
 					<th>職層</th>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.JobGradeCD'); ?></td>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_JobGradeName'); ?></td>
 					<th>職務</th>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.JobDutyCD'); ?></td>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_JobTypeName'); ?></td>
-					<td>NNNNN</td>
+					<td><?php echo Hash::get($commonInfo, 'sweeperYosan'); ?></td>
 				</tr>
 			</table>
 <!-- 2行目 -->
@@ -103,18 +103,18 @@
 				<tr>
 					<th>給料/報酬</th>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryTable'); ?></td>
-					<td>NNNNNN</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_SalaryTableName'); ?></td>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryClass'); ?>-<?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryGrade'); ?></td>
-					<td>NN</td>
-					<td>Z,ZZZ,ZZZ円</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_SalaryClassName'); ?></td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($commonInfo, 'kyuryoHoushuGaku')); ?>円</td>
 					<td><label><input type="checkbox" name="" value="">清掃加算対象</label></td>
 					<th>現給保障</th>
-					<td>NNN</td>
+					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_SalaryGuaranteeDivName'); ?></td>
 					<th>現在の保障額</th>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.TableOnGuarantTable'); ?></td>
-					<td>NNNNNN</td>
+					<td><?php echo Hash::get($commonInfo, 'genkyuHoshoTableName'); ?></td>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.GradeOnGuarantTable'); ?>-<?php echo Hash::get($commonInfo, 'QtSeitoHiwari.ClassOnGuarantTable'); ?></td>
-					<td>Z,ZZZ,ZZZ円</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($commonInfo, 'genkyuHoshoKingaku')); ?>円</td>
 				</tr>
 			</table>
 <!-- 4行目 -->
@@ -208,126 +208,126 @@
 
 					<th>&nbsp;</th>
 					<th>短期</th>
-					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.SocialInsHealthInsPrem')); ?></td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.MultiAidShortTermPrem')); ?></td>
 					<th>&nbsp;</th>
 					<th></th>
 					<th>短期</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTerm_MultiAidSTPrem')); ?></td>
 				</tr>
 				<tr>
 					<th>扶養手当</th>
 					<th>&nbsp;</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.DependentAllow')); ?></td>
 					<th>夜勤手当</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.NightShiftAllow')); ?></td>
 					<th class="td01">125</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.UnitPrcPerHour125')); ?></td>
 
 					<th>&nbsp;</th>
 					<th>福祉</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.MultiAidWelfarePrem')); ?></td>
 					<th>&nbsp;</th>
 					<th></th>
 					<th>福祉</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTerm_MultiAidWelfarePrem')); ?></td>
 				</tr>
 				<tr>
 					<th>地域手当</th>
 					<th>&nbsp;</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.LocalAllow')); ?></td>
 					<th>特殊勤務手当</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.SpeWorkAllow')); ?></td>
 					<th class="td01">150</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.UnitPrcPerHour150')); ?></td>
 
 					<th>&nbsp;</th>
 					<th>介護</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.MultiAidNursingPrem')); ?></td>
 					<th>&nbsp;</th>
 					<th></th>
 					<th>介護</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTerm_MultiAidNursingPrem')); ?></td>
 				</tr>
 				<tr>
 					<th>管理職手当</th>
 					<th>&nbsp;</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.MgrAllow')); ?></td>
 					<th>管理職特勤</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.MgrSpAllow')); ?></td>
 					<th class="td01">135</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.UnitPrcPerHour135')); ?></td>
 
 					<th>社保</th>
 					<th>厚年</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.SocialInsWelfarePensPrem')); ?></td>
 					<th>期末</th>
 					<th>社保</th>
 					<th>厚年</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTermMutWelfarePensPrem')); ?></td>
 				</tr>
 				<tr>
 					<th>住居手当</th>
 					<th>&nbsp;</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.ResidentialAllow')); ?></td>
 					<th>宿日直手当</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.NightWatchAllow')); ?></td>
 					<th class="td01">160</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.UnitPrcPerHour160')); ?></td>
 
 					<th>&nbsp;</th>
 					<th>健保</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.SocialInsHealthInsPrem')); ?></td>
 					<th>&nbsp;</th>
 					<th></th>
 					<th>健保</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTermMutHealthInsPrem')); ?></td>
 				</tr>
 				<tr>
 					<th>初任給調整</th>
 					<th>&nbsp;</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.MedDoCallAllowance')); ?></td>
 					<th>　（内、非課税額）</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.NightWatchAllowNonTax')); ?></td>
 					<th class="td01">175</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.UnitPrcPerHour175')); ?></td>
 
 					<th>&nbsp;</th>
 					<th>介護</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.SocialInsNursingInsPrem')); ?></td>
 					<th>&nbsp;</th>
 					<td>&nbsp;</td>
 					<th>介護</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTermMutNursingInsPrem')); ?></td>
 				</tr>
 				<tr>
 					<th>単身赴任</th>
 					<th>&nbsp;</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.SeparationAllow')); ?></td>
 					<th>能率給/賃金</th>
 					<td class="bdR">Z,ZZZ,ZZZ</td>
 					<th class="td01">25</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.UnitPrcPerHour25')); ?></td>
 
 					<th>雇用保険</th>
 					<th>&nbsp;</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EmploymentInsPrem')); ?></td>
 					<th>期末</th>
 					<th>雇用保険</th>
 					<th></th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTermEmpInsPrem')); ?></td>
 				</tr>
 				<tr>
 					<th>義務教育特別</th>
 					<th>&nbsp;</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.TeacherSpAllow')); ?></td>
 					<th>児童手当</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.ChildAllow')); ?></td>
 					<th class="td01">前月25</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.UnitPrcPerHour25_PreMonth')); ?></td>
 
 					<th>区互助</th>
 					<th>&nbsp;</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.WardBenefitSocietyPrem')); ?></td>
 					<th>&nbsp;</th>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
@@ -336,15 +336,15 @@
 				<tr>
 					<th>通勤手当</th>
 					<th>&nbsp;</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.CommutationAllow')); ?></td>
 					<th>&nbsp;</th>
 					<td class="bdR">&nbsp;</td>
 					<th class="td01">50</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.UnitPrcPerHour50')); ?></td>
 
 					<th>区教互助</th>
 					<th>&nbsp;</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.WardBenefitEduSocietyPrem')); ?></td>
 					<th>&nbsp;</th>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
@@ -353,15 +353,15 @@
 				<tr>
 					<th>　（内、非課税額）</th>
 					<th>&nbsp;</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.CommutationAllowNonTax')); ?></td>
 					<th>期末手当</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTermAllow')); ?></td>
 					<th class="td01">前月50</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.UnitPrcPerHour50_PreMonth')); ?></td>
 
 					<th>都教互助</th>
 					<th>&nbsp;</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.MetTeacherBenefitSocPrem')); ?></td>
 					<th>&nbsp;</th>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
@@ -372,13 +372,13 @@
 					<th>&nbsp;</th>
 					<td>&nbsp;</td>
 					<th>勤勉手当</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllow')); ?></td>
 					<th class="td01">日単価</th>
 					<td class="bdR">Z,ZZZ,ZZZ</td>
 
 					<th>特互助</th>
 					<th>&nbsp;</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.SpWardBenefitSocPrem')); ?></td>
 					<th>&nbsp;</th>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
@@ -395,7 +395,7 @@
 
 					<th>事業団</th>
 					<th>&nbsp;</th>
-					<td>Z,ZZZ,ZZZ</td>
+					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.PersonalSupportFndPrem')); ?></td>
 					<th>&nbsp;</th>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
@@ -407,19 +407,23 @@
 <!-- ============================== タブ02【日割情報】============================== -->
 		<div id="tab02content" class="tabContent">
 			<div class="wrap bdT_blue bdB_blue pd10">
+
+<?php // 支給年月日別の繰り返し ?>
+<?php foreach($hiwariInfo as $hiwariGruop): ?>
 				<table class="tbl02 mgR10 mgB10 mgL10 w40">
 					<tr>
 						<th class="bd_double th02">支給年月</th>
-						<td class="bd_double">GGYY.MM</td>
+						<td class="bd_double"><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($hiwariGruop, '0.QtSeitoHiwari.PaidYM')); ?></td>
 						<th>月の要勤務日数</th>
-						<td>ZZ日</td>
+						<td><?php echo Hash::get($hiwariGruop, '0.QtSeitoHiwari.RequestedWorkingDaysOfMonth'); ?>日</td>
 					</tr>
 				</table>
-<!-- ブロック1 -->
+	<?php // 支給年月日が同一のレコードの繰り返し ?>
+	<?php foreach($hiwariGruop as $record): ?>
 				<table class="tbl02 mgL10 w20">
 					<tr>
 						<th class="th02">発令年月日</th>
-						<td>GGYY.MM.DD</td>
+						<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($record, 'QtSeitoHiwari.DailyRateStartDate')); ?></td>
 					</tr>
 				</table>
 				<div class="wrap pd10 mgR10 mgB10 mgL10 bd">
@@ -429,21 +433,21 @@
 						</tr>
 						<tr>
 							<th class="pdL20">職員区分</th>
-							<td>XX</td>
-							<td>NNNN</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.EmpDiv'); ?></td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.CodeName_EmpDivName'); ?></td>
 							<th>給与体系</th>
-							<td>XX</td>
-							<td>NNNNNN</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.SalaryTypeCD'); ?></td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.CodeName_SalaryTypeName'); ?></td>
 							<th>所属</th>
-							<td>XXXXXXXX</td>
-							<td>N・NN・NNNNN</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.DepCD'); ?></td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.CodeName_DeptShortName'); ?></td>
 							<th>職層</th>
-							<td>XX</td>
-							<td>NNNN</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.JobGradeCD'); ?></td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.CodeName_JobGradeName'); ?></td>
 							<th>職務</th>
-							<td>XXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>NNNNN</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.JobDutyCD'); ?></td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.CodeName_JobTypeName'); ?></td>
+							<td><?php echo Hash::get($record, 'sweeperYosan'); ?></td>
 						</tr>
 					</table>
 					<table class="tbl02">
@@ -452,19 +456,19 @@
 						</tr>
 						<tr>
 							<th class="pdL20">表級号</th>
-							<td>XX</td>
-							<td>NNNNNN</td>
-							<td>XX-XXX</td>
-							<td>NN</td>
-							<td>Z,ZZZ,ZZZ円</td>
-							<td><label><input type="checkbox" name="" value="">清掃加算対象</label></td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.SalaryTable'); ?></td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.CodeName_SalaryTableName'); ?></td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.SalaryClass'); ?>-<?php echo Hash::get($record, 'QtSeitoHiwari.SalaryGrade'); ?></td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.CodeName_SalaryClassName'); ?></td>
+							<td><?php echo $this->SalaryForm->number_format(Hash::get($record, 'kyuryoHoushuGaku')); ?>円</td>
+							<td><label><input type="checkbox" name="" value="" disabled <?php if(Hash::get($record, 'QtSeitoHiwari.SweeperAdditionFlg') === '1') echo 'checked'; ?> >清掃加算対象</label></td>
 							<th>現給保障</th>
-							<td>NNN</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.CodeName_SalaryGuaranteeDivName'); ?></td>
 							<th>保障額表</th>
-							<td>XX</td>
-							<td>NNNNNN</td>
-							<td>XX-XXX</td>
-							<td>Z,ZZZ,ZZZ円</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.TableOnGuarantTable'); ?></td>
+							<td><?php echo Hash::get($record, 'genkyuHoshoTableName'); ?></td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.GradeOnGuarantTable'); ?>-<?php echo Hash::get($record, 'QtSeitoHiwari.ClassOnGuarantTable'); ?></td>
+							<td><?php echo $this->SalaryForm->number_format(Hash::get($record, 'genkyuHoshoKingaku')); ?>円</td>
 						</tr>
 					</table>
 					<table class="tbl02">
@@ -473,20 +477,20 @@
 						</tr>
 						<tr>
 							<th class="pdL20">一日</th>
-							<td>ZZ時間ZZ分</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.WorkingTimesOfDayHour'); ?>時間<?php echo Hash::get($record, 'QtSeitoHiwari.WorkingTimesOfDayMinite'); ?>分</td>
 							<th>一週間</th>
-							<td>Z日勤務</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.WorkingDaysOfWeek'); ?>日勤務</td>
 							<th>週の勤務時間</th>
-							<td>ZZ時間ZZ分</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.WorkingTimesOfWeekHour'); ?>時間<?php echo Hash::get($record, 'QtSeitoHiwari.WorkingTimesOfWeekMinite'); ?>分</td>
 							<th>月の勤務日数</th>
-							<td>ZZ日</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.WorkingDaysOfMonth'); ?>日</td>
 							<th>年の勤務日数</th>
-							<td>ZZZ日</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.WorkingDaysOfYear'); ?>日</td>
 							<th>その他</th>
-							<td>ZZZ日</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.OtherDay'); ?>日</td>
 							<td>／</td>
-							<td>ZZ月</td>
-							<td><button type="button" name="" value="" class="btn01">単価</button></td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.OtherMonth'); ?>月</td>
+							<td></td>
 						</tr>
 					</table>
 					<table class="tbl02">
@@ -495,16 +499,16 @@
 						</tr>
 						<tr>
 							<th class="pdL20">勤怠事由</th>
-							<td>XXXX</td>
-							<td>NNNNNN</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.AttendanceOrderedReasonCD'); ?></td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.CodeName_NAME'); ?></td>
 							<th>支給割合</th>
-							<td>ZZZ％</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.PayRatio'); ?>％</td>
 							<th>発令年月日</th>
-							<td>GGYY.MM.DD</td>
+							<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($record, 'QtSeitoHiwari.DailyRateStartDate')); ?></td>
 							<th>日割日数</th>
-							<td>ZZ</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.ObjectDays'); ?></td>
 							<td>／</td>
-							<td>ZZ</td>
+							<td><?php echo Hash::get($record, 'QtSeitoHiwari.RequestedWorkingDaysOfMonth'); ?></td>
 						</tr>
 					</table>
 					<table class="tbl02">
@@ -513,132 +517,22 @@
 						</tr>
 						<tr>
 							<th class="pdL20">給料</th>
-							<td class="td03">XXXXXXXXXXXX</td>
+							<td class="td03"><?php echo Hash::get($record, 'QtSeitoHiwari.SalaryRewardsAccountCD'); ?></td>
 							<td class="td03">NNNNNNNNNN</td>
 							<th>児童</th>
-							<td class="td03">XXXXXXXXXXXX</td>
+							<td class="td03"><?php echo Hash::get($record, 'QtSeitoHiwari.ChildAllowAccountCD'); ?></td>
 							<td class="td03">NNNNNNNNNN</td>
 							<th>超勤</th>
-							<td class="td03">XXXXXXXXXXXX</td>
+							<td class="td03"><?php echo Hash::get($record, 'QtSeitoHiwari.OverTimeWorkAccountCD'); ?></td>
 							<td class="td03">NNNNNNNNNN</td>
 							<th>休日給</th>
-							<td class="td03">XXXXXXXXXXXX</td>
+							<td class="td03"><?php echo Hash::get($record, 'QtSeitoHiwari.HolidaySalaryAccountCD'); ?></td>
 							<td class="td03">NNNNNNNNNN</td>
 						</tr>
 					</table>
 				</div><!-- //.wrap -->
-<!-- ブロック2 -->
-				<table class="tbl02 mgL10 w20">
-					<tr>
-						<th class="th02">発令年月日</th>
-						<td>GGYY.MM.DD</td>
-					</tr>
-				</table>
-				<div class="wrap pd10 mgR10 mgB10 mgL10 bd">
-					<table class="tbl02">
-						<tr>
-							<th colspan="16">■基本情報</th>
-						</tr>
-						<tr>
-							<th class="pdL20">職員区分</th>
-							<td>XX</td>
-							<td>NNNN</td>
-							<th>給与体系</th>
-							<td>XX</td>
-							<td>NNNNNN</td>
-							<th>所属</th>
-							<td>XXXXXXXX</td>
-							<td>N・NN・NNNNN</td>
-							<th>職層</th>
-							<td>XX</td>
-							<td>NNNN</td>
-							<th>職務</th>
-							<td>XXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>NNNNN</td>
-						</tr>
-					</table>
-					<table class="tbl02">
-						<tr>
-							<th colspan="14">■給料/報酬月額情報</th>
-						</tr>
-						<tr>
-							<th class="pdL20">表級号</th>
-							<td>XX</td>
-							<td>NNNNNN</td>
-							<td>XX-XXX</td>
-							<td>NN</td>
-							<td>Z,ZZZ,ZZZ円</td>
-							<td><label><input type="checkbox" name="" value="">清掃加算対象</label></td>
-							<th>現給保障</th>
-							<td>NNN</td>
-							<th>保障額表</th>
-							<td>XX</td>
-							<td>NNNNNN</td>
-							<td>XX-XXX</td>
-							<td>Z,ZZZ,ZZZ円</td>
-						</tr>
-					</table>
-					<table class="tbl02">
-						<tr>
-							<th colspan="15">■勤務態様</th>
-						</tr>
-						<tr>
-							<th class="pdL20">一日</th>
-							<td>ZZ時間ZZ分</td>
-							<th>一週間</th>
-							<td>Z日勤務</td>
-							<th>週の勤務時間</th>
-							<td>ZZ時間ZZ分</td>
-							<th>月の勤務日数</th>
-							<td>ZZ日</td>
-							<th>年の勤務日数</th>
-							<td>ZZZ日</td>
-							<th>その他</th>
-							<td>ZZZ日</td>
-							<td>／</td>
-							<td>ZZ月</td>
-							<td><button type="button" name="" value="" class="btn01">単価</button></td>
-						</tr>
-					</table>
-					<table class="tbl02">
-						<tr>
-							<th colspan="11">■勤怠情報/日割日数</th>
-						</tr>
-						<tr>
-							<th class="pdL20">勤怠事由</th>
-							<td>XXXX</td>
-							<td>NNNNNN</td>
-							<th>支給割合</th>
-							<td>ZZZ％</td>
-							<th>発令年月日</th>
-							<td>GGYY.MM.DD</td>
-							<th>日割日数</th>
-							<td>ZZ</td>
-							<td>／</td>
-							<td>ZZ</td>
-						</tr>
-					</table>
-					<table class="tbl02">
-						<tr>
-							<th colspan="12">■支出科目</th>
-						</tr>
-						<tr>
-							<th class="pdL20">給料</th>
-							<td class="td03">XXXXXXXXXXXX</td>
-							<td class="td03">NNNNNNNNNN</td>
-							<th>児童</th>
-							<td class="td03">XXXXXXXXXXXX</td>
-							<td class="td03">NNNNNNNNNN</td>
-							<th>超勤</th>
-							<td class="td03">XXXXXXXXXXXX</td>
-							<td class="td03">NNNNNNNNNN</td>
-							<th>休日給</th>
-							<td class="td03">XXXXXXXXXXXX</td>
-							<td class="td03">NNNNNNNNNN</td>
-						</tr>
-					</table>
-				</div><!-- //.wrap -->
+	<?php endforeach; ?>
+<?php endforeach; ?>
 			</div><!-- //.wrap -->
 		</div><!-- //#tab02content -->
 
@@ -1067,48 +961,48 @@
 								<col style="width: 68%;">
 								<col style="width: 32%;">
 								<tr>
-									<td><p title="125">125</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p>125</p></td>
+									<td><p><?php echo Hash::get($hendoInfo, 'QtSeitoHendo.OverTimesTotal125'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="150">150</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p>150</p></td>
+									<td><p><?php echo Hash::get($hendoInfo, 'QtSeitoHendo.OverTimesTotal150'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="135">135</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p>135</p></td>
+									<td><p><?php echo Hash::get($hendoInfo, 'QtSeitoHendo.OverTimesTotal135'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="160">160</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p>160</p></td>
+									<td><p><?php echo Hash::get($hendoInfo, 'QtSeitoHendo.OverTimesTotal160'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="100">100</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p>100</p></td>
+									<td><p><?php echo Hash::get($hendoInfo, 'QtSeitoHendo.OverTimesTotal100'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="25">25</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p>25</p></td>
+									<td><p><?php echo Hash::get($hendoInfo, 'QtSeitoHendo.OverTimesTotal25'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="前月25">前月25</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p>前月25</p></td>
+									<td><p><?php echo Hash::get($hendoInfo, 'QtSeitoHendo.OverTimesTotal25_Pre'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="割増150">割増150</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p>割増150</p></td>
+									<td><p><?php echo Hash::get($hendoInfo, 'QtSeitoHendo.Over60TimesTotal150'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="割増175">割増175</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p>割増175</p></td>
+									<td><p><?php echo Hash::get($hendoInfo, 'QtSeitoHendo.Over60TimesTotal175'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="割増50">割増50</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p>割増50</p></td>
+									<td><p><?php echo Hash::get($hendoInfo, 'QtSeitoHendo.Over60TimesTotal50'); ?></p></td>
 								</tr>
 								<tr>
-									<td><p title="割増前50">割増前50</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p>割増前50</p></td>
+									<td><p><?php echo Hash::get($hendoInfo, 'QtSeitoHendo.Over60TimesTotal50_Pre'); ?></p></td>
 								</tr>
 							</table>
 						</div>
@@ -1148,69 +1042,15 @@
 										<col style="width: 18.0%;">
 										<col style="width: 6.0%;">
 										<col style="width: 13.0%;">
+										<?php foreach ($seitoUchiChokinList as $seitoUchiChokin): ?>
 										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
+											<td><p><?php echo Hash::get($seitoUchiChokin, 'QtSeitoUchiChokin.AllowDetailCD'); ?></p></td>
+											<td><p><?php echo Hash::get($seitoUchiChokin, 'QtSeitoUchiChokin.AccountCD'); ?></p></td>
+											<td><p><?php echo Hash::get($seitoUchiChokin, 'QtSeitoUchiChokin.CodeName_AccountShortName'); ?></p></td>
+											<td><p><?php echo Hash::get($seitoUchiChokin, 'QtSeitoUchiChokin.WorkHours_OT'); ?></p></td>
+											<td><p><?php echo $this->SalaryForm->number_format(Hash::get($seitoUchiChokin, 'QtSeitoUchiChokin.Payments')); ?></p></td>
 										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
+										<?php endforeach; ?>
 									</table>
 								</div>
 							</div><!-- //内訳 -->
@@ -1230,7 +1070,7 @@
 									<th>《時間数合計》</th>
 								</tr>
 								<tr>
-									<td><p title="ZZZ">ZZZ</p></td>
+									<td><p><?php echo Hash::get($hendoInfo, 'QtSeitoHendo.HolidayWorkTimesTotal'); ?></p></td>
 								</tr>
 								<tr>
 									<td><p>&nbsp;</p></td>
@@ -1256,7 +1096,7 @@
 								<th>《時間数合計》</th>
 							</tr>
 							<tr>
-								<td><p title="ZZZ">ZZZ</p></td>
+								<td><p><?php echo Hash::get($hendoInfo, 'QtSeitoHendo.NightShiftTimesTotal'); ?></p></td>
 							</tr>
 						</table><!-- //タイトル -->
 					</div>
@@ -1295,34 +1135,15 @@
 										<col style="width: 18.0%;">
 										<col style="width: 8.0%;">
 										<col style="width: 13.0%;">
+										<?php foreach ($seitoUchiKyujitukyuList as $seitoUchiKyujitukyu): ?>
 										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
+											<td><p><?php echo Hash::get($seitoUchiKyujitukyu, 'QtSeitoUchiKyujitukyu.AllowDetailCD'); ?></p></td>
+											<td><p><?php echo Hash::get($seitoUchiKyujitukyu, 'QtSeitoUchiKyujitukyu.AccountCD'); ?></p></td>
+											<td><p><?php echo Hash::get($seitoUchiKyujitukyu, 'QtSeitoUchiKyujitukyu.CodeName_AccountShortName'); ?></p></td>
+											<td><p><?php echo Hash::get($seitoUchiKyujitukyu, 'QtSeitoUchiKyujitukyu.WorkHours_HD'); ?></p></td>
+											<td><p><?php echo $this->SalaryForm->number_format(Hash::get($seitoUchiKyujitukyu, 'QtSeitoUchiKyujitukyu.Payments')); ?></p></td>
 										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
-										</tr>
+										<?php endforeach; ?>
 									</table>
 								</div>
 							</div><!-- //内訳 -->
@@ -1359,32 +1180,32 @@
 										<col style="width: 8.0%;">
 										<col style="width: 13.0%;">
 										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
+											<td><p>XXXX</p></td>
+											<td><p>XXXXXXXXXXXX</p></td>
+											<td><p>NNNNNNNNNN</p></td>
+											<td><p>ZZZ</p></td>
+											<td><p>Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
+											<td><p>XXXX</p></td>
+											<td><p>XXXXXXXXXXXX</p></td>
+											<td><p>NNNNNNNNNN</p></td>
+											<td><p>ZZZ</p></td>
+											<td><p>Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
+											<td><p>XXXX</p></td>
+											<td><p>XXXXXXXXXXXX</p></td>
+											<td><p>NNNNNNNNNN</p></td>
+											<td><p>ZZZ</p></td>
+											<td><p>Z,ZZZ,ZZZ</p></td>
 										</tr>
 										<tr>
-											<td><p title="XXXX">XXXX</p></td>
-											<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-											<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-											<td><p title="ZZZ">ZZZ</p></td>
-											<td><p title="Z,ZZZ,ZZZ">Z,ZZZ,ZZZ</p></td>
+											<td><p>XXXX</p></td>
+											<td><p>XXXXXXXXXXXX</p></td>
+											<td><p>NNNNNNNNNN</p></td>
+											<td><p>ZZZ</p></td>
+											<td><p>Z,ZZZ,ZZZ</p></td>
 										</tr>
 									</table>
 								</div>
@@ -1452,52 +1273,52 @@
 								<col style="width: 7%;">
 								<col style="width: 7%;">
 								<tr>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
 								</tr>
 								<tr>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
 								</tr>
 								<tr>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
 								</tr>
 							</table>
 						</div>
@@ -1558,52 +1379,52 @@
 								<col style="width: 7%;">
 								<col style="width: 7%;">
 								<tr>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
 								</tr>
 								<tr>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
 								</tr>
 								<tr>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
 								</tr>
 							</table>
 						</div>
@@ -1664,52 +1485,52 @@
 								<col style="width: 7%;">
 								<col style="width: 7%;">
 								<tr>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
 								</tr>
 								<tr>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
 								</tr>
 								<tr>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
-									<td><p title="">&nbsp;</p></td>
-									<td><p title="XXXX">XXXX</p></td>
-									<td><p title="NNNNNNNN">NNNNNNNN</p></td>
-									<td><p title="XXXXXXXXXXXX">XXXXXXXXXXXX</p></td>
-									<td><p title="NNNNNNNNNN">NNNNNNNNNN</p></td>
-									<td><p title="ZZZ">ZZZ</p></td>
-									<td><p title="ZZZ,ZZZ">ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
+									<td><p>&nbsp;</p></td>
+									<td><p>XXXX</p></td>
+									<td><p>NNNNNNNN</p></td>
+									<td><p>XXXXXXXXXXXX</p></td>
+									<td><p>NNNNNNNNNN</p></td>
+									<td><p>ZZZ</p></td>
+									<td><p>ZZZ,ZZZ</p></td>
 								</tr>
 							</table>
 						</div>
