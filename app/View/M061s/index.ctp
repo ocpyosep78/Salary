@@ -1179,34 +1179,15 @@
 										<col style="width: 18.0%;">
 										<col style="width: 8.0%;">
 										<col style="width: 13.0%;">
-										<tr>
-											<td><p>XXXX</p></td>
-											<td><p>XXXXXXXXXXXX</p></td>
-											<td><p>NNNNNNNNNN</p></td>
-											<td><p>ZZZ</p></td>
-											<td><p>Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p>XXXX</p></td>
-											<td><p>XXXXXXXXXXXX</p></td>
-											<td><p>NNNNNNNNNN</p></td>
-											<td><p>ZZZ</p></td>
-											<td><p>Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p>XXXX</p></td>
-											<td><p>XXXXXXXXXXXX</p></td>
-											<td><p>NNNNNNNNNN</p></td>
-											<td><p>ZZZ</p></td>
-											<td><p>Z,ZZZ,ZZZ</p></td>
-										</tr>
-										<tr>
-											<td><p>XXXX</p></td>
-											<td><p>XXXXXXXXXXXX</p></td>
-											<td><p>NNNNNNNNNN</p></td>
-											<td><p>ZZZ</p></td>
-											<td><p>Z,ZZZ,ZZZ</p></td>
-										</tr>
+										<?php foreach ($seitoUchiYakinList as $seitoUchiYakin): ?>
+											<tr>
+												<td><p><?php echo Hash::get($seitoUchiYakin, 'QtSeitoUchiYakin.AllowDetailCD'); ?></p></td>
+												<td><p><?php echo Hash::get($seitoUchiYakin, 'QtSeitoUchiYakin.AccountCD'); ?></p></td>
+												<td><p><?php echo Hash::get($seitoUchiYakin, 'QtSeitoUchiYakin.CodeName_AccountShortName'); ?></p></td>
+												<td><p><?php echo Hash::get($seitoUchiYakin, 'QtSeitoUchiYakin.WorkHours_ON'); ?></p></td>
+												<td><p><?php echo $this->SalaryForm->number_format(Hash::get($seitoUchiYakin, 'QtSeitoUchiYakin.Payments')); ?></p></td>
+											</tr>
+										<?php endforeach; ?>
 									</table>
 								</div>
 							</div><!-- //内訳 -->
@@ -1272,54 +1253,29 @@
 								<col style="width: 7%;">
 								<col style="width: 7%;">
 								<col style="width: 7%;">
+								<?php $num = 1; ?>
+								<?php foreach ($seitoUchiTokkinList as $seitoUchiTokkin): ?>
+								<?php // 奇数個目のデータのときはtr開始タグを入れる ?>
+								<?php if($num % 2 === 1){ ?>
 								<tr>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
+								<?php } ?>
+									<td>&nbsp;</td>
+									<td><?php echo Hash::get($seitoUchiTokkin, 'QtSeitoUchiTokkin.AllowDetailCD'); ?></td>
+									<td><?php echo Hash::get($seitoUchiTokkin, 'QtSeitoUchiTokkin.CodeName_AllowDetailName'); ?></td>
+									<td><?php echo Hash::get($seitoUchiTokkin, 'QtSeitoUchiTokkin.AccountCD'); ?></td>
+									<td><?php echo Hash::get($seitoUchiTokkin, 'QtSeitoUchiTokkin.CodeName_AccountShortName'); ?></td>
+									<td><?php echo Hash::get($seitoUchiTokkin, 'QtSeitoUchiTokkin.WorkTiimes_UQ'); ?></td>
+									<td><?php echo $this->SalaryForm->number_format(Hash::get($seitoUchiTokkin, 'QtSeitoUchiTokkin.Payments')); ?></td>
+								<?php // 偶数個目のデータのときはtr終了タグを入れる ?>
+								<?php if($num % 2 === 0){ ?>
 								</tr>
-								<tr>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
+								<?php } ?>
+								<?php $num++; ?>
+								<?php endforeach; ?>
+								<?php // データが奇数のときはtr終了タグを入れる ?>
+								<?php if($num % 2 === 1){ ?>
 								</tr>
-								<tr>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
-								</tr>
+								<?php } ?>
 							</table>
 						</div>
 					</div><!-- //内訳 -->
@@ -1378,54 +1334,29 @@
 								<col style="width: 7%;">
 								<col style="width: 7%;">
 								<col style="width: 7%;">
+								<?php $num = 1; ?>
+								<?php foreach ($seitoUchiShukuList as $seitoUchiShuku): ?>
+								<?php // 奇数個目のデータのときはtr開始タグを入れる ?>
+								<?php if($num % 2 === 1){ ?>
 								<tr>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
+								<?php } ?>
+									<td>&nbsp;</td>
+									<td><?php echo Hash::get($seitoUchiShuku, 'QtSeitoUchiShuku.AllowDetailCD'); ?></td>
+									<td><?php echo Hash::get($seitoUchiShuku, 'QtSeitoUchiShuku.CodeName_AllowDetailName'); ?></td>
+									<td><?php echo Hash::get($seitoUchiShuku, 'QtSeitoUchiShuku.AccountCD'); ?></td>
+									<td><?php echo Hash::get($seitoUchiShuku, 'QtSeitoUchiShuku.CodeName_AccountShortName'); ?></td>
+									<td><?php echo Hash::get($seitoUchiShuku, 'QtSeitoUchiShuku.WorkTimes_ND'); ?></td>
+									<td><?php echo $this->SalaryForm->number_format(Hash::get($seitoUchiShuku, 'QtSeitoUchiShuku.Payments')); ?></td>
+								<?php // 偶数個目のデータのときはtr終了タグを入れる ?>
+								<?php if($num % 2 === 0){ ?>
 								</tr>
-								<tr>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
+								<?php } ?>
+								<?php $num++; ?>
+								<?php endforeach; ?>
+								<?php // データが奇数のときはtr終了タグを入れる ?>
+								<?php if($num % 2 === 1){ ?>
 								</tr>
-								<tr>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
-								</tr>
+								<?php } ?>
 							</table>
 						</div>
 					</div><!-- //内訳 -->
@@ -1484,54 +1415,29 @@
 								<col style="width: 7%;">
 								<col style="width: 7%;">
 								<col style="width: 7%;">
+								<?php $num = 1; ?>
+								<?php foreach ($seitoUchiKantokuList as $seitoUchiKantoku): ?>
+								<?php // 奇数個目のデータのときはtr開始タグを入れる ?>
+								<?php if($num % 2 === 1){ ?>
 								<tr>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
+								<?php } ?>
+									<td>&nbsp;</td>
+									<td><?php echo Hash::get($seitoUchiKantoku, 'QtSeitoUchiKantoku.AllowDetailCD'); ?></td>
+									<td><?php echo Hash::get($seitoUchiKantoku, 'QtSeitoUchiKantoku.CodeName_AllowDetailName'); ?></td>
+									<td><?php echo Hash::get($seitoUchiKantoku, 'QtSeitoUchiKantoku.AccountCD'); ?></td>
+									<td><?php echo Hash::get($seitoUchiKantoku, 'QtSeitoUchiKantoku.CodeName_AccountShortName'); ?></td>
+									<td><?php echo Hash::get($seitoUchiKantoku, 'QtSeitoUchiKantoku.WorkTimes_AU'); ?></td>
+									<td><?php echo $this->SalaryForm->number_format(Hash::get($seitoUchiKantoku, 'QtSeitoUchiKantoku.Payments')); ?></td>
+								<?php // 偶数個目のデータのときはtr終了タグを入れる ?>
+								<?php if($num % 2 === 0){ ?>
 								</tr>
-								<tr>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
+								<?php } ?>
+								<?php $num++; ?>
+								<?php endforeach; ?>
+								<?php // データが奇数のときはtr終了タグを入れる ?>
+								<?php if($num % 2 === 1){ ?>
 								</tr>
-								<tr>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
-									<td><p>&nbsp;</p></td>
-									<td><p>XXXX</p></td>
-									<td><p>NNNNNNNN</p></td>
-									<td><p>XXXXXXXXXXXX</p></td>
-									<td><p>NNNNNNNNNN</p></td>
-									<td><p>ZZZ</p></td>
-									<td><p>ZZZ,ZZZ</p></td>
-								</tr>
+								<?php } ?>
 							</table>
 						</div>
 					</div><!-- //内訳 -->
@@ -1556,126 +1462,18 @@
 				</table>
 				<div class="wrap scroll h01">
 					<table class="tbl02 w04">
+						<?php foreach ($seitoUchiNorituList as $seitoUchiNoritu): ?>
 						<tr>
 							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
+							<td><?php echo Hash::get($seitoUchiNoritu, 'QtSeitoUchiNoritu.AllowDetailCD'); ?></td>
+							<td><?php echo Hash::get($seitoUchiNoritu, 'QtSeitoUchiNoritu.CodeName_AllowDetailName'); ?></td>
+							<td><?php echo Hash::get($seitoUchiNoritu, 'QtSeitoUchiNoritu.AccountCD'); ?></td>
+							<td><?php echo Hash::get($seitoUchiNoritu, 'QtSeitoUchiNoritu.CodeName_AccountShortName'); ?></td>
+							<td><?php echo Hash::get($seitoUchiNoritu, 'QtSeitoUchiNoritu.EfficiencyWagesTimes'); ?></td>
+							<td><?php echo $this->SalaryForm->number_format(Hash::get($seitoUchiNoritu, 'QtSeitoUchiNoritu.EfficiencyWagesAmount')); ?></td>
+							<td><?php echo $this->SalaryForm->number_format(Hash::get($seitoUchiNoritu, 'QtSeitoUchiNoritu.Payments')); ?></td>
 						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
+						<?php endforeach; ?>
 					</table>
 				</div><!-- //.wrap -->
 			</div><!-- //.wrap -->
@@ -1697,114 +1495,17 @@
 				</table>
 				<div class="wrap scroll h01">
 					<table class="tbl02 w01">
+						<?php foreach ($seitoUchiChinginList as $seitoUchiChingin): ?>
 						<tr>
 							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
+							<td><?php echo Hash::get($seitoUchiChingin, 'QtSeitoUchiChingin.AllowDetailCD'); ?></td>
+							<td><?php echo Hash::get($seitoUchiChingin, 'QtSeitoUchiChingin.CodeName_AllowDetailName'); ?></td>
+							<td><?php echo Hash::get($seitoUchiChingin, 'QtSeitoUchiChingin.AccountCD'); ?></td>
+							<td><?php echo Hash::get($seitoUchiChingin, 'QtSeitoUchiChingin.CodeName_AccountShortName'); ?></td>
+							<td><?php echo Hash::get($seitoUchiChingin, 'QtSeitoUchiChingin.WorkTimes_LW'); ?></td>
+							<td><?php echo $this->SalaryForm->number_format(Hash::get($seitoUchiChingin, 'QtSeitoUchiChingin.Payments')); ?></td>
 						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>XXXX</td>
-							<td>NNNNNNNNNNNN</td>
-							<td>XXXXXXXXXXXX</td>
-							<td>NNNNNNNNNN</td>
-							<td>ZZZ</td>
-							<td>Z,ZZZ,ZZZ</td>
-						</tr>
+						<?php endforeach; ?>
 					</table>
 				</div><!-- //.wrap -->
 			</div><!-- //.wrap -->

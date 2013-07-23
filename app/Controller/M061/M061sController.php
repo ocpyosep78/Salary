@@ -10,7 +10,8 @@ class M061sController extends CommonController {
 
 	// この画面で使うモデル（テーブル）を宣言する
 	public $uses = array('QtSeitoKotei', 'QtSeitoHendo', 'QtSeitoHiwari', 'QmKyuryoChild', 'ZSalaryTableNamemaster',
-							'QmHoshogaku', 'QtSeitoUchiChokin', 'QtSeitoUchiKyujitukyu'
+							'QmHoshogaku', 'QtSeitoUchiChokin', 'QtSeitoUchiKyujitukyu', 'QtSeitoUchiYakin', 'QtSeitoUchiTokkin',
+								'QtSeitoUchiShuku', 'QtSeitoUchiKantoku', 'QtSeitoUchiNoritu', 'QtSeitoUchiChingin'
 	);
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
@@ -107,6 +108,15 @@ class M061sController extends CommonController {
 		// タブ05：超勤・休日・夜勤
 		$this->tab05($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PayerDiv']);
 
+		// タブ06：特勤・宿日直・管特
+		$this->tab06($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PayerDiv']);
+
+		// タブ07：能率給内訳
+		$this->tab07($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PayerDiv']);
+
+		// タブ08：賃金
+		$this->tab08($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PayerDiv']);
+
 		// ********************  画面へのデータ反映  ********************
 
 		// 前画面からの検索条件をそのまま画面にセットする
@@ -138,6 +148,12 @@ class M061sController extends CommonController {
 		$hiwariMultiRecordFlg = false;
 		$seitoUchiChokinList = array();
 		$seitoUchiKyujitukyuList = array();
+		$seitoUchiYakinList = array();
+		$seitoUchiTokkinList = array();
+		$seitoUchiShukuList = array();
+		$seitoUchiKantokuList = array();
+		$seitoUchiNorituList = array();
+		$seitoUchiChinginList = array();
 
 		// 画面への設定
 		$this->set('searchCondition', $searchCondition);
@@ -148,6 +164,13 @@ class M061sController extends CommonController {
 		$this->set('hiwariMultiRecordFlg', $hiwariMultiRecordFlg);
 		$this->set('seitoUchiChokinList', $seitoUchiChokinList);
 		$this->set('seitoUchiKyujitukyuList', $seitoUchiKyujitukyuList);
+		$this->set('seitoUchiYakinList', $seitoUchiYakinList);
+		$this->set('seitoUchiTokkinList', $seitoUchiTokkinList);
+		$this->set('seitoUchiShukuList', $seitoUchiShukuList);
+		$this->set('seitoUchiKantokuList', $seitoUchiKantokuList);
+		$this->set('seitoUchiNorituList', $seitoUchiNorituList);
+		$this->set('seitoUchiChinginList', $seitoUchiChinginList);
+
 	}
 
 	/**
@@ -229,15 +252,65 @@ class M061sController extends CommonController {
 	 * タブ05：超勤・休日・夜勤
 	 */
 	private function tab05($empNo, $paidYm, $payerDiv) {
+
 		// テーブル[正当支給データ：超勤内訳]からデータを取得する
 		$seitoUchiChokinList = $this->QtSeitoUchiChokin->findSeitoUchiChokin($paidYm, $empNo, $payerDiv);
 
 		// テーブル[正当支給データ：休日給内訳]からデータを取得する
 		$seitoUchiKyujitukyuList = $this->QtSeitoUchiKyujitukyu->findSeitoUchiKyujitukyu($paidYm, $empNo, $payerDiv);
 
+		// テーブル[正当支給データ：夜勤内訳]からデータを取得する
+		$seitoUchiYakinList = $this->QtSeitoUchiYakin->findSeitoUchiYakin($paidYm, $empNo, $payerDiv);
+
 		// 取得データをViewに渡す
 		$this->set(compact('seitoUchiChokinList'));
 		$this->set(compact('seitoUchiKyujitukyuList'));
+		$this->set(compact('seitoUchiYakinList'));
 	}
+
+	/**
+	 * タブ06：特勤・宿日直・管特
+	 */
+	private function tab06($empNo, $paidYm, $payerDiv) {
+
+		// テーブル[正当支給データ：特勤内訳]からデータを取得する
+		$seitoUchiTokkinList = $this->QtSeitoUchiTokkin->findSeitoUchiTokkin($paidYm, $empNo, $payerDiv);
+
+		// テーブル[正当支給データ：宿日直内訳]からデータを取得する
+		$seitoUchiShukuList = $this->QtSeitoUchiShuku->findSeitoUchiShuku($paidYm, $empNo, $payerDiv);
+
+		// テーブル[正当支給データ：管理職特勤内訳]からデータを取得する
+		$seitoUchiKantokuList = $this->QtSeitoUchiKantoku->findSeitoUchiKantoku($paidYm, $empNo, $payerDiv);
+
+		// 取得データをViewに渡す
+		$this->set(compact('seitoUchiTokkinList'));
+		$this->set(compact('seitoUchiShukuList'));
+		$this->set(compact('seitoUchiKantokuList'));
+	}
+
+	/**
+	 * タブ07：能率給
+	 */
+	private function tab07($empNo, $paidYm, $payerDiv) {
+
+		// テーブル[支給明細データ：旅費内訳]からデータを取得する
+		$seitoUchiNorituList = $this->QtSeitoUchiNoritu->findSeitoUchiNoritu($paidYm, $empNo, $payerDiv);
+
+		// 取得データをViewに渡す
+		$this->set(compact('seitoUchiNorituList'));
+	}
+
+	/**
+	 * タブ08：賃金
+	 */
+	private function tab08($empNo, $paidYm, $payerDiv) {
+
+		// テーブル[正当支給データ：賃金内訳]からデータを取得する
+		$seitoUchiChinginList = $this->QtSeitoUchiChingin->findSeitoUchiChingin($paidYm, $empNo, $payerDiv);
+
+		// 取得データをViewに渡す
+		$this->set(compact('seitoUchiChinginList'));
+	}
+
 }
 
