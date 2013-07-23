@@ -9,9 +9,9 @@
 				<th>名<th>
 				<td><input type="text" id="emp-search-keyword-first-name-kana" name="emp-search-keyword-first-name-kana" value="" /></td>
 				<th>職種職務<th>
-				<td><input type="text" id="emp-search-keyword-job-duty-" name="emp-search-keyword-" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-job-duty-cd-from" name="emp-search-keyword-job-duty-cd-from" value="" /></td>
 				<th>～<th>
-				<td><input type="text" id="emp-search-keyword-" name="emp-search-keyword-" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-job-duty-cd-to" name="emp-search-keyword-job-duty-cd-to" value="" /></td>
 				<td rowspan="2" class="td1 pd_01">
 					<input class="Button1" type="button" onclick="searchForEmpSearch();" value="　検索　" />
 				</td>
@@ -22,9 +22,9 @@
 				<th>名<th>
 				<td><input type="text" id="emp-search-keyword-first-name" name="emp-search-keyword-first-name" value="" /></td>
 				<th>職層<th>
-				<td><input type="text" id="emp-search-keyword-" name="emp-search-keyword-" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-job-grade-cd-from" name="emp-search-keyword-job-grade-cd-from" value="" /></td>
 				<th>～<th>
-				<td><input type="text" id="emp-search-keyword-" name="emp-search-keyword-" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-job-grade-cd-to" name="emp-search-keyword-job-grade-cd-to" value="" /></td>
 			</tr>
 			<tr>
 				<th>職員区分<th>
@@ -32,9 +32,9 @@
 				<th>～<th>
 				<td><input type="text" id="emp-search-keyword-emp-div-to" name="emp-search-keyword-emp-div-to" value="" /></td>
 				<th>所属<th>
-				<td><input type="text" id="emp-search-keyword-" name="emp-search-keyword-" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-dep-cd-from" name="emp-search-keyword-dep-cd-from" value="" /></td>
 				<th>～<th>
-				<td><input type="text" id="emp-search-keyword-" name="emp-search-keyword-" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-dep-cd-to" name="emp-search-keyword-dep-cd-to" value="" /></td>
 				<td rowspan="2" class="td1 pd_01">
 					<input class="Button1" type="button" onclick="clearForCommonSearch()" value="　消去　" />
 				</td>
@@ -43,9 +43,9 @@
 				<th>退職者<th>
 				<td colspan="4"></td>
 				<th>役職<th>
-				<td><input type="text" id="emp-search-keyword-" name="emp-search-keyword-" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-mgr-cd-from" name="emp-search-keyword-mgr-cd-from" value="" /></td>
 				<th>～<th>
-				<td><input type="text" id="emp-search-keyword-" name="emp-search-keyword-" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-mgr-cd-to" name="emp-search-keyword-mgr-cd-to" value="" /></td>
 			</tr>
 		</table>
 
@@ -57,13 +57,8 @@
 </div>
 
 <?php // テーブル検索に使用する項目をhiddenで定義 ?>
-<input type="hidden" value= "" name="hidden-common-search-table" id="hidden-common-search-table" />
-<input type="hidden" value= "" name="hidden-common-search-column-name" id="hidden-common-search-column-name" />
-<input type="hidden" value= "" name="hidden-common-search-column-code" id="hidden-common-search-column-code" />
-<input type="hidden" value= "" name="hidden-common-search-target-name" id="hidden-common-search-target-name" />
-<input type="hidden" value= "" name="hidden-common-search-target-code" id="hidden-common-search-target-code" />
-<input type="hidden" value= "" name="hidden-common-search-select-name" id="hidden-common-search-select-name" />
-<input type="hidden" value= "" name="hidden-common-search-select-code" id="hidden-common-search-select-code" />
+<input type="hidden" value= "" name="hidden-emp-search-table" id="hidden-emp-search-table" />
+
 
 <script type="text/javascript">
 	/**
@@ -75,18 +70,13 @@
 	 * @param targetName 検索結果の設定先（名称）
 	 * @param targetCode 検索結果の設定先（コード）
 	 */
-	function viewForEmpSearch(table, columnName, columnCode, targetName, targetCode) {
+	function viewForEmpSearch() {
 
 		// hidden項目の設定
-		$("#hidden-common-search-table").val(table);
-		$("#hidden-common-search-column-name").val(columnName);
-		$("#hidden-common-search-column-code").val(columnCode);
-		$("#hidden-common-search-target-name").val(targetName);
-		$("#hidden-common-search-target-code").val(targetCode);
 
 		// 子画面の検索結果一覧をクリア
 		$.ajax({
-			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'init')); ?>" + "?table=" + table + "&columnName=" + columnName + "&columnCode=" + columnCode,
+			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'init')); ?>" + "?table=" + 'JtKihonKihon',
 			type: 'GET',
 			success: function(data) {
 				$("#emp-search-result").html(data);
@@ -104,26 +94,40 @@
 	function searchForEmpSearch() {
 
 		// 検索キーワードの取得
-		var keywordCd   = $("#emp-search-keyword-").val();
-		var keywordName = $("#common-search-keyword-name").val();
-
-		// hidden項目の取得
-		var table      = $("#hidden-common-search-table").val();       // 検索対象のテーブル名
-		var columnName = $("#hidden-common-search-column-name").val(); // 検索対象のカラム（名称）
-		var columnCode = $("#hidden-common-search-column-code").val(); // 検索対象のカラム（コード）
-		var targetCode = $("#hidden-common-search-target-code").val(); // 検索結果の設定先（名称）
-		var targetName = $("#hidden-common-search-target-name").val(); // 検索結果の設定先（コード）
-
-		// 親画面に設定した値をクリア
-		$("#" + targetCode).val("");
-		$("#" + targetName).html("");
+		var familyNameKana = $("#emp-search-keyword-family-name-kana").val();
+		var firstNameKana  = $("#emp-search-keyword-first-name-kana").val();
+		var jobDutyCdFrom  = $("#emp-search-keyword-job-duty-cd-from").val();
+		var jobDutyCdTo    = $("#emp-search-keyword-job-duty-cd-to").val();
+		var familyName     = $("#emp-search-keyword-family-name").val();
+		var firstName      = $("#emp-search-keyword-first-name").val();
+		var jobGradeCdFrom = $("#emp-search-keyword-job-grade-cd-from").val();
+		var jobGradeCdTo   = $("#emp-search-keyword-job-grade-cd-to").val();
+		var empDivFrom     = $("#emp-search-keyword-emp-div-from").val();
+		var empDivTo       = $("#emp-search-keyword-emp-div-to").val();
+		var depCdFrom      = $("#emp-search-keyword-dep-cd-from").val();
+		var depCdTo        = $("#emp-search-keyword-dep-cd-to").val();
+		var mgrCdFrom      = $("#emp-search-keyword-mgr-cd-from").val();
+		var mgrCdTo        = $("#emp-search-keyword-mgr-cd-to").val();
 
 		// テーブルデータの取得（Ajax通信）
 		$.ajax({
-			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'search')); ?>" + "?keywordCd=" + keywordCd + "&keywordName=" + keywordName + "&table=" + table + "&columnName=" + columnName + "&columnCode=" + columnCode,
+			url: "<?php echo $this->Html->url(array('controller' => 'EmpSearches', 'action' => 'search')); ?>" + "?familyNameKana=" + familyNameKana
+																													+ "&firstNameKana=" + firstNameKana
+																													+ "&jobDutyCdFrom=" + jobDutyCdFrom
+																													+ "&jobDutyCdTo=" + jobDutyCdTo
+																													+ "&familyName=" + familyName
+																													+ "&firstName=" + firstName
+																													+ "&jobGradeCdFrom=" + jobGradeCdFrom
+																													+ "&jobGradeCdTo=" + jobGradeCdTo
+																													+ "&empDivFrom=" + empDivFrom
+																													+ "&empDivTo=" + empDivTo
+																													+ "&depCdFrom=" + depCdFrom
+																													+ "&depCdTo=" + depCdTo
+																													+ "&mgrCdFrom=" + mgrCdFrom
+																													+ "&mgrCdTo=" + mgrCdTo,
 			type: 'GET',
 			success: function(data) {
-				$("#common-search-result").html(data);
+				$("#emp-search-result").html(data);
 			}
 		});
 	}
@@ -134,8 +138,8 @@
 	function clearForEmpSearch() {
 
 		// 親画面の項目IDを取得
-		var targetCode = $("#hidden-common-search-target-code").val();
-		var targetName = $("#hidden-common-search-target-name").val();
+		var targetCode = $("#hidden-emp-search-target-code").val();
+		var targetName = $("#hidden-emp-search-target-name").val();
 
 		// 親画面に設定した値をクリア
 		$("#" + targetCode).val("");
@@ -145,7 +149,7 @@
 		$("#emp-search-keyword-").val("");
 		$("#common-search-keyword-name").val("");
 
-		var table = $("#hidden-common-search-table").val();       // 検索対象のテーブル名
+		var table = $("#hidden-emp-search-table").val();       // 検索対象のテーブル名
 
 		// 子画面の検索結果一覧をクリア
 		$.ajax({

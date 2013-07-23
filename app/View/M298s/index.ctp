@@ -11,7 +11,7 @@
 			<th>職員番号</th>
 			<td>
 				<?php echo $this->SalaryForm->text('EmpNo', array('value' => Hash::get($searchCondition, 'EmpNo')));?>
-				<input type="button"  class="Button2" value="？" onclick="viewForEmpSearch('JtKihonKihon', 'FamilyName', 'EmpNo', 'FamilyName', 'EmpNo');" />
+				<input type="button"  class="Button2" value="？" onclick="viewForEmpSearch();" />
 			</td>
 			<th>氏名</th>
 			<td><?php echo Hash::get($personalInfo, 'FamilyName'); ?>_<?php echo Hash::get($personalInfo, 'FamilyNameKana'); ?> <?php echo Hash::get($personalInfo, 'FirstName'); ?>_<?php echo Hash::get($personalInfo, 'FirstNameKana'); ?></td>

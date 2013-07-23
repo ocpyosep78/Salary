@@ -79,9 +79,17 @@ $const_labels = array(
 	// 検索結果表示項目：人事基本情報
 	'VIEW_COLUMN_JTKIHONKIHON' => array(
 		'labels' => array(
-			'EmpNo' => array('symbol' => '', 'name' => '職員番号'),
-			'FamilyName' => array('symbol' => '', 'name' => '氏名_氏'),
-			'FirstName' => array('symbol' => '', 'name' => '氏名_名'),
+			'EmpNo'           => array('symbol' => '', 'name' => '職員番号'),
+			'Name'            => array('symbol' => '', 'name' => '漢字氏名'),
+			'NameKana'        => array('symbol' => '', 'name' => 'カナ氏名'),
+			'empDiv'          => array('symbol' => '', 'name' => '職員区分'),
+			'retired'         => array('symbol' => '', 'name' => '退職'),
+			'DepCD'           => array('symbol' => '', 'name' => '所属CD'),
+			'DepShortCD'      => array('symbol' => '', 'name' => '所属名（短縮）'),
+			'MgrCD'           => array('symbol' => '', 'name' => '役職CD'),
+			'MgrName'         => array('symbol' => '', 'name' => '役職名'),
+			'JobDutyCD'       => array('symbol' => '', 'name' => '職務CD'),
+			'JobCategoryName' => array('symbol' => '', 'name' => '職務名'),
 		)
 	),
 	// 検索項目：人事基本情報
