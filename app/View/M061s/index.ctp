@@ -70,7 +70,7 @@
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_SalaryTypeName'); ?></td>
 					<th>所属</th>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.DepCD'); ?></td>
-					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_DeptShortName'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'deptShortName'); ?></td>
 					<th>職層</th>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.JobGradeCD'); ?></td>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_JobGradeName'); ?></td>
@@ -86,16 +86,16 @@
 					<th>支出科目</th>
 					<th>給料</th>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryRewardsAccountCD'); ?></td>
-					<td>NNNNNNNNNN</td>
+					<td><?php echo Hash::get($commonInfo, 'salaryRewardsAccountShortName'); ?></td>
 					<th>児童</th>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.ChildAllowAccountCD'); ?></td>
-					<td>NNNNNNNNNN</td>
+					<td><?php echo Hash::get($commonInfo, 'childAllowAccountShortName'); ?></td>
 					<th>超勤</th>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.OverTimeWorkAccountCD'); ?></td>
-					<td>NNNNNNNNNN</td>
+					<td><?php echo Hash::get($commonInfo, 'overTimeWorkAccountShortName'); ?></td>
 					<th>休日給</th>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.HolidaySalaryAccountCD'); ?></td>
-					<td>NNNNNNNNNN</td>
+					<td><?php echo Hash::get($commonInfo, 'holidaySalaryAccountShortName'); ?></td>
 				</tr>
 			</table>
 <!-- 3行目 -->
@@ -105,7 +105,7 @@
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryTable'); ?></td>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_SalaryTableName'); ?></td>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryClass'); ?>-<?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryGrade'); ?></td>
-					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_SalaryClassName'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'salaryClassName'); ?></td>
 					<td><?php echo $this->SalaryForm->number_format(Hash::get($commonInfo, 'kyuryoHoushuGaku')); ?>円</td>
 					<td><label><input type="checkbox" name="" value="">清掃加算対象</label></td>
 					<th>現給保障</th>
@@ -304,7 +304,16 @@
 					<th>&nbsp;</th>
 					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.SeparationAllow')); ?></td>
 					<th>能率給/賃金</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
+					<td class="bdR">
+					<?php
+						if(is_numeric(Hash::get($hendoInfo, 'QtSeitoHendo.EfficiencyWages')) && is_numeric(Hash::get($hendoInfo, 'QtSeitoHendo.Wages'))){
+							$noritukyuChingin = Hash::get($hendoInfo, 'QtSeitoHendo.EfficiencyWages') + Hash::get($hendoInfo, 'QtSeitoHendo.Wages');
+						} else {
+							$noritukyuChingin = null;
+						}
+					?>
+					<?php echo $this->SalaryForm->number_format($noritukyuChingin); ?>
+					</td>
 					<th class="td01">25</th>
 					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($hendoInfo, 'QtSeitoHendo.UnitPrcPerHour25')); ?></td>
 
@@ -373,9 +382,21 @@
 					<td>&nbsp;</td>
 					<th>勤勉手当</th>
 					<td class="bdR"><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllow')); ?></td>
+					<?php
+						if(Hash::get($commonInfo, 'QtSeitoHiwari.EmpDiv_Reports') === '3') {
+					?>
 					<th class="td01">日単価</th>
-					<td class="bdR">Z,ZZZ,ZZZ</td>
-
+					<td class="bdR">
+						<?php echo $this->SalaryForm->number_format(Hash::get($commonInfo, 'QtSeitoHiwari.SalaryUnitPerDay')); ?>
+					</td>
+					<?php
+						} else {
+					?>
+					<th class="td01"></th>
+					<td class="bdR"></td>
+					<?php
+						}
+					?>
 					<th>特互助</th>
 					<th>&nbsp;</th>
 					<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.SpWardBenefitSocPrem')); ?></td>
@@ -440,7 +461,7 @@
 							<td><?php echo Hash::get($record, 'QtSeitoHiwari.CodeName_SalaryTypeName'); ?></td>
 							<th>所属</th>
 							<td><?php echo Hash::get($record, 'QtSeitoHiwari.DepCD'); ?></td>
-							<td><?php echo Hash::get($record, 'QtSeitoHiwari.CodeName_DeptShortName'); ?></td>
+							<td><?php echo Hash::get($record, 'deptShortName'); ?></td>
 							<th>職層</th>
 							<td><?php echo Hash::get($record, 'QtSeitoHiwari.JobGradeCD'); ?></td>
 							<td><?php echo Hash::get($record, 'QtSeitoHiwari.CodeName_JobGradeName'); ?></td>
@@ -459,7 +480,7 @@
 							<td><?php echo Hash::get($record, 'QtSeitoHiwari.SalaryTable'); ?></td>
 							<td><?php echo Hash::get($record, 'QtSeitoHiwari.CodeName_SalaryTableName'); ?></td>
 							<td><?php echo Hash::get($record, 'QtSeitoHiwari.SalaryClass'); ?>-<?php echo Hash::get($record, 'QtSeitoHiwari.SalaryGrade'); ?></td>
-							<td><?php echo Hash::get($record, 'QtSeitoHiwari.CodeName_SalaryClassName'); ?></td>
+							<td><?php echo Hash::get($record, 'salaryClassName'); ?></td>
 							<td><?php echo $this->SalaryForm->number_format(Hash::get($record, 'kyuryoHoushuGaku')); ?>円</td>
 							<td><label><input type="checkbox" name="" value="" disabled <?php if(Hash::get($record, 'QtSeitoHiwari.SweeperAdditionFlg') === '1') echo 'checked'; ?> >清掃加算対象</label></td>
 							<th>現給保障</th>
@@ -518,16 +539,16 @@
 						<tr>
 							<th class="pdL20">給料</th>
 							<td class="td03"><?php echo Hash::get($record, 'QtSeitoHiwari.SalaryRewardsAccountCD'); ?></td>
-							<td class="td03">NNNNNNNNNN</td>
+							<td class="td03"><?php echo Hash::get($record, 'salaryRewardsAccountShortName'); ?></td>
 							<th>児童</th>
 							<td class="td03"><?php echo Hash::get($record, 'QtSeitoHiwari.ChildAllowAccountCD'); ?></td>
-							<td class="td03">NNNNNNNNNN</td>
+							<td class="td03"><?php echo Hash::get($record, 'childAllowAccountShortName'); ?></td>
 							<th>超勤</th>
 							<td class="td03"><?php echo Hash::get($record, 'QtSeitoHiwari.OverTimeWorkAccountCD'); ?></td>
-							<td class="td03">NNNNNNNNNN</td>
+							<td class="td03"><?php echo Hash::get($record, 'overTimeWorkAccountShortName'); ?></td>
 							<th>休日給</th>
 							<td class="td03"><?php echo Hash::get($record, 'QtSeitoHiwari.HolidaySalaryAccountCD'); ?></td>
-							<td class="td03">NNNNNNNNNN</td>
+							<td class="td03"><?php echo Hash::get($record, 'holidaySalaryAccountShortName'); ?></td>
 						</tr>
 					</table>
 				</div><!-- //.wrap -->

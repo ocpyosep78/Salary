@@ -67,4 +67,38 @@ class ZSalaryTableClsName extends AppModel {
 			),
 		),
 	);
+
+	/**
+	 * 級名称を取得する
+	 *
+	 * @param string $salaryTable 給料表CD
+	 * @param string $salaryClass 級
+	 *
+	 * @return string 級名称
+	 */
+	public function getSalaryClassName($salaryTable, $salaryClass) {
+
+		$this->recursive = -1;
+
+		// 検索条件の設定
+		$searchCondition = array();
+		$searchCondition['SalaryTable'] = $salaryTable; // 給料表CD
+		$searchCondition['SalaryClass'] = $salaryClass; // 級
+		$searchCondition['delete_flg']  = '0';          // 削除フラグ
+
+		// 検索パラメータの設定
+		$params = array(
+			'conditions' => $searchCondition
+		);
+
+		// 検索
+		$result = $this->find('first', $params);
+
+		$salaryClassName = '';
+		if(!empty($result)) {
+			$salaryClassName = $result['ZSalaryTableClsName']['SalaryClassName'];
+		}
+
+		return $salaryClassName;
+	}
 }

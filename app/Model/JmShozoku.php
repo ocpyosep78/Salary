@@ -67,4 +67,38 @@ class JmShozoku extends AppModel {
 			),
 		),
 	);
+
+	/**
+	 * 所属マスタから所属（略称）を取得する
+	 *
+	 * @param string $paidYM 支給年月
+	 * @param string $depCD  所属CD
+	 *
+	 * @return 所属（略称）
+	 */
+	public function getDeptShortName($paidYM, $depCD) {
+
+		$this->recursive = -1;
+
+		// 検索条件の設定
+		$searchCondition = array();
+		$searchCondition['FiscalYear'] = substr($paidYM, 0, 4); // 年度
+		$searchCondition['DepCD']      = $depCD;                // 所属CD
+		$searchCondition['delete_flg'] = '0';                   // 削除フラグ
+
+		// 検索パラメータの設定
+		$params = array(
+			'conditions' => $searchCondition
+		);
+
+		// 検索
+		$result = $this->find('first', $params);
+
+		$depShortName = '';
+		if(!empty($result)) {
+			$depShortName = $result['JmShozoku']['DeptShortName'];
+		}
+
+		return $depShortName;
+	}
 }

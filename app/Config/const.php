@@ -149,9 +149,6 @@ Configure::write('CACHE_KEY_MAP',array(
 	'AccountCD' => array('AccountName', 'AccountShortName'),
 	// 支給種別CDマスタ
 	'EtcTypeCD' => array('EtcTypeName', 'EtcTypeSName'),
-	// 所属マスタ
-	'DepCD' => array('DeptName', 'DeptShortName'),
-	'ExpendDepCD' => array('DeptName', 'DeptShortName'),
 	// 給料表級名称マスタ
 	'SalaryClass' => array('SalaryClassName', 'SalaryClassNameShort'),
 	// 現給保障区分マスタ

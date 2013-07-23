@@ -9,8 +9,7 @@ class TopsController extends AppController {
 
 	public $uses = array('MgrPositionMaster', 'ZAllowanceDetailNamemaster', 'JmSyokuinKubun', 'QmKyuyoTaikei',
 							'JmSyokuso', 'JobCategoryMaster', 'ZSalaryTableNamemaster', 'ZAttendanceReason', 'ZDetachmentAllowDivmaster',
-								'QmKamoku', 'CzSikyuSyubetu', 'JmShozoku', 'ZSalaryTableClsName', 'ZSalaryGuaranteeDivmaster', 'QmTeateCd',
-									'CzFukurikojoShubetsu'
+								'QmKamoku', 'CzSikyuSyubetu', 'ZSalaryGuaranteeDivmaster', 'QmTeateCd', 'CzFukurikojoShubetsu'
 	);
 
 	/**
@@ -58,22 +57,14 @@ class TopsController extends AppController {
 		$results = $this->CzSikyuSyubetu->find('all', array('conditions' => array('delete_flg' => 0)));
 		$this->__saveCacheForCodeName($results, 'CzSikyuSyubetu', 'EtcTypeCD', array('EtcTypeName', 'EtcTypeSName'));
 
-		// 所属マスタ
-		$results = $this->JmShozoku->find('all', array('conditions' => array('delete_flg' => 0)));
-		$this->__saveCacheForCodeName($results, 'JmShozoku', 'DepCD', array('DeptName', 'DeptShortName'));
-
-		// 給料表級名称マスタ
-		$results = $this->ZSalaryTableClsName->find('all', array('conditions' => array('delete_flg' => 0)));
-		$this->__saveCacheForCodeName($results, 'ZSalaryTableClsName', 'SalaryClass', array('SalaryClassName', 'SalaryClassNameShort'));
-		
 		// 現給保障区分マスタ
 		$results = $this->ZSalaryGuaranteeDivmaster->find('all', array('conditions' => array('delete_flg' => 0)));
 		$this->__saveCacheForCodeName($results, 'ZSalaryGuaranteeDivmaster', 'SalaryGuaranteeDivCD', array('SalaryGuaranteeDivName', 'SalaryGuaranteeDivShortName'));
-		
+
 		// 手当コードマスタ
 		$results = $this->QmTeateCd->find('all', array('conditions' => array('delete_flg' => 0)));
 		$this->__saveCacheForCodeName($results, 'QmTeateCd', 'AllowanceCD', array('AllowanceName', 'AllowanceShortName'));
-		
+
 		// 福利控除金種別マスタ
 		$results = $this->CzFukurikojoShubetsu->find('all', array('conditions' => array('delete_flg' => 0)));
 		$this->__saveCacheForCodeName($results, 'CzFukurikojoShubetsu', 'BenefitDeductMoneyTypeCD', array('BenefitDeductMoneyTypeName'));

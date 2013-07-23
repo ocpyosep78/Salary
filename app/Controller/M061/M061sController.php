@@ -11,7 +11,8 @@ class M061sController extends CommonController {
 	// この画面で使うモデル（テーブル）を宣言する
 	public $uses = array('QtSeitoKotei', 'QtSeitoHendo', 'QtSeitoHiwari', 'QmKyuryoChild', 'ZSalaryTableNamemaster',
 							'QmHoshogaku', 'QtSeitoUchiChokin', 'QtSeitoUchiKyujitukyu', 'QtSeitoUchiYakin', 'QtSeitoUchiTokkin',
-								'QtSeitoUchiShuku', 'QtSeitoUchiKantoku', 'QtSeitoUchiNoritu', 'QtSeitoUchiChingin'
+								'QtSeitoUchiShuku', 'QtSeitoUchiKantoku', 'QtSeitoUchiNoritu', 'QtSeitoUchiChingin', 'JmShozoku',
+									'ZSalaryTableClsName', 'QmKamoku'
 	);
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
@@ -76,6 +77,21 @@ class M061sController extends CommonController {
 			$commonInfo = $hiwariAllInfo[0];
 		}
 
+		// 給与報酬科目（略称）を取得する
+		$commonInfo['salaryRewardsAccountShortName'] = $this->QmKamoku->getAccountShortName($searchCondition['PaidYM'], $commonInfo['QtSeitoHiwari']['SalaryRewardsAccountCD']);
+
+		// 児童手当科目（略称）を取得する
+		$commonInfo['childAllowAccountShortName'] = $this->QmKamoku->getAccountShortName($searchCondition['PaidYM'], $commonInfo['QtSeitoHiwari']['ChildAllowAccountCD']);
+
+		// 超過勤務科目（略称）を取得する
+		$commonInfo['overTimeWorkAccountShortName'] = $this->QmKamoku->getAccountShortName($searchCondition['PaidYM'], $commonInfo['QtSeitoHiwari']['OverTimeWorkAccountCD']);
+
+		// 休日給科目（略称）を取得する
+		$commonInfo['holidaySalaryAccountShortName'] = $this->QmKamoku->getAccountShortName($searchCondition['PaidYM'], $commonInfo['QtSeitoHiwari']['HolidaySalaryAccountCD']);
+
+		// 所属（略称）を取得する
+		$commonInfo['deptShortName'] = $this->JmShozoku->getDeptShortName($searchCondition['PaidYM'], $commonInfo['QtSeitoHiwari']['DepCD']);
+
 		// 清掃／臨職の表示内容を判定する
 		$sweeperYosan = '';
 		if($commonInfo['QtSeitoHiwari']['TempEmpPreDiv'] == '2') {
@@ -92,6 +108,9 @@ class M061sController extends CommonController {
 			}
 		}
 		$commonInfo['sweeperYosan'] = $sweeperYosan;
+
+		// 月額/日額/時給(名称)を取得する
+		$commonInfo['salaryClassName'] = $this->ZSalaryTableClsName->getSalaryClassName($commonInfo['QtSeitoHiwari']['SalaryTable'], $commonInfo['QtSeitoHiwari']['SalaryClass']);
 
 		// 給料/報酬の金額を取得する
 		$commonInfo['kyuryoHoushuGaku'] = $this->QmKyuryoChild->getSumAddAllow($searchCondition['PaidYM'], $commonInfo['QtSeitoHiwari']['SalaryTable'], $commonInfo['QtSeitoHiwari']['SalaryClass'], $commonInfo['QtSeitoHiwari']['SalaryGrade']);
@@ -225,6 +244,24 @@ class M061sController extends CommonController {
 				}
 			}
 			$hiwariInfo[$key]['sweeperYosan'] = $sweeperYosan;
+
+			// 給与報酬科目（略称）を取得する
+			$hiwariInfo[$key]['salaryRewardsAccountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtSeitoHiwari']['SalaryRewardsAccountCD']);
+
+			// 児童手当科目（略称）を取得する
+			$hiwariInfo[$key]['childAllowAccountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtSeitoHiwari']['ChildAllowAccountCD']);
+
+			// 超過勤務科目（略称）を取得する
+			$hiwariInfo[$key]['overTimeWorkAccountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtSeitoHiwari']['OverTimeWorkAccountCD']);
+
+			// 休日給科目（略称）を取得する
+			$hiwariInfo[$key]['holidaySalaryAccountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtSeitoHiwari']['HolidaySalaryAccountCD']);
+
+			// 所属（略称）を取得する
+			$hiwariInfo[$key]['deptShortName'] = $this->JmShozoku->getDeptShortName($paidYm, $record['QtSeitoHiwari']['DepCD']);
+
+			// 月額/日額/時給(名称)を取得する
+			$hiwariInfo[$key]['salaryClassName'] = $this->ZSalaryTableClsName->getSalaryClassName($record['QtSeitoHiwari']['SalaryTable'], $record['QtSeitoHiwari']['SalaryClass']);
 
 			// 給料/報酬の金額を取得する
 			$hiwariInfo[$key]['kyuryoHoushuGaku'] = $this->QmKyuryoChild->getSumAddAllow($paidYm, $record['QtSeitoHiwari']['SalaryTable'], $record['QtSeitoHiwari']['SalaryClass'], $record['QtSeitoHiwari']['SalaryGrade']);

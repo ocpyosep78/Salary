@@ -12,7 +12,8 @@ class M298sController extends CommonController {
 	public $uses = array('QtMeisai', 'QtMeisaiHiwari', 'QtMeisaiUchiSonotasikyu', 'JtKihonKihon', 'QtMeisaiUchiChingin',
 							'QtMeisaiUchiFukurikojo', 'QtMeisaiUchiRyohi', 'QtMeisaiUchiNoritu', 'QtMeisaiUchiTokkin',
 							'QtMeisaiUchiShuku', 'QtMeisaiUchiKantoku', 'QtMeisaiUchiChokin', 'QtMeisaiUchiKyujitukyu',
-							'QtMeisaiUchiYakin', 'QmKyuryoChild', 'ZSalaryTableNamemaster', 'QmHoshogaku', 'BankMaster'
+							'QtMeisaiUchiYakin', 'QmKyuryoChild', 'ZSalaryTableNamemaster', 'QmHoshogaku', 'BankMaster',
+							'JmShozoku', 'ZSalaryTableClsName', 'QmKamoku'
 	);
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
@@ -84,6 +85,21 @@ class M298sController extends CommonController {
 			$commonInfo = $hiwariAllInfo[0];
 		}
 
+		// 給与報酬科目（略称）を取得する
+		$commonInfo['salaryRewardsAccountShortName'] = $this->QmKamoku->getAccountShortName($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['SalaryRewardsAccountCD']);
+
+		// 児童手当科目（略称）を取得する
+		$commonInfo['childAllowAccountShortName'] = $this->QmKamoku->getAccountShortName($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['ChildAllowAccountCD']);
+
+		// 超過勤務科目（略称）を取得する
+		$commonInfo['overTimeWorkAccountShortName'] = $this->QmKamoku->getAccountShortName($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['OverTimeWorkAccountCD']);
+
+		// 休日給科目（略称）を取得する
+		$commonInfo['holidaySalaryAccountShortName'] = $this->QmKamoku->getAccountShortName($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['HolidaySalaryAccountCD']);
+
+		// 所属（略称）を取得する
+		$commonInfo['deptShortName'] = $this->JmShozoku->getDeptShortName($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['DepCD']);
+
 		// 清掃／臨職の表示内容を判定する
 		$sweeperYosan = '';
 		if($commonInfo['QtMeisaiHiwari']['TempEmpPreDiv'] == '2') {
@@ -100,6 +116,9 @@ class M298sController extends CommonController {
 			}
 		}
 		$commonInfo['sweeperYosan'] = $sweeperYosan;
+
+		// 月額/日額/時給(名称)を取得する
+		$commonInfo['salaryClassName'] = $this->ZSalaryTableClsName->getSalaryClassName($commonInfo['QtMeisaiHiwari']['SalaryTable'], $commonInfo['QtMeisaiHiwari']['SalaryClass']);
 
 		// 給料/報酬の金額を取得する
 		$commonInfo['kyuryoHoushuGaku'] = $this->QmKyuryoChild->getSumAddAllow($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['SalaryTable'], $commonInfo['QtMeisaiHiwari']['SalaryClass'], $commonInfo['QtMeisaiHiwari']['SalaryGrade']);
@@ -178,6 +197,7 @@ class M298sController extends CommonController {
 		$meisaiUchiKantokuList = array();
 		$meisaiUchiChokinList = array();
 		$meisaiUchiKyujitukyuList = array();
+		$meisaiUchiYakinList = array();
 		$uchiKinsetsuchiRyohi = array();
 
 
@@ -199,6 +219,7 @@ class M298sController extends CommonController {
 		$this->set('meisaiUchiKantokuList', $meisaiUchiKantokuList);
 		$this->set('meisaiUchiChokinList', $meisaiUchiChokinList);
 		$this->set('meisaiUchiKyujitukyuList', $meisaiUchiKyujitukyuList);
+		$this->set('meisaiUchiYakinList', $meisaiUchiYakinList);
 		$this->set('uchiKinsetsuchiRyohi', $uchiKinsetsuchiRyohi);
 	}
 
@@ -297,6 +318,24 @@ class M298sController extends CommonController {
 			}
 			$hiwariInfo[$key]['sweeperYosan'] = $sweeperYosan;
 
+			// 給与報酬科目（略称）を取得する
+			$hiwariInfo[$key]['salaryRewardsAccountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtMeisaiHiwari']['SalaryRewardsAccountCD']);
+
+			// 児童手当科目（略称）を取得する
+			$hiwariInfo[$key]['childAllowAccountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtMeisaiHiwari']['ChildAllowAccountCD']);
+
+			// 超過勤務科目（略称）を取得する
+			$hiwariInfo[$key]['overTimeWorkAccountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtMeisaiHiwari']['OverTimeWorkAccountCD']);
+
+			// 休日給科目（略称）を取得する
+			$hiwariInfo[$key]['holidaySalaryAccountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtMeisaiHiwari']['HolidaySalaryAccountCD']);
+
+			// 所属（略称）を取得する
+			$hiwariInfo[$key]['deptShortName'] = $this->JmShozoku->getDeptShortName($paidYm, $record['QtMeisaiHiwari']['DepCD']);
+
+			// 月額/日額/時給(名称)を取得する
+			$hiwariInfo[$key]['salaryClassName'] = $this->ZSalaryTableClsName->getSalaryClassName($record['QtMeisaiHiwari']['SalaryTable'], $record['QtMeisaiHiwari']['SalaryClass']);
+
 			// 給料/報酬の金額を取得する
 			$hiwariInfo[$key]['kyuryoHoushuGaku'] = $this->QmKyuryoChild->getSumAddAllow($paidYm, $record['QtMeisaiHiwari']['SalaryTable'], $record['QtMeisaiHiwari']['SalaryClass'], $record['QtMeisaiHiwari']['SalaryGrade']);
 
@@ -327,11 +366,26 @@ class M298sController extends CommonController {
 		// テーブル[支給明細データ：超勤内訳]からデータを取得する
 		$meisaiUchiChokinList = $this->QtMeisaiUchiChokin->findMeisaiUchiChokin($paidYm, $empNo, $paidDiv, $payerDiv);
 
+		// 超勤内訳の科目（略称）を取得する
+		foreach($meisaiUchiChokinList as $key => $record) {
+			$meisaiUchiChokinList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtMeisaiUchiChokin']['AccountCD']);
+		}
+
 		// テーブル[支給明細データ：休日給内訳]からデータを取得する
 		$meisaiUchiKyujitukyuList = $this->QtMeisaiUchiKyujitukyu->findMeisaiUchiKyujitukyu($paidYm, $empNo, $paidDiv, $payerDiv);
 
+		// 休日給内訳の科目（略称）を取得する
+		foreach($meisaiUchiKyujitukyuList as $key => $record) {
+			$meisaiUchiKyujitukyuList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtMeisaiUchiKyujitukyu']['AccountCD']);
+		}
+
 		// テーブル[支給明細データ：夜勤内訳]からデータを取得する
 		$meisaiUchiYakinList = $this->QtMeisaiUchiYakin->findMeisaiUchiYakin($paidYm, $empNo, $paidDiv, $payerDiv);
+
+		// 夜勤内訳の科目（略称）を取得する
+		foreach($meisaiUchiYakinList as $key => $record) {
+			$meisaiUchiYakinList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtMeisaiUchiYakin']['AccountCD']);
+		}
 
 		// 取得データをViewに渡す
 		$this->set(compact('meisaiUchiChokinList'));
@@ -378,6 +432,11 @@ class M298sController extends CommonController {
 
 		// テーブル[支給明細データ：旅費内訳]からデータを取得する
 		$meisaiUchiRyohiList = $this->QtMeisaiUchiRyohi->findMeisaiUchiRyohi($paidYm, $empNo, $paidDiv, $payerDiv);
+
+		// 所属（略称）を取得する
+		foreach($meisaiUchiRyohiList as $key => $meisaiUchiRyohi) {
+			$meisaiUchiRyohiList[$key]['deptShortName'] = $this->JmShozoku->getDeptShortName($paidYm, $meisaiUchiRyohi['QtMeisaiUchiRyohi']['ExpendDepCD']);
+		}
 
 		// 取得データをViewに渡す
 		$this->set(compact('meisaiUchiRyohiList'));
