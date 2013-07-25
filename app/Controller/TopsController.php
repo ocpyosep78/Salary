@@ -9,7 +9,8 @@ class TopsController extends AppController {
 
 	public $uses = array('MgrPositionMaster', 'ZAllowanceDetailNamemaster', 'JmSyokuinKubun', 'QmKyuyoTaikei',
 							'JmSyokuso', 'JobCategoryMaster', 'ZSalaryTableNamemaster', 'ZAttendanceReason', 'ZDetachmentAllowDivmaster',
-								'QmKamoku', 'CzSikyuSyubetu', 'ZSalaryGuaranteeDivmaster', 'QmTeateCd', 'CzFukurikojoShubetsu'
+								'CzSikyuSyubetu', 'ZSalaryGuaranteeDivmaster', 'QmTeateCd', 'CzFukurikojoShubetsu', 'CzJyukyoTeateNintei',
+									'ZMaSiEnrollDivmaster'
 	);
 
 	/**
@@ -49,10 +50,6 @@ class TopsController extends AppController {
 		$results = $this->ZAttendanceReason->find('all', array('conditions' => array('DeleteFlg' => 0)));
 		$this->__saveCacheForCodeName($results, 'ZAttendanceReason', 'ID', array('NAME'));
 
-		// 科目テーブル
-		$results = $this->QmKamoku->find('all', array('conditions' => array('delete_flg' => 0)));
-		$this->__saveCacheForCodeName($results, 'QmKamoku', 'AccountCD', array('AccountName', 'AccountShortName'));
-
 		// 支給種別CDマスタ
 		$results = $this->CzSikyuSyubetu->find('all', array('conditions' => array('delete_flg' => 0)));
 		$this->__saveCacheForCodeName($results, 'CzSikyuSyubetu', 'EtcTypeCD', array('EtcTypeName', 'EtcTypeSName'));
@@ -68,6 +65,15 @@ class TopsController extends AppController {
 		// 福利控除金種別マスタ
 		$results = $this->CzFukurikojoShubetsu->find('all', array('conditions' => array('delete_flg' => 0)));
 		$this->__saveCacheForCodeName($results, 'CzFukurikojoShubetsu', 'BenefitDeductMoneyTypeCD', array('BenefitDeductMoneyTypeName'));
+
+		// 住居手当認定区分マスタ
+		$results = $this->CzJyukyoTeateNintei->find('all', array('conditions' => array('delete_flg' => 0)));
+		$this->__saveCacheForCodeName($results, 'CzJyukyoTeateNintei', 'ResidentAllowCD', array('ResidentAllowName', 'ResidentAllowSName'));
+
+		// 共済社保加入区分マスタ
+		$results = $this->ZMaSiEnrollDivmaster->find('all', array('conditions' => array('delete_flg' => 0)));
+		$this->__saveCacheForCodeName($results, 'ZMaSiEnrollDivmaster', 'MA_SI_EnrollDiv', array('MA_SI_EnrollDivName'));
+
 	}
 
 	/**

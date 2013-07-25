@@ -87,4 +87,37 @@ class ZDetachmentAllowDivmaster extends AppModel {
 			),
 		),
 	);
+
+	/**
+	 * 単身赴任手当区分(名称)を取得する
+	 *
+	 * @param string $detachmentAllowDivCD 単身赴任手当認定区分CD
+	 *
+	 * @return string 単身赴任手当区分(名称)
+	 */
+	public function getName($detachmentAllowDivCD) {
+
+		$this->recursive = -1;
+
+		// 検索条件の設定
+		$searchCondition = array();
+		$searchCondition['ID']        = $detachmentAllowDivCD; // 区分CD
+		$searchCondition['DeleteFlg'] = '0';                   // 削除フラグ
+
+		// 検索パラメータの設定
+		$params = array(
+			'conditions' => $searchCondition
+		);
+
+		// 検索
+		$result = $this->find('first', $params);
+
+		// 検索結果から単身赴任手当区分(名称)を取得する
+		$detachmentAllowDivName = '';
+		if(!empty($result)){
+			$detachmentAllowDivName = $result['ZDetachmentAllowDivmaster']['NAME'];
+		}
+
+		return $detachmentAllowDivName;
+	}
 }

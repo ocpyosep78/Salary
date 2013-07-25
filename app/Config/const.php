@@ -136,6 +136,7 @@ Configure::write('CACHE_KEY_MAP',array(
 	'MgrCD' => array('MgrName', 'MgrShortName'),
 	// 手当詳細
 	'AllowDetailCD' => array('AllowDetailName', 'AllowDetailSName'),
+	'SpecificDutySalaryCD' => array('AllowDetailName', 'AllowDetailSName'),
 	// 職員区分
 	'EmpDiv' => array('EmpDivName', 'EmpDivShortName'),
 	// 給与体系
@@ -148,13 +149,6 @@ Configure::write('CACHE_KEY_MAP',array(
 	'SalaryTable' => array('SalaryTableName', 'SalaryTableSName'),
 	// 勤怠事由マスタ
 	'AttendanceOrderedReasonCD' => array('NAME'),
-	// 銀行マスタ
-	'A_Account_BankCD' => array('BankNameKana'),
-	//'B_Account_BankCD' => array('BankNameKana'),
-	'A_Account_BranchCD' => array('BankBrancheName'),
-	//'B_Account_BranchCD' => array('BankBrancheName'),
-	// 科目テーブル
-	'AccountCD' => array('AccountName', 'AccountShortName'),
 	// 支給種別CDマスタ
 	'EtcTypeCD' => array('EtcTypeName', 'EtcTypeSName'),
 	// 給料表級名称マスタ
@@ -165,5 +159,9 @@ Configure::write('CACHE_KEY_MAP',array(
 	'TravelExpTypeCD' => array('AllowanceName', 'AllowanceShortName'),
 	// 福利控除金種別マスタ
 	'DeductionCD' => array('BenefitDeductMoneyTypeName'),
+	// 住居手当認定区分マスタ
+	'ResidentAllowCD' => array('ResidentAllowName', 'ResidentAllowSName'),
+	// 共済社保加入区分マスタ
+	'TokyoMetMASchoolMASoInsDiv' => array('MA_SI_EnrollDivName'),
 ));
 ?>

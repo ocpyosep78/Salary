@@ -520,7 +520,7 @@
 
 						<th>■共済/社保</th>
 						<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.TokyoMetMASchoolMASoInsDiv'); ?></td>
-						<td>NNNN</td>
+						<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.CodeName_MA_SI_EnrollDivName'); ?></td>
 						<th>■所得税</th>
 						<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.StandardMonthSalaryDiv'); ?></td>
 						<td><p>NN</p></td>
@@ -583,9 +583,9 @@
 					</tr>
 					<tr>
 						<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.ResidentAllowCD'); ?></td>
-						<td colspan="2" class="td04">NNNNNN</td>
+						<td colspan="2" class="td04"><?php echo Hash::get($meisaiInfo, 'QtMeisai.CodeName_ResidentAllowName'); ?></td>
 						<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.DetachmentAllowDivCD'); ?></td>
-						<td colspan="2" class="td04 bdR">NNNNNN</td>
+						<td colspan="2" class="td04 bdR"><?php echo Hash::get($meisaiInfo, 'detachmentAllowDivName'); ?></td>
 
 						<th class="pdL20">通勤</th>
 						<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.CommutationStopStartFlg'); ?></td>
@@ -643,7 +643,7 @@
 					<tr>
 						<th class="pdL20">特勤</th>
 						<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.SpecificDutySalaryCD'); ?></td>
-						<td>NNNNNN</td>
+						<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.CodeName_AllowDetailName'); ?></td>
 						<th>&nbsp;</th>
 						<td>&nbsp;</td>
 						<th class="bdR">&nbsp;</th>
@@ -1269,7 +1269,7 @@
 									<td><?php echo Hash::get($meisaiUchiTokkin, 'QtMeisaiUchiTokkin.AllowDetailCD'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiTokkin, 'QtMeisaiUchiTokkin.CodeName_AllowDetailName'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiTokkin, 'QtMeisaiUchiTokkin.AccountCD'); ?></td>
-									<td><?php echo Hash::get($meisaiUchiTokkin, 'QtMeisaiUchiTokkin.CodeName_AccountShortName'); ?></td>
+									<td><?php echo Hash::get($meisaiUchiTokkin, 'accountShortName'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiTokkin, 'QtMeisaiUchiTokkin.WorkTiimes_UQ'); ?></td>
 									<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiTokkin, 'QtMeisaiUchiTokkin.Payments')); ?></td>
 								<?php // 偶数個目のデータのときはtr終了タグを入れる ?>
@@ -1350,7 +1350,7 @@
 									<td><?php echo Hash::get($meisaiUchiShuku, 'QtMeisaiUchiShuku.AllowDetailCD'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiShuku, 'QtMeisaiUchiShuku.CodeName_AllowDetailName'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiShuku, 'QtMeisaiUchiShuku.AccountCD'); ?></td>
-									<td><?php echo Hash::get($meisaiUchiShuku, 'QtMeisaiUchiShuku.CodeName_AccountShortName'); ?></td>
+									<td><?php echo Hash::get($meisaiUchiShuku, 'accountShortName'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiShuku, 'QtMeisaiUchiShuku.WorkTimes_ND'); ?></td>
 									<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiShuku, 'QtMeisaiUchiShuku.Payments')); ?></td>
 								<?php // 偶数個目のデータのときはtr終了タグを入れる ?>
@@ -1431,7 +1431,7 @@
 									<td><?php echo Hash::get($meisaiUchiKantoku, 'QtMeisaiUchiKantoku.AllowDetailCD'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiKantoku, 'QtMeisaiUchiKantoku.CodeName_AllowDetailName'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiKantoku, 'QtMeisaiUchiKantoku.AccountCD'); ?></td>
-									<td><?php echo Hash::get($meisaiUchiKantoku, 'QtMeisaiUchiKantoku.CodeName_AccountShortName'); ?></td>
+									<td><?php echo Hash::get($meisaiUchiKantoku, 'accountShortName'); ?></td>
 									<td><?php echo Hash::get($meisaiUchiKantoku, 'QtMeisaiUchiKantoku.WorkTimes_AU'); ?></td>
 									<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiKantoku, 'QtMeisaiUchiKantoku.Payments')); ?></td>
 								<?php // 偶数個目のデータのときはtr終了タグを入れる ?>
@@ -1474,7 +1474,7 @@
 							<td><?php echo Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.AllowDetailCD'); ?></td>
 							<td><?php echo Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.CodeName_AllowDetailName'); ?></td>
 							<td><?php echo Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.AccountCD'); ?></td>
-							<td><?php echo Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.CodeName_AccountShortName'); ?></td>
+							<td><?php echo Hash::get($meisaiUchiNoritu, 'accountShortName'); ?></td>
 							<td><?php echo Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.EfficiencyWagesTimes'); ?></td>
 							<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.EfficiencyWagesAmount')); ?></td>
 							<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiNoritu, 'QtMeisaiUchiNoritu.Payments')); ?></td>
@@ -1510,7 +1510,7 @@
 								<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.ExpendDepCD'); ?></td>
 								<td><?php echo Hash::get($meisaiUchiRyohi, 'deptShortName'); ?></td>
 								<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.AccountCD'); ?></td>
-								<td><?php echo Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.CodeName_AccountShortName'); ?></td>
+								<td><?php echo Hash::get($meisaiUchiRyohi, 'accountShortName'); ?></td>
 								<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiRyohi, 'QtMeisaiUchiRyohi.ExpenseAmount')); ?></td>
 							</tr>
 						<?php endforeach; ?>
@@ -1626,7 +1626,7 @@
 							<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.AllowDetailCD'); ?></td>
 							<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.CodeName_AllowDetailName'); ?></td>
 							<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.AccountCD'); ?></td>
-							<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.CodeName_AccountShortName'); ?></td>
+							<td><?php echo Hash::get($meisaiUchiChingin, 'accountShortName'); ?></td>
 							<td><?php echo Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.WorkTimes_LW'); ?></td>
 							<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiUchiChingin, 'QtMeisaiUchiChingin.Payments')); ?></td>
 						</tr>

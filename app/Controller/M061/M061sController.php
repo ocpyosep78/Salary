@@ -12,7 +12,7 @@ class M061sController extends CommonController {
 	public $uses = array('QtSeitoKotei', 'QtSeitoHendo', 'QtSeitoHiwari', 'QmKyuryoChild', 'ZSalaryTableNamemaster',
 							'QmHoshogaku', 'QtSeitoUchiChokin', 'QtSeitoUchiKyujitukyu', 'QtSeitoUchiYakin', 'QtSeitoUchiTokkin',
 								'QtSeitoUchiShuku', 'QtSeitoUchiKantoku', 'QtSeitoUchiNoritu', 'QtSeitoUchiChingin', 'JmShozoku',
-									'ZSalaryTableClsName', 'QmKamoku'
+									'ZSalaryTableClsName', 'QmKamoku', 'ZDetachmentAllowDivmaster'
 	);
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
@@ -123,6 +123,9 @@ class M061sController extends CommonController {
 
 		// タブ02：日割情報
 		$this->tab02($searchCondition['PaidYM'], $hiwariAllInfo);
+
+		// タブ03：詳細情報
+		$this->tab03($koteiInfo);
 
 		// タブ05：超勤・休日・夜勤
 		$this->tab05($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PayerDiv']);
@@ -286,6 +289,15 @@ class M061sController extends CommonController {
 	}
 
 	/**
+	 * タブ03：詳細画面
+	 */
+	private function tab03(&$koteiInfo) {
+
+		// 単身赴任手当区分（名称）を取得する
+		$koteiInfo['detachmentAllowDivName'] = $this->ZDetachmentAllowDivmaster->getName($koteiInfo['QtSeitoKotei']['DetachmentAllowDivCD']);
+	}
+
+	/**
 	 * タブ05：超勤・休日・夜勤
 	 */
 	private function tab05($empNo, $paidYm, $payerDiv) {
@@ -293,11 +305,26 @@ class M061sController extends CommonController {
 		// テーブル[正当支給データ：超勤内訳]からデータを取得する
 		$seitoUchiChokinList = $this->QtSeitoUchiChokin->findSeitoUchiChokin($paidYm, $empNo, $payerDiv);
 
+		// 超勤内訳の科目（略称）を取得する
+		foreach($seitoUchiChokinList as $key => $record) {
+			$seitoUchiChokinList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtSeitoUchiChokin']['AccountCD']);
+		}
+
 		// テーブル[正当支給データ：休日給内訳]からデータを取得する
 		$seitoUchiKyujitukyuList = $this->QtSeitoUchiKyujitukyu->findSeitoUchiKyujitukyu($paidYm, $empNo, $payerDiv);
 
+		// 休日給内訳の科目（略称）を取得する
+		foreach($seitoUchiKyujitukyuList as $key => $record) {
+			$seitoUchiKyujitukyuList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtSeitoUchiKyujitukyu']['AccountCD']);
+		}
+
 		// テーブル[正当支給データ：夜勤内訳]からデータを取得する
 		$seitoUchiYakinList = $this->QtSeitoUchiYakin->findSeitoUchiYakin($paidYm, $empNo, $payerDiv);
+
+		// 夜勤内訳の科目（略称）を取得する
+		foreach($seitoUchiYakinList as $key => $record) {
+			$seitoUchiYakinList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtSeitoUchiYakin']['AccountCD']);
+		}
 
 		// 取得データをViewに渡す
 		$this->set(compact('seitoUchiChokinList'));
@@ -313,11 +340,26 @@ class M061sController extends CommonController {
 		// テーブル[正当支給データ：特勤内訳]からデータを取得する
 		$seitoUchiTokkinList = $this->QtSeitoUchiTokkin->findSeitoUchiTokkin($paidYm, $empNo, $payerDiv);
 
+		// 特勤内訳の科目（略称）を取得する
+		foreach($seitoUchiTokkinList as $key => $record) {
+			$seitoUchiTokkinList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtSeitoUchiTokkin']['AccountCD']);
+		}
+
 		// テーブル[正当支給データ：宿日直内訳]からデータを取得する
 		$seitoUchiShukuList = $this->QtSeitoUchiShuku->findSeitoUchiShuku($paidYm, $empNo, $payerDiv);
 
+		// 宿日直内訳の科目（略称）を取得する
+		foreach($seitoUchiShukuList as $key => $record) {
+			$seitoUchiShukuList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtSeitoUchiShuku']['AccountCD']);
+		}
+
 		// テーブル[正当支給データ：管理職特勤内訳]からデータを取得する
 		$seitoUchiKantokuList = $this->QtSeitoUchiKantoku->findSeitoUchiKantoku($paidYm, $empNo, $payerDiv);
+
+		// 管理職特勤内訳の科目（略称）を取得する
+		foreach($seitoUchiKantokuList as $key => $record) {
+			$seitoUchiKantokuList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtSeitoUchiKantoku']['AccountCD']);
+		}
 
 		// 取得データをViewに渡す
 		$this->set(compact('seitoUchiTokkinList'));
@@ -330,8 +372,13 @@ class M061sController extends CommonController {
 	 */
 	private function tab07($empNo, $paidYm, $payerDiv) {
 
-		// テーブル[支給明細データ：旅費内訳]からデータを取得する
+		// テーブル[正当支給データ：能率給内訳]からデータを取得する
 		$seitoUchiNorituList = $this->QtSeitoUchiNoritu->findSeitoUchiNoritu($paidYm, $empNo, $payerDiv);
+
+		// 能率給内訳の科目（略称）を取得する
+		foreach($seitoUchiNorituList as $key => $record) {
+			$seitoUchiNorituList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtSeitoUchiNoritu']['AccountCD']);
+		}
 
 		// 取得データをViewに渡す
 		$this->set(compact('seitoUchiNorituList'));
@@ -344,6 +391,11 @@ class M061sController extends CommonController {
 
 		// テーブル[正当支給データ：賃金内訳]からデータを取得する
 		$seitoUchiChinginList = $this->QtSeitoUchiChingin->findSeitoUchiChingin($paidYm, $empNo, $payerDiv);
+
+		// 賃金内訳の科目（略称）を取得する
+		foreach($seitoUchiChinginList as $key => $record) {
+			$seitoUchiChinginList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtSeitoUchiChingin']['AccountCD']);
+		}
 
 		// 取得データをViewに渡す
 		$this->set(compact('seitoUchiChinginList'));

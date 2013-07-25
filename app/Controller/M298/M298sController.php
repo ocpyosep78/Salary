@@ -13,7 +13,7 @@ class M298sController extends CommonController {
 							'QtMeisaiUchiFukurikojo', 'QtMeisaiUchiRyohi', 'QtMeisaiUchiNoritu', 'QtMeisaiUchiTokkin',
 							'QtMeisaiUchiShuku', 'QtMeisaiUchiKantoku', 'QtMeisaiUchiChokin', 'QtMeisaiUchiKyujitukyu',
 							'QtMeisaiUchiYakin', 'QmKyuryoChild', 'ZSalaryTableNamemaster', 'QmHoshogaku', 'BankMaster',
-							'JmShozoku', 'ZSalaryTableClsName', 'QmKamoku'
+							'JmShozoku', 'ZSalaryTableClsName', 'QmKamoku', 'ZDetachmentAllowDivmaster'
 	);
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
@@ -137,6 +137,9 @@ class M298sController extends CommonController {
 
 		// タブ02：日割情報
 		$this->tab02($searchCondition['PaidYM'], $hiwariAllInfo);
+
+		// タブ03：詳細画面
+		$this->tab03($meisaiInfo);
 
 		// タブ05：超勤・休日・夜勤
 		$this->tab05($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
@@ -359,6 +362,15 @@ class M298sController extends CommonController {
 	}
 
 	/**
+	 * 支給明細照会　タブ03：詳細画面
+	 */
+	private function tab03(&$meisaiInfo) {
+
+		// 単身赴任手当区分（名称）を取得する
+		$meisaiInfo['detachmentAllowDivName'] = $this->ZDetachmentAllowDivmaster->getName($meisaiInfo['QtMeisai']['DetachmentAllowDivCD']);
+	}
+
+	/**
 	 * 支給明細照会　タブ05：超勤・休日・夜勤
 	 */
 	private function tab05($empNo, $paidYm, $paidDiv, $payerDiv) {
@@ -401,11 +413,26 @@ class M298sController extends CommonController {
 		// テーブル[支給明細データ：特勤内訳]からデータを取得する
 		$meisaiUchiTokkinList = $this->QtMeisaiUchiTokkin->findMeisaiUchiTokkin($paidYm, $empNo, $paidDiv, $payerDiv);
 
+		// 特勤内訳の科目（略称）を取得する
+		foreach($meisaiUchiTokkinList as $key => $record) {
+			$meisaiUchiTokkinList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtMeisaiUchiTokkin']['AccountCD']);
+		}
+
 		// テーブル[支給明細データ：宿日直内訳]からデータを取得する
 		$meisaiUchiShukuList = $this->QtMeisaiUchiShuku->findMeisaiUchiShuku($paidYm, $empNo, $paidDiv, $payerDiv);
 
+		// 宿日直内訳の科目（略称）を取得する
+		foreach($meisaiUchiShukuList as $key => $record) {
+			$meisaiUchiShukuList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtMeisaiUchiShuku']['AccountCD']);
+		}
+
 		// テーブル[支給明細データ：管理職特勤内訳]からデータを取得する
 		$meisaiUchiKantokuList = $this->QtMeisaiUchiKantoku->findMeisaiUchiKantoku($paidYm, $empNo, $paidDiv, $payerDiv);
+
+		// 管理職特勤内訳の科目（略称）を取得する
+		foreach($meisaiUchiKantokuList as $key => $record) {
+			$meisaiUchiKantokuList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtMeisaiUchiKantoku']['AccountCD']);
+		}
 
 		// 取得データをViewに渡す
 		$this->set(compact('meisaiUchiTokkinList'));
@@ -418,8 +445,13 @@ class M298sController extends CommonController {
 	 */
 	private function tab07($empNo, $paidYm, $paidDiv, $payerDiv) {
 
-		// テーブル[支給明細データ：旅費内訳]からデータを取得する
+		// テーブル[支給明細データ：能率給内訳]からデータを取得する
 		$meisaiUchiNorituList = $this->QtMeisaiUchiNoritu->findMeisaiUchiNoritu($paidYm, $empNo, $paidDiv, $payerDiv);
+
+		// 能率給内訳の科目（略称）を取得する
+		foreach($meisaiUchiNorituList as $key => $record) {
+			$meisaiUchiNorituList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtMeisaiUchiNoritu']['AccountCD']);
+		}
 
 		// 取得データをViewに渡す
 		$this->set(compact('meisaiUchiNorituList'));
@@ -433,9 +465,12 @@ class M298sController extends CommonController {
 		// テーブル[支給明細データ：旅費内訳]からデータを取得する
 		$meisaiUchiRyohiList = $this->QtMeisaiUchiRyohi->findMeisaiUchiRyohi($paidYm, $empNo, $paidDiv, $payerDiv);
 
-		// 所属（略称）を取得する
+		// 所属（略称）と旅費内訳の科目（略称）を取得する
 		foreach($meisaiUchiRyohiList as $key => $meisaiUchiRyohi) {
+			// 所属（略称）を取得する
 			$meisaiUchiRyohiList[$key]['deptShortName'] = $this->JmShozoku->getDeptShortName($paidYm, $meisaiUchiRyohi['QtMeisaiUchiRyohi']['ExpendDepCD']);
+			// 旅費内訳の科目（略称）を取得する
+			$meisaiUchiRyohiList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $meisaiUchiRyohi['QtMeisaiUchiRyohi']['AccountCD']);
 		}
 
 		// 取得データをViewに渡す
@@ -461,6 +496,11 @@ class M298sController extends CommonController {
 
 		// テーブル[支給明細データ：賃金内訳]からデータを取得する
 		$meisaiUchiChinginList = $this->QtMeisaiUchiChingin->findMeisaiUchiChingin($paidYm, $empNo, $paidDiv, $payerDiv);
+
+		// 賃金内訳の科目（略称）を取得する
+		foreach($meisaiUchiChinginList as $key => $record) {
+			$meisaiUchiChinginList[$key]['accountShortName'] = $this->QmKamoku->getAccountShortName($paidYm, $record['QtMeisaiUchiChingin']['AccountCD']);
+		}
 
 		// 取得データをViewに渡す
 		$this->set(compact('meisaiUchiChinginList'));
