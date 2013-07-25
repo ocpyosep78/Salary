@@ -44,6 +44,12 @@ class M061sController extends CommonController {
 
 		// TODO バリデーションチェック
 
+		// 消去ボタンを押下した場合
+		if(isset($this->request->data['clear'])) {
+			// 初期画面を表示する
+			$this->redirect('index');
+		}
+
 		// POSTデータを受け取る
 		$postData = $this->request->data['M061s'];
 
@@ -68,6 +74,8 @@ class M061sController extends CommonController {
 		$koteiInfo = $this->QtSeitoKotei->find('first', $params);
 		// テーブル[正当支給データ：日割]からデータを取得する
 		$hiwariAllInfo = $this->QtSeitoHiwari->find('all', $params);
+
+		// TODO 検索結果が0件のときは、その旨を伝えるポップアップを表示する
 
 		// 共通エリア情報
 		$commonInfo = array();

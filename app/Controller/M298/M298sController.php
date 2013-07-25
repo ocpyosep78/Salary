@@ -44,6 +44,12 @@ class M298sController extends CommonController {
 
 		// TODO バリデーションチェック
 
+		// 消去ボタンを押下した場合
+		if(isset($this->request->data['clear'])) {
+			// 初期画面を表示する
+			$this->redirect('index');
+		}
+
 		// POSTデータを受け取る
 		$postData = $this->request->data['M298s'];
 
@@ -76,6 +82,8 @@ class M298sController extends CommonController {
 		$params['order'] = array('QtMeisaiHiwari.TableNo');
 		// テーブル[支給明細データ：日割]からデータを取得する
 		$hiwariAllInfo = $this->QtMeisaiHiwari->find('all', $params);
+
+		// TODO 検索結果が0件のときは、その旨を伝えるポップアップを表示する
 
 		// 共通エリア情報
 		$commonInfo = array();

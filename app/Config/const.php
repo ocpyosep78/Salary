@@ -163,5 +163,9 @@ Configure::write('CACHE_KEY_MAP',array(
 	'ResidentAllowCD' => array('ResidentAllowName', 'ResidentAllowSName'),
 	// 共済社保加入区分マスタ
 	'TokyoMetMASchoolMASoInsDiv' => array('MA_SI_EnrollDivName'),
+	// 支給区分マスタ
+	'PaidDiv' => array('PaymentDivName'),
+	// 給与支払者マスタ
+	'PayerDiv' => array('PayerName', 'PayerShortName'),
 ));
 ?>

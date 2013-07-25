@@ -10,7 +10,7 @@ class TopsController extends AppController {
 	public $uses = array('MgrPositionMaster', 'ZAllowanceDetailNamemaster', 'JmSyokuinKubun', 'QmKyuyoTaikei',
 							'JmSyokuso', 'JobCategoryMaster', 'ZSalaryTableNamemaster', 'ZAttendanceReason', 'ZDetachmentAllowDivmaster',
 								'CzSikyuSyubetu', 'ZSalaryGuaranteeDivmaster', 'QmTeateCd', 'CzFukurikojoShubetsu', 'CzJyukyoTeateNintei',
-									'ZMaSiEnrollDivmaster'
+									'ZMaSiEnrollDivmaster', 'QmShikyuKubun', 'QmKyuyoShiharaisha'
 	);
 
 	/**
@@ -73,6 +73,14 @@ class TopsController extends AppController {
 		// 共済社保加入区分マスタ
 		$results = $this->ZMaSiEnrollDivmaster->find('all', array('conditions' => array('delete_flg' => 0)));
 		$this->__saveCacheForCodeName($results, 'ZMaSiEnrollDivmaster', 'MA_SI_EnrollDiv', array('MA_SI_EnrollDivName'));
+
+		// 支給区分マスタ
+		$results = $this->QmShikyuKubun->find('all', array('conditions' => array('delete_flg' => 0)));
+		$this->__saveCacheForCodeName($results, 'QmShikyuKubun', 'PaymentDivCD', array('PaymentDivName'));
+
+		// 給与支払者マスタ
+		$results = $this->QmKyuyoShiharaisha->find('all', array('conditions' => array('delete_flg' => 0)));
+		$this->__saveCacheForCodeName($results, 'QmKyuyoShiharaisha', 'PayerDiv', array('PayerName', 'PayerShortName'));
 
 	}
 

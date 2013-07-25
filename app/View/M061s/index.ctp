@@ -36,7 +36,7 @@
 			<td>&nbsp;</td>
 			<th>&nbsp;</th>
 			<td class="td01 pd02">
-				<?php echo $this->SalaryForm->reset('clear', array('type' => 'reset', 'class' => 'Button1', 'value' => '消去'), null); ?>
+				<?php echo $this->SalaryForm->submit('消去', array('type' => 'submit', 'class' => 'Button1', 'name' => 'clear'), null); ?>
 			</td>
 		</tr>
 	</table>

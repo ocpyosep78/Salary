@@ -14,9 +14,9 @@
 				<input type="button"  class="Button2" value="？" onclick="viewForEmpSearch();" />
 			</td>
 			<th>氏名</th>
-			<td><?php echo Hash::get($personalInfo, 'FamilyName'); ?>_<?php echo Hash::get($personalInfo, 'FamilyNameKana'); ?> <?php echo Hash::get($personalInfo, 'FirstName'); ?>_<?php echo Hash::get($personalInfo, 'FirstNameKana'); ?></td>
+			<td><?php echo Hash::get($personalInfo, 'JtKihonKihon.FamilyNameKana'); ?>&nbsp;<?php echo Hash::get($personalInfo, 'JtKihonKihon.FirstNameKana'); ?></td>
 			<th>年齢</th>
-			<td>満　ZZ歳</td>
+			<td><?php echo $this->SalaryForm->getAgeFromChristianEra(Hash::get($personalInfo, 'JtKihonKihon.BirthDate')); ?></td>
 			<td class="td1 pd01">
 				<?php echo $this->SalaryForm->submit('検索', array('type' => 'submit', 'class' => 'Button1'), null); ?>
 			</td>
@@ -31,16 +31,16 @@
 			<td>
 				<?php echo $this->SalaryForm->text('PaidDiv', array('size' => '1', 'id' => 'ShikyuCD', 'value' => Hash::get($searchCondition, 'PaidDiv'), 'placeholder' => 'XX'));?>
 				<?php echo $this->SalaryForm->button('？', array('type' => 'button', 'onclick' => "viewForCommonSearch('QmShikyuKubun', 'PaymentDivName', 'PaymentDivCD', 'ShikyuName', 'ShikyuCD')" ), null); ?>
-				<p class="description" id="ShikyuName" ></p>
+				<p class="description" id="ShikyuName" ><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.CodeName_PaymentDivName'); ?></p>
 			</td>
 			<th>支払者</th>
 			<td>
 				<?php echo $this->SalaryForm->text('PayerDiv', array('size' => '1', 'id' => 'ShiharaishaCD', 'value' => Hash::get($searchCondition, 'PayerDiv'), 'placeholder' => 'XX'));?>
 				<?php echo $this->SalaryForm->button('？', array('type' => 'button', 'onclick' => "viewForCommonSearch('QmKyuyoShiharaisha', 'PayerName', 'PayerDiv', 'ShiharaishaName', 'ShiharaishaCD')" ), null); ?>
-				<p class="description" id="ShiharaishaName"></p>
+				<p class="description" id="ShiharaishaName"><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.CodeName_PayerName'); ?></p>
 			</td>
 			<td class="td1 pd02">
-				<?php echo $this->SalaryForm->reset('clear', array('type' => 'reset', 'class' => 'Button1', 'value' => '消去'), null); ?>
+				<?php echo $this->SalaryForm->submit('消去', array('type' => 'submit', 'class' => 'Button1', 'name' => 'clear'), null); ?>
 			</td>
 		</tr>
 	</table>
