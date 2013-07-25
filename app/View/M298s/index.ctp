@@ -1639,7 +1639,7 @@
 	</div><!-- //#tabs -->
 
 <!-- *********************************【フッター】********************************* -->
-	<p id="footer"><input type="submit" name="" value="（空白）" class="btn01" /></p>
+	<p id="footer"><input type="button" value="閉じる" class="btn01" onClick="window.close();" /></p>
 
 </div><!-- //#container -->
 
@@ -1648,3 +1648,4 @@
 
 <?php // 検索子画面の読み込み ?>
 <?php // echo $this->element('common_search'); ?>
+

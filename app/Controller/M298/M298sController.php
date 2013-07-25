@@ -209,7 +209,7 @@ class M298sController extends CommonController {
 		$meisaiUchiChokinList = array();
 		$meisaiUchiKyujitukyuList = array();
 		$meisaiUchiYakinList = array();
-		$uchiKinsetsuchiRyohi = array();
+		$uchiKinsetsuchiRyohi = "";
 
 
 		// 画面への設定

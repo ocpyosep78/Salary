@@ -14,9 +14,9 @@
 				<?php echo $this->SalaryForm->button('？', array('type' => 'button'), null); ?>
 			</td>
 			<th>氏名</th>
-			<td>NNNNNNNNNNNNNNN</td>
+			<td><?php echo Hash::get($personalInfo, 'JtKihonKihon.FamilyNameKana'); ?>&nbsp;<?php echo Hash::get($personalInfo, 'JtKihonKihon.FirstNameKana'); ?></td>
 			<th>年齢</th>
-			<td>満　ZZ歳</td>
+			<td><?php echo $this->SalaryForm->getAgeFromChristianEra(Hash::get($personalInfo, 'JtKihonKihon.BirthDate')); ?></td>
 			<td class="td01 pd01">
 				<?php echo $this->SalaryForm->submit('検索', array('type' => 'submit', 'class' => 'Button1'), null); ?>
 			</td>
@@ -31,7 +31,7 @@
 			<td>
 				<?php echo $this->SalaryForm->text('PayerDiv', array('size' => '1', 'id' => 'ShiharaishaCD', 'value' => Hash::get($searchCondition, 'PayerDiv'), 'placeholder' => 'XX'));?>
 				<?php echo $this->SalaryForm->button('？', array('type' => 'button', 'onclick' => "viewForCommonSearch('QmKyuyoShiharaisha', 'PayerName', 'PayerDiv', 'ShiharaishaName', 'ShiharaishaCD')" ), null); ?>
-				<p class="description" id="ShiharaishaName"></p>
+				<p class="description" id="ShiharaishaName"><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_PayerName'); ?></p>
 			</td>
 			<td>&nbsp;</td>
 			<th>&nbsp;</th>
@@ -1535,7 +1535,7 @@
 	</div><!-- //#tabs -->
 
 <!-- *********************************【フッター】********************************* -->
-	<p id="footer"><input type="submit" name="" value="（空白）" class="btn01" /></p>
+	<p id="footer"><input type="button" value="閉じる" class="btn01" onClick="window.close();" /></p>
 
 </div><!-- //#container -->
 

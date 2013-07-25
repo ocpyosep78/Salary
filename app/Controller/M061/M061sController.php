@@ -12,7 +12,7 @@ class M061sController extends CommonController {
 	public $uses = array('QtSeitoKotei', 'QtSeitoHendo', 'QtSeitoHiwari', 'QmKyuryoChild', 'ZSalaryTableNamemaster',
 							'QmHoshogaku', 'QtSeitoUchiChokin', 'QtSeitoUchiKyujitukyu', 'QtSeitoUchiYakin', 'QtSeitoUchiTokkin',
 								'QtSeitoUchiShuku', 'QtSeitoUchiKantoku', 'QtSeitoUchiNoritu', 'QtSeitoUchiChingin', 'JmShozoku',
-									'ZSalaryTableClsName', 'QmKamoku', 'ZDetachmentAllowDivmaster'
+									'ZSalaryTableClsName', 'QmKamoku', 'ZDetachmentAllowDivmaster', 'JtKihonKihon'
 	);
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
@@ -61,13 +61,19 @@ class M061sController extends CommonController {
 
 		// ********************  ビジネスロジック  ********************
 
+		// テーブル[人事基本情報]からデータを取得する
+		$personalInfo = array();
+		if(isset($searchCondition['EmpNo'])){
+			$personalInfo = $this->JtKihonKihon->find('first', array('conditions' => array('EmpNo' => $searchCondition['EmpNo'])));
+		}
+		
 		// findのパラメータを設定する
 		// 追加条件：論理削除されていないこと
 		$searchCondition['delete_flg'] = 0;
 		$params = array(
 			'conditions' => $searchCondition
 		);
-
+		
 		// テーブル[正当支給データ：変動給]からデータを取得する
 		$hendoInfo = $this->QtSeitoHendo->find('first', $params);
 		// テーブル[正当支給 : 固定給]からデータを取得する
@@ -153,6 +159,7 @@ class M061sController extends CommonController {
 		$this->set('searchCondition', $searchCondition);
 
 		// 取得データを設定する
+		$this->set('personalInfo', $personalInfo);
 		$this->set('hendoInfo', $hendoInfo);
 		$this->set('koteiInfo', $koteiInfo);
 		$this->set('commonInfo', $commonInfo);
@@ -171,6 +178,7 @@ class M061sController extends CommonController {
 
 		// 画面側でエラーが出ないように空配列等の初期値をセットしておく
 		$searchCondition = array();
+		$personalInfo = array();
 		$hendoInfo = array();
 		$koteiInfo = array();
 		$commonInfo = array();
@@ -187,6 +195,7 @@ class M061sController extends CommonController {
 
 		// 画面への設定
 		$this->set('searchCondition', $searchCondition);
+		$this->set('personalInfo', $personalInfo);
 		$this->set('hendoInfo', $hendoInfo);
 		$this->set('koteiInfo', $koteiInfo);
 		$this->set('commonInfo', $commonInfo);
