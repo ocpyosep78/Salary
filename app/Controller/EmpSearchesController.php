@@ -44,28 +44,13 @@ class EmpSearchesController extends CommonController {
 		if ($page === null) $page = 1;
 
 		// Paginateコントローラ変数の設定
-		$this->recursive = -1;
-		$searchCondition = array();
-// 		if (isset($keywordCd)) {
-// 			$searchCondition[$columnCode . ' LIKE ?'] = '%' . $keywordCd . '%';
-// 		}
-// 		if (isset($keywordName)) {
-// 			$searchCondition[$columnName . ' LIKE ?'] = '%' . $keywordName . '%';
-// 		}
-		$this->paginate = array(
-// 				'conditions' => $searchCondition,
-				'limit' => PAGINATION_VIEW_LIMIT_COMMON_SEARCH, // 一度に表示する件数
-// 				'order' => array($columnCode => 'asc'),
-				'page' => $page, // 最初に表示するページ
-		);
-$searchCondition = 'SELECT * FROM jt_kihon_kihon';
-		$searchResultList = $this->Paginator->paginate($searchCondition, null, null, PAGINATION_VIEW_LIMIT_COMMON_SEARCH, $page);
-var_dump($searchResultList);
+		$this->paginate = $this->JtKihonKihon->getPaginateOptionsForEmpSearch($page, $familyNameKana, $firstNameKana, $jobDutyCdFrom, $jobDutyCdTo, $familyName, $firstName, $jobGradeCdFrom, $jobGradeCdTo, $empDivFrom, $empDivTo, $depCdFrom, $depCdTo, $mgrCdFrom, $mgrCdTo);
+
 		// 検索結果をViewに渡す
-		$this->set(compact('searchResultList'));
+		$this->set('searchResultList', $this->Paginate());
 		$this->set('tableName', 'JtKihonKihon');
 
 		// 検索結果一覧を表示する
-		$this->render('/Elements/common_search_result');
+		$this->render('/Elements/emp_search_result');
 	}
 }

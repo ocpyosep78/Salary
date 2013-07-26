@@ -77,4 +77,63 @@ class JtKihonKihon extends AppModel {
 			),
 		),
 	);
+
+	/**
+	 * 職員番号検索のPaginateオプションを取得する
+	 */
+	public function getPaginateOptionsForEmpSearch($page, $familyNameKana, $firstNameKana, $jobDutyCdFrom, $jobDutyCdTo, $familyName, $firstName, $jobGradeCdFrom, $jobGradeCdTo, $empDivFrom, $empDivTo, $depCdFrom, $depCdTo, $mgrCdFrom, $mgrCdTo) {
+
+		$fields = array(
+				'JtKihonKihon.EmpNo',
+				'JtKihonKihon.FamilyName',
+				'JtKihonKihon.FirstName',
+				'JtKihonKihon.FamilyNameKana',
+				'JtKihonKihon.FirstNameKana',
+				'JtKihonKihon.EmpDiv',
+				'JtKihonRekiSyozoku.DepCD',
+				'JtKihonRekiSyozoku.MgrCD',
+				'JtKihonRekiSyokumu.JobDutyCD'
+		);
+
+		$searchCondition = array();
+		// カナ（姓）
+		$searchCondition['JtKihonKihon.FamilyNameKana LIKE ?'] =  '%' . $familyNameKana . '%';
+		// カナ（名）
+		$searchCondition['JtKihonKihon.FirstNameKana LIKE ?']  =  '%' . $firstNameKana . '%';
+		// 漢字（姓）
+		$searchCondition['JtKihonKihon.FamilyName LIKE ?']     =  '%' . $familyName . '%';
+		// 漢字（名）
+		$searchCondition['JtKihonKihon.FirstName LIKE ?']     =  '%' . $firstName . '%';
+
+		$joins = array(
+				array('type' => 'LEFT',
+						'table' => 'jt_kihon_reki_syozoku',
+						'alias' => 'JtKihonRekiSyozoku',
+						'conditions' => 'JtKihonKihon.EmpDeptHistID = JtKihonRekiSyozoku.EmpDeptHistID'
+				),
+				array('type' => 'LEFT',
+						'table' => 'jt_kihon_reki_syokumu',
+						'alias' => 'JtKihonRekiSyokumu',
+						'conditions' => 'JtKihonKihon.EmpJobDutyHistID = JtKihonRekiSyokumu.EmpJobDutyHistID'
+				),
+				array('type' => 'LEFT',
+						'table' => 'jt_kihon_reki_syokuso',
+						'alias' => 'JtKihonRekiSyokuso',
+						'conditions' => 'JtKihonKihon.EmpJobGradeHistID = JtKihonRekiSyokuso.EmpJobGradeHistID'
+				),
+		);
+
+		$options = array(
+			'JtKihonKihon' => array(
+				'fields'     => $fields,
+				'conditions' => $searchCondition,
+				'joins'      => $joins,
+				'limit'      => PAGINATION_VIEW_LIMIT_COMMON_SEARCH, // 一度に表示する件数
+				'order'      => array('JtKihonKihon.EmpNo' => 'asc'),
+				'page'       => $page, // 最初に表示するページ
+			)
+		);
+
+		return $options;
+	}
 }
