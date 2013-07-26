@@ -1,5 +1,5 @@
 <div class="modalWindow fixed" id="emp-search">
-	<div class="close"></div>
+	<div class="close pd_01" align="right"><input class="Button1" type="button" onclick="closeModal();" value="×" /></div>
 	<div class="modalBody">
 
 		<table class="box_common_search_t_header">
@@ -159,5 +159,13 @@
 				$("#common-search-result").html(data);
 			}
 		});
+	}
+	
+	/**
+	 * モーダルを閉じる
+	 */
+	function closeModal() {
+		// モーダルを閉じる
+		$(".modalWindow,#blackLayer").hide();
 	}
 </script>
