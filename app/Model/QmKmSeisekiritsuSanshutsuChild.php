@@ -112,9 +112,8 @@ class QmKmSeisekiritsuSanshutsuChild extends AppModel {
 		$params = array(
 				'conditions' => $searchCondition,
 				// 改定年月が、支給年月の直近過去最新のデータを取得する
-				'order'      => array('QmKmSeisekiritsuSanshutsuChild.RevYM DESC'),
+				'order'      => array('QmKmSeisekiritsuSanshutsuChild.RevYM DESC')
 		);
-		var_dump($params);
 
 		// 検索
 		$result = $this->find('first', $params);
