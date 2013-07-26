@@ -93,6 +93,9 @@
 	 */
 	function searchForEmpSearch() {
 
+		if (!checkConditionInput()) {
+			return;
+		}
 		// 検索キーワードの取得
 		var familyNameKana = $("#emp-search-keyword-family-name-kana").val();
 		var firstNameKana  = $("#emp-search-keyword-first-name-kana").val();
@@ -132,6 +135,50 @@
 		});
 	}
 
+	/**
+	 * 入力有無チェック
+	 */
+	function checkConditionInput() {
+		// 検索キーワードの取得
+		var familyNameKana = $("#emp-search-keyword-family-name-kana").val();
+		var firstNameKana  = $("#emp-search-keyword-first-name-kana").val();
+		var jobDutyCdFrom  = $("#emp-search-keyword-job-duty-cd-from").val();
+		var jobDutyCdTo    = $("#emp-search-keyword-job-duty-cd-to").val();
+		var familyName     = $("#emp-search-keyword-family-name").val();
+		var firstName      = $("#emp-search-keyword-first-name").val();
+		var jobGradeCdFrom = $("#emp-search-keyword-job-grade-cd-from").val();
+		var jobGradeCdTo   = $("#emp-search-keyword-job-grade-cd-to").val();
+		var empDivFrom     = $("#emp-search-keyword-emp-div-from").val();
+		var empDivTo       = $("#emp-search-keyword-emp-div-to").val();
+		var depCdFrom      = $("#emp-search-keyword-dep-cd-from").val();
+		var depCdTo        = $("#emp-search-keyword-dep-cd-to").val();
+		var mgrCdFrom      = $("#emp-search-keyword-mgr-cd-from").val();
+		var mgrCdTo        = $("#emp-search-keyword-mgr-cd-to").val();
+		
+		if (familyNameKana == "" &&
+			firstNameKana == "" &&
+			jobDutyCdFrom == "" &&
+			jobDutyCdTo == "" &&
+			familyName == "" &&
+			firstName == "" &&
+			jobGradeCdFrom == "" &&
+			jobGradeCdTo == "" &&
+			empDivFrom == "" &&
+			empDivTo == "" &&
+			depCdFrom == "" &&
+			depCdTo == "" &&
+			mgrCdFrom == "" &&
+			mgrCdTo == ""
+		) {
+			if(window.confirm('全件検索されますがよろしいですか？')) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	/**
 	 * 検索結果のクリア
 	 */
