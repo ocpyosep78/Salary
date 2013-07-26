@@ -10,7 +10,7 @@ class TopsController extends AppController {
 	public $uses = array('MgrPositionMaster', 'ZAllowanceDetailNamemaster', 'JmSyokuinKubun', 'QmKyuyoTaikei',
 							'JmSyokuso', 'JobCategoryMaster', 'ZSalaryTableNamemaster', 'ZAttendanceReason', 'ZDetachmentAllowDivmaster',
 								'CzSikyuSyubetu', 'ZSalaryGuaranteeDivmaster', 'QmTeateCd', 'CzFukurikojoShubetsu', 'CzJyukyoTeateNintei',
-									'ZMaSiEnrollDivmaster', 'QmShikyuKubun', 'QmKyuyoShiharaisha'
+									'ZMaSiEnrollDivmaster', 'QmShikyuKubun', 'QmKyuyoShiharaisha', 'QmKmSeisekiHanteiParent'
 	);
 
 	/**
@@ -81,6 +81,10 @@ class TopsController extends AppController {
 		// 給与支払者マスタ
 		$results = $this->QmKyuyoShiharaisha->find('all', array('conditions' => array('delete_flg' => 0)));
 		$this->__saveCacheForCodeName($results, 'QmKyuyoShiharaisha', 'PayerDiv', array('PayerName', 'PayerShortName'));
+
+		// 成績判定区分マスタ（親）
+		$results = $this->QmKmSeisekiHanteiParent->find('all', array('conditions' => array('delete_flg' => 0)));
+		$this->__saveCacheForCodeName($results, 'QmKmSeisekiHanteiParent', 'GradeJudgeDiv', array('RecordJudgeDivName'));
 
 	}
 

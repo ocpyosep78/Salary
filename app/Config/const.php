@@ -167,5 +167,7 @@ Configure::write('CACHE_KEY_MAP',array(
 	'PaidDiv' => array('PaymentDivName'),
 	// 給与支払者マスタ
 	'PayerDiv' => array('PayerName', 'PayerShortName'),
+	// 成績判定区分マスタ（親）
+	'DiligenceAllowRecordJudgeDiv' => array('RecordJudgeDivName'),
 ));
 ?>

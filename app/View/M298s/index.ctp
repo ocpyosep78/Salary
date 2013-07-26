@@ -866,9 +866,8 @@
 						<td>&nbsp;</td>
 						<th>金額</th>
 						<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiInfo, 'QtMeisai.DiligenceAllowBasic_JobDutyAmo')); ?></td>
-						<!--TODO 区分値の名称のテーブルがないため確認-->
 						<td class="pdL20"><?php echo Hash::get($meisaiInfo, 'QtMeisai.DiligenceAllowRecordJudgeDiv'); ?></td>
-						<td class="bdR"><?php echo Hash::get($meisaiInfo, 'QtMeisai.DiligenceAllowRecordJudgeDiv'); ?></td>
+						<td class="bdR"><?php echo Hash::get($meisaiInfo, 'QtMeisai.CodeName_RecordJudgeDivName'); ?></td>
 						<th class="pdL20">3月期末勤勉</th>
 						<td><?php echo $this->SalaryForm->number_format(Hash::get($meisaiInfo, 'QtMeisai.NecessaryAdjust_MarDiligenceAllowAdjust')); ?></td>
 						<td>&nbsp;</td>

@@ -899,7 +899,7 @@
 						<th>金額</th>
 						<td>Z,ZZZ,ZZZ</td>
 						<td class="pdL20">XX</td>
-						<td class="bdR">NNNNNN</td>
+						<td class="bdR"><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.CodeName_RecordJudgeDivName'); ?></td>
 						<th class="pdL20">3月期末勤勉</th>
 						<td>Z,ZZZ,ZZZ</td>
 						<td>&nbsp;</td>
