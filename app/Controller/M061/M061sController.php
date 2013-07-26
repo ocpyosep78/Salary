@@ -39,19 +39,49 @@ class M061sController extends CommonController {
 
 		// ********************  画面からのデータ受け取り  ********************
 
-		// 前画面からの検索条件の受け取り（職員番号、支給年月、支払者）
-		$searchCondition = array();
-
-		// TODO バリデーションチェック
-
+		// POSTデータを受け取る
+		$postData = $this->request->data['M061s'];
+		
 		// 消去ボタンを押下した場合
 		if(isset($this->request->data['clear'])) {
 			// 初期画面を表示する
 			$this->redirect('index');
 		}
 
-		// POSTデータを受け取る
-		$postData = $this->request->data['M061s'];
+		// 入力チェック
+		$validationData = $postData;
+		$this->QtSeitoKotei->set($validationData);
+		$validateError = $this->QtSeitoKotei->invalidFields();
+		if(!empty($validateError)) {
+			// バリデーションエラーのとき
+			
+			// 初期値を設定する
+			$this->_initSet();
+			
+			// 入力値を設定する
+			$searchCondition = array();
+			$searchCondition['EmpNo']    = $postData['EmpNo'];
+			$searchCondition['PaidYM']   = $postData['PaidYM'];
+			$searchCondition['PayerDiv'] = $postData['PayerDiv'];
+			$this->set('searchCondition', $searchCondition);
+
+			// エラーメッセージの設定
+			$errorMsgList = array();
+			foreach($validateError as $ary) {
+				foreach($ary as $errorMsg) {
+					$errorMsgList[] = $errorMsg;
+				}
+			}
+			$this->set('errorMsgList', $errorMsgList);
+			
+			// 初期画面をレンダリング
+			$this->render('index');
+			
+			// 処理終了
+			return;
+		}
+
+		// POSTデータを設定する
 		$empNo    = $postData['EmpNo'];                          // 職員番号
 		// 和暦から西暦に変換する
 		$paidYM   = $this->getChristianEra($postData['PaidYM']); // 支給年月
@@ -59,7 +89,9 @@ class M061sController extends CommonController {
 
 		// 支給年月の入力値の翌月
 		$nextMonth = date("Y-m-d", strtotime(date($paidYM) . "+1 month"));
+
 		// 検索条件を設定する
+		$searchCondition = array();
 		$searchCondition['EmpNo']     = $empNo;
 		$searchCondition['PaidYM >='] = $paidYM;
 		$searchCondition['PaidYM <']  = $nextMonth;
@@ -94,6 +126,7 @@ class M061sController extends CommonController {
 			$this->_initSet();
 
 			// 検索条件の値など、最低限必要な部分は設定する
+			$searchCondition['PaidYM'] = $postData['PaidYM'];
 			$this->set('searchCondition', $searchCondition);
 			$this->set('personalInfo', $personalInfo);
 
@@ -186,6 +219,7 @@ class M061sController extends CommonController {
 		// ********************  画面へのデータ反映  ********************
 
 		// 前画面からの検索条件をそのまま画面にセットする
+		$searchCondition['PaidYM'] = $postData['PaidYM'];
 		$this->set('searchCondition', $searchCondition);
 
 		// 取得データを設定する
@@ -461,7 +495,6 @@ class M061sController extends CommonController {
 	}
 
 	/**
-	 * TODO コンポーネントに移す
 	 * 和暦表記から西暦表記へ変換する
 	 * 平成25.06
 	 * のように頭に0付けで正しく動作する
@@ -494,7 +527,6 @@ class M061sController extends CommonController {
 	}
 
 	/**
-	 * TODO コンポーネントに移す
 	 * 元号から西暦への変換
 	 */
 	private function fnc_warekiset($year){

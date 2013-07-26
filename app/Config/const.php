@@ -170,4 +170,9 @@ Configure::write('CACHE_KEY_MAP',array(
 	// 成績判定区分マスタ（親）
 	'DiligenceAllowRecordJudgeDiv' => array('RecordJudgeDivName'),
 ));
+
+// Validation エラーメッセージ
+define("ERROR_MESSAGE_NOTEMPTY", "%sを入力してください。");
+define("ERROR_MESSAGE_FORMAT", "%sの形式が正しくありません。");
+
 ?>

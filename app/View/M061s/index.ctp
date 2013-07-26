@@ -10,7 +10,7 @@
 		<tr>
 			<th>職員番号</th>
 			<td>
-				<?php echo $this->SalaryForm->text('EmpNo', array('value' => Hash::get($searchCondition, 'EmpNo')));?>
+				<?php echo $this->SalaryForm->text('EmpNo', array('value' => Hash::get($searchCondition, 'EmpNo'), 'maxlength' => '8'));?>
 				<?php echo $this->SalaryForm->button('？', array('type' => 'button'), null); ?>
 			</td>
 			<th>氏名</th>
@@ -24,12 +24,12 @@
 		<tr>
 			<th>支給年月</th>
 			<td>
-				<?php echo $this->SalaryForm->text('PaidYM', array('value' => $this->SalaryForm->getJapaneseEraWithoutDay(Hash::get($searchCondition, 'PaidYM')), 'placeholder' => 'GGYY.MM'));?>
+				<?php echo $this->SalaryForm->text('PaidYM', array('value' => Hash::get($searchCondition, 'PaidYM'), 'placeholder' => 'GGYY.MM', 'maxlength' => '7'));?>
 				<?php echo $this->SalaryForm->button('？', array('type' => 'button'), null); ?>
 			</td>
 			<th>支払者</th>
 			<td>
-				<?php echo $this->SalaryForm->text('PayerDiv', array('size' => '1', 'id' => 'ShiharaishaCD', 'value' => Hash::get($searchCondition, 'PayerDiv'), 'placeholder' => 'XX'));?>
+				<?php echo $this->SalaryForm->text('PayerDiv', array('size' => '1', 'id' => 'ShiharaishaCD', 'value' => Hash::get($searchCondition, 'PayerDiv'), 'placeholder' => 'XX', 'maxlength' => '2'));?>
 				<?php echo $this->SalaryForm->button('？', array('type' => 'button', 'onclick' => "viewForCommonSearch('QmKyuyoShiharaisha', 'PayerName', 'PayerDiv', 'ShiharaishaName', 'ShiharaishaCD')" ), null); ?>
 				<p class="description" id="ShiharaishaName"><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_PayerName'); ?></p>
 			</td>
