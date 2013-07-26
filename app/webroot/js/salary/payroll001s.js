@@ -1,5 +1,13 @@
 ;(function($) {
 
+	$(function() {
+
+		// 初期画面や日割レコードが単一のときは、日割タブは非表示
+		if(!hiwariMultiRecordFlg) {
+			$("#tab01menu").hide();
+		}
+	});
+
 	/**
 	 * タブ表示切替（個別実装）
 	 */

@@ -52,13 +52,20 @@ class M298sController extends CommonController {
 
 		// POSTデータを受け取る
 		$postData = $this->request->data['M298s'];
+		$empNo    = $postData['EmpNo'];                          // 職員番号
+		// 和暦から西暦に変換する
+		$paidYM   = $this->getChristianEra($postData['PaidYM']); // 支給年月
+		$paidDiv  = $postData['PaidDiv'];                        // 支給区分
+		$payerDiv = $postData['PayerDiv'];                       // 支払者区分
 
+		// 支給年月の入力値の翌月
+		$nextMonth = date("Y-m-d", strtotime(date($paidYM) . "+1 month"));
 		// 検索条件を設定する
-		$searchCondition['EmpNo']    = $postData['EmpNo'];    // 職員番号
-		// TODO 和暦から西暦に変換する
-		$searchCondition['PaidYM']   = $postData['PaidYM'];   // 支給年月
-		$searchCondition['PaidDiv']  = $postData['PaidDiv'];  // 支給区分
-		$searchCondition['PayerDiv'] = $postData['PayerDiv']; // 支払者区分
+		$searchCondition['EmpNo']     = $empNo;
+		$searchCondition['PaidYM >='] = $paidYM;
+		$searchCondition['PaidYM <']  = $nextMonth;
+		$searchCondition['PaidDiv']   = $paidDiv;
+		$searchCondition['PayerDiv']  = $payerDiv;
 
 		// ********************  ビジネスロジック  ********************
 
@@ -83,7 +90,28 @@ class M298sController extends CommonController {
 		// テーブル[支給明細データ：日割]からデータを取得する
 		$hiwariAllInfo = $this->QtMeisaiHiwari->find('all', $params);
 
-		// TODO 検索結果が0件のときは、その旨を伝えるポップアップを表示する
+		// 検索結果が0件のときは、その旨を伝えるポップアップを表示する
+		if(empty($hiwariAllInfo) || empty($meisaiInfo)) {
+
+			// 初期値を設定する
+			$this->_initSet();
+
+			// 検索条件の値など、最低限必要な部分は設定する
+			$this->set('searchCondition', $searchCondition);
+			$this->set('personalInfo', $personalInfo);
+
+			// エラーメッセージの設定
+			$errorMsgList = array();
+			$errorMsgList[] = "検索結果がありません。";
+			$this->set('errorMsgList', $errorMsgList);
+
+			// 初期画面をレンダリング
+			$this->render('index');
+
+			// 処理終了
+			return;
+
+		}
 
 		// 共通エリア情報
 		$commonInfo = array();
@@ -94,19 +122,19 @@ class M298sController extends CommonController {
 		}
 
 		// 給与報酬科目（略称）を取得する
-		$commonInfo['salaryRewardsAccountShortName'] = $this->QmKamoku->getAccountShortName($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['SalaryRewardsAccountCD']);
+		$commonInfo['salaryRewardsAccountShortName'] = $this->QmKamoku->getAccountShortName($paidYM, $commonInfo['QtMeisaiHiwari']['SalaryRewardsAccountCD']);
 
 		// 児童手当科目（略称）を取得する
-		$commonInfo['childAllowAccountShortName'] = $this->QmKamoku->getAccountShortName($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['ChildAllowAccountCD']);
+		$commonInfo['childAllowAccountShortName'] = $this->QmKamoku->getAccountShortName($paidYM, $commonInfo['QtMeisaiHiwari']['ChildAllowAccountCD']);
 
 		// 超過勤務科目（略称）を取得する
-		$commonInfo['overTimeWorkAccountShortName'] = $this->QmKamoku->getAccountShortName($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['OverTimeWorkAccountCD']);
+		$commonInfo['overTimeWorkAccountShortName'] = $this->QmKamoku->getAccountShortName($paidYM, $commonInfo['QtMeisaiHiwari']['OverTimeWorkAccountCD']);
 
 		// 休日給科目（略称）を取得する
-		$commonInfo['holidaySalaryAccountShortName'] = $this->QmKamoku->getAccountShortName($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['HolidaySalaryAccountCD']);
+		$commonInfo['holidaySalaryAccountShortName'] = $this->QmKamoku->getAccountShortName($paidYM, $commonInfo['QtMeisaiHiwari']['HolidaySalaryAccountCD']);
 
 		// 所属（略称）を取得する
-		$commonInfo['deptShortName'] = $this->JmShozoku->getDeptShortName($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['DepCD']);
+		$commonInfo['deptShortName'] = $this->JmShozoku->getDeptShortName($paidYM, $commonInfo['QtMeisaiHiwari']['DepCD']);
 
 		// 清掃／臨職の表示内容を判定する
 		$sweeperYosan = '';
@@ -129,43 +157,43 @@ class M298sController extends CommonController {
 		$commonInfo['salaryClassName'] = $this->ZSalaryTableClsName->getSalaryClassName($commonInfo['QtMeisaiHiwari']['SalaryTable'], $commonInfo['QtMeisaiHiwari']['SalaryClass']);
 
 		// 給料/報酬の金額を取得する
-		$commonInfo['kyuryoHoushuGaku'] = $this->QmKyuryoChild->getSumAddAllow($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['SalaryTable'], $commonInfo['QtMeisaiHiwari']['SalaryClass'], $commonInfo['QtMeisaiHiwari']['SalaryGrade']);
+		$commonInfo['kyuryoHoushuGaku'] = $this->QmKyuryoChild->getSumAddAllow($paidYM, $commonInfo['QtMeisaiHiwari']['SalaryTable'], $commonInfo['QtMeisaiHiwari']['SalaryClass'], $commonInfo['QtMeisaiHiwari']['SalaryGrade']);
 
 		// 現給保障 表(名称)を取得する
 		$commonInfo['genkyuHoshoTableName'] = $this->ZSalaryTableNamemaster->getSalaryTableName($commonInfo['QtMeisaiHiwari']['SalaryTable']);
 
 		// 現給保障の金額を取得する
-		$commonInfo['genkyuHoshoKingaku'] = $this->QmHoshogaku->getAmounts($searchCondition['PaidYM'], $commonInfo['QtMeisaiHiwari']['SalaryTable'], $commonInfo['QtMeisaiHiwari']['SalaryClass'], $commonInfo['QtMeisaiHiwari']['SalaryGrade']);
+		$commonInfo['genkyuHoshoKingaku'] = $this->QmHoshogaku->getAmounts($paidYM, $commonInfo['QtMeisaiHiwari']['SalaryTable'], $commonInfo['QtMeisaiHiwari']['SalaryClass'], $commonInfo['QtMeisaiHiwari']['SalaryGrade']);
 
 		// テーブル[支給明細データ：その他支給内訳]からデータを取得する(タブ01、タブ08で使用する)
-		$meisaiUchiSonotasikyuList = $this->QtMeisaiUchiSonotasikyu->findMeisaiUchiSonotasikyu($searchCondition['PaidYM'], $searchCondition['EmpNo'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
+		$meisaiUchiSonotasikyuList = $this->QtMeisaiUchiSonotasikyu->findMeisaiUchiSonotasikyu($paidYM, $empNo, $paidDiv, $payerDiv);
 
 		// タブ01：基本情報
 		$this->tab01($meisaiInfo, $meisaiUchiSonotasikyuList);
 
 		// タブ02：日割情報
-		$this->tab02($searchCondition['PaidYM'], $hiwariAllInfo);
+		$this->tab02($paidYM, $hiwariAllInfo);
 
 		// タブ03：詳細画面
 		$this->tab03($meisaiInfo);
 
 		// タブ05：超勤・休日・夜勤
-		$this->tab05($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
+		$this->tab05($empNo, $paidYM, $paidDiv, $payerDiv);
 
 		// タブ06：特勤・宿日直・管特
-		$this->tab06($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
+		$this->tab06($empNo, $paidYM, $paidDiv, $payerDiv);
 
 		// タブ07：能率給内訳
-		$this->tab07($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
+		$this->tab07($empNo, $paidYM, $paidDiv, $payerDiv);
 
 		// タブ08：旅費・その他支給
-		$this->tab08($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
+		$this->tab08($empNo, $paidYM, $paidDiv, $payerDiv);
 
 		// タブ09：福利控除
-		$this->tab09($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
+		$this->tab09($empNo, $paidYM, $paidDiv, $payerDiv);
 
 		// タブ10：賃金
-		$this->tab10($searchCondition['EmpNo'], $searchCondition['PaidYM'], $searchCondition['PaidDiv'], $searchCondition['PayerDiv']);
+		$this->tab10($empNo, $paidYM, $paidDiv, $payerDiv);
 
 		// ********************  画面へのデータ反映  ********************
 
@@ -210,6 +238,7 @@ class M298sController extends CommonController {
 		$meisaiUchiKyujitukyuList = array();
 		$meisaiUchiYakinList = array();
 		$uchiKinsetsuchiRyohi = "";
+		$errorMsgList = array();
 
 
 		// 画面への設定
@@ -232,6 +261,7 @@ class M298sController extends CommonController {
 		$this->set('meisaiUchiKyujitukyuList', $meisaiUchiKyujitukyuList);
 		$this->set('meisaiUchiYakinList', $meisaiUchiYakinList);
 		$this->set('uchiKinsetsuchiRyohi', $uchiKinsetsuchiRyohi);
+		$this->set('errorMsgList', $errorMsgList);
 	}
 
 	/**
@@ -512,5 +542,65 @@ class M298sController extends CommonController {
 
 		// 取得データをViewに渡す
 		$this->set(compact('meisaiUchiChinginList'));
+	}
+
+	/**
+	 * TODO コンポーネントに移す
+	 * 和暦表記から西暦表記へ変換する
+	 * 平成25.06
+	 * のように頭に0付けで正しく動作する
+	 *
+	 */
+	private function getChristianEra($japaneseEra) {
+
+		// "."の削除
+		$date = str_replace(".","",$japaneseEra);
+
+		// 全角文字を全部半角に変換
+		$date= mb_convert_kana($date,"rnask","UTF-8");
+
+		// 年・月に分割
+		mb_language('Japanese');
+		mb_internal_encoding('UTF-8');
+		$year  = mb_substr($date, 0, 4);
+		$month = mb_substr($date, 4, 2);
+
+		// 大正・昭和・平成の変換
+		$year = $this->fnc_warekiset($year);
+
+		// 日付の整合性（日は1で固定）
+		if(!@checkdate($month,1,$year)) {
+			// 変な日付
+			return "";
+		}
+		// 年月日の返品（日は1で固定）
+		return $year.'-'.$month.'-01';
+	}
+
+	/**
+	 * TODO コンポーネントに移す
+	 * 元号から西暦への変換
+	 */
+	private function fnc_warekiset($year){
+		// 年度二分割
+		mb_language('Japanese');
+		mb_internal_encoding('UTF-8');
+		$gg = mb_substr($year,0,2);
+		$yy = mb_substr($year,2,2);
+
+		// 和暦に応じて年度加算
+		switch($gg){
+			case "大正":
+				$year = 1911 + $yy;
+				break;
+			case "昭和":
+				$year = 1925 + $yy;
+				break;
+			case "平成":
+				$year = 1988 + $yy;
+				break;
+		}
+		// 年度の返品
+		return $year;
 	}
 }

@@ -168,6 +168,32 @@ class SalaryFormHelper extends FormHelper{
 	}
 
 	/**
+	 * 西暦表記から和暦表記へ変換する
+	 */
+	public function getJapaneseEraWithoutDay($christianEra) {
+
+		if (is_null($christianEra)) return null;
+
+		$date = date('Ymd', strtotime($christianEra));
+		$year = date('Y', strtotime($christianEra));
+
+		if ($date >= 19890108) { //平成元年（1989年1月8日以降）
+			$name = '平成';
+			$year -= 1988;
+		} else if ($date >= 19261225) { //昭和元年（1926年12月25日以降）
+			$name = '昭和';
+			$year -= 1925;
+		} else if ($date >= 19120730) { //大正元年（1912年7月30日以降）
+			$name = '大正';
+			$year -= 1911;
+		} else if ($date >= 18680125) { //明治元年（1868年1月25日以降）
+			$name = '明治';
+			$year -= 1867;
+		}
+		return $name.$year.date('.m', strtotime($date));
+	}
+
+	/**
 	 * 和暦表記から西暦表記へ変換する
 	 * 平成25年06月25日
 	 * のように頭に0付けで正しく動作する

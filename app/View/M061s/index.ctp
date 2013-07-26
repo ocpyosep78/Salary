@@ -24,7 +24,7 @@
 		<tr>
 			<th>支給年月</th>
 			<td>
-				<?php echo $this->SalaryForm->text('PaidYM', array('value' => Hash::get($searchCondition, 'PaidYM'), 'placeholder' => 'GGYY.MM'));?>
+				<?php echo $this->SalaryForm->text('PaidYM', array('value' => $this->SalaryForm->getJapaneseEraWithoutDay(Hash::get($searchCondition, 'PaidYM')), 'placeholder' => 'GGYY.MM'));?>
 				<?php echo $this->SalaryForm->button('？', array('type' => 'button'), null); ?>
 			</td>
 			<th>支払者</th>
@@ -46,7 +46,7 @@
 <!-- ============================== 共通タブメニュー ============================== -->
 		<ul class="menu">
 			<li><a href="#">基本情報</a></li>
-			<li><a href="#">日割情報</a></li>
+			<li id="tab01menu"><a href="#">日割情報</a></li>
 			<li><a href="#">詳細情報</a></li>
 			<li><a href="#">期末勤勉詳細</a></li>
 			<li><a href="#">超勤・休日・夜勤</a></li>
@@ -1542,3 +1542,30 @@
 <?php // 検索子画面の読み込み ?>
 <?php echo $this->element('common_search'); ?>
 
+
+<script type="text/javascript">
+<!--
+<?php
+// エラーメッセージ一覧配列を<br />区切りで展開する
+$errorMsgString = "";
+if(!empty($errorMsgList)) {
+	$errorMsgString = $this->SalaryForm->getFormattedArgumentBreakTags($errorMsgList);
+}
+?>
+// phpからjavascriptへ値を渡す
+var errorMsgString = "<?php echo $errorMsgString; ?>";
+// エラーメッセージがあるときは、ポップアップで表示する
+if(errorMsgString != "") {
+	showErrorAlert();
+}
+
+// エラーメッセージのポップアップを表示する
+function showErrorAlert(){
+	window.alert(errorMsgString);
+}
+
+// 日割レコードが複数かどうかのフラグを取得する(jQueryで使用する)
+var hiwariMultiRecordFlg = "<?php echo $hiwariMultiRecordFlg; ?>";
+
+// -->
+</script>

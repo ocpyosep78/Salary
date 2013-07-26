@@ -142,7 +142,10 @@ class QtSeitoUchiChingin extends AppModel {
 
 		// 検索条件の設定
 		$searchCondition = array();
-		$searchCondition['PaidYM']     = $paidYm;   // 支給年月
+		// 支給年月の入力値の翌月
+		$nextMonth = date("Y-m-d", strtotime(date($paidYm) . "+1 month"));
+		$searchCondition['PaidYM >=']  = $paidYm;   // 支給年月
+		$searchCondition['PaidYM <']   = $nextMonth;
 		$searchCondition['EmpNo']      = $empNo;    // 職員番号
 		$searchCondition['PayerDiv']   = $payerDiv; // 支払者区分
 		$searchCondition['delete_flg'] = '0';       // 削除フラグ
