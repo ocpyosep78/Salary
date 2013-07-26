@@ -87,4 +87,44 @@ class QmKmSeisekiritsuSanshutsuChild extends AppModel {
 			),
 		),
 	);
+
+	/**
+	 * 正当支給データ：成績率算出方法マスタ（子）のレコードを取得する
+	 *
+	 * @param $paidYm   支給年月
+	 * @param $gradeJudgeDiv    成績判定区分
+	 * @param $recordGrade 成績段階
+	 * @return 検索結果レコード
+	 */
+	public function findSeisekiritsuSanshutsuChild($paidYm, $gradeJudgeDiv, $recordGrade) {
+
+		$this->recursive = -1;
+
+		// 検索条件の設定
+		$searchCondition = array(
+				'RevYM <='      => date($paidYm),  // 改定年月:支給年月の直近過去最新
+				'GradeJudgeDiv' => $gradeJudgeDiv, // 成績判定区分
+				'RecordGrade'   => $recordGrade,   // 成績段階
+				'delete_flg'    => '0',            // 削除フラグ
+		);
+
+		// 検索パラメータの設定
+		$params = array(
+				'conditions' => $searchCondition,
+				// 改定年月が、支給年月の直近過去最新のデータを取得する
+				'order'      => array('QmKmSeisekiritsuSanshutsuChild.RevYM DESC'),
+		);
+		var_dump($params);
+
+		// 検索
+		$result = $this->find('first', $params);
+
+		// 成績段階名称を検索結果から抽出する
+		$ratingLvName = '';
+		if(!empty($result)) {
+			$ratingLvName = $result['QmKmSeisekiritsuSanshutsuChild']['RatingLvName'];
+		}
+
+		return $ratingLvName;
+	}
 }

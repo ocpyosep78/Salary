@@ -12,7 +12,7 @@ class M061sController extends CommonController {
 	public $uses = array('QtSeitoKotei', 'QtSeitoHendo', 'QtSeitoHiwari', 'QmKyuryoChild', 'ZSalaryTableNamemaster',
 							'QmHoshogaku', 'QtSeitoUchiChokin', 'QtSeitoUchiKyujitukyu', 'QtSeitoUchiYakin', 'QtSeitoUchiTokkin',
 								'QtSeitoUchiShuku', 'QtSeitoUchiKantoku', 'QtSeitoUchiNoritu', 'QtSeitoUchiChingin', 'JmShozoku',
-									'ZSalaryTableClsName', 'QmKamoku', 'ZDetachmentAllowDivmaster', 'JtKihonKihon'
+									'ZSalaryTableClsName', 'QmKamoku', 'ZDetachmentAllowDivmaster', 'JtKihonKihon', 'QmKmSeisekiritsuSanshutsuChild'
 	);
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
@@ -167,6 +167,9 @@ class M061sController extends CommonController {
 
 		// タブ03：詳細情報
 		$this->tab03($koteiInfo);
+
+		// タブ04：期末勤勉詳細
+		$this->tab04($paidYM, $koteiInfo);
 
 		// タブ05：超勤・休日・夜勤
 		$this->tab05($empNo, $paidYM, $payerDiv);
@@ -339,6 +342,18 @@ class M061sController extends CommonController {
 
 		// 単身赴任手当区分（名称）を取得する
 		$koteiInfo['detachmentAllowDivName'] = $this->ZDetachmentAllowDivmaster->getName($koteiInfo['QtSeitoKotei']['DetachmentAllowDivCD']);
+	}
+
+	/**
+	 * タブ04：期末勤勉詳細
+	 */
+	private function tab04($paidYm, &$koteiInfo) {
+
+		$gradeJudgeDiv = $koteiInfo['QtSeitoKotei']['DiligenceAllowRecordJudgeDiv'];
+		$recordGrade = $koteiInfo['QtSeitoKotei']['DiligenceAllowRecordClass'];
+
+		// テーブル[正当支給データ：成績率算出方法マスタ（子）]からデータを取得する
+		$koteiInfo['diligenceAllowRecordName'] = $this->QmKmSeisekiritsuSanshutsuChild->findSeisekiritsuSanshutsuChild($paidYm, $gradeJudgeDiv, $recordGrade);
 	}
 
 	/**

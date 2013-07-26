@@ -13,7 +13,7 @@ class M298sController extends CommonController {
 							'QtMeisaiUchiFukurikojo', 'QtMeisaiUchiRyohi', 'QtMeisaiUchiNoritu', 'QtMeisaiUchiTokkin',
 							'QtMeisaiUchiShuku', 'QtMeisaiUchiKantoku', 'QtMeisaiUchiChokin', 'QtMeisaiUchiKyujitukyu',
 							'QtMeisaiUchiYakin', 'QmKyuryoChild', 'ZSalaryTableNamemaster', 'QmHoshogaku', 'BankMaster',
-							'JmShozoku', 'ZSalaryTableClsName', 'QmKamoku', 'ZDetachmentAllowDivmaster'
+							'JmShozoku', 'ZSalaryTableClsName', 'QmKamoku', 'ZDetachmentAllowDivmaster', 'QmKmSeisekiritsuSanshutsuChild'
 	);
 
 	// 画面のレイアウト変更や、初期化処理、共通処理などはここに記述する
@@ -176,6 +176,9 @@ class M298sController extends CommonController {
 
 		// タブ03：詳細画面
 		$this->tab03($meisaiInfo);
+
+		// タブ04：期末勤勉詳細
+		$this->tab04($paidYM, $meisaiInfo);
 
 		// タブ05：超勤・休日・夜勤
 		$this->tab05($empNo, $paidYM, $paidDiv, $payerDiv);
@@ -406,6 +409,18 @@ class M298sController extends CommonController {
 
 		// 単身赴任手当区分（名称）を取得する
 		$meisaiInfo['detachmentAllowDivName'] = $this->ZDetachmentAllowDivmaster->getName($meisaiInfo['QtMeisai']['DetachmentAllowDivCD']);
+	}
+
+	/**
+	 * タブ04：期末勤勉詳細
+	 */
+	private function tab04($paidYm, &$meisaiInfo) {
+
+		$gradeJudgeDiv = $meisaiInfo['QtMeisai']['DiligenceAllowRecordJudgeDiv'];
+		$recordGrade = $meisaiInfo['QtMeisai']['DiligenceAllowRecordClass'];
+
+		// テーブル[正当支給データ：成績率算出方法マスタ（子）]からデータを取得する
+		$meisaiInfo['diligenceAllowRecordName'] = $this->QmKmSeisekiritsuSanshutsuChild->findSeisekiritsuSanshutsuChild($paidYm, $gradeJudgeDiv, $recordGrade);
 	}
 
 	/**

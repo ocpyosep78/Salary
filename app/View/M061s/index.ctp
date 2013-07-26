@@ -571,11 +571,16 @@
 						<th colspan="3" class="bdR">■減額</th>
 
 						<th>■共済/社保</th>
-						<td>X</td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.TokyoMetMASchoolMASoInsDiv'); ?></td>
 						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.CodeName_MA_SI_EnrollDivName'); ?></td>
 						<th>■雇用保険</th>
-						<td>X</td>
-						<td><p>NNNN</p></td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.EmploymentInsFlg'); ?></td>
+						<td><p><?php if(Hash::get($koteiInfo, 'QtSeitoKotei.EmploymentInsFlg') == '0') {
+									echo '非加入';
+								} else if(Hash::get($koteiInfo, 'QtSeitoKotei.EmploymentInsFlg') == '1') {
+									echo '加入';
+								}
+						?></p></td>
 						<th>■互助会/互助組合</th>
 					</tr>
 					<tr>
@@ -586,32 +591,42 @@
 						<th class="th01">三人以降</th>
 						<th class="bdR th01">特定加算</th>
 
-						<td>ZZZ時間</td>
-						<td colspan="2" class="bdR">ZZ日</td>
+						<td><?php echo Hash::get($hendoInfo, 'QtSeitoHendo.ReducedAmoTimes'); ?>時間</td>
+						<td colspan="2" class="bdR"><?php echo Hash::get($hendoInfo, 'QtSeitoHendo.ReducedAmoDays'); ?>日</td>
 
 						<th class="pdL20">介護該当</th>
-						<td>X</td>
-						<td>NNNN</td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.NusingFlg'); ?></td>
+						<td><?php if(Hash::get($koteiInfo, 'QtSeitoKotei.NusingFlg') == '0') {
+									echo '非該当';
+								} else if(Hash::get($koteiInfo, 'QtSeitoKotei.NusingFlg') == '1') {
+									echo '該当';
+								}
+						?></td>
 						<th class="pdL20">高齢免除</th>
-						<td>X</td>
-						<td>NNNN</td>
-						<td class="td04 pdL20"><label><input type="checkbox" name="" value="">区互助</label></td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.UnempInsuranceFlg'); ?></td>
+						<td><?php if(Hash::get($koteiInfo, 'QtSeitoKotei.UnempInsuranceFlg') == '0') {
+									echo '非該当';
+								} else if(Hash::get($koteiInfo, 'QtSeitoKotei.UnempInsuranceFlg') == '1') {
+									echo '該当';
+								}
+						?></td>
+						<td class="td04 pdL20"><label><input type="checkbox" name="" value="" <?php if(Hash::get($koteiInfo, 'QtSeitoKotei.WardBenefitSocietyDeductEntryFlg') === '1') echo 'checked'; ?> disabled>区互助</label></td>
 					</tr>
 					<tr>
-						<td>X</td>
-						<td>X</td>
-						<td>X</td>
-						<td>X</td>
-						<td>X</td>
-						<td class="bdR">X</td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.SpouseFlg'); ?></td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.SubstituteSpouse'); ?></td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.FirstDependent'); ?></td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.SecondDependent'); ?></td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.ThirdAboveDependents'); ?></td>
+						<td class="bdR"><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.SpAddNoOfPeople'); ?></td>
 
-						<td colspan="3" class="bdR td04"><label><input type="checkbox" name="" value="">全欠勤</label></td>
+						<td colspan="3" class="bdR td04"><label><input type="checkbox" name="" value="" <?php if(Hash::get($koteiInfo, 'QtSeitoKotei.AbsentedAllDayFlg') === '1') echo 'checked'; ?> disabled>全欠勤</label></td>
 
-						<td colspan="3" class="td04 pdL20"><label><input type="checkbox" name="" value="">部分休長期免除</label></td>
+						<td colspan="3" class="td04 pdL20"><label><input type="checkbox" name="" value="" <?php if(Hash::get($koteiInfo, 'QtSeitoKotei.TimesOfPartRestPremDeduct') !== null && Hash::get($koteiInfo, 'QtSeitoKotei.TimesOfPartRestPremDeduct') !== '0') echo 'checked'; ?> disabled>部分休長期免除</label></td>
 						<th class="th01">&nbsp;</th>
 						<th class="th01">&nbsp;</th>
 						<th class="th01">&nbsp;</th>
-						<td class="td04 pdL20"><label><input type="checkbox" name="" value="">区教互助</label></td>
+						<td class="td04 pdL20"><label><input type="checkbox" name="" value="" <?php if(Hash::get($koteiInfo, 'QtSeitoKotei.WardBenefitEduSocietyDeductEntryFlg') === '1') echo 'checked'; ?> disabled>区教互助</label></td>
 					</tr>
 					<tr>
 						<th colspan="3">■住居手当</th>
@@ -619,46 +634,60 @@
 
 						<th colspan="3" class="bdR">■手当停止</th>
 
-						<td colspan="3">ZZZ時間</td>
+						<td colspan="3"><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.TimesOfPartRestPremDeduct'); ?>時間</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
-						<td class="td04 pdL20"><label><input type="checkbox" name="" value="">都教互助</label></td>
+						<td class="td04 pdL20"><label><input type="checkbox" name="" value="" <?php if(Hash::get($koteiInfo, 'QtSeitoKotei.MetroBenefitEduSocietyDeductEntryFlg') === '1') echo 'checked'; ?> disabled>都教互助</label></td>
 					</tr>
 					<tr>
-						<td>XX</td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.ResidentAllowCD'); ?></td>
 						<td colspan="2" class="td04"><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.CodeName_ResidentAllowName'); ?></td>
-						<td>XX</td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.DetachmentAllowDivCD'); ?></td>
 						<td colspan="2" class="td04 bdR"><?php echo Hash::get($koteiInfo, 'detachmentAllowDivName'); ?></td>
 
 						<th class="pdL20">通勤</th>
-						<td>X</td>
-						<td class="bdR">NN</td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.CommutationStopStartFlg'); ?></td>
+						<td class="bdR"><?php if(Hash::get($koteiInfo, 'QtSeitoKotei.CommutationStopStartFlg') == '0') {
+									echo '継続';
+								} else if(Hash::get($koteiInfo, 'QtSeitoKotei.CommutationStopStartFlg') == '1') {
+									echo '停止';
+								} else if(Hash::get($koteiInfo, 'QtSeitoKotei.CommutationStopStartFlg') == '2') {
+									echo '解除';
+								}
+						?></td>
 
 						<th colspan="3">■標準報酬</th>
 						<th>&nbsp;</th>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
-						<td class="td04 pdL20"><label><input type="checkbox" name="" value="">特互助</label></td>
+						<td class="td04 pdL20"><label><input type="checkbox" name="" value="" <?php if(Hash::get($koteiInfo, 'QtSeitoKotei.SpWardBenefitEduSocietyDeductEntryFlg') === '1') echo 'checked'; ?> disabled>特互助</label></td>
 					</tr>
 					<tr>
 						<th colspan="2">■初任給調整</th>
-						<td class="td04">XX</td>
+						<td class="td04"><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.MedDoCallAllowanceDiv'); ?></td>
 						<th>■通勤手当</th>
-						<td>X</td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.CommutationPattern'); ?></td>
 						<td class="td04 bdR">NNNNNN</td>
 
 						<th class="pdL20">管理職</th>
-						<td>X</td>
-						<td class="bdR">NN</td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.MgrAllowStopStartFlg'); ?></td>
+						<td class="bdR"><?php if(Hash::get($koteiInfo, 'QtSeitoKotei.MgrAllowStopStartFlg') == '0') {
+									echo '継続';
+								} else if(Hash::get($koteiInfo, 'QtSeitoKotei.MgrAllowStopStartFlg') == '1') {
+									echo '停止';
+								} else if(Hash::get($koteiInfo, 'QtSeitoKotei.MgrAllowStopStartFlg') == '2') {
+									echo '解除';
+								}
+						?></td>
 
 						<th class="th01">等級</th>
-						<td>XX</td>
-						<td>（XX）</td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.StandardMonthSalaryDiv'); ?></td>
+						<td>&nbsp;</td>
 						<th class="th01">&nbsp;</th>
 						<th class="th01">&nbsp;</th>
 						<th class="th01">&nbsp;</th>
-						<td class="td04 pdL20"><label><input type="checkbox" name="" value="">事業団</label></td>
+						<td class="td04 pdL20"><label><input type="checkbox" name="" value="" <?php if(Hash::get($koteiInfo, 'QtSeitoKotei.PersonalSupportFndDeductEntryFlg') === '1') echo 'checked'; ?> disabled>事業団</label></td>
 					</tr>
 					<tr>
 						<th colspan="2">■単価算入特勤</th>
@@ -672,7 +701,7 @@
 						<th class="bdR">&nbsp;</th>
 
 						<th class="th01">月額</th>
-						<td colspan="2">Z,ZZZ,ZZZ</td>
+						<td colspan="2"><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.StandardMonthSalary')); ?></td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
@@ -680,7 +709,7 @@
 					</tr>
 					<tr>
 						<th class="pdL20">特勤</th>
-						<td>XXXX</td>
+						<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SpecificDutySalaryCD'); ?></td>
 						<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_AllowDetailName'); ?></td>
 						<th>&nbsp;</th>
 						<td>&nbsp;</td>
@@ -691,16 +720,16 @@
 						<th class="bdR">&nbsp;</th>
 
 						<th class="th01">適用</th>
-						<td colspan="2">GGYY.MM</td>
+						<td colspan="2"><?php echo $this->SalaryForm->getJapaneseEraWithoutDay(Hash::get($koteiInfo, 'QtSeitoKotei.StandardMonthSalaryRemarks')); ?></td>
 						<th>&nbsp;</th>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 					</tr>
 					<tr>
-						<th class="pdL20">算入方法</th>
-						<td>X</td>
-						<td>NNNNNN</td>
+						<th class="pdL20">一月あたり日数</th>
+						<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.RequestedWorkingDaysOfMonth'); ?>日</tdh>
+						<td>&nbsp;</td>
 						<th>&nbsp;</th>
 						<td>&nbsp;</td>
 						<th class="bdR">&nbsp;</th>
@@ -718,8 +747,8 @@
 						<td>&nbsp;</td>
 					</tr>
 					<tr>
-						<th class="pdL20">一日あたり日数</th>
-						<td>ZZ日</tdh>
+						<th>&nbsp;</th>
+						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<th>&nbsp;</th>
 						<td>&nbsp;</td>
@@ -809,14 +838,14 @@
 					<tr>
 						<th class="pdL20">《一律分》</th>
 						<th>給料</th>
-						<td>Z,ZZZ,ZZZ</td>
-						<td class="pdL20 bdR">Z.ZZZZZZ月</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTermAllowUniformBasic_Salary')); ?></td>
+						<td class="pdL20 bdR"><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.EndTermAllowMonths'); ?>月</td>
 						<th class="pdL20">《一律分》</th>
 						<th>給料</th>
-						<td>Z,ZZZ,ZZZ</td>
-						<td class="pdL20">Z.ZZZZZZ月</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllowUniformBasic_Salary')); ?></td>
+						<td class="pdL20"><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllowMonths'); ?>月</td>
 						<td class="bdR">&nbsp;</td>
-						<td class="pdL20">Z.ZZZZ％</td>
+						<td class="pdL20"><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_ModificationRatio'); ?>％</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
@@ -825,11 +854,11 @@
 					<tr>
 						<td>&nbsp;</td>
 						<th>扶養</th>
-						<td>Z,ZZZ,ZZZ</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTermAllowUniformBasic_Dependent')); ?></td>
 						<th class="bdR">■支給割合</th>
 						<td>&nbsp;</td>
 						<th>扶養</th>
-						<td>Z,ZZZ,ZZZ</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllowUniformBasic_Dependent')); ?></td>
 						<th>■支給割合</th>
 						<td class="bdR">&nbsp;</td>
 						<th>■調整月数</th>
@@ -841,30 +870,30 @@
 					<tr>
 						<td>&nbsp;</td>
 						<th>地域</th>
-						<td>Z,ZZZ,ZZZ</td>
-						<td class="pdL20 bdR">ZZZ％</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTermAllowUniformBasic_Local')); ?></td>
+						<td class="pdL20 bdR"><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.EndTermAllowRatio'); ?>％</td>
 						<td>&nbsp;</td>
 						<th>地域</th>
-						<td>Z,ZZZ,ZZZ</td>
-						<td class="pdL20">ZZZ％</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllowUniformBasic_Local')); ?></td>
+						<td class="pdL20"><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllowRatio'); ?>％</td>
 						<td class="bdR">&nbsp;</td>
-						<td class="pdL20">ZZ月</td>
+						<td class="pdL20"><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_AdjustMonths'); ?>月</td>
 						<td>（減じる月数</td>
-						<td>ZZ月）</td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_DeductMonths'); ?>月）</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
 						<th>合計</th>
-						<td>Z,ZZZ,ZZZ</td>
-						<td class="bdR pdL20"><label><input type="checkbox" name="" value="">
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTermAllowUniformBasic_Total')); ?></td>
+						<td class="bdR pdL20"><label><input type="checkbox" name="" value="" <?php if(Hash::get($koteiInfo, 'QtSeitoKotei.EndTermAllowExceptionFlg') === '1') echo 'checked'; ?> disabled>
 						支給対象外
 						</label></td>
 						<td>&nbsp;</td>
 						<th>合計</th>
-						<td>Z,ZZZ,ZZZ</td>
-						<td class="pdL20"><label><input type="checkbox" name="" value="">
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllowUniformBasic_Total')); ?></td>
+						<td class="pdL20"><label><input type="checkbox" name="" value="" <?php if(Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllowExceptionFlg') === '1') echo 'checked'; ?> disabled>
 						支給対象外
 						</label></td>
 						<td class="bdR">&nbsp;</td>
@@ -877,63 +906,75 @@
 					<tr>
 						<th class="pdL20">《職務級加算》</th>
 						<th>加算率</th>
-						<td>ZZ％</td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.EndTermAllowBasic_JobDutyRatio'); ?>％</td>
 						<td class="bdR">&nbsp;</td>
 						<th class="pdL20">《職務級加算》</th>
 						<th>加算率</th>
-						<td>ZZ％</td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllowBasic_JobDutyRatio'); ?>％</td>
 						<th>■成績率</th>
 						<td class="bdR">&nbsp;</td>
 						<th class="pdL20">例月分</th>
-						<td>Z,ZZZ,ZZZ</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_MonthlyAdjust')); ?></td>
 						<td>&nbsp;</td>
-						<td>◎期末手当</td>
-						<td>◎勤勉手当</td>
+						<td><label><input type="checkbox" name="" value="" <?php if(Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_EndDiligenceDiv') === '1') echo 'checked'; ?> disabled>期末手当</label></td>
+						<td><label><input type="checkbox" name="" value="" <?php if(Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_DiligenceAllowDiv') === '1') echo 'checked'; ?> disabled>勤勉手当</label></td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
 						<th>金額</th>
-						<td>Z,ZZZ,ZZZ</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTermAllowBasic_JobDutyAmo')); ?></td>
 						<td class="bdR">&nbsp;</td>
 						<td>&nbsp;</td>
 						<th>金額</th>
-						<td>Z,ZZZ,ZZZ</td>
-						<td class="pdL20">XX</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllowBasic_JobDutyAmo')); ?></td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllowRecordJudgeDiv'); ?></td>
 						<td class="bdR"><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.CodeName_RecordJudgeDivName'); ?></td>
 						<th class="pdL20">3月期末勤勉</th>
-						<td>Z,ZZZ,ZZZ</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_MarDiligenceAllowAdjust')); ?></td>
 						<td>&nbsp;</td>
-						<th>調整前手当額</th>
-						<td>Z,ZZZ,ZZZ</td>
+						<th><?php if(Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_EndDiligenceDiv') == '1') {
+									echo '調整前期末手当額';
+								}
+						?></th>
+						<td><?php if(Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_EndDiligenceDiv') == '1') {
+									echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_AllowBeforeAdjust'));
+								}
+						?></td>
 					</tr>
 					<tr>
 						<th class="pdL20">《管理職加算》</th>
 						<th>加算率</th>
-						<td>ZZ％</td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.EndTermAllowBasic_MgrAddRatio'); ?>％</td>
 						<td class="bdR">&nbsp;</td>
 						<th class="pdL20">《管理職加算》</th>
 						<th>加算率</th>
-						<td>ZZ％</td>
-						<td class="pdL20">XX</td>
-						<td class="bdR">NNNNNN</td>
+						<td><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllowBasic_MgrAddRatio'); ?>％</td>
+						<td class="pdL20"><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllowRecordClass'); ?></td>
+						<td class="bdR"><?php echo Hash::get($koteiInfo, 'diligenceAllowRecordName'); ?></td>
 						<th class="pdL20">6月期末勤勉</th>
-						<td>Z,ZZZ,ZZZ</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_JunDiligenceAllowAdjust')); ?></td>
 						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
+						<th><?php if(Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_DiligenceAllowDiv') == '1') {
+									echo '調整前勤勉手当額';
+								}
+						?></th>
+						<td><?php if(Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_DiligenceAllowDiv') == '1') {
+									echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_DilAllowBeforeAdjust'));
+								}
+						?></td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
 						<th>金額</th>
-						<td>Z,ZZZ,ZZZ</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTermAllowBasic_MgrAddAmo')); ?></td>
 						<td class="bdR">&nbsp;</td>
 						<td>&nbsp;</td>
 						<th>金額</th>
-						<td>Z,ZZZ,ZZZ</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllowBasic_MgrAddAmo')); ?></td>
 						<th>■減額率</th>
 						<td class="bdR">&nbsp;</td>
 						<th class="pdL20">12月期末勤勉</th>
-						<td>Z,ZZZ,ZZZ</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_DecDiligenceAllowAdjust')); ?></td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
@@ -941,15 +982,15 @@
 					<tr>
 						<th class="pdL20">《合計》</th>
 						<td>&nbsp;</td>
-						<td>Z,ZZZ,ZZZ</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.EndTermAllowBasic_Total')); ?></td>
 						<td class="bdR">&nbsp;</td>
 						<th class="pdL20">《合計》</th>
 						<td>&nbsp;</td>
-						<td>Z,ZZZ,ZZZ</td>
-						<td class="pdL20">ZZZ％</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllowBasic_Total')); ?></td>
+						<td class="pdL20"><?php echo Hash::get($koteiInfo, 'QtSeitoKotei.DiligenceAllowDeductRatio'); ?>％</td>
 						<td class="bdR">&nbsp;</td>
 						<th class="pdL20">合計</th>
-						<td>Z,ZZZ,ZZZ</td>
+						<td><?php echo $this->SalaryForm->number_format(Hash::get($koteiInfo, 'QtSeitoKotei.NecessaryAdjust_AdjustAmo')); ?></td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
