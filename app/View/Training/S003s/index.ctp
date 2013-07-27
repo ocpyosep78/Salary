@@ -18,7 +18,7 @@
 				<td class="td1 pd_01"><input class="Button1" type="submit" value="検索" /></td>
 			</tr>
 			<tr>
-				<td class="td1 pd_02"><input class="Button1" type="button" value="消去" /></td>
+				<td class="td1 pd_02"><input class="Button1" type="submit" value="消去" name="clear" /></td>
 			</tr>
 		</table>
 	<?php echo $this->SalaryForm->end(); ?>
@@ -136,7 +136,7 @@
 
 		<table id="footer">
 			<tr>
-				<td class="f_td1"><input class="Button1" type="button" value="閉じる" onclick="beforeSubmit('close');" /></td>
+				<td class="f_td1"><input class="Button1" type="button" value="閉じる" onclick="window.close();" /></td>
 				<td class="f_td2"><input class="Button1" type="button" value="修正" onclick="beforeSubmit('edit');" /></td>
 				<td class="f_td3"><input class="Button1" type="button" value="追加" onclick="beforeSubmit('add');" /></td>
 				<td class="f_td4"><input class="Button1" type="button" value="削除" onclick="beforeSubmit('delete');" /></td>

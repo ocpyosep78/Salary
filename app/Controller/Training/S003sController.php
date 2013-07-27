@@ -1,6 +1,7 @@
 <?php
 
 App::uses('CommonController', 'Controller');
+App::uses('SalaryPaginatorHelper', 'View/Helper');
 
 /**
  * S003sController Controller
@@ -47,12 +48,12 @@ class S003sController extends CommonController {
 
 		// ********************  画面からのデータ受け取り  ********************
 
-		// ページ番号を直接指定された場合のリダイレクト処理
-		if ($_SERVER['REQUEST_METHOD']=='POST' && isset($this->params['data']['page'])) {
-			// リダイレクト
-			$this->redirect('search/page:'.$this->params['data']['page']);
+		// 消去ボタンを押下した場合
+		if(isset($this->request->data['clear'])) {
+			// 初期画面を表示する
+			$this->redirect('index');
 		}
-
+		
 		// 前画面からの検索条件の受け取り（研修委託会社コード）
 		if (isset($this->request->data['consignmentCompanyCd'])) {
 			// POSTデータを受け取る
@@ -63,15 +64,57 @@ class S003sController extends CommonController {
 			// POSTデータが存在しない場合（ページングなど）、セッションから取得して使う
 			$searchCondition = $this->Session->read(self::S003S_SESSION_KEY);
 		}
+		
+		// ジャンプボタンの制御。存在しないページへのジャンプを回避する
+		if(isset($this->request->params['named']) && isset($this->request->params['named']['page'])) {
+
+			// ページ番号回避
+			$inputPage = $this->request->params['named']['page'];
+			
+			//　paginateでエラーが出ないように1を仮置き
+			$this->request->params['named']['page'] = 1;
+			
+			$this->paginate = $this->SmItakusakiKaisha->getPaginateCondition($searchCondition);
+			$this->paginate();
+			$this->SalaryPaginatorHelper = new SalaryPaginatorHelper(new View());
+			$endPage = (int)$this->SalaryPaginatorHelper->counter(array('format' => '{:pages}'));
+
+			if($inputPage > $endPage) {
+				// 入力値 > 全ページ数のとき
+				
+				// リダイレクト
+				$this->redirect('search/page:'.$this->params['named']['page']);
+				
+				// 前画面からの検索条件をそのまま画面にセットする
+				$this->set('searchCondition', $searchCondition);
+				
+				// エラーメッセージの設定
+				$errorMsgList = array();
+				$errorMsgList[] = '指定されたページはありません。';
+				$this->set('errorMsgList', $errorMsgList);
+				
+				// 入力値の初期値を設定する
+				$input = array();
+				$this->set('input', $input);
+			}
+			
+			// ページ番号を元に戻す
+			$this->request->params['named']['page'] = $inputPage;
+		}
+		
+		// ページ番号を直接指定された場合のリダイレクト処理
+		if ($_SERVER['REQUEST_METHOD']=='POST' && isset($this->params['data']['page'])) {
+			// リダイレクト
+			$this->redirect('search/page:'.$this->params['data']['page']);
+		}
 
 		// ********************  ビジネスロジック  ********************
 
 		// 研修委託会社テーブルからリスト形式でデータを取得する
 		$this->paginate = $this->SmItakusakiKaisha->getPaginateCondition($searchCondition);
-
-		// TODO ジャンプ制御。存在しないページへのジャンプの回避処理
 		
 		// ********************  画面へのデータ反映  ********************
+
 
 		// 前画面からの検索条件をそのまま画面にセットする
 		$this->set('searchCondition', $searchCondition);
@@ -98,10 +141,7 @@ class S003sController extends CommonController {
 		$commitType = $this->request->data['commitType'];
 
 		switch ($commitType) {
-			case 'close':
-				// TODO 閉じる処理(view側？)
-			break;
-
+			
 			case 'edit':
 				// 入力値チェック
 				if(!$this->checkValidation($this->request->data)){
@@ -163,8 +203,7 @@ class S003sController extends CommonController {
 				'updated_by' => '仮ユーザー',
 			)
 		);
-
-		// TODO 登録が失敗したときの回避処理(1回目はし直してリトライ。２回目はエラーメッセージで回避)
+		
 		$this->SmItakusakiKaisha->save($param);
 
 	}
