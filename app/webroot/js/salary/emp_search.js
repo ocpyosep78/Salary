@@ -1,4 +1,53 @@
 ;(function($) {
+	/**
+	 * モーダルウィンドウ
+	 */
+	$.fn.modalForEmpSearch = function(op){
+
+		//option
+		op = $.extend({
+			type:"fixed",
+			scrollTop : 20,
+			scrollBottom : false
+		},op);
+
+		//setting
+		if($("#blackLayer").length < 1){
+			$("body").append("<div id='blackLayer'></div>");
+
+			// モーダルの背景がクリックされた場合の処理
+			$(".modalWindow .close").add("#blackLayer").click(function(){
+
+				// モーダルを閉じる
+				//$(".modalWindow,#blackLayer").hide();
+
+				// 子画面の検索条件入力欄をクリア
+				//$("#common-search-keyword").val("");
+				// 子画面の検索結果一覧をクリア
+				//$("#common-search-result").html("");
+
+				// hidden項目をクリア
+				//$("#hidden-common-search-select-name").val("");
+				//$("#hidden-common-search-select-code").val("");
+
+				return false;
+			});
+		}
+
+		// モーダルのスタイル設定
+		var target = $("#emp-search");
+		target.css({
+			display:"block",
+			position:"absolute",
+			top:$(window).scrollTop()+op.scrollTop,
+			left:(op.type=="fixed")?"50%":op.type,
+			marginLeft:(op.type=="fixed")?"-"+(target.width()/2)+"px":"0px"
+		});
+
+		// モーダルを表示する
+		$("#blackLayer").show();
+		return false;
+	}
 
 	/**
 	 * 検索子画面の一覧部分でレコード選択時の処理

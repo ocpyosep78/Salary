@@ -91,7 +91,7 @@
 
 		// 検索子画面の表示
 		// モーダルで表示する
-		$("#emp-search").modal();
+		$("#emp-search").modalForEmpSearch();
 	}
 
 	/**

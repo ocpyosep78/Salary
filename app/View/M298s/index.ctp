@@ -1715,7 +1715,7 @@
 <?php echo $this->element('emp_search'); ?>
 
 <?php // 検索子画面の読み込み ?>
-<?php // echo $this->element('common_search'); ?>
+<?php echo $this->element('common_search'); ?>
 
 <script type="text/javascript">
 <!--

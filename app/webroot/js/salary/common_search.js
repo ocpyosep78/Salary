@@ -35,7 +35,7 @@
 		}
 
 		// モーダルのスタイル設定
-		var target = $(".modalWindow");
+		var target = $("#common-search");
 		target.css({
 			display:"block",
 			position:"absolute",
