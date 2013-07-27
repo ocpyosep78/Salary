@@ -16,6 +16,8 @@
 			// 各画面で記述された個別のcss, scriptタグ読み込み
 			echo $this->fetch('css');
 		?>
+
+		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.css" type="text/css">
 	</head>
 
 	<?php
@@ -29,7 +31,7 @@
 
 		<?php
 			// フロント画面用の共通のJSファイルを読み込み
-			echo $this->Html->script(array('lib/jquery-1.9.1.min', 'salary/common', 'salary/common_search', 'salary/emp_search'));
+			echo $this->Html->script(array('lib/jquery-1.8.3', 'lib/jquery-ui.min', 'lib/jquery.ui.ympicker', 'lib/jquery.gpobservetext-1.0.min', 'salary/common', 'salary/common_search', 'salary/emp_search'));
 
 			// 各画面で記述された個別のscriptタグ読み込み
 			echo $this->fetch('script');
