@@ -35,6 +35,7 @@ class EmpSearchesController extends CommonController {
 		$empDivTo       = Hash::get($this->request->query, 'empDivTo');
 		$depCdFrom      = Hash::get($this->request->query, 'depCdFrom');
 		$depCdTo        = Hash::get($this->request->query, 'depCdTo');
+		$retired        = Hash::get($this->request->query, 'retired');
 		$mgrCdFrom      = Hash::get($this->request->query, 'mgrCdFrom');
 		$mgrCdTo        = Hash::get($this->request->query, 'mgrCdTo');
 
@@ -44,7 +45,7 @@ class EmpSearchesController extends CommonController {
 		if ($page === null) $page = 1;
 
 		// Paginateコントローラ変数の設定
-		$this->paginate = $this->JtKihonKihon->getPaginateOptionsForEmpSearch($page, $familyNameKana, $firstNameKana, $jobDutyCdFrom, $jobDutyCdTo, $familyName, $firstName, $jobGradeCdFrom, $jobGradeCdTo, $empDivFrom, $empDivTo, $depCdFrom, $depCdTo, $mgrCdFrom, $mgrCdTo);
+		$this->paginate = $this->JtKihonKihon->getPaginateOptionsForEmpSearch($page, $familyNameKana, $firstNameKana, $jobDutyCdFrom, $jobDutyCdTo, $familyName, $firstName, $jobGradeCdFrom, $jobGradeCdTo, $empDivFrom, $empDivTo, $depCdFrom, $depCdTo, $retired, $mgrCdFrom, $mgrCdTo);
 
 		// 検索結果をViewに渡す
 		$this->set('searchResultList', $this->Paginate());

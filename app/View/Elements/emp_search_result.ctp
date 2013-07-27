@@ -28,18 +28,23 @@
 		<?php if(isset($searchResultList)) { ?>
 			<?php foreach($searchResultList as $key => $searchResult) : ?>
 
-					<tr class="commonSearchSelectableRecord">
-						<td><?php echo $this->SalaryForm->getSequentialNumber($this->SalaryPaginator->current(), PAGINATION_VIEW_LIMIT_COMMON_SEARCH, $key); ?></td>
-						<td><?php echo Hash::get($searchResult, 'JtKihonKihon.EmpNo'); ?></td>
-						<td><?php echo Hash::get($searchResult, 'JtKihonKihon.FamilyName'); ?><?php echo Hash::get($searchResult, 'JtKihonKihon.FirstName'); ?></td>
-						<td><?php echo Hash::get($searchResult, 'JtKihonKihon.FamilyNameKana'); ?><?php echo Hash::get($searchResult, 'JtKihonKihon.FirstNameKana'); ?></td>
+					<tr class="empSearchSelectableRecord">
+						<td>
+							<?php echo $this->SalaryForm->getSequentialNumber($this->SalaryPaginator->current(), PAGINATION_VIEW_LIMIT_COMMON_SEARCH, $key); ?>
+						</td>
+						<td class="EmpNo"><?php echo Hash::get($searchResult, 'JtKihonKihon.EmpNo'); ?></td>
+						<td class="Name"><?php echo Hash::get($searchResult, 'JtKihonKihon.FamilyName'); ?><?php echo Hash::get($searchResult, 'JtKihonKihon.FirstName'); ?></td>
+						<td class="NameKana"><?php echo Hash::get($searchResult, 'JtKihonKihon.FamilyNameKana'); ?><?php echo Hash::get($searchResult, 'JtKihonKihon.FirstNameKana'); ?></td>
 						<td><?php echo Hash::get($searchResult, 'JtKihonKihon.CodeName_EmpDivName'); ?></td>
+						<td>
+							<?php $retiredDate = Hash::get($searchResult, 'JtKihonKihon.RetiredDate'); ?>
+							<input type="checkbox" name="retired" value="0" id="retired" <?php if(!is_null($retiredDate)) echo 'checked' ?> disabled />
+						</td>
+						<td class="DepCD"><?php echo Hash::get($searchResult, 'JtKihonRekiSyozoku.DepCD'); ?></td>
 						<td></td>
-						<td><?php echo Hash::get($searchResult, 'JtKihonRekiSyozoku.DepCD'); ?></td>
+						<td class="MgrCD"><?php echo Hash::get($searchResult, 'JtKihonRekiSyozoku.MgrCD'); ?></td>
 						<td></td>
-						<td><?php echo Hash::get($searchResult, 'JtKihonRekiSyozoku.MgrCD'); ?></td>
-						<td></td>
-						<td><?php echo Hash::get($searchResult, 'JtKihonRekiSyokumu.JobDutyCD'); ?></td>
+						<td class="JobDutyCD"><?php echo Hash::get($searchResult, 'JtKihonRekiSyokumu.JobDutyCD'); ?></td>
 						<td></td>
 					</tr>
 
@@ -59,29 +64,39 @@
 	 */
 	function commitForEmpSearch() {
 
-		// 選択値の設定先を取得する
-		var targetCode = $("#hidden-common-search-target-code").val();
-		var targetName = $("#hidden-common-search-target-name").val();
-
 		// 選択値を取得する
-		var selectName = $("#hidden-common-search-select-name").val();
-		var selectCode = $("#hidden-common-search-select-code").val();
+		var empNo    = $("#hidden-emp-search-select-emp-no").val();
+		var nameKana = $("#hidden-emp-search-select-name-kana").val();
 
 		// 選択値を親画面の項目に設定する
-		$("#" + targetCode).val(selectName);
-		$("#" + targetName).html(selectCode);
+		$("#EmpNo").val(empNo);
+		$("#NameKana").html(nameKana);
 
 		// モーダルを閉じる
 		$(".modalWindow,#blackLayer").hide();
 
 		// 子画面の検索条件入力欄をクリア
-		$("#common-search-keyword").val("");
+		$("#emp-search-keyword-family-name-kana").val("");
+		$("#emp-search-keyword-first-name-kana").val("");
+		$("#emp-search-keyword-job-duty-cd-from").val("");
+		$("#emp-search-keyword-job-duty-cd-to").val("");
+		$("#emp-search-keyword-family-name").val("");
+		$("#emp-search-keyword-first-name").val("");
+		$("#emp-search-keyword-job-grade-cd-from").val("");
+		$("#emp-search-keyword-job-grade-cd-to").val("");
+		$("#emp-search-keyword-emp-div-from").val("");
+		$("#emp-search-keyword-emp-div-to").val("");
+		$("#emp-search-keyword-dep-cd-from").val("");
+		$("#emp-search-keyword-dep-cd-to").val("");
+		$("input[type='radio'][name='emp-search-keyword-retired']").attr("checked",false);
+		$("#emp-search-keyword-mgr-cd-from").val("");
+		$("#emp-search-keyword-mgr-cd-to").val("");
 
 		// 子画面の検索結果一覧をクリア
-		$("#common-search-result").html("");
+		$("#emp-search-result").html("");
 
 		// hidden項目をクリア
-		$("#hidden-common-search-select-name").val("");
-		$("#hidden-common-search-select-code").val("");
+		$("#hidden-emp-search-select-emp-no").val("");
+		$("#hidden-emp-search-select-name-kana").val("");
 	}
 </script>

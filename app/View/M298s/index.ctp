@@ -10,13 +10,13 @@
 		<tr>
 			<th width='10%'>職員番号</th>
 			<td width='25%'>
-				<?php echo $this->SalaryForm->text('EmpNo', array('value' => Hash::get($searchCondition, 'EmpNo'), 'maxlength' => '8'));?>
+				<?php echo $this->SalaryForm->text('EmpNo', array('id' => 'EmpNo', 'value' => Hash::get($searchCondition, 'EmpNo'), 'maxlength' => '8'));?>
 				<?php echo $this->SalaryForm->button('？', array('type' => 'button', 'class' => 'btn02', 'onclick' => "viewForEmpSearch()" ), null); ?>
 			</td>
 			<th width='10%'>氏名</th>
-			<td width='15%'><?php echo Hash::get($personalInfo, 'JtKihonKihon.FamilyNameKana'); ?>&nbsp;<?php echo Hash::get($personalInfo, 'JtKihonKihon.FirstNameKana'); ?></td>
+			<td width='15%' id="NameKana"><?php echo Hash::get($personalInfo, 'JtKihonKihon.FamilyNameKana'); ?>&nbsp;<?php echo Hash::get($personalInfo, 'JtKihonKihon.FirstNameKana'); ?></td>
 			<th width='10%'>年齢</th>
-			<td width='10%'><?php echo $this->SalaryForm->getAgeFromChristianEra(Hash::get($personalInfo, 'JtKihonKihon.BirthDate')); ?></td>
+			<td width='10%' id="Age"><?php echo $this->SalaryForm->getAgeFromChristianEra(Hash::get($personalInfo, 'JtKihonKihon.BirthDate')); ?></td>
 			<td class="td1 pd01">
 				<?php echo $this->SalaryForm->submit('検索', array('type' => 'submit', 'class' => 'btn01'), null); ?>
 			</td>

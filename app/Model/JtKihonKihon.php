@@ -81,7 +81,7 @@ class JtKihonKihon extends AppModel {
 	/**
 	 * 職員番号検索のPaginateオプションを取得する
 	 */
-	public function getPaginateOptionsForEmpSearch($page, $familyNameKana, $firstNameKana, $jobDutyCdFrom, $jobDutyCdTo, $familyName, $firstName, $jobGradeCdFrom, $jobGradeCdTo, $empDivFrom, $empDivTo, $depCdFrom, $depCdTo, $mgrCdFrom, $mgrCdTo) {
+	public function getPaginateOptionsForEmpSearch($page, $familyNameKana, $firstNameKana, $jobDutyCdFrom, $jobDutyCdTo, $familyName, $firstName, $jobGradeCdFrom, $jobGradeCdTo, $empDivFrom, $empDivTo, $depCdFrom, $depCdTo, $retired, $mgrCdFrom, $mgrCdTo) {
 
 		$fields = array(
 				'JtKihonKihon.EmpNo',
@@ -90,6 +90,8 @@ class JtKihonKihon extends AppModel {
 				'JtKihonKihon.FamilyNameKana',
 				'JtKihonKihon.FirstNameKana',
 				'JtKihonKihon.EmpDiv',
+				'JtKihonKihon.RetiredDate',
+				'JtKihonKihon.BirthDate',
 				'JtKihonRekiSyozoku.DepCD',
 				'JtKihonRekiSyozoku.MgrCD',
 				'JtKihonRekiSyokumu.JobDutyCD'
@@ -103,7 +105,55 @@ class JtKihonKihon extends AppModel {
 		// 漢字（姓）
 		$searchCondition['JtKihonKihon.FamilyName LIKE ?']     =  '%' . $familyName . '%';
 		// 漢字（名）
-		$searchCondition['JtKihonKihon.FirstName LIKE ?']     =  '%' . $firstName . '%';
+		$searchCondition['JtKihonKihon.FirstName LIKE ?']      =  '%' . $firstName . '%';
+		// 職員区分（FROM）
+		if (isset($empDivFrom) && $empDivFrom !== "") {
+			$searchCondition['JtKihonKihon.EmpDiv >= '] = $empDivFrom;
+		}
+		// 職員区分（TO）
+		if (isset($empDivTo) && $empDivTo !== "") {
+			$searchCondition['JtKihonKihon.EmpDiv <= '] = $empDivTo;
+		}
+		// 退職者
+		if ($retired === '1') {
+			// 退職者を除く
+			$searchCondition += array('JtKihonKihon.RetiredDate IS NULL');
+		} else if ($retired === '2') {
+			// 退職者のみ
+			$searchCondition += array('JtKihonKihon.RetiredDate IS NOT NULL');
+		}
+		// 職種職務（FROM）
+		if (isset($jobDutyCdFrom) && $jobDutyCdFrom !== "") {
+			$searchCondition['JtKihonRekiSyokumu.JobDutyCD >= '] = $jobDutyCdFrom;
+		}
+		// 職種職務（TO）
+		if (isset($jobDutyCdTo) && $jobDutyCdTo !== "") {
+			$searchCondition['JtKihonRekiSyokumu.JobDutyCD <= '] = $jobDutyCdTo;
+		}
+		// 職層（FROM）
+		if (isset($jobGradeCdFrom) && $jobGradeCdFrom !== "") {
+			$searchCondition['JtKihonRekiSyokuso.JobGradeCD >= '] = $jobGradeCdFrom;
+		}
+		// 職層（TO）
+		if (isset($jobGradeCdTo) && $jobGradeCdTo !== "") {
+			$searchCondition['JtKihonRekiSyokuso.JobGradeCD <= '] = $jobGradeCdTo;
+		}
+		// 所属（FROM）
+		if (isset($depCdFrom) && $depCdFrom !== "") {
+			$searchCondition['JtKihonRekiSyozoku.DepCD >= '] = $depCdFrom;
+		}
+		// 所属（TO）
+		if (isset($depCdTo) && $depCdTo !== "") {
+			$searchCondition['JtKihonRekiSyozoku.DepCD <= '] = $depCdTo;
+		}
+		// 役職（FROM）
+		if (isset($mgrCdFrom) && $mgrCdFrom !== "") {
+			$searchCondition['JtKihonRekiSyozoku.MgrCD >= '] = $mgrCdFrom;
+		}
+		// 役職（TO）
+		if (isset($mgrCdTo) && $mgrCdTo !== "") {
+			$searchCondition['JtKihonRekiSyozoku.MgrCD <= '] = $mgrCdTo;
+		}
 
 		$joins = array(
 				array('type' => 'LEFT',

@@ -36,12 +36,16 @@
 				<th>～<th>
 				<td><input type="text" id="emp-search-keyword-dep-cd-to" name="emp-search-keyword-dep-cd-to" value="" /></td>
 				<td rowspan="2" class="td1 pd_01">
-					<input class="Button1" type="button" onclick="clearForCommonSearch()" value="　消去　" />
+					<input class="Button1" type="button" onclick="clearForEmpSearch()" value="　消去　" />
 				</td>
 			</tr>
 			<tr>
 				<th>退職者<th>
-				<td colspan="4"></td>
+				<td colspan="4">
+					<input type="radio" name="emp-search-keyword-retired" value="0" class="retired" id="emp-search-keyword-retired-include" checked /><label for="emp-search-keyword-retired-include">含む　</label>
+					<input type="radio" name="emp-search-keyword-retired" value="1" class="retired" id="emp-search-keyword-retired-except" /><label for="emp-search-keyword-retired-except">除く　</label>
+					<input type="radio" name="emp-search-keyword-retired" value="2" class="retired" id="emp-search-keyword-retired-only" /><label for="emp-search-keyword-retired-only">のみ　</label>
+				</td>
 				<th>役職<th>
 				<td><input type="text" id="emp-search-keyword-mgr-cd-from" name="emp-search-keyword-mgr-cd-from" value="" /></td>
 				<th>～<th>
@@ -56,9 +60,9 @@
 	</div>
 </div>
 
-<?php // テーブル検索に使用する項目をhiddenで定義 ?>
-<input type="hidden" value= "" name="hidden-emp-search-table" id="hidden-emp-search-table" />
-
+<?php // 選択された項目をhiddenで定義 ?>
+<input type="hidden" value= "" name="hidden-emp-search-select-emp-no" id="hidden-emp-search-select-emp-no" />
+<input type="hidden" value= "" name="hidden-emp-search-select-name-kana" id="hidden-emp-search-select-name-kana" />
 
 <script type="text/javascript">
 	/**
@@ -109,6 +113,7 @@
 		var empDivTo       = $("#emp-search-keyword-emp-div-to").val();
 		var depCdFrom      = $("#emp-search-keyword-dep-cd-from").val();
 		var depCdTo        = $("#emp-search-keyword-dep-cd-to").val();
+		var retired        = $("input[type='radio'][name='emp-search-keyword-retired']:checked").val();
 		var mgrCdFrom      = $("#emp-search-keyword-mgr-cd-from").val();
 		var mgrCdTo        = $("#emp-search-keyword-mgr-cd-to").val();
 
@@ -126,6 +131,7 @@
 																													+ "&empDivTo=" + empDivTo
 																													+ "&depCdFrom=" + depCdFrom
 																													+ "&depCdTo=" + depCdTo
+																													+ "&retired=" + retired
 																													+ "&mgrCdFrom=" + mgrCdFrom
 																													+ "&mgrCdTo=" + mgrCdTo,
 			type: 'GET',
@@ -154,7 +160,7 @@
 		var depCdTo        = $("#emp-search-keyword-dep-cd-to").val();
 		var mgrCdFrom      = $("#emp-search-keyword-mgr-cd-from").val();
 		var mgrCdTo        = $("#emp-search-keyword-mgr-cd-to").val();
-		
+
 		if (familyNameKana == "" &&
 			firstNameKana == "" &&
 			jobDutyCdFrom == "" &&
@@ -178,40 +184,53 @@
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 検索結果のクリア
 	 */
 	function clearForEmpSearch() {
 
-		// 親画面の項目IDを取得
-		var targetCode = $("#hidden-emp-search-target-code").val();
-		var targetName = $("#hidden-emp-search-target-name").val();
-
 		// 親画面に設定した値をクリア
-		$("#" + targetCode).val("");
-		$("#" + targetName).html("");
+		$("#EmpNo").val("");
+		$("#NameKana").html("");
 
 		// 子画面の検索条件入力欄をクリア
-		$("#emp-search-keyword-").val("");
-		$("#common-search-keyword-name").val("");
+		$("#emp-search-keyword-family-name-kana").val("");
+		$("#emp-search-keyword-first-name-kana").val("");
+		$("#emp-search-keyword-job-duty-cd-from").val("");
+		$("#emp-search-keyword-job-duty-cd-to").val("");
+		$("#emp-search-keyword-family-name").val("");
+		$("#emp-search-keyword-first-name").val("");
+		$("#emp-search-keyword-job-grade-cd-from").val("");
+		$("#emp-search-keyword-job-grade-cd-to").val("");
+		$("#emp-search-keyword-emp-div-from").val("");
+		$("#emp-search-keyword-emp-div-to").val("");
+		$("#emp-search-keyword-dep-cd-from").val("");
+		$("#emp-search-keyword-dep-cd-to").val("");
+		$("input[type='radio'][name='emp-search-keyword-retired']").attr("checked",false);
+		$("#emp-search-keyword-mgr-cd-from").val("");
+		$("#emp-search-keyword-mgr-cd-to").val("");
 
 		var table = $("#hidden-emp-search-table").val();       // 検索対象のテーブル名
 
 		// 子画面の検索結果一覧をクリア
 		$.ajax({
-			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'clear')); ?>" + "?table=" + table,
+			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'clear')); ?>" + "?table=" + 'JtKihonKihon',
 			type: 'GET',
 			success: function(data) {
-				$("#common-search-result").html(data);
+				$("#emp-search-result").html(data);
 			}
 		});
 	}
-	
+
 	/**
 	 * モーダルを閉じる
 	 */
 	function closeModal() {
+
+		// 検索結果を初期化する
+		clearForEmpSearch();
+
 		// モーダルを閉じる
 		$(".modalWindow,#blackLayer").hide();
 	}
