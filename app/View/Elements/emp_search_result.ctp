@@ -68,6 +68,15 @@
 		var empNo    = $("#hidden-emp-search-select-emp-no").val();
 		var nameKana = $("#hidden-emp-search-select-name-kana").val();
 
+		// 満年齢を算出する
+//		$.ajax({
+//			url: "<?php echo $this->Html->url(array('controller' => 'EmpSearches', 'action' => 'clear')); ?>" + "?table=" + 'JtKihonKihon',
+//			type: 'GET',
+//			success: function(data) {
+//				$("#emp-search-result").html(data);
+//			}
+//		});
+
 		// 選択値を親画面の項目に設定する
 		$("#EmpNo").val(empNo);
 		$("#NameKana").html(nameKana);

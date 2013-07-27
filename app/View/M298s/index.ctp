@@ -1,5 +1,5 @@
 <?php
-	$this->append('script'); echo $this->Html->script(array('lib/jquery-1.9.1.min', 'salary/payroll001s')); $this->end();
+	$this->append('script'); echo $this->Html->script(array('salary/payroll001s')); $this->end();
 	$this->append('css'); echo $this->Html->css(array('salary/common', 'M298/common')); $this->end();
 ?>
 

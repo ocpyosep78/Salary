@@ -1,6 +1,6 @@
 <?php
 	// スクリプトで、この画面特有のものを差し込むときの書き方。
-	$this->append('script'); echo $this->Html->script(array('lib/jquery-1.9.1.min', 'salary/s003_index')); $this->end();
+	$this->append('script'); echo $this->Html->script(array('salary/s003_index')); $this->end();
 	// スタイルシートで、この画面特有のものを差し込むときの書き方。
 	$this->append('css');    echo $this->Html->css(array('salary/common'));    $this->end();
 ?>
@@ -157,7 +157,7 @@
 		document.flexible.appendChild(submitType);
 		document.flexible.submit();
 	}
-	
+
 	<?php
 	// エラーメッセージ一覧配列をカンマ区切りで展開する
 	$errorMsgString = "";
@@ -166,7 +166,7 @@
 	}
 	?>
 	// phpからjavascriptへ値を渡す
-	var errorMsgString = "<?php echo $errorMsgString; ?>";	
+	var errorMsgString = "<?php echo $errorMsgString; ?>";
 	// エラーメッセージがあるときは、ポップアップで表示する
 	if(errorMsgString != "") {
 		// カンマを\n（改行）に置換する
