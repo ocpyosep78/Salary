@@ -421,6 +421,7 @@ class QtMeisai extends AppModel {
 	);
 	
 	/**
+	 * validation check
 	 * 支給年月チェック
 	 */
 	public function checkPaidYm(){

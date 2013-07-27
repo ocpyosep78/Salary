@@ -29,9 +29,11 @@ class S003sController extends CommonController {
 	 */
 	public function index() {
 
-		// 画面側でエラーが出ないように空の検索条件をセットしておく
+		// 画面側でエラーが出ないように空の検索条件等をセットしておく
 		$searchCondition = array();
 		$this->set('searchCondition', $searchCondition);
+		$input = array(); // 入力初期値
+		$this->set('input', $input);
 
 		// セッションを開始する
 		$this->Session->write(self::S003S_SESSION_KEY, $searchCondition);
@@ -67,11 +69,16 @@ class S003sController extends CommonController {
 		// 研修委託会社テーブルからリスト形式でデータを取得する
 		$this->paginate = $this->SmItakusakiKaisha->getPaginateCondition($searchCondition);
 
+		// TODO ジャンプ制御。存在しないページへのジャンプの回避処理
+		
 		// ********************  画面へのデータ反映  ********************
 
 		// 前画面からの検索条件をそのまま画面にセットする
 		$this->set('searchCondition', $searchCondition);
-
+		
+		$input = array(); // 入力初期値
+		$this->set('input', $input);
+		
 		// 取得したリストを画面にセットする
 		$this->set('rtnSmItakusakiKaishaList', $this->Paginate());
 
@@ -92,14 +99,25 @@ class S003sController extends CommonController {
 
 		switch ($commitType) {
 			case 'close':
+				// TODO 閉じる処理(view側？)
 			break;
 
 			case 'edit':
+				// 入力値チェック
+				if(!$this->checkValidation($this->request->data)){
+					// バリデーションエラーのときは、処理終了
+					return;
+				}
 				$this->updateDetailData($this->request->data);
 				$this->redirect('index');
 			break;
 
 			case 'add':
+				// 入力値チェック
+				if(!$this->checkValidation($this->request->data)){
+					// バリデーションエラーのときは、処理終了
+					return;
+				}
 				$this->insertDetailData($this->request->data);
 				$this->redirect('index');
 			break;
@@ -121,9 +139,12 @@ class S003sController extends CommonController {
 	 */
 	private function insertDetailData($data) {
 
+		// CD値の自動付番
+		$newCode = $this->createNewCode();
+		
 		$param = array(
 			'SmItakusakiKaisha' => array(
-				'ConsignmentCompanyCD' => 'TOE',
+				'ConsignmentCompanyCD' => $newCode,
 				'ConsignmentCompanyName' => $data['ConsignmentCompanyName'],
 				'Representative' => $data['Representative'],
 				'PostalCD' => $data['PostalCD1'].'-'.$data['PostalCD2'],
@@ -139,10 +160,11 @@ class S003sController extends CommonController {
 				'EmailAddresse1' => $data['EmailAddresse1'],
 				'EmailAddresse2' => $data['EmailAddresse2'],
 				'update_date' => date('Y-m-d H:i:s'),
-				'updated_by' => 'TODO 仮ユーザー',
+				'updated_by' => '仮ユーザー',
 			)
 		);
 
+		// TODO 登録が失敗したときの回避処理(1回目はし直してリトライ。２回目はエラーメッセージで回避)
 		$this->SmItakusakiKaisha->save($param);
 
 	}
@@ -151,7 +173,7 @@ class S003sController extends CommonController {
 	 * 画面データを更新する
 	 */
 	private function updateDetailData($data) {
-
+		
 		$param = array(
 			'SmItakusakiKaisha' => array(
 				'ConsignmentCompanyCD' => $data['ConsignmentCompanyCD'],
@@ -170,7 +192,7 @@ class S003sController extends CommonController {
 				'EmailAddresse1' => $data['EmailAddresse1'],
 				'EmailAddresse2' => $data['EmailAddresse2'],
 				'update_date' => date('Y-m-d H:i:s'),
-				'updated_by' => 'TODO 仮ユーザー',
+				'updated_by' => '仮ユーザー',
 			)
 		);
 
@@ -192,5 +214,70 @@ class S003sController extends CommonController {
 
 		$this->SmItakusakiKaisha->save($param);
 	}
+	
+	/**
+	 * 入力値チェックを行う
+	 * 
+	 * @param array $input 入力値
+	 */
+	private function checkValidation($input) {
 
+		// 郵便番号をチェック対象に追加する
+		$input['PostalCD'] = $input['PostalCD1'].'-'.$input['PostalCD2'];
+		
+		$this->SmItakusakiKaisha->set($input);
+		$validateError = $this->SmItakusakiKaisha->invalidFields();
+		if(!empty($validateError)) {
+			// バリデーションエラーのとき
+
+			// エラーメッセージの設定
+			$errorMsgList = array();
+			foreach($validateError as $ary) {
+				foreach($ary as $errorMsg) {
+					$errorMsgList[] = $errorMsg;
+				}
+			}
+			$this->set('errorMsgList', $errorMsgList);
+			
+			// 画面側でエラーが出ないように空の検索条件をセットしておく
+			$searchCondition = array();
+			$this->set('searchCondition', $searchCondition);
+			
+			// 入力値の初期値を設定する
+			$this->set('input', $input);
+
+			// 初期画面をレンダリングする
+			$this->render('index');
+			
+			return false;
+		}
+		
+		return true;
+	}
+
+	/**
+	 * 新規登録用のコード値を作成する
+	 * 
+	 * @return 新規コード値
+	 */
+	private function createNewCode() {
+		
+		// コード降順で一件取得
+		$maxCode = $this->SmItakusakiKaisha->getMaxCode();
+		
+		// 数字部分抽出(後ろ２桁)
+		$number = substr($maxCode, 1, 2);
+		
+		// +1
+		$number++;
+		
+		// 数値を文字列に変換
+		$string = str_pad($number, 2, '0', STR_PAD_LEFT);
+		
+		// 文字部分と連結し、新規コード値を生成する
+		$newCode = substr($maxCode, 0, 1) . $string;
+		
+		return $newCode;
+	}
+	
 }

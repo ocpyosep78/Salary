@@ -1,7 +1,7 @@
 <?php
-	// スクリプトで、この画面特有のものを差し込むときの書き方。（この画面では選択されたレコードを詳細エリアに転記するなどの処理）
+	// スクリプトで、この画面特有のものを差し込むときの書き方。
 	$this->append('script'); echo $this->Html->script(array('lib/jquery-1.9.1.min', 'salary/s003_index')); $this->end();
-	// スタイルシートで、この画面特有のものを差し込むときの書き方。（この画面では必要無いのでコメントアウト）
+	// スタイルシートで、この画面特有のものを差し込むときの書き方。
 	$this->append('css');    echo $this->Html->css(array('salary/common'));    $this->end();
 ?>
 
@@ -11,7 +11,7 @@
 			<tr>
 				<td rowspan="2">
 					<p class="title">研修委託会社コード</p>
-					<input type="text" name="consignmentCompanyCd" id="consignmentCompanyCd" value="<?php echo Hash::get($searchCondition, 'consignmentCompanyCd'); ?>" />
+					<input type="text" name="consignmentCompanyCd" id="consignmentCompanyCd" value="<?php echo Hash::get($searchCondition, 'consignmentCompanyCd'); ?>" maxlength="3" />
 					<input type="button"  class="Button2" value="？" onclick="viewForCommonSearch('SmItakusakiKaisha', 'ConsignmentCompanyName', 'ConsignmentCompanyCD', 'consignmentCompanyName', 'consignmentCompanyCd');" />
 					<p class="description" id="consignmentCompanyName"><?php echo Hash::get($searchCondition, 'consignmentCompanyName'); ?></p>
 				</td>
@@ -21,7 +21,7 @@
 				<td class="td1 pd_02"><input class="Button1" type="button" value="消去" /></td>
 			</tr>
 		</table>
-	</form>
+	<?php echo $this->SalaryForm->end(); ?>
 
 		<?php
 			if(isset($rtnSmItakusakiKaishaList) && sizeof($rtnSmItakusakiKaishaList) != '0') {
@@ -55,72 +55,72 @@
 
 		<div id="container">
 			<div class="box_02">
-				<p id="code">コード：<span id="Code"></span></p>
-				<input type="hidden" value= "" name="ConsignmentCompanyCD" id="ConsignmentCompanyCD" />
+				<p id="code">コード：<?php echo Hash::get($input, 'ConsignmentCompanyCD'); ?><span id="Code"></span></p>
+				<input type="hidden" value= "<?php echo Hash::get($input, 'ConsignmentCompanyCD'); ?>" name="ConsignmentCompanyCD" id="ConsignmentCompanyCD" />
 				<table class="table_left">
 					<tr>
 						<th>委託先会社名</th>
-						<td colspan="3"><input type="text" value= "" name="ConsignmentCompanyName" id="ConsignmentCompanyName" /></td>
+						<td colspan="3"><input type="text" value="<?php echo Hash::get($input, 'ConsignmentCompanyName'); ?>" name="ConsignmentCompanyName" id="ConsignmentCompanyName" maxlength="50" /></td>
 					</tr>
 					<tr>
-						<th>代表社名</th>
-						<td colspan="3"><input type="text" value= "" name="Representative" id="Representative" /></td>
+						<th>代表者名</th>
+						<td colspan="3"><input type="text" value= "<?php echo Hash::get($input, 'Representative'); ?>" name="Representative" id="Representative" maxlength="50" /></td>
 					</tr>
 					<tr>
 						<th rowspan="6" class="th_01">所在地</th>
 						<th>郵便番号</th>
-						<td colspan="2"><input type="text" value= "" name="PostalCD1" id="PostalCD1" maxlength="3" class="short_01" /> - <input type="text" value= "" name="PostalCD2" id="PostalCD2" maxlength="3" class="short_01" /></td>
+						<td colspan="2"><input type="text" value= "<?php echo Hash::get($input, 'PostalCD1'); ?>" name="PostalCD1" id="PostalCD1" maxlength="3" class="short_01" /> - <input type="text" value= "<?php echo Hash::get($input, 'PostalCD2'); ?>" name="PostalCD2" id="PostalCD2" maxlength="4" class="short_01" /></td>
 					</tr>
 					<tr>
 						<th>市区町村CD</th>
 						<td>
-							<input type="text" value= "" name="CityCD" id="CityCD" class="short_02" />
+							<input type="text" value="<?php echo Hash::get($input, 'CityCD'); ?>" name="CityCD" id="CityCD" class="short_02" maxlength="6" />
 							<input type="button"  class="Button2" value="？" onclick="viewForCommonSearch('LGovMaster', 'LGovName', 'LGovCode', 'CityName', 'CityCD');" />
 						</td>
-						<td id="CityName">NNNNNNNNNNNNNNN</td>
+						<td id="CityName">&nbsp</td>
 					</tr>
 					<tr>
 						<th class="th_02">漢字住所</th>
-						<td colspan="2"><input type="text" value= "" name="AddressKanji" id="AddressKanji" /></td>
+						<td colspan="2"><input type="text" value= "<?php echo Hash::get($input, 'AddressKanji'); ?>" name="AddressKanji" id="AddressKanji" maxlength="50" /></td>
 					</tr>
 					<tr>
 						<th class="th_02">方書き</th>
-						<td colspan="2"><input type="text" value= "" name="SideKanji" id="SideKanji" /></td>
+						<td colspan="2"><input type="text" value= "<?php echo Hash::get($input, 'SideKanji'); ?>" name="SideKanji" id="SideKanji" maxlength="50" /></td>
 					</tr>
 					<tr>
 						<th class="th_02">カナ住所</th>
-						<td colspan="2"><input type="text" value= "" name="AddressKana" id="AddressKana" /></td>
+						<td colspan="2"><input type="text" value= "<?php echo Hash::get($input, 'AddressKana'); ?>" name="AddressKana" id="AddressKana" maxlength="100" /></td>
 					</tr>
 					<tr>
 						<th class="th_02">方書き</th>
-						<td colspan="2"><input type="text" value= "" name="SideKana" id="SideKana" /></td>
+						<td colspan="2"><input type="text" value= "<?php echo Hash::get($input, 'SideKana'); ?>" name="SideKana" id="SideKana" maxlength="100" /></td>
 					</tr>
 				</table><!-- //.table_left -->
 				<table class="table_right">
 					<tr>
 						<th colspan="2">営業担当者</th>
-						<td><input type="text" value= "" name="AccountExecutiveName" id="AccountExecutiveName" /></td>
+						<td><input type="text" value= "<?php echo Hash::get($input, 'AccountExecutiveName'); ?>" name="AccountExecutiveName" id="AccountExecutiveName" maxlength="50" /></td>
 					</tr>
 					<tr>
 						<th rowspan="3">連絡先</th>
 						<th class="th_02">電話1</th>
-						<td><input type="text" value= "" name="TelNo1" id="TelNo1" /></td>
+						<td><input type="text" value= "<?php echo Hash::get($input, 'TelNo1'); ?>" name="TelNo1" id="TelNo1" maxlength="14" /></td>
 					</tr>
 					<tr>
 						<th class="th_02">電話2</th>
-						<td><input type="text" value= "" name="TelNo2" id="TelNo2" /></td>
+						<td><input type="text" value= "<?php echo Hash::get($input, 'TelNo2'); ?>" name="TelNo2" id="TelNo2" maxlength="14" /></td>
 					</tr>
 					<tr>
 						<th class="th_02">電話3</th>
-						<td><input type="text" value= "" name="TelNo3" id="TelNo3" /></td>
+						<td><input type="text" value= "<?php echo Hash::get($input, 'TelNo3'); ?>" name="TelNo3" id="TelNo3" maxlength="14" /></td>
 					</tr>
 					<tr>
 						<th colspan="2" class="th_02">メールアドレス1</th>
-						<td><input type="text" value=""  name="EmailAddresse1" id="EmailAddresse1" /></td>
+						<td><input type="text" value="<?php echo Hash::get($input, 'EmailAddresse1'); ?>"  name="EmailAddresse1" id="EmailAddresse1" maxlength="40" /></td>
 					</tr>
 					<tr>
 						<th colspan="2" class="th_02">メールアドレス2</th>
-						<td><input type="text" value=""  name="EmailAddresse2" id="EmailAddresse2" /></td>
+						<td><input type="text" value="<?php echo Hash::get($input, 'EmailAddresse2'); ?>"  name="EmailAddresse2" id="EmailAddresse2" maxlength="40" /></td>
 					</tr>
 					<tr>
 						<th colspan="2">最終更新日時</th>
@@ -156,5 +156,27 @@
 		submitType.setAttribute("value", type);
 		document.flexible.appendChild(submitType);
 		document.flexible.submit();
+	}
+	
+	<?php
+	// エラーメッセージ一覧配列をカンマ区切りで展開する
+	$errorMsgString = "";
+	if(!empty($errorMsgList)) {
+		$errorMsgString = join(",", $errorMsgList);
+	}
+	?>
+	// phpからjavascriptへ値を渡す
+	var errorMsgString = "<?php echo $errorMsgString; ?>";	
+	// エラーメッセージがあるときは、ポップアップで表示する
+	if(errorMsgString != "") {
+		// カンマを\n（改行）に置換する
+		errorMsgString = errorMsgString.split(",").join("\n");
+		// エラーメッセージのポップアップを表示する
+		showErrorAlert();
+	}
+
+	// エラーメッセージのポップアップを表示する
+	function showErrorAlert(){
+		window.alert(errorMsgString);
 	}
 </script>

@@ -1694,17 +1694,20 @@
 <script type="text/javascript">
 <!--
 <?php
-// エラーメッセージ一覧配列を<br />区切りで展開する
+// エラーメッセージ一覧配列をカンマ区切りで展開する
 $errorMsgString = "";
 if(!empty($errorMsgList)) {
-	$errorMsgString = $this->SalaryForm->getFormattedArgumentBreakTags($errorMsgList);
+	$errorMsgString = join(",", $errorMsgList);
 }
 ?>
 // phpからjavascriptへ値を渡す
 var errorMsgString = "<?php echo $errorMsgString; ?>";
 // エラーメッセージがあるときは、ポップアップで表示する
 if(errorMsgString != "") {
-	showErrorAlert();
+// カンマを\n（改行）に置換する
+errorMsgString = errorMsgString.split(",").join("\n");
+// エラーメッセージのポップアップを表示する
+showErrorAlert();
 }
 
 // エラーメッセージのポップアップを表示する

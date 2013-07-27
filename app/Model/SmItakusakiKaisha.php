@@ -26,6 +26,92 @@ class SmItakusakiKaisha extends AppModel {
  * @var array
  */
 	public $validate = array(
+		'ConsignmentCompanyName' => array(
+			'notempty' => array(
+				'rule' => array('notempty', '委託先会社名'),
+				'message' => ERROR_MESSAGE_NOTEMPTY,
+			),
+		),
+		'Representative' => array(
+			'notempty' => array(
+				'rule' => array('notempty', '代表者名'),
+				'message' => ERROR_MESSAGE_NOTEMPTY,
+			),
+		),
+		'PostalCD' => array(
+			'custom' => array(
+				'rule' => array('checkEmptyPostalCD', '郵便番号'),
+				'message' => ERROR_MESSAGE_NOTEMPTY,
+			),
+		),
+		'CityCD' => array(
+			'notempty' => array(
+				'rule' => array('notempty', '市区町村CD'),
+				'message' => ERROR_MESSAGE_NOTEMPTY,
+			),
+		),
+		'AddressKanji' => array(
+			'notempty' => array(
+				'rule' => array('notempty', '漢字住所'),
+				'message' => ERROR_MESSAGE_NOTEMPTY,
+			),
+		),
+		'SideKanji' => array(
+			'notempty' => array(
+				'rule' => array('notempty', '方書き（漢字）'),
+				'message' => ERROR_MESSAGE_NOTEMPTY,
+			),
+		),
+		'AddressKana' => array(
+			'notempty' => array(
+				'rule' => array('notempty', 'カナ住所'),
+				'message' => ERROR_MESSAGE_NOTEMPTY,
+			),
+		),
+		'SideKana' => array(
+			'notempty' => array(
+				'rule' => array('notempty', '方書き（カナ）'),
+				'message' => ERROR_MESSAGE_NOTEMPTY,
+			),
+		),
+		'AccountExecutiveName' => array(
+			'notempty' => array(
+				'rule' => array('notempty', '営業担当者名'),
+				'message' => ERROR_MESSAGE_NOTEMPTY,
+			),
+		),
+		'TelNo1' => array(
+			'notempty' => array(
+				'rule' => array('notempty', '電話番号１'),
+				'message' => ERROR_MESSAGE_NOTEMPTY,
+			),
+		),
+		'TelNo2' => array(
+			'notempty' => array(
+				'rule' => array('notempty', '電話番号２'),
+				'message' => ERROR_MESSAGE_NOTEMPTY,
+			),
+		),
+		'TelNo3' => array(
+			'notempty' => array(
+				'rule' => array('notempty', '電話番号３'),
+				'message' => ERROR_MESSAGE_NOTEMPTY,
+			),
+		),
+		'EmailAddresse1' => array(
+			'notempty' => array(
+				'rule' => array('notempty', 'メールアドレス１'),
+				'message' => ERROR_MESSAGE_NOTEMPTY,
+			),
+		),
+		'EmailAddresse2' => array(
+			'notempty' => array(
+				'rule' => array('notempty', 'メールアドレス２'),
+				'message' => ERROR_MESSAGE_NOTEMPTY,
+			),
+		),
+		
+		
 		'registered_date' => array(
 			'datetime' => array(
 				'rule' => array('datetime'),
@@ -79,6 +165,44 @@ class SmItakusakiKaisha extends AppModel {
 			)
 		);
 
+	}
+	
+	/**
+	 * validation check
+	 * 郵便番号の空チェック
+	 */
+	public function checkEmptyPostalCD() {
+
+		if(empty($this->data['SmItakusakiKaisha']['PostalCD1']) || empty($this->data['SmItakusakiKaisha']['PostalCD2'])) {
+			// 郵便番号の入力欄のいずれかが空のとき
+			return false;
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * 最大コード値を取得する
+	 * 
+	 * @return 最大コード値
+	 */
+	public function getMaxCode() {
+		
+		$this->recursive = -1;
+		
+		// 検索パラメータの設定
+		$params = array(
+			'order' => array('ConsignmentCompanyCD DESC')
+		);
+		
+		// 検索
+		$result = $this->find('first', $params);
+		
+		// コード値を取得する
+		$maxCode = $result['SmItakusakiKaisha']['ConsignmentCompanyCD'];
+		
+		return $maxCode;
+		
 	}
 
 }
