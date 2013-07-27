@@ -1265,7 +1265,7 @@
 <!-- ↓■特殊勤務手当 -->
 				<div class="y_data_area">
 <!-- ↓タイトル -->
-					<table class="y_data_title w06">
+					<table class="y_data_title">
 						<col style="width: 7%;">
 						<col style="width: 7%;">
 						<col style="width: 7%;">
@@ -1298,9 +1298,9 @@
 						</tr>
 					</table><!-- //タイトル -->
 <!-- ↓内訳 -->
-					<div class="y_scroll_box w06 max_h02">
+					<div class="y_scroll_box max_h02">
 						<div class="y_hidden">
-							<table class="y_data w06">
+							<table class="y_data">
 								<col style="width: 7%;">
 								<col style="width: 7%;">
 								<col style="width: 7%;">
@@ -1353,7 +1353,7 @@
 <!-- ↓■宿日直手当 -->
 				<div class="y_data_area">
 <!-- ↓タイトル -->
-					<table class="y_data_title w06">
+					<table class="y_data_title">
 						<col style="width: 7%;">
 						<col style="width: 7%;">
 						<col style="width: 7%;">
@@ -1386,9 +1386,9 @@
 						</tr>
 					</table><!-- //タイトル -->
 <!-- ↓内訳 -->
-					<div class="y_scroll_box w06 max_h02">
+					<div class="y_scroll_box max_h02">
 						<div class="y_hidden">
-							<table class="y_data w06">
+							<table class="y_data">
 								<col style="width: 7%;">
 								<col style="width: 7%;">
 								<col style="width: 7%;">
@@ -1441,7 +1441,7 @@
 <!-- ↓■管理職特勤 -->
 				<div class="y_data_area">
 <!-- ↓タイトル -->
-					<table class="y_data_title w06">
+					<table class="y_data_title">
 						<col style="width: 7%;">
 						<col style="width: 7%;">
 						<col style="width: 7%;">
@@ -1474,9 +1474,9 @@
 						</tr>
 					</table><!-- //タイトル -->
 <!-- ↓内訳 -->
-					<div class="y_scroll_box w06 max_h02">
+					<div class="y_scroll_box max_h02">
 						<div class="y_hidden">
-							<table class="y_data w06">
+							<table class="y_data">
 								<col style="width: 7%;">
 								<col style="width: 7%;">
 								<col style="width: 7%;">

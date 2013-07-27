@@ -751,8 +751,9 @@ padding: 5px;
 }
 
 table.y_data td {
-overflow: hidden; /* データが幅を超えたとき非表示に */
-white-space: nowrap; /* データの折り返しを防止 */
+/* 以下２行をコメントアウト */
+/* overflow: hidden; データが幅を超えたとき非表示に */
+/* white-space: nowrap; データの折り返しを防止 */
 }
 
 table.y_data td p {
