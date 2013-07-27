@@ -64,6 +64,8 @@
 <input type="hidden" value= "" name="hidden-emp-search-select-emp-no" id="hidden-emp-search-select-emp-no" />
 <input type="hidden" value= "" name="hidden-emp-search-select-name-kana" id="hidden-emp-search-select-name-kana" />
 
+<?php echo $this->element('emp_error'); ?>
+
 <script type="text/javascript">
 	/**
 	 * 検索子画面の表示

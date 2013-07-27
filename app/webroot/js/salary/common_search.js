@@ -50,6 +50,33 @@
 	}
 
 	/**
+	 * モーダルウィンドウ
+	 */
+	$.fn.modalError = function(op){
+
+		//option
+		op = $.extend({
+			type:"fixed",
+			scrollTop : 20,
+			scrollBottom : false
+		},op);
+
+		// モーダルのスタイル設定
+		var target = $(".modalWindowError");
+		target.css({
+			display:"block",
+			position:"absolute",
+			top:$(window).scrollTop()+op.scrollTop,
+			left:(op.type=="fixed")?"50%":op.type,
+			marginLeft:(op.type=="fixed")?"-"+(target.width()/2)+"px":"0px"
+		});
+
+		// モーダルを表示する
+//		$("#blackLayer").show();
+		return false;
+	}
+
+	/**
 	 * Paginationクリック処理
 	 */
 	function paginationClick(url) {
