@@ -64,10 +64,10 @@
 
 <!-- 1行目 -->
 		<div class="wrap bdT_blue bdR_blue bdL_blue pdR10 pdL10" id="tabCommonContents">
-			<table class="tbl_01">
+			<table class="tbl01">
 				<tr>
-					<th>支給年月日</th>
-					<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($commonInfo, 'QtMeisaiHiwari.PaidYM')); ?></td>
+					<th class="bd_double">支給年月日</th>
+					<td class="bd_double"><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($commonInfo, 'QtMeisaiHiwari.PaidYM')); ?></td>
 					<th>職員区分</th>
 					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.EmpDiv'); ?></td>
 					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.CodeName_EmpDivName'); ?></td>
@@ -87,7 +87,7 @@
 				</tr>
 			</table>
 <!-- 2行目 -->
-			<table class="tbl_01">
+			<table class="tbl01">
 				<tr>
 					<th>支出科目</th>
 					<th>給料</th>
@@ -105,7 +105,7 @@
 				</tr>
 			</table>
 <!-- 3行目 -->
-			<table class="tbl_01">
+			<table class="tbl01">
 				<tr>
 					<th>給料/報酬</th>
 					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.SalaryTable'); ?></td>
@@ -119,12 +119,12 @@
 					<th>現在の保障額</th>
 					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.TableOnGuarantTable'); ?></td>
 					<td><?php echo Hash::get($commonInfo, 'genkyuHoshoTableName'); ?></td>
-					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.GradeOnGuarantTable'); ?><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.ClassOnGuarantTable'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.GradeOnGuarantTable'); ?>-<?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.ClassOnGuarantTable'); ?></td>
 					<td><?php echo $this->SalaryForm->number_format(Hash::get($commonInfo, 'genkyuHoshoKingaku')); ?>円</td>
 				</tr>
 			</table>
 <!-- 4行目 -->
-			<table class="tbl_01">
+			<table class="tbl01">
 				<tr>
 					<th>勤務態様</th>
 					<th>一日</th>
@@ -139,11 +139,12 @@
 					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.WorkingDaysOfYear'); ?>日</td>
 					<th>その他</th>
 					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.OtherDay'); ?>日</td>
+					<td>／</td>
 					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.OtherMonth'); ?>月</td>
 				</tr>
 			</table>
 <!-- 5行目 -->
-			<table class="tbl_01">
+			<table class="tbl01">
 				<tr>
 					<th>勤怠事由</th>
 					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.AttendanceOrderedReasonCD'); ?></td>
@@ -153,7 +154,9 @@
 					<th>発令年月日</th>
 					<td><?php echo $this->SalaryForm->getJapaneseEra(Hash::get($commonInfo, 'QtMeisaiHiwari.DailyRateStartDate')); ?></td>
 					<th>日割日数</th>
-					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.ObjectDays'); ?>/<?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.RequestedWorkingDaysOfMonth'); ?></td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.ObjectDays'); ?></td>
+					<td>／</td>
+					<td><?php echo Hash::get($commonInfo, 'QtMeisaiHiwari.RequestedWorkingDaysOfMonth'); ?></td>
 				</tr>
 			</table>
 		</div><!-- //.wrap -->

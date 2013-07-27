@@ -107,7 +107,7 @@
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryClass'); ?>-<?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryGrade'); ?></td>
 					<td><?php echo Hash::get($commonInfo, 'salaryClassName'); ?></td>
 					<td><?php echo $this->SalaryForm->number_format(Hash::get($commonInfo, 'kyuryoHoushuGaku')); ?>円</td>
-					<td><label><input type="checkbox" name="" value="">清掃加算対象</label></td>
+					<td><label><input type="checkbox" name="" value="" disabled <?php if(Hash::get($commonInfo, 'QtSeitoHiwari.SweeperAdditionFlg') === '1') echo 'checked'; ?> >清掃加算対象</label></td>
 					<th>現給保障</th>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.CodeName_SalaryGuaranteeDivName'); ?></td>
 					<th>現在の保障額</th>
