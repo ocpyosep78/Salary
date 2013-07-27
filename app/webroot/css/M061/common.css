@@ -650,8 +650,10 @@ border-left: 2px solid #96d7f4;
 
 #footer {
 height: 30px;
+width: auto;
 padding: 5px 10px;
 text-align: right;
+margin-left: 0px;
 border-top: 2px solid #a9db80;
 }
 

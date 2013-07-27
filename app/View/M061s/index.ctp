@@ -157,7 +157,7 @@
 
 <!-- ============================== タブ01【基本情報】============================== -->
 		<div id="tab01content" class="tabContent">
-			<table class="tbl02 bdT">
+			<table class="tbl02 bdT bdB_blue">
 				<tr>
 					<th colspan="7" class="th01 bdR bdB bg01">支給</th>
 					<th colspan="7" class="th01 bdB bg01">控除</th>
