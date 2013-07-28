@@ -81,7 +81,7 @@
 				</tr>
 			</table>
 <!-- 2行目 -->
-			<table class="tbl01">
+			<table class="tbl01 mg01">
 				<tr>
 					<th>支出科目</th>
 					<th>給料</th>
@@ -99,7 +99,7 @@
 				</tr>
 			</table>
 <!-- 3行目 -->
-			<table class="tbl01">
+			<table class="tbl01 mg01">
 				<tr>
 					<th>給料/報酬</th>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.SalaryTable'); ?></td>
@@ -118,7 +118,7 @@
 				</tr>
 			</table>
 <!-- 4行目 -->
-			<table class="tbl01">
+			<table class="tbl01 mg01">
 				<tr>
 					<th>勤務態様</th>
 					<th>一日</th>
@@ -138,7 +138,7 @@
 				</tr>
 			</table>
 <!-- 5行目 -->
-			<table class="tbl01">
+			<table class="tbl01 mg01">
 				<tr>
 					<th>勤怠事由</th>
 					<td><?php echo Hash::get($commonInfo, 'QtSeitoHiwari.AttendanceOrderedReasonCD'); ?></td>
