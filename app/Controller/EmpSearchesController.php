@@ -50,10 +50,10 @@ class EmpSearchesController extends CommonController {
 		$searchResultList = $this->Paginate();
 
 		// 検索結果に所属名（短縮）を付加する
-		$searchResultList = $this->Paginate();
 		foreach ($searchResultList as &$searchResult) {
 			$depCD = Hash::get($searchResult, 'JtKihonRekiSyozoku.DepCD');
-			$searchResult['JtKihonRekiSyozoku']['CodeName_DeptShortName'] = $this->JmShozoku->getDeptShortName('2013', $depCD);
+			$currentDate = date('Y-m-d H:i:s');
+			$searchResult['JtKihonRekiSyozoku']['CodeName_DeptShortName'] = $this->JmShozoku->getDeptShortName($currentDate, $depCD);
 		}
 
 		// 検索結果をViewに渡す
