@@ -85,7 +85,7 @@
 
 		// 子画面の検索結果一覧をクリア
 		$.ajax({
-			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'init')); ?>" + "?table=" + 'JtKihonKihon',
+			url: "<?php echo $this->Html->url(array('controller' => 'EmpSearches', 'action' => 'init')); ?>",
 			type: 'GET',
 			success: function(data) {
 				$("#emp-search-result").html(data);
@@ -220,7 +220,7 @@
 
 		// 子画面の検索結果一覧をクリア
 		$.ajax({
-			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'clear')); ?>" + "?table=" + 'JtKihonKihon',
+			url: "<?php echo $this->Html->url(array('controller' => 'EmpSearches', 'action' => 'init')); ?>" + "?table=" + 'JtKihonKihon',
 			type: 'GET',
 			success: function(data) {
 				$("#emp-search-result").html(data);

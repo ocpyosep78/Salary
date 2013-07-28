@@ -82,6 +82,7 @@ $const_labels = array(
 			'EmpNo'           => array('symbol' => '', 'name' => '職員番号'),
 			'Name'            => array('symbol' => '', 'name' => '漢字氏名'),
 			'NameKana'        => array('symbol' => '', 'name' => 'カナ氏名'),
+			'TargetNameKana'  => array('symbol' => '', 'name' => '対象者名（カナ）'),
 			'empDiv'          => array('symbol' => '', 'name' => '職員区分'),
 			'retired'         => array('symbol' => '', 'name' => '退職'),
 			'DepCD'           => array('symbol' => '', 'name' => '所属CD'),

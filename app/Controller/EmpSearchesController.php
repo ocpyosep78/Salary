@@ -18,6 +18,18 @@ class EmpSearchesController extends CommonController {
 	}
 
 	/**
+	 * 初期化処理
+	 */
+	public function init() {
+
+		// 検索結果をViewに渡す
+		$this->set('tableName', 'JtKihonKihon');
+
+		// 検索結果一覧を表示する
+		$this->render('/Elements/emp_search_init');
+	}
+
+	/**
 	 * 検索処理
 	 */
 	public function search() {
