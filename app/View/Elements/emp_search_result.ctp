@@ -52,6 +52,11 @@
 					</tr>
 
 			<?php endforeach ?>
+			<?php if(sizeof($searchResultList) != '0') { ?>
+				<input type="hidden" value= "1" name="hidden-emp-search-count" id="hidden-emp-search-count" />
+			<?php } else { ?>
+				<input type="hidden" value= "0" name="hidden-emp-search-count" id="hidden-emp-search-count" />
+			<?php } ?>
 		<?php } ?>
 
 	</table>
@@ -62,6 +67,15 @@
 </div>
 
 <script type="text/javascript">
+
+	$(document).ready(function(){
+		var count = $("#hidden-emp-search-count").val();
+		if (count == "0") {
+			$("#hidden-emp-err-message").val("検索結果がありません。");
+			viewForEmpSearchError();
+		}
+	});
+
 	/**
 	 * 「確定」ボタン押下処理
 	 */

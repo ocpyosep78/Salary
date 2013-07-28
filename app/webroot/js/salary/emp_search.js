@@ -88,6 +88,27 @@
 		// Ajax通信用URLの取得
 		var url = $(this).children("a").attr("href");
 
+		var temp = url.split("page:");
+		if (temp.length == 2) {
+			var page = temp[1];
+			if (page == 0) {
+				$("#hidden-emp-err-message").val("前のページはありません。");
+				viewForEmpSearchError();
+				return false;
+			} else {
+				var totalPageStr = $("#emp-search-result .box_common_search_header_td03").text();
+				temp = totalPageStr.split("/ ");
+				if (temp.length == 2) {
+					var totalPage = parseInt(temp[1]);
+					if (page > totalPage) {
+						$("#hidden-emp-err-message").val("次のページはありません。");
+						viewForEmpSearchError();
+						return false;
+					}
+				}
+			}
+		}
+
 		// Paginationクリック時の処理を行う
 		paginationClickForEmpSearch(url);
 
@@ -102,6 +123,30 @@
 
 		// Ajax通信用URLの取得
 		var page = $(this).parent().parent().find("input:first").val();
+
+		if(isNaN(page)) {
+			$("#hidden-emp-err-message").val("指定されたページはありません。");
+			viewForEmpSearchError();
+			return false;
+		}
+		var tempPage = parseInt(page);
+		if (tempPage < 1) {
+			$("#hidden-emp-err-message").val("指定されたページはありません。");
+			viewForEmpSearchError();
+			return false;
+		} else {
+			var totalPageStr = $("#emp-search-result .box_common_search_header_td03").text();
+			var temp = totalPageStr.split("/ ");
+			if (temp.length == 2) {
+				var totalPage = parseInt(temp[1]);
+				if (tempPage > totalPage) {
+					$("#hidden-emp-err-message").val("指定されたページはありません。");
+					viewForEmpSearchError();
+					return false;
+				}
+			}
+		}
+
 		var url = "/EmpSearches/search/page:" + page;
 
 		// Paginationクリック時の処理を行う
