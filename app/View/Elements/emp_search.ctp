@@ -67,8 +67,6 @@
 <input type="hidden" value= "" name="hidden-emp-err-message" id="hidden-emp-err-message" />
 <input type="hidden" value= "1" name="hidden-emp-err-count" id="hidden-emp-err-count" />
 
-<?php echo $this->element('emp_error'); ?>
-
 <script type="text/javascript">
 	/**
 	 * 検索子画面の表示

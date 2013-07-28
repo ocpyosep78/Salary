@@ -42,6 +42,8 @@
 <input type="hidden" value= "" name="hidden-common-search-target-code" id="hidden-common-search-target-code" />
 <input type="hidden" value= "" name="hidden-common-search-select-name" id="hidden-common-search-select-name" />
 <input type="hidden" value= "" name="hidden-common-search-select-code" id="hidden-common-search-select-code" />
+<input type="hidden" value= "" name="hidden-emp-err-message" id="hidden-emp-err-message" />
+<input type="hidden" value= "1" name="hidden-emp-err-count" id="hidden-emp-err-count" />
 
 <script type="text/javascript">
 	/**
