@@ -65,6 +65,7 @@
 <input type="hidden" value= "" name="hidden-emp-search-select-name-kana" id="hidden-emp-search-select-name-kana" />
 <input type="hidden" value= "" name="hidden-emp-search-select-birthday" id="hidden-emp-search-select-birthday" />
 <input type="hidden" value= "" name="hidden-emp-err-message" id="hidden-emp-err-message" />
+<input type="hidden" value= "1" name="hidden-emp-err-count" id="hidden-emp-err-count" />
 
 <?php echo $this->element('emp_error'); ?>
 

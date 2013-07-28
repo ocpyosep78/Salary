@@ -402,8 +402,8 @@ text-align: right;
 }
 .modalBodyError {
   background-color: #fff;
-  border: 2px solid #a9db80;
-  border-top: 3px solid #a9db80;
+  border: 2px solid #acf3f9;
+  border-top: 3px solid #acf3f9;
 }
 #whiteLayer {
   position: fixed;
@@ -416,6 +416,24 @@ text-align: right;
   filter: alpha(opacity=80);
   z-index: 100;
   display: none;
+}
+.box_error_floadting_content {
+width: 100%;
+background-color: #fff;
+}
+
+.box_error_floadting_content th,
+.box_error_floadting_content td {
+border: 1px solid #fbc4c4;
+}
+
+.box_error_floadting_content th {
+padding: 3px 10px;
+background-color: #c0e3a3;
+}
+
+.box_error_floadting_content td {
+padding: 5px 10px;
 }
 
 /* ======================================
