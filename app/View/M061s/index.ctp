@@ -1,5 +1,5 @@
 <?php
-	$this->append('script'); echo $this->Html->script(array('salary/payroll001s')); $this->end();
+	$this->append('script'); echo $this->Html->script(array('salary/payroll001s', 'm061')); $this->end();
 	$this->append('css'); echo $this->Html->css(array('salary/common', 'M061/common')); $this->end();
 ?>
 
@@ -24,8 +24,8 @@
 		<tr>
 			<th>支給年月</th>
 			<td>
-				<?php echo $this->SalaryForm->text('PaidYM', array('value' => Hash::get($searchCondition, 'PaidYM'), 'placeholder' => 'GGYY.MM', 'maxlength' => '7'));?>
-				<?php echo $this->SalaryForm->button('？', array('type' => 'button', 'class' => 'btn02'), null); ?>
+				<?php echo $this->SalaryForm->text('PaidYM', array('value' => Hash::get($searchCondition, 'PaidYM'), 'placeholder' => 'GGYY.MM', 'maxlength' => '7', 'id' => 'PaidYM'));?>
+				<?php echo $this->SalaryForm->button('？', array('type' => 'button', 'class' => 'btn02', 'id' => 'PaidYMButton'), null); ?>
 			</td>
 			<th>支払者&nbsp;</th>
 			<td>
