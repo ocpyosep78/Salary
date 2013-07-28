@@ -11,18 +11,19 @@
 	<table class="tbl_02">
 
 		<tr>
-			<th style="width:10%">連番</th>
-			<th style="">職員番号</th>
-			<th style="">漢字氏名</th>
-			<th style="">カナ氏名</th>
-			<th style="">職員区分</th>
-			<th style="">退職</th>
-			<th style="">所属CD</th>
-			<th style="">所属名（短縮）</th>
-			<th style="">役職CD</th>
-			<th style="">役職名</th>
-			<th style="">職務CD</th>
-			<th style="">職務名</th>
+			<th style="width:5%">連番</th>
+			<th style="width:5%">職員番号</th>
+			<th style="width:10%">漢字氏名</th>
+			<th style="width:13%">カナ氏名</th>
+			<th style="width:13%">対象者名（カナ）</th>
+			<th style="width:8%">職員区分</th>
+			<th style="width:5%">退職</th>
+			<th style="width:5%">所属CD</th>
+			<th style="width:8%">所属名（短縮）</th>
+			<th style="width:5%">役職CD</th>
+			<th style="width:8%">役職名</th>
+			<th style="width:5%">職務CD</th>
+			<th style="width:10%">職務名</th>
 		</tr>
 
 		<?php if(isset($searchResultList)) { ?>
@@ -35,6 +36,7 @@
 						<td class="EmpNo"><?php echo Hash::get($searchResult, 'JtKihonKihon.EmpNo'); ?></td>
 						<td class="Name"><?php echo Hash::get($searchResult, 'JtKihonKihon.FamilyName'); ?><?php echo Hash::get($searchResult, 'JtKihonKihon.FirstName'); ?></td>
 						<td class="NameKana"><?php echo Hash::get($searchResult, 'JtKihonKihon.FamilyNameKana'); ?><?php echo Hash::get($searchResult, 'JtKihonKihon.FirstNameKana'); ?></td>
+						<td><?php echo Hash::get($searchResult, 'JtKihonSimei.FamilyNameKana'); ?><?php echo Hash::get($searchResult, 'JtKihonSimei.FirstNameKana'); ?></td>
 						<td><?php echo Hash::get($searchResult, 'JtKihonKihon.CodeName_EmpDivName'); ?></td>
 						<td>
 							<?php $retiredDate = Hash::get($searchResult, 'JtKihonKihon.RetiredDate'); ?>

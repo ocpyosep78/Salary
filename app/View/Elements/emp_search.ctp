@@ -4,7 +4,7 @@
 
 		<table class="box_common_search_t_header">
 			<tr>
-				<th>カナ　氏<th>
+				<th style="height:40px">カナ　氏<th>
 				<td><input type="text" id="emp-search-keyword-family-name-kana" name="emp-search-keyword-family-name-kana" value="" /></td>
 				<th>名<th>
 				<td><input type="text" id="emp-search-keyword-first-name-kana" name="emp-search-keyword-first-name-kana" value="" /></td>
@@ -17,7 +17,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th>漢字　氏<th>
+				<th style="height:40px">漢字　氏<th>
 				<td><input type="text" id="emp-search-keyword-family-name" name="emp-search-keyword-family-name" value="" /></td>
 				<th>名<th>
 				<td><input type="text" id="emp-search-keyword-first-name" name="emp-search-keyword-first-name" value="" /></td>
@@ -27,7 +27,7 @@
 				<td><input type="text" id="emp-search-keyword-job-grade-cd-to" name="emp-search-keyword-job-grade-cd-to" value="" /></td>
 			</tr>
 			<tr>
-				<th>職員区分<th>
+				<th style="height:40px">職員区分<th>
 				<td><input type="text" id="emp-search-keyword-emp-div-from" name="emp-search-keyword-emp-div-from" value="" /></td>
 				<th>～<th>
 				<td><input type="text" id="emp-search-keyword-emp-div-to" name="emp-search-keyword-emp-div-to" value="" /></td>
@@ -40,11 +40,11 @@
 				</td>
 			</tr>
 			<tr>
-				<th>退職者<th>
+				<th style="height:40px">退職者<th>
 				<td colspan="4">
-					<input type="radio" name="emp-search-keyword-retired" value="0" class="retired" id="emp-search-keyword-retired-include" checked /><label for="emp-search-keyword-retired-include">含む　</label>
-					<input type="radio" name="emp-search-keyword-retired" value="1" class="retired" id="emp-search-keyword-retired-except" /><label for="emp-search-keyword-retired-except">除く　</label>
-					<input type="radio" name="emp-search-keyword-retired" value="2" class="retired" id="emp-search-keyword-retired-only" /><label for="emp-search-keyword-retired-only">のみ　</label>
+					<input type="radio" name="emp-search-keyword-retired" value="0" class="retired" id="emp-search-keyword-retired-include" checked /><label for="emp-search-keyword-retired-include"> 含む</label>　
+					<input type="radio" name="emp-search-keyword-retired" value="1" class="retired" id="emp-search-keyword-retired-except" /><label for="emp-search-keyword-retired-except"> 除く</label>　
+					<input type="radio" name="emp-search-keyword-retired" value="2" class="retired" id="emp-search-keyword-retired-only" /><label for="emp-search-keyword-retired-only"> のみ</label>
 				</td>
 				<th>役職<th>
 				<td><input type="text" id="emp-search-keyword-mgr-cd-from" name="emp-search-keyword-mgr-cd-from" value="" /></td>

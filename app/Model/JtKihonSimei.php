@@ -77,4 +77,29 @@ class JtKihonSimei extends AppModel {
 			),
 		),
 	);
+
+	/**
+	 * simei情報を取得する
+	 *
+	 * @param $empNo 職員番号
+	 */
+	public function getKihonSimeiByEmpNo($empNo) {
+
+		$fields = array(
+				'EmpNo',
+				'FamilyNameKana',
+				'FirstNameKana'
+		);
+
+		$searchCondition = array();
+		$searchCondition['EmpNo'] = $empNo;
+
+		$options = array(
+				'fields' => $fields,
+				'conditions' => $searchCondition,
+		);
+		$result = $this->find('first', $options);
+
+		return $result;
+	}
 }
