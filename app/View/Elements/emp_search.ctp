@@ -63,6 +63,7 @@
 <?php // 選択された項目をhiddenで定義 ?>
 <input type="hidden" value= "" name="hidden-emp-search-select-emp-no" id="hidden-emp-search-select-emp-no" />
 <input type="hidden" value= "" name="hidden-emp-search-select-name-kana" id="hidden-emp-search-select-name-kana" />
+<input type="hidden" value= "" name="hidden-emp-search-select-birthday" id="hidden-emp-search-select-birthday" />
 <input type="hidden" value= "" name="hidden-emp-err-message" id="hidden-emp-err-message" />
 
 <?php echo $this->element('emp_error'); ?>

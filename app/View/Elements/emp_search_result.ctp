@@ -41,11 +41,12 @@
 							<input type="checkbox" name="retired" value="0" id="retired" <?php if(!is_null($retiredDate)) echo 'checked' ?> disabled />
 						</td>
 						<td class="DepCD"><?php echo Hash::get($searchResult, 'JtKihonRekiSyozoku.DepCD'); ?></td>
-						<td></td>
+						<td><?php echo Hash::get($searchResult, 'JtKihonRekiSyozoku.CodeName_DeptShortName'); ?></td>
 						<td class="MgrCD"><?php echo Hash::get($searchResult, 'JtKihonRekiSyozoku.MgrCD'); ?></td>
-						<td></td>
+						<td><?php echo Hash::get($searchResult, 'JtKihonRekiSyozoku.CodeName_MgrShortName'); ?></td>
 						<td class="JobDutyCD"><?php echo Hash::get($searchResult, 'JtKihonRekiSyokumu.JobDutyCD'); ?></td>
-						<td></td>
+						<td><?php echo Hash::get($searchResult, 'JtKihonRekiSyokumu.CodeName_JobDutyShortName'); ?></td>
+						<td class="BirthDate" style="display:none"><?php echo Hash::get($searchResult, 'JtKihonKihon.BirthDate'); ?></td>
 					</tr>
 
 			<?php endforeach ?>
@@ -67,15 +68,16 @@
 		// 選択値を取得する
 		var empNo    = $("#hidden-emp-search-select-emp-no").val();
 		var nameKana = $("#hidden-emp-search-select-name-kana").val();
+		var birthday = $("#hidden-emp-search-select-birthday").val();
 
 		// 満年齢を算出する
-//		$.ajax({
-//			url: "<?php echo $this->Html->url(array('controller' => 'EmpSearches', 'action' => 'clear')); ?>" + "?table=" + 'JtKihonKihon',
-//			type: 'GET',
-//			success: function(data) {
-//				$("#emp-search-result").html(data);
-//			}
-//		});
+		$.ajax({
+			url: "<?php echo $this->Html->url(array('controller' => 'EmpSearches', 'action' => 'getAge')); ?>" + "?birthday=" + birthday,
+			type: 'GET',
+			success: function(data) {
+				$("#Age").html(data);
+			}
+		});
 
 		// 選択値を親画面の項目に設定する
 		$("#EmpNo").val(empNo);

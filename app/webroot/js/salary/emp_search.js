@@ -61,6 +61,7 @@
 		// 選択値をhidden項目に設定する
 		$("#hidden-emp-search-select-emp-no").val($(this).children("td.EmpNo").html());
 		$("#hidden-emp-search-select-name-kana").val($(this).children("td.Name").html());
+		$("#hidden-emp-search-select-birthday").val($(this).children("td.BirthDate").html());
 
 		// 確定ボタンを活性化する
 		$("#emp-search-result .commit").removeAttr("disabled");

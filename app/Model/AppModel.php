@@ -75,21 +75,24 @@ class AppModel extends Model {
 		$cacheKeyMap = Configure::read("CACHE_KEY_MAP");
 
 		// 検索結果レコードから項目を取り出す
-		foreach ($result[$this->alias] as $key => $value) {
+		foreach ($result as $tableName => &$records) {
 
-			// キーマップからキャッシュデータのキーを取得する
-			$cacheKeyList = Hash::get($cacheKeyMap, $key);
-			if ($cacheKeyList === null) continue;
+			foreach ($records as $key => $value) {
 
-			// キャッシュキーのリストからキーを取り出す
-			foreach ($cacheKeyList as $cacheKey) {
+				// キーマップからキャッシュデータのキーを取得する
+				$cacheKeyList = Hash::get($cacheKeyMap, $key);
+				if ($cacheKeyList === null) continue;
 
-				// 名称リストを取得する
-				$nameList = Hash::get($cacheData, $cacheKey);
-				if ($nameList === null) continue;
+				// キャッシュキーのリストからキーを取り出す
+				foreach ($cacheKeyList as $cacheKey) {
 
-				// 検索結果に名称を付加する
-				$result[$this->alias]['CodeName_' . $cacheKey] = Hash::get($nameList, $value);
+					// 名称リストを取得する
+					$nameList = Hash::get($cacheData, $cacheKey);
+					if ($nameList === null) continue;
+
+					// 検索結果に名称を付加する
+					$records['CodeName_' . $cacheKey] = Hash::get($nameList, $value);
+				}
 			}
 		}
 	}

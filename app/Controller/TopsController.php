@@ -40,7 +40,7 @@ class TopsController extends AppController {
 
 		// 職種職務マスタ
 		$results = $this->JobCategoryMaster->find('all', array('conditions' => array('delete_flg' => 0)));
-		$this->__saveCacheForCodeName($results, 'JobCategoryMaster', 'JobDutyCD', array('JobTypeName', 'JobTypeShortName'));
+		$this->__saveCacheForCodeName($results, 'JobCategoryMaster', 'JobDutyCD', array('JobTypeName', 'JobTypeShortName', 'JobDutyName', 'JobDutyShortName'));
 
 		// 給料表名称マスタ
 		$results = $this->ZSalaryTableNamemaster->find('all', array('conditions' => array('delete_flg' => 0)));

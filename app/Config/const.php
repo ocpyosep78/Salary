@@ -144,7 +144,7 @@ Configure::write('CACHE_KEY_MAP',array(
 	// 職層マスタ
 	'JobGradeCD' => array('JobGradeName', 'JobGradeShortName'),
 	// 職種職務マスタ
-	'JobDutyCD' => array('JobTypeName', 'JobTypeShortName'),
+	'JobDutyCD' => array('JobTypeName', 'JobTypeShortName', 'JobDutyName', 'JobDutyShortName'),
 	// 給料表名称マスタ
 	'SalaryTable' => array('SalaryTableName', 'SalaryTableSName'),
 	// 勤怠事由マスタ
