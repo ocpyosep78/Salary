@@ -101,7 +101,7 @@
 	 */
 	function searchForCommonSearch() {
 
-		if (!checkConditionInput()) {
+		if (!checkCommonConditionInput()) {
 			return;
 		}
 		// 検索キーワードの取得
@@ -132,7 +132,7 @@
 	/**
 	 * 入力有無チェック
 	 */
-	function checkConditionInput() {
+	function checkCommonConditionInput() {
 		var keywordCd   = $("#common-search-keyword-cd").val();
 		var keywordName = $("#common-search-keyword-name").val();
 		if (keywordCd == "" && keywordName == "") {

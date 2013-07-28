@@ -100,7 +100,7 @@
 	 */
 	function searchForEmpSearch() {
 
-		if (!checkConditionInput()) {
+		if (!checkEmpConditionInput()) {
 			return;
 		}
 		// 検索キーワードの取得
@@ -147,7 +147,7 @@
 	/**
 	 * 入力有無チェック
 	 */
-	function checkConditionInput() {
+	function checkEmpConditionInput() {
 		// 検索キーワードの取得
 		var familyNameKana = $("#emp-search-keyword-family-name-kana").val();
 		var firstNameKana  = $("#emp-search-keyword-first-name-kana").val();
