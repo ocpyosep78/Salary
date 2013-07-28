@@ -525,10 +525,10 @@
 						<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.TokyoMetMASchoolMASoInsDiv'); ?></td>
 						<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.CodeName_MA_SI_EnrollDivName'); ?></td>
 						<th>■所得税</th>
-						<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.StandardMonthSalaryDiv'); ?></td>
-						<td><p><?php if(Hash::get($meisaiInfo, 'QtMeisai.StandardMonthSalaryDiv') == '01') {
+						<td><?php echo Hash::get($meisaiInfo, 'QtMeisai.InTaxTableDiv'); ?></td>
+						<td><p><?php if(Hash::get($meisaiInfo, 'QtMeisai.InTaxTableDiv') == '01') {
 									echo '甲欄';
-								} else if(Hash::get($meisaiInfo, 'QtMeisai.StandardMonthSalaryDiv') == '02') {
+								} else if(Hash::get($meisaiInfo, 'QtMeisai.InTaxTableDiv') == '02') {
 									echo '乙欄';
 								}
 						?></p></td>
