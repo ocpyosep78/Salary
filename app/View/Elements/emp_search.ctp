@@ -9,9 +9,9 @@
 				<th>名<th>
 				<td><input type="text" id="emp-search-keyword-first-name-kana" name="emp-search-keyword-first-name-kana" value="" /></td>
 				<th>職種職務<th>
-				<td><input type="text" id="emp-search-keyword-job-duty-cd-from" name="emp-search-keyword-job-duty-cd-from" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-job-duty-cd-from" name="emp-search-keyword-job-duty-cd-from" value="" style="width:40px" /></td>
 				<th>～<th>
-				<td><input type="text" id="emp-search-keyword-job-duty-cd-to" name="emp-search-keyword-job-duty-cd-to" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-job-duty-cd-to" name="emp-search-keyword-job-duty-cd-to" value="" style="width:40px" /></td>
 				<td rowspan="2" class="td1 pd_01">
 					<input class="Button1" type="button" onclick="searchForEmpSearch();" value="　検索　" />
 				</td>
@@ -22,19 +22,19 @@
 				<th>名<th>
 				<td><input type="text" id="emp-search-keyword-first-name" name="emp-search-keyword-first-name" value="" /></td>
 				<th>職層<th>
-				<td><input type="text" id="emp-search-keyword-job-grade-cd-from" name="emp-search-keyword-job-grade-cd-from" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-job-grade-cd-from" name="emp-search-keyword-job-grade-cd-from" value="" style="width:40px" /></td>
 				<th>～<th>
-				<td><input type="text" id="emp-search-keyword-job-grade-cd-to" name="emp-search-keyword-job-grade-cd-to" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-job-grade-cd-to" name="emp-search-keyword-job-grade-cd-to" value="" style="width:40px" /></td>
 			</tr>
 			<tr>
 				<th style="height:40px">職員区分<th>
-				<td><input type="text" id="emp-search-keyword-emp-div-from" name="emp-search-keyword-emp-div-from" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-emp-div-from" name="emp-search-keyword-emp-div-from" value="" style="width:40px"/></td>
 				<th>～<th>
-				<td><input type="text" id="emp-search-keyword-emp-div-to" name="emp-search-keyword-emp-div-to" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-emp-div-to" name="emp-search-keyword-emp-div-to" value="" style="width:40px"/></td>
 				<th>所属<th>
-				<td><input type="text" id="emp-search-keyword-dep-cd-from" name="emp-search-keyword-dep-cd-from" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-dep-cd-from" name="emp-search-keyword-dep-cd-from" value="" style="width:80px" /></td>
 				<th>～<th>
-				<td><input type="text" id="emp-search-keyword-dep-cd-to" name="emp-search-keyword-dep-cd-to" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-dep-cd-to" name="emp-search-keyword-dep-cd-to" value="" style="width:80px" /></td>
 				<td rowspan="2" class="td1 pd_01">
 					<input class="Button1" type="button" onclick="clearForEmpSearch()" value="　消去　" />
 				</td>
@@ -47,9 +47,9 @@
 					<input type="radio" name="emp-search-keyword-retired" value="2" class="retired" id="emp-search-keyword-retired-only" /><label for="emp-search-keyword-retired-only"> のみ</label>
 				</td>
 				<th>役職<th>
-				<td><input type="text" id="emp-search-keyword-mgr-cd-from" name="emp-search-keyword-mgr-cd-from" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-mgr-cd-from" name="emp-search-keyword-mgr-cd-from" value="" style="width:40px" /></td>
 				<th>～<th>
-				<td><input type="text" id="emp-search-keyword-mgr-cd-to" name="emp-search-keyword-mgr-cd-to" value="" /></td>
+				<td><input type="text" id="emp-search-keyword-mgr-cd-to" name="emp-search-keyword-mgr-cd-to" value="" style="width:40px" /></td>
 			</tr>
 		</table>
 
