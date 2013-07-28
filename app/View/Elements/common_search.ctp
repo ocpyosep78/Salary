@@ -1,5 +1,5 @@
 <div class="modalWindow fixed" id="common-search">
-	<div class="close"></div>
+	<div class="close pd_01" align="right"><input class="Button1" type="button" onclick="closeModal();" value="×" /></div>
 	<div class="modalBody">
 
 		<table class="box_common_search_t_header">
@@ -99,6 +99,9 @@
 	 */
 	function searchForCommonSearch() {
 
+		if (!checkConditionInput()) {
+			return;
+		}
 		// 検索キーワードの取得
 		var keywordCd   = $("#common-search-keyword-cd").val();
 		var keywordName = $("#common-search-keyword-name").val();
@@ -122,6 +125,22 @@
 				$("#common-search-result").html(data);
 			}
 		});
+	}
+
+	/**
+	 * 入力有無チェック
+	 */
+	function checkConditionInput() {
+		var keywordCd   = $("#common-search-keyword-cd").val();
+		var keywordName = $("#common-search-keyword-name").val();
+		if (keywordCd == "" && keywordName == "") {
+			if(window.confirm('全件検索されますがよろしいですか？')) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -151,5 +170,13 @@
 				$("#common-search-result").html(data);
 			}
 		});
+	}
+
+	/**
+	 * モーダルを閉じる
+	 */
+	function closeModal() {
+		// モーダルを閉じる
+		$(".modalWindow,#blackLayer").hide();
 	}
 </script>
