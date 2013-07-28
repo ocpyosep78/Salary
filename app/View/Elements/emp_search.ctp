@@ -198,6 +198,7 @@
 		// 親画面に設定した値をクリア
 		$("#EmpNo").val("");
 		$("#NameKana").html("");
+		$("#Age").html("");
 
 		// 子画面の検索条件入力欄をクリア
 		$("#emp-search-keyword-family-name-kana").val("");
