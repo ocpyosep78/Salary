@@ -14,9 +14,9 @@
 				<?php echo $this->SalaryForm->button('？', array('type' => 'button', 'class' => 'btn02', 'onclick' => "viewForEmpSearch()" ), null); ?>
 			</td>
 			<th width='10%'>氏名</th>
-			<td width='15%' id="NameKana"><?php echo Hash::get($personalInfo, 'JtKihonKihon.FamilyNameKana'); ?>&nbsp;<?php echo Hash::get($personalInfo, 'JtKihonKihon.FirstNameKana'); ?></td>
+			<td width='20%' id="NameKana"><?php echo Hash::get($personalInfo, 'JtKihonKihon.FamilyNameKana'); ?>&nbsp;<?php echo Hash::get($personalInfo, 'JtKihonKihon.FirstNameKana'); ?></td>
 			<th width='10%'>年齢</th>
-			<td width='10%' id="Age"><?php echo $this->SalaryForm->getAgeFromChristianEra(Hash::get($personalInfo, 'JtKihonKihon.BirthDate')); ?></td>
+			<td width='20%' id="Age"><?php echo $this->SalaryForm->getAgeFromChristianEra(Hash::get($personalInfo, 'JtKihonKihon.BirthDate')); ?></td>
 			<td class="td1 pd01">
 				<?php echo $this->SalaryForm->submit('検索', array('type' => 'submit', 'class' => 'btn01'), null); ?>
 			</td>
