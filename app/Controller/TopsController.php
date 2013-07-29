@@ -9,7 +9,7 @@ class TopsController extends AppController {
 
 	public $uses = array('MgrPositionMaster', 'ZAllowanceDetailNamemaster', 'JmSyokuinKubun', 'QmKyuyoTaikei',
 							'JmSyokuso', 'JobCategoryMaster', 'ZSalaryTableNamemaster', 'ZAttendanceReason', 'ZDetachmentAllowDivmaster',
-								'CzSikyuSyubetu', 'ZSalaryGuaranteeDivmaster', 'QmTeateCd', 'CzFukurikojoShubetsu', 'CzJyukyoTeateNintei',
+								'CzSikyuSyubetu', 'ZSalaryguaranteeDivmaster', 'QmTeateCd', 'CzFukurikojoShubetsu', 'CzJyukyoTeateNintei',
 									'ZMaSiEnrollDivmaster', 'QmShikyuKubun', 'QmKyuyoShiharaisha', 'QmKmSeisekiHanteiParent'
 	);
 
@@ -55,8 +55,8 @@ class TopsController extends AppController {
 		$this->__saveCacheForCodeName($results, 'CzSikyuSyubetu', 'EtcTypeCD', array('EtcTypeName', 'EtcTypeSName'));
 
 		// 現給保障区分マスタ
-		$results = $this->ZSalaryGuaranteeDivmaster->find('all', array('conditions' => array('delete_flg' => 0)));
-		$this->__saveCacheForCodeName($results, 'ZSalaryGuaranteeDivmaster', 'SalaryGuaranteeDivCD', array('SalaryGuaranteeDivName', 'SalaryGuaranteeDivShortName'));
+		$results = $this->ZSalaryguaranteeDivmaster->find('all', array('conditions' => array('delete_flg' => 0)));
+		$this->__saveCacheForCodeName($results, 'ZSalaryguaranteeDivmaster', 'SalaryGuaranteeDivCD', array('SalaryGuaranteeDivName', 'SalaryGuaranteeDivShortName'));
 
 		// 手当コードマスタ
 		$results = $this->QmTeateCd->find('all', array('conditions' => array('delete_flg' => 0)));
