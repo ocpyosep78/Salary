@@ -34,9 +34,9 @@
 							<?php echo $this->SalaryForm->getSequentialNumber($this->SalaryPaginator->current(), PAGINATION_VIEW_LIMIT_COMMON_SEARCH, $key); ?>
 						</td>
 						<td class="EmpNo"><?php echo Hash::get($searchResult, 'JtKihonKihon.EmpNo'); ?></td>
-						<td class="Name"><?php echo Hash::get($searchResult, 'JtKihonKihon.FamilyName'); ?><?php echo Hash::get($searchResult, 'JtKihonKihon.FirstName'); ?></td>
-						<td class="NameKana"><?php echo Hash::get($searchResult, 'JtKihonKihon.FamilyNameKana'); ?><?php echo Hash::get($searchResult, 'JtKihonKihon.FirstNameKana'); ?></td>
-						<td><?php echo Hash::get($searchResult, 'JtKihonSimei.FamilyNameKana'); ?><?php echo Hash::get($searchResult, 'JtKihonSimei.FirstNameKana'); ?></td>
+						<td class="Name"><?php echo Hash::get($searchResult, 'JtKihonKihon.FamilyName'); ?>&nbsp;<?php echo Hash::get($searchResult, 'JtKihonKihon.FirstName'); ?></td>
+						<td class="NameKana"><?php echo Hash::get($searchResult, 'JtKihonKihon.FamilyNameKana'); ?>&nbsp;<?php echo Hash::get($searchResult, 'JtKihonKihon.FirstNameKana'); ?></td>
+						<td><?php echo Hash::get($searchResult, 'JtKihonSimei.FamilyNameKana'); ?>&nbsp;<?php echo Hash::get($searchResult, 'JtKihonSimei.FirstNameKana'); ?></td>
 						<td><?php echo Hash::get($searchResult, 'JtKihonKihon.CodeName_EmpDivName'); ?></td>
 						<td>
 							<?php $retiredDate = Hash::get($searchResult, 'JtKihonKihon.RetiredDate'); ?>
