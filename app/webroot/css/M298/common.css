@@ -202,7 +202,7 @@ margin-left: 8px;
 .menu li {
 display: inline-block;
 height: 30px;
-font-size: 90%;
+font-size: 80%;
 background-color: #999999;
 _display: inline; /* IE6 */
 _zoom: 1; /* IE6 */
