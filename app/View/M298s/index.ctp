@@ -1721,7 +1721,7 @@
 <?php echo $this->element('emp_error'); ?>
 
 <script type="text/javascript">
-<!--
+
 <?php
 // エラーメッセージ一覧配列をカンマ区切りで展開する
 $errorMsgString = "";
@@ -1747,5 +1747,4 @@ function showErrorAlert(){
 // 日割レコードが複数かどうかのフラグを取得する(jQueryで使用する)
 var hiwariMultiRecordFlg = "<?php echo $hiwariMultiRecordFlg; ?>";
 
-// -->
 </script>

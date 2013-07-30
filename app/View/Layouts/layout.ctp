@@ -8,9 +8,9 @@
 		<?php
 			// フロント画面用の共通のCSSファイルを読み込み
 			//echo $this->Html->css(array('properpay/common'));
-
-			echo $this->Html->css(array('PIE.htc'));
 		?>
+
+		<link rel="stylesheet" type="text/css" href="/css/PIE.htc" />
 
 		<?php
 			// 各画面で記述された個別のcss, scriptタグ読み込み
