@@ -31,14 +31,16 @@
 					</tr>
 
 			<?php endforeach ?>
-			<?php if(sizeof($searchResultList) != '0') { ?>
-				<input type="hidden" value= "1" name="hidden-common-search-count" id="hidden-common-search-count" />
-			<?php } else { ?>
-				<input type="hidden" value= "0" name="hidden-common-search-count" id="hidden-common-search-count" />
-			<?php } ?>
 		<?php } ?>
 
 	</table>
+
+	<?php if(isset($searchResultList) && sizeof($searchResultList) != '0') { ?>
+		<input type="hidden" value= "1" name="hidden-common-search-count" id="hidden-common-search-count" />
+	<?php } else { ?>
+		<input type="hidden" value= "0" name="hidden-common-search-count" id="hidden-common-search-count" />
+	<?php } ?>
+
 </div><!-- //.box_01 -->
 
 <div class="box_common_search_footer">
