@@ -122,12 +122,12 @@
 
 		// テーブルデータの取得（Ajax通信）
 		$.ajax({
-			url: "<?php echo $this->Html->url(array('controller' => 'EmpSearches', 'action' => 'search')); ?>" + "?familyNameKana=" + familyNameKana
-																													+ "&firstNameKana=" + firstNameKana
+			url: "<?php echo $this->Html->url(array('controller' => 'EmpSearches', 'action' => 'search')); ?>" + "?familyNameKana=" + encodeURI(familyNameKana)
+																													+ "&firstNameKana=" + encodeURI(firstNameKana)
 																													+ "&jobDutyCdFrom=" + jobDutyCdFrom
 																													+ "&jobDutyCdTo=" + jobDutyCdTo
-																													+ "&familyName=" + familyName
-																													+ "&firstName=" + firstName
+																													+ "&familyName=" + encodeURI(familyName)
+																													+ "&firstName=" + encodeURI(firstName)
 																													+ "&jobGradeCdFrom=" + jobGradeCdFrom
 																													+ "&jobGradeCdTo=" + jobGradeCdTo
 																													+ "&empDivFrom=" + empDivFrom
