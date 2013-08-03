@@ -8,7 +8,7 @@
 				<?php echo $this->SalaryPaginator->next('次ページ'); ?>
 			</td>
 			<td class="box_common_search_header_td03">
-				<input type="text" name="data[page]" width="30" value="<?php echo $this->SalaryPaginator->counter('%page%'); ?>" />/ <?php echo $this->SalaryPaginator->counter('%pages%'); ?>
+				<input type="text" name="data[page]" id="data[page]" width="30" value="<?php echo $this->SalaryPaginator->counter('%page%'); ?>" />/ <?php echo $this->SalaryPaginator->counter('%pages%'); ?>
 			</td>
 			<td class="box_common_search_header_td04">
 				<input class="Button1 jump" type="submit" value="ジャンプ">

@@ -122,7 +122,9 @@
 	$("#emp-search-result .pagination .jump").click(function() {
 
 		// Ajax通信用URLの取得
-		var page = $(this).parent().parent().find("input:first").val();
+		// IE8に対応するため取得方法を変える
+//		var page = $(this).parent().parent().find("input:first").val();
+		var page = document.getElementById("data[page]").value;
 
 		if(isNaN(page)) {
 			$("#hidden-emp-err-message").val("指定されたページはありません。");
