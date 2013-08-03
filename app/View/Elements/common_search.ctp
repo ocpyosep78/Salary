@@ -121,7 +121,7 @@
 
 		// テーブルデータの取得（Ajax通信）
 		$.ajax({
-			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'search')); ?>" + "?keywordCd=" + keywordCd + "&keywordName=" + keywordName + "&table=" + table + "&columnName=" + columnName + "&columnCode=" + columnCode,
+			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'search')); ?>" + "?keywordCd=" + keywordCd + "&keywordName=" + encodeURI(keywordName) + "&table=" + table + "&columnName=" + columnName + "&columnCode=" + columnCode,
 			type: 'GET',
 			success: function(data) {
 				$("#common-search-result").html(data);
