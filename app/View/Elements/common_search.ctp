@@ -123,6 +123,7 @@
 		$.ajax({
 			url: "<?php echo $this->Html->url(array('controller' => 'CommonSearches', 'action' => 'search')); ?>" + "?keywordCd=" + keywordCd + "&keywordName=" + encodeURI(keywordName) + "&table=" + table + "&columnName=" + columnName + "&columnCode=" + columnCode,
 			type: 'GET',
+			cache: false,
 			success: function(data) {
 				$("#common-search-result").html(data);
 			}

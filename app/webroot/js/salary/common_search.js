@@ -89,6 +89,7 @@
 		$("#" + targetCode).val("");
 		$("#" + targetName).html("");
 
+		$.ajaxSetup({ cache: false });
 		// Ajax通信で指定ページを読み込む
 		$("#common-search-result").load(url);
 	}
